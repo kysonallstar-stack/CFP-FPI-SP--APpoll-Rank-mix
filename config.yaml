@@ -24,3 +24,29 @@ fetch:
 polls:
   ap: AP Top 25
   cfp: Playoff Committee Rankings
+
+rating:
+  metric_sources: [sp, fpi]    # z-scored across FBS teams, then averaged
+  metric_fallback: [elo]       # used only in weeks where SP+ and FPI are both unavailable
+  # Converts the blended z back to points. Normally SP+'s own SD that week;
+  # this is used only when SP+ is missing (e.g. the 2025 backtest).
+  # 13.3 = SD of 2026 week-4 SP+ across FBS.
+  fallback_points_sd: 13.3
+
+poll:
+  # zscore  = as specified: z-score AP points across all FBS teams (unranked = floor)
+  # matched = map points onto the metrics scale using the ranked teams; unranked
+  #           teams' poll value = min(own metrics value, floor)
+  method: matched
+  # Unranked teams' points: the lowest vote-getter minus the average gap between
+  # adjacent ranked teams ("one more rank-step below #25").
+
+weight:                        # w = poll weight; blend = (1 - w) * metrics + w * poll
+  start_week: 5
+  start: 0.25                  # w at week 5 or earlier
+  end_week: 12
+  end: 0.40                    # w at week 12 or later
+
+cfp:
+  replace_ap: true             # once committee rankings exist, they replace the AP poll
+  weight: 0.50                 # poll weight while CFP rankings are in use
