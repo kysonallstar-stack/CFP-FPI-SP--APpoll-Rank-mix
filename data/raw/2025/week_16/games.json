@@ -1,0 +1,48 @@
+[
+ {
+  "id": 401762521,
+  "season": 2025,
+  "week": 16,
+  "seasonType": "regular",
+  "startDate": "2025-12-13T20:00:00.000Z",
+  "startTimeTBD": false,
+  "completed": true,
+  "neutralSite": true,
+  "conferenceGame": true,
+  "attendance": 70936,
+  "venueId": 3814,
+  "venue": "M&T Bank Stadium",
+  "homeId": 2426,
+  "homeTeam": "Navy",
+  "homeClassification": "fbs",
+  "homeConference": "American Athletic",
+  "homePoints": 17,
+  "homeLineScores": [
+   7,
+   0,
+   3,
+   7
+  ],
+  "homePostgameWinProbability": 0.7359485030174255,
+  "homePregameElo": 1525,
+  "homePostgameElo": 1527,
+  "awayId": 349,
+  "awayTeam": "Army",
+  "awayClassification": "fbs",
+  "awayConference": "American Athletic",
+  "awayPoints": 16,
+  "awayLineScores": [
+   0,
+   13,
+   3,
+   0
+  ],
+  "awayPostgameWinProbability": 0.26405149698257446,
+  "awayPregameElo": 1514,
+  "awayPostgameElo": 1512,
+  "excitementIndex": 4.799045878452558,
+  "highlights": "",
+  "notes": null,
+  "playoff": null
+ }
+]

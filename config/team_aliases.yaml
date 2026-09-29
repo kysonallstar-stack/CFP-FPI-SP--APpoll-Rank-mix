@@ -1,0 +1,14 @@
+# Extra spellings -> the canonical CFBD school name.
+# The CFBD team list already supplies most alternate names; add entries here
+# only when a source uses a spelling the matcher logs as unmatched.
+San Jose State: San José State
+Hawaii: Hawai'i
+Louisiana Monroe: UL Monroe
+ULM: UL Monroe
+Miami (FL): Miami
+Miami Ohio: Miami (OH)
+UConn: UConn
+Connecticut: UConn
+Southern Mississippi: Southern Miss
+Appalachian State: App State
+UMass: Massachusetts

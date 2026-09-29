@@ -1,0 +1,26 @@
+# CFB Blend configuration. Every tunable constant lives here.
+
+season: 2026
+
+api:
+  base_url: https://api.collegefootballdata.com
+  key_env: CFBD_API_KEY        # the key is read from this env var, never stored in the repo
+  timeout_seconds: 30
+  max_retries: 3
+
+paths:
+  raw: data/raw                # data/raw/<season>/week_<n>/
+  processed: data/processed    # data/processed/<season>/week_<n>.json
+  aliases: config/team_aliases.yaml
+
+fetch:
+  # A week is "complete" (frozen, never re-downloaded) once every FBS game in it
+  # is final AND the poll released after it is available. If a game never gets
+  # a result (cancelled) or the poll never shows up, we stop waiting after these
+  # many days past the week's end and freeze the week with the gap recorded.
+  games_grace_days: 2
+  poll_grace_days: 9
+
+polls:
+  ap: AP Top 25
+  cfp: Playoff Committee Rankings
