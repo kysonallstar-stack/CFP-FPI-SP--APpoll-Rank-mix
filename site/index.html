@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="CFB Blend">
+  <meta name="description" content="College football rankings blending SP+, FPI and the AP poll, with playoff odds from 10,000 simulated seasons.">
+  <title>CFB Blend</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <h1><a href="#rankings">CFB Blend</a></h1>
+      <p class="sub" id="subtitle">Loading…</p>
+    </div>
+    <nav class="tabs wrap" aria-label="Sections">
+      <a href="#rankings" data-tab="rankings">Rankings</a>
+      <a href="#games" data-tab="games">This week</a>
+      <a href="#disagree" data-tab="disagree">Disagree</a>
+      <a href="#about" data-tab="about">About</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section id="view-rankings" class="view" hidden>
+      <div class="controls">
+        <input id="search" type="search" placeholder="Search teams" aria-label="Search teams" autocomplete="off">
+        <select id="conf" aria-label="Conference"><option value="">All conferences</option></select>
+        <label class="toggle"><input id="all" type="checkbox"> All 138</label>
+      </div>
+      <div class="table-scroll">
+        <table id="rank-table">
+          <thead><tr>
+            <th data-sort="rank" class="num">#</th>
+            <th data-sort="name" class="team-col">Team</th>
+            <th data-sort="p_playoff" class="num" title="Chance to make the 12-team playoff">CFP%</th>
+            <th data-sort="p_bye" class="num" title="Chance of a first-round bye (top-4 seed)">Bye%</th>
+            <th data-sort="p_conf" class="num" title="Chance to win the conference">Conf%</th>
+            <th data-sort="rating" class="num" title="Blended rating, points vs. an average FBS team">Rtg</th>
+            <th data-sort="ap" class="num">AP</th>
+            <th data-sort="cfp" class="num cfp-col" title="Committee ranking">CFP</th>
+            <th data-sort="sp" class="num">SP+</th>
+            <th data-sort="fpi" class="num">FPI</th>
+            <th data-sort="xw" class="num" title="Expected wins, including a conference title game">xW</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="note">Tap a team for its schedule and odds. Tap a column to sort.</p>
+    </section>
+
+    <section id="view-games" class="view" hidden>
+      <h2 id="games-title">This week</h2>
+      <h3>Top matchups</h3>
+      <p class="note">The best games on paper: ranked by the weaker team's rating, so both teams are good.</p>
+      <div id="matchups" class="cards"></div>
+      <h3>Biggest playoff swings</h3>
+      <p class="note">Games whose result moves playoff odds the most, summed over every team affected.</p>
+      <div id="leverage" class="cards"></div>
+    </section>
+
+    <section id="view-disagree" class="view" hidden>
+      <h2>Where humans and computers disagree</h2>
+      <p class="note" id="disagree-note"></p>
+      <div class="split">
+        <div><h3>Poll likes them more</h3><ol id="poll-higher" class="dlist"></ol></div>
+        <div><h3>Computers like them more</h3><ol id="metrics-higher" class="dlist"></ol></div>
+      </div>
+    </section>
+
+    <section id="view-team" class="view" hidden></section>
+
+    <section id="view-about" class="view prose" hidden>
+      <h2>How it works</h2>
+      <p><strong>Rating.</strong> SP+ and ESPN's FPI are converted to z-scores and averaged (the "computers").
+        That is blended with the AP poll's vote points (the "humans"). The poll's weight grows from 25% in
+        week 5 to 40% by week 12. The result is shown in points, so the difference between two teams is a
+        predicted margin before home field.</p>
+      <p><strong>Playoff selection.</strong> Once the committee releases its rankings, they replace the AP poll at a 50%
+        weight, but only for predicting who the committee picks. Game predictions keep using the AP.</p>
+      <p><strong>Odds.</strong> Every remaining game, each conference title game and the 12-team selection are simulated
+        <span id="about-sims">10,000</span> times. Home field is worth <span id="about-hfa">2.7</span> points. Each
+        simulated season also draws how much better or worse each team really is than its rating, so a team's
+        results move together instead of every game being a separate coin flip.</p>
+      <p><strong>The committee is approximated.</strong> In each simulation it ranks teams by rating, subtracts points for
+        every loss and adds a little for conference titles. Those weights were fitted to the committee's actual
+        2024 and 2025 final rankings. The real committee weighs many things this ignores.</p>
+      <h3>Known weaknesses</h3>
+      <ul>
+        <li><strong>Early-season priors.</strong> SP+ and FPI lean on preseason expectations for the first few weeks.</li>
+        <li><strong>Few games between conferences.</strong> Conferences are compared mostly through a handful of non-conference games.</li>
+        <li><strong>The committee model is a simple approximation</strong> (rating, losses, titles).</li>
+        <li><strong>Injuries aren't modeled</strong>, including a starting quarterback going down.</li>
+        <li><strong>Tiebreakers are simplified:</strong> record among the tied teams, then rating.</li>
+      </ul>
+      <p><a id="repo-link" href="https://github.com/kysonallstar-stack/CFP-FPI-SP--APpoll-Rank-mix">Code, full method and backtest results on GitHub</a></p>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <p id="updated"></p>
+    <p>Data: <a href="https://collegefootballdata.com">CollegeFootballData.com</a>. Not affiliated with the CFP, AP or ESPN.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

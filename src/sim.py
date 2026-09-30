@@ -321,7 +321,10 @@ def leverage(season: Season, res: dict, week: int, min_side: int, z_min: float, 
         g = season.games[c]
         out.append({
             "game_id": g["id"], "week": int(week), "home": g["home_name"], "away": g["away_name"],
+            "home_id": g["home_id"], "away_id": g["away_id"], "start": g["start"],
             "neutral": g["neutral"], "home_win_prob": round(float(res["probs"][c]), 3),
+            "predicted_margin": round(float(season.k * (season.r(season.g_home[c]) - season.r(season.g_away[c]))
+                                            + season.g_edge[c]), 1),
             "total_swing": round(float(np.abs(delta).sum()), 3),
             "movers": [{"team": season.name[t], "if_home_wins": round(float(made[hw, t].mean()), 3),
                         "if_home_loses": round(float(made[~hw, t].mean()), 3),
@@ -353,14 +356,14 @@ def run(week_data: dict, cfg: dict, n_sims: int, seed: int | None) -> dict:
         })
     teams.sort(key=lambda x: (-x["p_playoff"], x["rank"]))
 
-    upcoming = []
-    for c in np.where(season.g_week == next_week)[0] if next_week else []:
-        g = season.games[c]
+    remaining = []
+    for c, g in enumerate(season.games):
         m = season.k * (season.r(season.g_home[c]) - season.r(season.g_away[c])) + season.g_edge[c]
-        upcoming.append({"game_id": g["id"], "home": g["home_name"], "away": g["away_name"],
-                         "home_id": g["home_id"], "away_id": g["away_id"], "fbs": g["home_fbs"] and g["away_fbs"],
-                         "neutral": g["neutral"], "start": g["start"],
-                         "home_win_prob": round(float(res["probs"][c]), 3), "predicted_margin": round(float(m), 1)})
+        remaining.append({"game_id": g["id"], "week": g["week"], "home": g["home_name"], "away": g["away_name"],
+                          "home_id": g["home_id"], "away_id": g["away_id"], "fbs": g["home_fbs"] and g["away_fbs"],
+                          "neutral": g["neutral"], "start": g["start"],
+                          "home_win_prob": round(float(res["probs"][c]), 3), "predicted_margin": round(float(m), 1)})
+    upcoming = [g for g in remaining if g["week"] == next_week]
 
     lev = leverage(season, res, next_week, cfg["sim"]["leverage_min_side_sims"],
                    cfg["sim"]["leverage_z_min"], top_n=None) if next_week else []
@@ -369,7 +372,7 @@ def run(week_data: dict, cfg: dict, n_sims: int, seed: int | None) -> dict:
         "sims": n_sims, "seed": seed,
         "settings": {"hfa": season.hfa, "sigma": season.sigma, "fcs_rating": round(season.fcs_rating, 1),
                      "g6_bid": cfg["playoff"]["g6_bid"], "committee": cfg["committee"]},
-        "teams": teams, "upcoming_games": upcoming,
+        "teams": teams, "upcoming_games": upcoming, "remaining_games": remaining,
         "leverage": lev[:cfg["sim"]["top_n_games"]],
         "top_matchups": top_matchups(upcoming, by_id, teams, lev, cfg["sim"]["top_n_games"]),
     }
@@ -386,7 +389,8 @@ def top_matchups(upcoming: list, by_id: dict, teams: list, lev: list, n: int) ->
         if not g["fbs"]:
             continue
         h, a = by_id[str(g["home_id"])], by_id[str(g["away_id"])]
-        out.append({**{k: g[k] for k in ("game_id", "home", "away", "neutral", "start", "home_win_prob", "predicted_margin")},
+        out.append({**{k: g[k] for k in ("game_id", "home", "away", "home_id", "away_id", "neutral", "start",
+                                         "home_win_prob", "predicted_margin")},
                     "home_rank": h["rank"], "away_rank": a["rank"],
                     "home_p_playoff": odds[h["id"]], "away_p_playoff": odds[a["id"]],
                     "playoff_swing": swing.get(g["game_id"], 0.0),
