@@ -47,7 +47,9 @@ class TeamRegistry:
                 "division": t.get("division"),
                 "abbreviation": t.get("abbreviation"),
                 "color": t.get("color"),
-                "logo": (t.get("logos") or [None])[0],
+                # Small logo made for dark backgrounds (the site is always dark).
+                "logo": next((u for u in t.get("logos") or [] if "/logos-dark/64/" in u),
+                             (t.get("logos") or [None])[0]),
             }
             self._exact[t["school"]] = tid
             self._norm[normalize_name(t["school"])] = tid

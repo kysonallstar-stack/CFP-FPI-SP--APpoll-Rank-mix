@@ -197,3 +197,21 @@ tbody tr:hover td, tbody tr:focus-within td { background: var(--accent-soft); }
 .wi-bar .primary:disabled { opacity: 0.45; cursor: default; }
 .wi-bar .ghost { background: none; color: var(--accent); border: 1px solid var(--line); }
 .wi-table { max-height: none; }
+
+/* Bracket */
+.bround { display: grid; gap: 8px; }
+@media (min-width: 720px) { .bround { grid-template-columns: 1fr 1fr; } }
+.bgame { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.brow {
+  display: grid; grid-template-columns: 1.6em 22px minmax(0, 1fr) auto; gap: 8px; align-items: center;
+  padding: 8px 12px; color: var(--text); text-decoration: none; border-left: 3px solid transparent;
+}
+.brow + .brow { border-top: 1px solid var(--line); }
+.brow.fav { border-left-color: var(--accent-fill); font-weight: 700; }
+.bseed { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; text-align: right; }
+.bname { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bp { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; }
+.brow.fav .bp { color: var(--text); }
+.logo { width: 22px; height: 22px; object-fit: contain; vertical-align: middle; }
+.dlist .logo { width: 18px; height: 18px; margin-right: 4px; }
+.byes .bseed { color: var(--accent); }

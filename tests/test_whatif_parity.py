@@ -64,3 +64,30 @@ def test_forced_picks_always_happen(python_run, tmp_path):
     js = run_js(inp, tmp_path, 2000, picks)
     assert js["regWins"][i] == inp["w"][i]          # no more regular-season wins, in every sim
     assert js["playoff"][i] < 0.05                   # an 8-loss team doesn't make the playoff
+
+
+def test_projected_bracket_follows_the_rules(python_run, tmp_path):
+    """Projected field from the real sim output: 12 distinct teams, every Power 4
+    conference's most likely champion included, title odds summing to 1."""
+    inp = python_run["inputs"]
+    (tmp_path / "b.json").write_text(json.dumps(inp))
+    script = f"""
+      const sim = require({json.dumps(str(ROOT / 'site/sim.js'))});
+      const inp = JSON.parse(require('fs').readFileSync({json.dumps(str(tmp_path / 'b.json'))}));
+      const field = sim.projectField(inp, inp.projection.score, inp.projection.p_conf);
+      const ids = field.map((i) => inp.ids[i]);
+      const b = sim.bracket(ids, (id) => inp.rating[inp.ids.indexOf(id)], {{k: inp.k, sigma: inp.sigma, hfa: inp.hfa}});
+      console.log(JSON.stringify({{field, byes: b.byes, odds: b.titleOdds.map((x) => x[1]),
+        r1: b.rounds[0].games.map((g) => [g.seedA, g.seedB]), qf: b.rounds[1].games.map((g) => g.seedA),
+        sfSides: b.rounds[2].games.length}}));
+    """
+    out = json.loads(subprocess.run([NODE, "-e", script], capture_output=True, text=True, check=True).stdout)
+    field = out["field"]
+    assert len(field) == 12 and len(set(field)) == 12
+    p_conf = inp["projection"]["p_conf"]
+    for conf in inp["playoff"]["power4"]:
+        members = [i for i, c in enumerate(inp["conf"]) if c == conf]
+        assert max(members, key=lambda i: p_conf[i]) in field
+    assert out["r1"] == [[5, 12], [6, 11], [7, 10], [8, 9]]
+    assert out["qf"] == [1, 2, 3, 4] and out["sfSides"] == 2
+    assert abs(sum(out["odds"]) - 1) < 1e-9 and len(out["odds"]) == 12

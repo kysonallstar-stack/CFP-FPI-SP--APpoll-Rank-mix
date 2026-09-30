@@ -319,6 +319,7 @@ def simulate(season: Season, n_sims: int, seed: int | None) -> dict:
     made = np.zeros((S, T), dtype=bool)
     bye = np.zeros((S, T), dtype=bool)
     seeds = np.zeros((S, T), dtype=int)
+    score_sum = np.zeros(T)   # average committee score -> the projected bracket
 
     for s in range(S):
         true_rating = season.rating + offset[s]
@@ -356,13 +357,15 @@ def simulate(season: Season, n_sims: int, seed: int | None) -> dict:
         score = (season.sel_rating + offset[s] + sel_noise[s]
                  - ccfg["loss_penalty"] * (future_losses[s] + current_loss_factor * season.base["l"])
                  + ccfg["champ_bonus"] * champ[s])
+        score_sum += score
         for k, t in enumerate(pick_field(score, champ[s], season.conf, nd, pcfg)):
             made[s, t] = True
             seeds[s, t] = k + 1
             bye[s, t] = k < pcfg["byes"]
 
     return {"home_win": home_win, "probs": probs, "made": made, "bye": bye, "champ": champ,
-            "in_title": in_title, "wins": rec["w"], "reg_wins": reg_wins, "seeds": seeds}
+            "in_title": in_title, "wins": rec["w"], "reg_wins": reg_wins, "seeds": seeds,
+            "mean_score": score_sum / S}
 
 
 def leverage(season: Season, res: dict, week: int, min_side: int, z_min: float, top_n: int | None = 10) -> list[dict]:
@@ -489,14 +492,21 @@ def run(week_data: dict, cfg: dict, n_sims: int, seed: int | None) -> dict:
     return {
         "season": week_data["season"], "as_of_week": week_data["week"], "next_week": next_week,
         "sims": n_sims, "seed": seed,
-        "settings": {"hfa": season.hfa, "sigma": season.sigma, "fcs_rating": round(season.fcs_rating, 1),
+        "settings": {"hfa": season.hfa, "sigma": season.sigma, "margin_scale": season.k,
+                     "fcs_rating": round(season.fcs_rating, 1),
                      "g6_bid": cfg["playoff"]["g6_bid"], "committee": cfg["committee"]},
         "teams": teams, "upcoming_games": upcoming, "remaining_games": remaining,
         "leverage": lev[:cfg["sim"]["top_n_games"]],
         "top_matchups": top_matchups(upcoming, by_id, teams, lev, cfg["sim"]["top_n_games"]),
         "week_games": week_games(upcoming, by_id, lev, season.fcs_rating),
         "final_field": final,                               # set on Selection Day, else None
-        "inputs": None if final else season.export(),       # for the in-browser what-if tool
+        "inputs": None if final else {
+            **season.export(),                              # for the in-browser what-if tool
+            # For the projected bracket (built in site/sim.js): each team's average
+            # committee score and title odds, in the same team order as `ids`.
+            "projection": {"score": [round(float(x), 2) for x in res["mean_score"]],
+                           "p_conf": [round(float(x), 4) for x in res["champ"].mean(0)]},
+        },
     }
 
 

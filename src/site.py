@@ -43,7 +43,7 @@ def build(season: int, proc: Path, cfg: dict, n_sims: int, seed) -> tuple[dict, 
         o, i = odds[t["id"]], info[t["id"]]
         teams.append({
             "id": t["id"], "name": t["team"], "abbr": i.get("abbreviation"), "conf": t["conference"],
-            "color": i.get("color"),
+            "color": i.get("color"), "logo": i.get("logo"),
             "rank": t["rank"], "rating": t["rating"], "sel_rank": t["selection_rank"],
             "w": t["wins"], "l": t["losses"], "cw": t["conf_wins"], "cl": t["conf_losses"],
             "ap": t["ap_rank"], "ap_pts": t["ap_points"], "cfp": t["cfp_rank"],

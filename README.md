@@ -70,6 +70,13 @@ with those results locked in. The simulation runs in your browser
 (`site/sim.js`, a copy of the Python simulator; a test checks the two agree).
 Each team's page has a "What if they win out?" shortcut.
 
+**Projected bracket.** The Bracket tab shows the field "if the season went as
+expected": each conference's most likely champion, then the selection rules
+applied to each team's average committee score across the simulations. Every
+matchup shows win chances (first round at the higher seed, later rounds
+neutral), and each team's title odds are worked out exactly through the
+bracket. The What-if tab redraws it with your picks.
+
 **9. Selection Day.** Once every conference title game is final and the
 committee's final rankings are out, the site stops simulating and shows the
 real field: seeds, byes and first-round matchups, taken from the committee's

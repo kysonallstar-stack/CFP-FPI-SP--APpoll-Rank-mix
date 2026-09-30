@@ -10,7 +10,9 @@
   <title>CFB Blend</title>
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon.png">
-  <link rel="stylesheet" href="style.css">
+  <!-- The deploy step stamps a build number into these URLs so phones fetch new files. -->
+  <script>window.BUILD = "__BUILD__";</script>
+  <link rel="stylesheet" href="style.css?v=__BUILD__">
 </head>
 <body>
   <header class="top">
@@ -21,6 +23,7 @@
     <nav class="tabs wrap" aria-label="Sections">
       <a href="#rankings" data-tab="rankings">Rankings</a>
       <a href="#games" data-tab="games">This week</a>
+      <a href="#bracket" data-tab="bracket">Bracket</a>
       <a href="#whatif" data-tab="whatif">What if</a>
       <a href="#disagree" data-tab="disagree">Disagree</a>
       <a href="#about" data-tab="about">About</a>
@@ -56,7 +59,6 @@
     </section>
 
     <section id="view-games" class="view" hidden>
-      <div id="final-field" hidden></div>
       <h2 id="games-title">This week</h2>
       <div class="seg" role="group" aria-label="Sort games">
         <button type="button" data-sort="quality" aria-pressed="true">Best games</button>
@@ -66,6 +68,10 @@
       <p class="note" id="games-note"></p>
       <div id="week-games" class="cards"></div>
       <button type="button" id="more-games" class="more" hidden></button>
+    </section>
+
+    <section id="view-bracket" class="view" hidden>
+      <div id="bracket"></div>
     </section>
 
     <section id="view-whatif" class="view" hidden>
@@ -84,6 +90,7 @@
           <button type="button" id="wi-run" class="primary">Simulate</button>
         </div>
         <div id="wi-results" aria-live="polite"></div>
+        <div id="wi-bracket"></div>
       </div>
     </section>
 
@@ -132,7 +139,7 @@
     <p>Data: <a href="https://collegefootballdata.com">CollegeFootballData.com</a>. Not affiliated with the CFP, AP or ESPN.</p>
   </footer>
 
-  <script src="sim.js"></script>
-  <script src="app.js"></script>
+  <script src="sim.js?v=__BUILD__"></script>
+  <script src="app.js?v=__BUILD__"></script>
 </body>
 </html>

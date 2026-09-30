@@ -129,7 +129,8 @@
     const curLossFactor = 1 - inp.sel_poll_weight;
 
     const out = { playoff: new Float64Array(T), bye: new Float64Array(T), conf: new Float64Array(T),
-                  title: new Float64Array(T), wins: new Float64Array(T), regWins: new Float64Array(T) };
+                  title: new Float64Array(T), wins: new Float64Array(T), regWins: new Float64Array(T),
+                  score: new Float64Array(T) };
     const off = new Float64Array(T), w = new Float64Array(T), l = new Float64Array(T);
     const cw = new Float64Array(T), cl = new Float64Array(T), futureL = new Float64Array(T);
     const pct = new Float64Array(T), score = new Float64Array(T);
@@ -191,6 +192,7 @@
           - c.loss_penalty * (futureL[t] + curLossFactor * inp.l[t]) + c.champ_bonus * champ[t];
         out.wins[t] += w[t];
         out.conf[t] += champ[t];
+        out.score[t] += score[t];
       }
       pickField(score, champ, inp.conf, p.nd, p).forEach((t, i) => {
         out.playoff[t]++;
@@ -201,7 +203,78 @@
     return out;
   }
 
-  const api = { simulate, order, pickField };
+  // ---- projected bracket ---------------------------------------------------
+
+  // Normal CDF via erf (Abramowitz & Stegun 7.1.26, error < 1.5e-7).
+  function erf(x) {
+    const sgn = x < 0 ? -1 : 1;
+    x = Math.abs(x);
+    const t = 1 / (1 + 0.3275911 * x);
+    const y = 1 - ((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x);
+    return sgn * y;
+  }
+  const winProb = (margin, sigma) => 0.5 * (1 + erf(margin / (sigma * Math.SQRT2)));
+
+  /**
+   * The projected field (team indices in seed order): each conference's most
+   * likely champion, then the normal selection rules applied to each team's
+   * average committee score across the simulated seasons.
+   */
+  function projectField(inp, score, pConf) {
+    const T = inp.ids.length, champ = new Uint8Array(T), best = new Map();
+    for (let t = 0; t < T; t++) {
+      const cf = inp.conf[t];
+      if (inp.playoff.no_title_game.includes(cf)) continue;
+      const b = best.get(cf);
+      if (b === undefined || pConf[t] > pConf[b] || (pConf[t] === pConf[b] && score[t] > score[b])) best.set(cf, t);
+    }
+    for (const t of best.values()) champ[t] = 1;
+    return pickField(score, champ, inp.conf, inp.playoff.nd, inp.playoff);
+  }
+
+  /**
+   * Bracket for a 12-team field. seeds: team ids in seed order. rating(id) gives
+   * the predictive rating; params {k, sigma, hfa}. First round is at the higher
+   * seed; later rounds are neutral. No re-seeding: 1 vs 8/9, 2 vs 7/10, 3 vs
+   * 6/11, 4 vs 5/12; semifinals pair the 1/4 side and the 2/3 side.
+   * Returns rounds with each game's favorite, plus exact title odds per team
+   * (probabilities pushed through the bracket, no simulation needed).
+   */
+  function bracket(seeds, rating, params) {
+    const seedOf = new Map(seeds.map((id, i) => [id, i + 1]));
+    const p = (a, b, homeA) => winProb(params.k * (rating(a) - rating(b)) + (homeA ? params.hfa : 0), params.sigma);
+    // Combine two "who could be here" distributions into who wins this game.
+    const play = (A, B, homeA) => {
+      const out = new Map();
+      for (const [a, pa] of A) for (const [b, pb] of B) {
+        const q = p(a, b, homeA);
+        out.set(a, (out.get(a) || 0) + pa * pb * q);
+        out.set(b, (out.get(b) || 0) + pa * pb * (1 - q));
+      }
+      return out;
+    };
+    const one = (seed) => new Map([[seeds[seed - 1], 1]]);
+    const fav = (dist) => [...dist].sort((x, y) => y[1] - x[1])[0][0];
+    const game = (A, B, homeA, label) => {
+      const a = fav(A), b = fav(B);
+      const pa = p(a, b, homeA);
+      return { label, a, b, seedA: seedOf.get(a), seedB: seedOf.get(b), pA: pa, winner: pa >= 0.5 ? a : b,
+               dist: play(A, B, homeA) };
+    };
+    const r1 = [[5, 12], [6, 11], [7, 10], [8, 9]].map(([h, l]) => game(one(h), one(l), true, `${h} vs ${l}`));
+    const w = (g) => g.dist;
+    const qf = [[1, r1[3]], [2, r1[2]], [3, r1[1]], [4, r1[0]]].map(([s, g]) => game(one(s), w(g), false, `${s} vs ${g.label} winner`));
+    const sf = [game(w(qf[0]), w(qf[3]), false, "1/4 side"), game(w(qf[1]), w(qf[2]), false, "2/3 side")];
+    const fin = game(w(sf[0]), w(sf[1]), false, "Championship");
+    return {
+      byes: seeds.slice(0, 4),
+      rounds: [{ name: "First round", games: r1 }, { name: "Quarterfinals", games: qf },
+               { name: "Semifinals", games: sf }, { name: "Championship", games: [fin] }],
+      titleOdds: [...fin.dist].sort((x, y) => y[1] - x[1]),
+    };
+  }
+
+  const api = { simulate, order, pickField, projectField, bracket, winProb };
   root.CFBSim = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof self !== "undefined" ? self : globalThis);

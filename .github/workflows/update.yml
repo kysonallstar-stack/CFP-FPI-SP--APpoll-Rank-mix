@@ -75,6 +75,14 @@ jobs:
         with:
           ref: main           # pick up the data commit the update job just pushed
           fetch-depth: 2      # the notifier compares with the previous commit
+      - name: Stamp build number (cache busting)
+        # Browsers keep files ~10 minutes (longer on phones). A new number in the
+        # asset URLs forces fresh files, and build.txt lets an old cached page
+        # notice it's out of date and reload itself.
+        run: |
+          B="r${GITHUB_RUN_NUMBER}-${GITHUB_RUN_ATTEMPT}"
+          sed -i "s/__BUILD__/$B/g" site/index.html
+          printf '%s' "$B" > site/build.txt
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:

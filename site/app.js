@@ -240,7 +240,7 @@ function runSim(picks) {
   const opts = { sims: WI_SIMS, seed: WI_SEED, picks };
   if (!wi.worker && typeof Worker !== "undefined") {
     try {
-      wi.worker = new Worker("whatif-worker.js");
+      wi.worker = new Worker("whatif-worker.js?v=" + encodeURIComponent(window.BUILD || ""));
       wi.worker.onmessage = (e) => { wi.pending.get(e.data.id)(e.data.result); wi.pending.delete(e.data.id); };
     } catch { wi.worker = false; }
   }
@@ -314,6 +314,10 @@ async function simulateWhatif() {
     <p class="note">Change is in percentage points of playoff odds. Both columns come from ${WI_SIMS.toLocaleString()}
       in-browser simulations, so differences under ~2 points are noise.</p>`
     : `<p class="note">Your picks barely move anyone's playoff odds (all changes under 1 point).</p>`;
+  renderBracket($("#wi-bracket"), projectedSeeds(r.score, r.conf), {
+    title: "Projected bracket with your picks",
+    note: "Same method as the Bracket tab, using the simulations with your picks locked in.",
+  });
 }
 
 function initWhatif() {
@@ -343,6 +347,7 @@ function initWhatif() {
     state.picks = {};
     savePicks();
     $("#wi-results").innerHTML = "";
+    $("#wi-bracket").innerHTML = "";
     renderWhatifGames();
   });
   $("#wi-run").addEventListener("click", simulateWhatif);
@@ -367,31 +372,68 @@ function winOut(id) {
   simulateWhatif();
 }
 
-// ---------- Selection Day ---------------------------------------------------
-function renderFinalField() {
-  const f = state.data.final_field;
-  const el = $("#final-field");
-  if (!f) { el.hidden = true; return; }
-  el.hidden = false;
-  const seed = (x) => `<li data-id="${x.id}"><span><b>${x.seed}.</b> ${esc(x.team)}${x.champion ? ' <span class="tag">Champion</span>' : ""}</span>
-    <span class="ranks">${x.cfp_rank ? "CFP #" + x.cfp_rank : "unranked"}${x.bye ? " · bye" : ""}</span></li>`;
+// ---------- bracket ---------------------------------------------------------
+const logo = (t) => (t && t.logo
+  ? `<img class="logo" src="${esc(t.logo)}" alt="" width="22" height="22" loading="lazy" onerror="this.remove()">` : "");
+
+// Render a 12-team bracket into `el`. seeds: team ids in seed order.
+function renderBracket(el, seeds, { title, note }) {
+  const params = { k: state.data.settings.margin_scale || 1, sigma: state.data.settings.sigma, hfa: state.data.settings.hfa };
+  const b = CFBSim.bracket(seeds, (id) => state.byId.get(id).rating, params);
+  const odds = new Map(b.titleOdds);
+  const row = (id, seed, p, win) => {
+    const t = state.byId.get(id);
+    return `<a class="brow${win ? " fav" : ""}" href="#team/${id}"><span class="bseed">${seed}</span>${logo(t)}
+      <span class="bname">${esc(t.name)}</span><span class="bp">${pct(p)}</span></a>`;
+  };
+  const game = (g) => `<div class="bgame">${row(g.a, g.seedA, g.pA, g.winner === g.a)}${row(g.b, g.seedB, 1 - g.pA, g.winner === g.b)}</div>`;
   el.innerHTML = `
-    <h2>The playoff field</h2>
-    <p class="note">Set by the committee's final rankings. Top four seeds get first-round byes; no re-seeding.</p>
-    <ol class="dlist">${f.seeds.map(seed).join("")}</ol>
-    <h3>First round (at the higher seed)</h3>
-    <div class="cards">${f.first_round.map(([a, b, sa, sb]) =>
-      `<div class="card"><b>#${sb} ${esc(b)}</b> at <b>#${sa} ${esc(a)}</b></div>`).join("")}</div>
-    <h3>Quarterfinals</h3>
-    <div class="cards">${f.quarterfinals.map(([a, opp, s]) =>
-      `<div class="card"><b>#${s} ${esc(a)}</b> vs winner of ${esc(opp)}</div>`).join("")}</div>`;
+    <h2>${esc(title)}</h2>
+    <p class="note">${note}</p>
+    <h3>First-round byes</h3>
+    <div class="bgame byes">${b.byes.map((id, i) => row(id, i + 1, odds.get(id), false)).join("")}</div>
+    <p class="note">Percentages next to the bye teams are their chances to win the title.</p>
+    ${b.rounds.map((r) => `<h3>${r.name}</h3>
+      <p class="note">${r.name === "First round" ? "At the higher seed's stadium." : "Neutral site."}
+        ${r.name === "First round" ? "" : "Showing the most likely matchup."}</p>
+      <div class="bround">${r.games.map(game).join("")}</div>`).join("")}
+    <h3>Title odds within this bracket</h3>
+    <ol class="dlist">${b.titleOdds.map(([id, p]) => {
+      const t = state.byId.get(id);
+      return `<li data-id="${id}"><span>${logo(t)} <b>${esc(t.name)}</b></span><span class="ranks">${pct(p)}</span></li>`;
+    }).join("")}</ol>`;
+}
+
+function projectedSeeds(score, pConf) {
+  const inp = state.data.whatif;
+  return CFBSim.projectField(inp, score, pConf).map((i) => inp.ids[i]);
+}
+
+function renderBracketView() {
+  const el = $("#bracket");
+  const d = state.data;
+  if (d.final_field) {
+    renderBracket(el, d.final_field.seeds.map((x) => x.id), {
+      title: "The playoff field",
+      note: "Set by the committee's final rankings. Win chances come from our ratings.",
+    });
+  } else if (d.whatif && d.whatif.projection) {
+    renderBracket(el, projectedSeeds(d.whatif.projection.score, d.whatif.projection.p_conf), {
+      title: "Projected bracket",
+      note: `If the season went as the simulations expect: each conference's most likely champion, then the
+        committee rules applied to every team's average standing across ${d.sims.toLocaleString()} simulated seasons.
+        Try your own results on the <a href="#whatif">What if</a> tab.`,
+    });
+  } else {
+    el.innerHTML = `<p class="note">No bracket yet.</p>`;
+  }
 }
 
 // ---------- routing -------------------------------------------------------
 function route() {
   const hash = location.hash.slice(1) || "rankings";
   const [view, arg] = hash.split("/");
-  const name = ["rankings", "games", "whatif", "disagree", "about", "team"].includes(view) ? view : "rankings";
+  const name = ["rankings", "games", "bracket", "whatif", "disagree", "about", "team"].includes(view) ? view : "rankings";
   document.querySelectorAll(".view").forEach((v) => (v.hidden = v.id !== "view-" + name));
   document.querySelectorAll(".tabs a").forEach((a) =>
     a.classList.toggle("active", a.dataset.tab === name || (name === "team" && a.dataset.tab === "rankings")));
@@ -421,7 +463,7 @@ function init(data) {
 
   renderRankings();
   renderGames();
-  renderFinalField();
+  renderBracketView();
   renderDisagree();
   initWhatif();
 
@@ -448,11 +490,28 @@ function init(data) {
   $("#rank-table tbody").addEventListener("click", openRow);
   $("#rank-table tbody").addEventListener("keydown", (e) => { if (e.key === "Enter") openRow(e); });
   $("#view-disagree").addEventListener("click", openRow);
-  $("#final-field").addEventListener("click", openRow);
+  $("#bracket").addEventListener("click", openRow);
+  $("#wi-bracket").addEventListener("click", openRow);
 
   window.addEventListener("hashchange", route);
   route();
 }
+
+// If this page is an old cached copy (phones and home-screen apps hold on to
+// files), reload once so the latest code loads. build.txt is written at deploy.
+(function checkBuild() {
+  if (!window.BUILD || window.BUILD.startsWith("__")) return;   // local preview: no build number
+  fetch("build.txt", { cache: "no-store" })
+    .then((r) => (r.ok ? r.text() : null))
+    .then((latest) => {
+      latest = latest && latest.trim();
+      if (!latest || latest === window.BUILD) return;
+      const key = "cfb-reloaded-" + latest;
+      try { if (sessionStorage.getItem(key)) return; sessionStorage.setItem(key, "1"); } catch { /* ignore */ }
+      location.replace(location.pathname + "?b=" + encodeURIComponent(latest) + location.hash);
+    })
+    .catch(() => {});
+})();
 
 fetch("data.json", { cache: "no-cache" })
   .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
