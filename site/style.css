@@ -1,20 +1,20 @@
-/* CFB Blend: mobile-first, always dark, BYU colors.
-   BYU brand: navy #002E5D, royal #0062B8 (brand.byu.edu). Royal is used for fills;
-   text links use a lighter tint of royal so they stay readable on dark navy. */
+/* CFB Blend: mobile-first, always dark. Neutral black/gray surfaces with BYU
+   colors for accents. BYU brand: navy #002E5D, royal #0062B8 (brand.byu.edu).
+   Royal is used for fills; text links use a lighter tint so they stay readable. */
 :root {
   --byu-navy: #002e5d;
   --byu-royal: #0062b8;
-  --bg: #001a36;          /* deeper than BYU navy so cards stand out */
-  --surface: #032a52;
-  --text: #f3f6fa;
-  --muted: #a9bbd0;
-  --line: #164272;
+  --bg: #0d0f13;
+  --surface: #161a20;
+  --text: #e8eaed;
+  --muted: #9aa1ab;
+  --line: #2a3038;
   --accent: #7fb5ef;      /* royal, lightened for text on dark */
   --accent-fill: var(--byu-royal);
-  --accent-soft: #0a3a6e;
-  --good: #5ee08f;
-  --bad: #ff8a8a;
-  --bar: #164272;
+  --accent-soft: #10243d; /* royal-tinted hover */
+  --good: #4ade80;
+  --bad: #f87171;
+  --bar: #2a3038;
   --head: var(--byu-navy);
   --head-text: #ffffff;
   --radius: 10px;
@@ -82,8 +82,8 @@ table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 14
 th, td { padding: 9px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
 tbody tr:last-child td { border-bottom: 0; }
 th {
-  position: sticky; top: 0; z-index: 2; background: var(--byu-navy); color: var(--muted);
-  box-shadow: inset 0 -1px 0 var(--line);
+  position: sticky; top: 0; z-index: 2; background: var(--surface); color: var(--muted);
+  box-shadow: inset 0 -2px 0 var(--byu-royal);
   font-size: 12px; text-transform: uppercase; letter-spacing: 0.03em;
   cursor: pointer; user-select: none; text-align: left;
 }
@@ -92,7 +92,7 @@ th.sorted::after { content: " ▾"; }
 th.sorted.asc::after { content: " ▴"; }
 .num { text-align: right; font-variant-numeric: tabular-nums; }
 .team-col { position: sticky; left: 0; background: var(--surface); z-index: 1; min-width: 150px; }
-th.team-col { z-index: 3; background: var(--byu-navy); }  /* the corner cell sticks both ways */
+th.team-col { z-index: 3; background: var(--surface); }  /* the corner cell sticks both ways */
 tbody tr { cursor: pointer; }
 tbody tr:hover td, tbody tr:focus-within td { background: var(--accent-soft); }
 .teamcell { display: flex; align-items: center; gap: 8px; }
