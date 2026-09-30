@@ -50,3 +50,35 @@ weight:                        # w = poll weight; blend = (1 - w) * metrics + w 
 cfp:
   replace_ap: true             # once committee rankings exist, they replace the AP poll
   weight: 0.50                 # poll weight while CFP rankings are in use
+
+sim:
+  n_sims: 10000
+  seed: 42                     # fixed for reproducible runs; set to null for fresh randomness
+  # Home-field advantage, points. 2025 conference games (every team ~half at home,
+  # so strength cancels): mean home margin 2.71 (90% CI 1.4-4.1), n=537.
+  hfa: 2.7
+  # SD of actual margin around predicted margin. 2025 Elo-based predictions had a
+  # residual SD of 16.1 (15.4 from week 8 on). Phase 4 re-measures this for our blend.
+  sigma: 16.0
+  fcs_rating_default: -20.0    # used only if <10 completed FBS-vs-FCS games to estimate from
+  leverage_min_side_sims: 50   # skip games where either outcome occurs in fewer sims (too noisy)
+  leverage_z_min: 3.0          # a team's swing counts only if > 3 standard errors (filters sampling noise)
+
+committee:                     # APPROXIMATION of the selection committee, not the real thing
+  loss_penalty: 3.0            # points subtracted per loss (committee weighs losses heavily)
+  champ_bonus: 2.0             # points added for winning a conference title
+  noise_sd: 1.5                # per-sim noise: the committee is not perfectly predictable
+
+playoff:                       # verified 2026-27 format (see Phase 0 notes)
+  field_size: 12
+  byes: 4
+  power4: [SEC, Big Ten, Big 12, ACC]
+  group6: [American Athletic, Conference USA, Mid-American, Mountain West, Pac-12, Sun Belt]
+  g6_bid: highest_ranked       # highest_ranked (2026 rule) | champion (pre-2026 rule)
+  notre_dame_id: 87            # auto-bid if ranked in the committee's top 12
+  no_title_game: [FBS Independents]
+  divisions:                   # title game = division winners instead of top two
+    Sun Belt: [East, West]
+  # Title game hosted by the higher seed (verified for MW and Pac-12; historical
+  # practice for the others). All other title games are at neutral sites.
+  title_game_home_of_higher_seed: [Mountain West, Pac-12, American Athletic, Conference USA, Sun Belt]
