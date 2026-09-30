@@ -110,15 +110,38 @@ function moversList(g) {
 const swingText = (s) => s >= 0.005
   ? `Moves playoff odds ${Math.round(s * 100)} points in total (all teams combined)`
   : "Little effect on playoff odds";
+
+const GAME_SORTS = {
+  quality:   { note: "Best games on paper: ranked by the weaker team's rating, so both teams are good.",
+               key: (g) => -g.quality },
+  swing:     { note: "Games whose result moves playoff odds the most, added up over every team affected.",
+               key: (g) => -g.swing },
+  closeness: { note: "Closest to a coin flip first.",
+               key: (g) => g.closeness },
+};
+
 function renderGames() {
   const d = state.data;
+  const sort = state.gameSort || "quality";
   $("#games-title").textContent = d.next_week ? `Week ${d.next_week}` : "No games left";
-  $("#matchups").innerHTML = d.top_matchups.map((g) =>
-    gameCard(g, `<div class="meta">${swingText(g.playoff_swing)}</div>`)).join("")
-    || `<p class="note">No upcoming games.</p>`;
-  $("#leverage").innerHTML = d.leverage.map((g) =>
-    gameCard(g, `<div class="meta">${swingText(g.total_swing)}</div>${moversList(g)}`)).join("")
-    || `<p class="note">No upcoming games.</p>`;
+  $("#games-note").textContent = GAME_SORTS[sort].note;
+  document.querySelectorAll(".seg button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.sort === sort)));
+
+  const games = [...(d.week_games || [])].sort((a, b) =>
+    GAME_SORTS[sort].key(a) - GAME_SORTS[sort].key(b) || b.quality - a.quality);
+  const shown = state.showAllGames ? games : games.slice(0, 10);
+  $("#week-games").innerHTML = shown.map((g) => {
+    const tag = sort === "swing" ? `${Math.round(g.swing * 100)} pt swing`
+      : sort === "closeness" ? (g.closeness <= 0.03 ? "Toss-up"
+        : `${pct(Math.max(g.home_win_prob, 1 - g.home_win_prob))} favorite`) : "";
+    const extra = `<div class="meta">${swingText(g.swing)}${tag ? `<span class="tag">${esc(tag)}</span>` : ""}</div>` +
+      (sort === "swing" ? moversList(g) : "");
+    return gameCard(g, extra);
+  }).join("") || `<p class="note">No upcoming games.</p>`;
+
+  const more = $("#more-games");
+  more.hidden = games.length <= 10;
+  more.textContent = state.showAllGames ? "Show top 10" : `Show all ${games.length} games`;
 }
 
 // ---------- disagreements ---------------------------------------------------
@@ -226,6 +249,12 @@ function init(data) {
   renderRankings();
   renderGames();
   renderDisagree();
+
+  document.querySelectorAll(".seg button").forEach((b) => b.addEventListener("click", () => {
+    state.gameSort = b.dataset.sort;
+    renderGames();
+  }));
+  $("#more-games").addEventListener("click", () => { state.showAllGames = !state.showAllGames; renderGames(); });
 
   $("#search").addEventListener("input", renderRankings);
   $("#conf").addEventListener("change", renderRankings);

@@ -375,7 +375,28 @@ def run(week_data: dict, cfg: dict, n_sims: int, seed: int | None) -> dict:
         "teams": teams, "upcoming_games": upcoming, "remaining_games": remaining,
         "leverage": lev[:cfg["sim"]["top_n_games"]],
         "top_matchups": top_matchups(upcoming, by_id, teams, lev, cfg["sim"]["top_n_games"]),
+        "week_games": week_games(upcoming, by_id, lev, season.fcs_rating),
     }
+
+
+def week_games(upcoming: list, by_id: dict, lev: list, fcs_rating: float) -> list[dict]:
+    """Every game next week with three ways to rank it:
+      quality      - the weaker team's rating (both teams good)
+      swing        - total change in playoff odds between the two results
+      closeness    - how near a coin flip it is (0 = 50/50, 0.5 = certain)
+    """
+    by_game = {g["game_id"]: g for g in lev}
+    out = []
+    for g in upcoming:
+        h, a = by_id.get(str(g["home_id"])), by_id.get(str(g["away_id"]))
+        lv = by_game.get(g["game_id"], {})
+        out.append({**{k: g[k] for k in ("game_id", "home", "away", "home_id", "away_id", "neutral", "start",
+                                         "home_win_prob", "predicted_margin")},
+                    "home_rank": h and h["rank"], "away_rank": a and a["rank"],
+                    "quality": round(min(h["rating"] if h else fcs_rating, a["rating"] if a else fcs_rating), 1),
+                    "swing": lv.get("total_swing", 0.0), "movers": lv.get("movers", []),
+                    "closeness": round(abs(g["home_win_prob"] - 0.5), 3)})
+    return sorted(out, key=lambda x: -x["quality"])
 
 
 def top_matchups(upcoming: list, by_id: dict, teams: list, lev: list, n: int) -> list[dict]:

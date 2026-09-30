@@ -1,35 +1,24 @@
-/* CFB Blend: mobile-first. Colors are tokens so dark mode is one override. */
+/* CFB Blend: mobile-first, always dark, BYU colors.
+   BYU brand: navy #002E5D, royal #0062B8 (brand.byu.edu). Royal is used for fills;
+   text links use a lighter tint of royal so they stay readable on dark navy. */
 :root {
-  --bg: #f7f7f5;
-  --surface: #ffffff;
-  --text: #16181d;
-  --muted: #5f6570;
-  --line: #e3e3de;
-  --accent: #1d4ed8;
-  --accent-soft: #e6edfd;
-  --good: #15803d;
-  --bad: #b91c1c;
-  --bar: #cbd5e1;
-  --head: #0f172a;
-  --head-text: #f8fafc;
+  --byu-navy: #002e5d;
+  --byu-royal: #0062b8;
+  --bg: #001a36;          /* deeper than BYU navy so cards stand out */
+  --surface: #032a52;
+  --text: #f3f6fa;
+  --muted: #a9bbd0;
+  --line: #164272;
+  --accent: #7fb5ef;      /* royal, lightened for text on dark */
+  --accent-fill: var(--byu-royal);
+  --accent-soft: #0a3a6e;
+  --good: #5ee08f;
+  --bad: #ff8a8a;
+  --bar: #164272;
+  --head: var(--byu-navy);
+  --head-text: #ffffff;
   --radius: 10px;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0d0f13;
-    --surface: #161a20;
-    --text: #e8eaed;
-    --muted: #9aa1ab;
-    --line: #2a3038;
-    --accent: #7aa2ff;
-    --accent-soft: #1b2640;
-    --good: #4ade80;
-    --bad: #f87171;
-    --bar: #334155;
-    --head: #0b1220;
-    color-scheme: dark;
-  }
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -61,7 +50,7 @@ a { color: var(--accent); }
   padding: 10px 12px; font-size: 14px; font-weight: 600;
   border-bottom: 3px solid transparent;
 }
-.tabs a.active { opacity: 1; border-bottom-color: #60a5fa; }
+.tabs a.active { opacity: 1; border-bottom-color: #ffffff; }
 
 main { padding-top: 14px; padding-bottom: 24px; }
 h2 { font-size: 19px; margin: 6px 0 4px; }
@@ -79,17 +68,23 @@ h3 { font-size: 15px; margin: 20px 0 4px; }
 .controls select { flex: 1 1 140px; }
 .toggle { font-size: 14px; color: var(--muted); display: flex; gap: 6px; align-items: center; white-space: nowrap; }
 
-/* Rankings table: scrolls sideways inside its box, never the page. */
+/* Rankings table: scrolls inside its own box (both directions), so the header
+   row stays pinned at the top and the team column stays pinned on the left.
+   The box is sized to the screen minus the sticky page header. */
 .table-scroll {
-  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  overflow: auto; -webkit-overflow-scrolling: touch;
+  max-height: calc(100vh - 110px);
+  max-height: calc(100dvh - 110px);
+  overscroll-behavior: contain;
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
 }
 table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 14px; }
 th, td { padding: 9px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
 tbody tr:last-child td { border-bottom: 0; }
 th {
-  position: sticky; top: 0; background: var(--surface);
-  font-size: 12px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted);
+  position: sticky; top: 0; z-index: 2; background: var(--byu-navy); color: var(--muted);
+  box-shadow: inset 0 -1px 0 var(--line);
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.03em;
   cursor: pointer; user-select: none; text-align: left;
 }
 th.sorted { color: var(--text); }
@@ -97,11 +92,12 @@ th.sorted::after { content: " ▾"; }
 th.sorted.asc::after { content: " ▴"; }
 .num { text-align: right; font-variant-numeric: tabular-nums; }
 .team-col { position: sticky; left: 0; background: var(--surface); z-index: 1; min-width: 150px; }
-th.team-col { z-index: 2; }
+th.team-col { z-index: 3; background: var(--byu-navy); }  /* the corner cell sticks both ways */
 tbody tr { cursor: pointer; }
 tbody tr:hover td, tbody tr:focus-within td { background: var(--accent-soft); }
 .teamcell { display: flex; align-items: center; gap: 8px; }
-.swatch { width: 4px; height: 26px; border-radius: 2px; flex: none; background: var(--line); }
+.swatch { width: 4px; height: 26px; border-radius: 2px; flex: none; background: var(--line);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35); }  /* keeps navy team colors visible on navy */
 .tname { font-weight: 600; }
 .trec { display: block; font-size: 12px; color: var(--muted); font-weight: 400; }
 .dim { color: var(--muted); }
@@ -120,7 +116,7 @@ tbody tr:hover td, tbody tr:focus-within td { background: var(--accent-soft); }
 .matchup .rk { color: var(--muted); font-weight: 400; font-size: 13px; }
 .matchup .pr { font-variant-numeric: tabular-nums; font-weight: 700; text-align: right; }
 .probbar { height: 6px; border-radius: 3px; background: var(--bar); margin: 8px 0 6px; overflow: hidden; }
-.probbar span { display: block; height: 100%; background: var(--accent); }
+.probbar span { display: block; height: 100%; background: var(--accent-fill); }
 .meta { font-size: 13px; color: var(--muted); }
 .movers { margin: 8px 0 0; padding: 0; list-style: none; font-size: 13px; }
 .movers li { display: flex; justify-content: space-between; gap: 8px; padding: 3px 0; border-top: 1px solid var(--line); }
@@ -138,7 +134,8 @@ tbody tr:hover td, tbody tr:focus-within td { background: var(--accent-soft); }
 
 /* Team detail */
 .back { display: inline-block; margin-bottom: 8px; text-decoration: none; font-size: 14px; }
-.team-head { border-left: 6px solid var(--line); padding-left: 12px; margin-bottom: 12px; }
+.team-head { border-left: 6px solid var(--line); padding-left: 12px; margin-bottom: 12px;
+  box-shadow: -1px 0 0 rgba(255, 255, 255, 0.35); }
 .team-head h2 { margin: 0; }
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 10px 0; }
 @media (min-width: 560px) { .stats { grid-template-columns: repeat(6, 1fr); } }
@@ -158,3 +155,15 @@ tbody tr:hover td, tbody tr:focus-within td { background: var(--accent-soft); }
 .prose p, .prose li { max-width: 68ch; }
 .foot { color: var(--muted); font-size: 12px; padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
 .foot p { margin: 4px 0; }
+
+/* Sort buttons for this week's games */
+.seg { display: flex; gap: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 3px; margin: 8px 0 4px; }
+.seg button {
+  flex: 1; font: inherit; font-size: 14px; font-weight: 600; color: var(--muted);
+  background: none; border: 0; border-radius: 999px; padding: 8px 6px; cursor: pointer;
+}
+.seg button[aria-pressed="true"] { background: var(--accent-fill); color: #fff; }
+.more { display: block; width: 100%; margin-top: 10px; font: inherit; font-weight: 600; color: var(--accent);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px; cursor: pointer; }
+.tag { display: inline-block; font-size: 12px; font-weight: 600; color: #fff; background: var(--accent-fill);
+  border-radius: 999px; padding: 1px 8px; margin-left: 6px; vertical-align: 1px; }

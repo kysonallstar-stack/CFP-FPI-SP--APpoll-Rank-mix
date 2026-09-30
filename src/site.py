@@ -79,8 +79,7 @@ def build(season: int, proc: Path, cfg: dict, n_sims: int, seed) -> tuple[dict, 
             "poll_higher": sorted((t for t in gaps if t["gap"] > 0), key=lambda t: -t["gap"])[:10],
             "metrics_higher": sorted((t for t in gaps if t["gap"] < 0), key=lambda t: t["gap"])[:10],
         },
-        "top_matchups": sim["top_matchups"],
-        "leverage": sim["leverage"],
+        "week_games": sim["week_games"],
         "games": sorted(games, key=lambda g: (g["wk"], g["start"] or "")),
     }
     # The disagreement lists only need ids; the page looks teams up.

@@ -7,7 +7,7 @@ def data(week=5, odds=(0.9, 0.5), stale=None):
     teams = [{"id": i, "name": n, "rank": i, "p_playoff": p, "cfp": None, "ap": i}
              for i, (n, p) in enumerate(zip(["Alpha", "Beta"], odds), start=1)]
     return {"season": 2026, "week": week, "stale": stale or {}, "teams": teams,
-            "top_matchups": [{"away": "Alpha", "home": "Beta"}]}
+            "week_games": [{"away": "Alpha", "home": "Beta"}]}
 
 
 def test_no_message_when_nothing_changed():

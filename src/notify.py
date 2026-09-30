@@ -69,8 +69,8 @@ def build_message(new: dict, prev: dict | None) -> tuple[str, str] | None:
         if moves:
             lines.append("Biggest playoff-odds moves: " + ", ".join(moves))
 
-    if new.get("top_matchups"):
-        g = new["top_matchups"][0]
+    if new.get("week_games"):
+        g = new["week_games"][0]          # sorted best matchup first
         lines.append(f"Game of the week: {g['away']} at {g['home']}")
     for k, wk in (new.get("stale") or {}).items():
         lines.append(f"{LABEL.get(k, k)} still from week {wk}; will re-check Wednesday.")
