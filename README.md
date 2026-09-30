@@ -4,8 +4,8 @@ A weekly college football ranking that blends computer ratings (SP+ and ESPN's
 FPI) with the AP poll, plus 12-team playoff odds from 10,000 simulated seasons.
 
 **Site:** https://kysonallstar-stack.github.io/CFP-FPI-SP--APpoll-Rank-mix/
-(updates Monday 10:00 Mountain time after the Sunday AP poll, and again Wednesday
-10:00 to pick up the committee's Tuesday-night rankings)
+(updates Sunday 1:00 p.m. Mountain, an hour after the AP poll, and again Wednesday
+10:00 to pick up the committee's Tuesday-night rankings; takes the offseason off)
 
 ## The method, in plain language
 
@@ -42,7 +42,11 @@ backtest.
 - play every remaining game;
 - set up each conference title game from the simulated standings (top two by
   conference win percentage; the Sun Belt uses its East and West division
-  winners);
+  winners). Ties go to the team with the better record against the other tied
+  teams, then against common conference opponents, then the higher rating;
+- give each Pac-12 team a stand-in game in the conference's late-scheduled
+  "flex week" until the real matchups are announced (neutral site, against an
+  opponent rated at the Group of 6 median);
 - simulate the title games;
 - pick the 12-team field using the 2026-27 rules. The four Power 4 champions
   get automatic bids. So does the highest-ranked Group of 6 team, champion or
@@ -54,11 +58,26 @@ is than its current rating, based on how much ratings actually moved in past
 seasons. A team that's secretly better wins more of *all* its games, which
 keeps the odds from being overconfident.
 
-**7. Leverage and top matchups.**
-- *Top matchups* are next week's games where both teams are good.
-- *Leverage* is how much a game's result changes playoff odds, added up over
+**7. This week's games.** Every game next week, sortable three ways:
+- *Best games*: both teams are good (ranked by the weaker team's rating).
+- *Playoff swing*: how much the result changes playoff odds, added up over
   every team it affects. Small changes that could just be random noise from
   the simulation are left out.
+- *Closest*: nearest to a coin flip.
+
+**8. What if.** Pick winners of any remaining games and re-run 5,000 seasons
+with those results locked in. The simulation runs in your browser
+(`site/sim.js`, a copy of the Python simulator; a test checks the two agree).
+Each team's page has a "What if they win out?" shortcut.
+
+**9. Selection Day.** Once every conference title game is final and the
+committee's final rankings are out, the site stops simulating and shows the
+real field: seeds, byes and first-round matchups, taken from the committee's
+ranking and the actual champions. Replaying 2025 this way reproduces the
+actual 2025 bracket exactly.
+
+**10. The offseason.** From February through July the weekly job exits
+without doing anything. In August it picks up the new season on its own.
 
 ## When polls come out on different days
 
@@ -68,8 +87,9 @@ be late. So:
 - A week's *games* are frozen once they're final, but its *polls* are
   re-downloaded on every run (one API call covers the whole season). A late
   poll is picked up by the next run.
-- There are two runs a week: Monday (new games and the AP poll) and Wednesday
-  (the committee's Tuesday rankings, plus anything late).
+- There are two runs a week: Sunday at 1:00 p.m. Mountain, an hour after the AP
+  poll (new games and the poll), and Wednesday (the committee's Tuesday
+  rankings, plus anything late).
 - Until a poll is released, the site uses the most recent one and says so in
   the footer, e.g. "CFP rankings is from week 9 (this week's isn't out yet)".
 - The latest SP+/FPI snapshot is re-taken on each run until the next week
@@ -95,16 +115,16 @@ be late. So:
 - **Injuries aren't modeled**, especially quarterback injuries. A team that
   loses its starting QB keeps its rating until its results drag it down.
 - **Simplified tiebreakers.** Conference ties are broken by record among the
-  tied teams, then by rating. Real tiebreakers go further (common opponents,
-  opponents' records, the ACC's new "body of work" step, the American's
-  computer average).
+  tied teams, then record against common opponents, then rating. Real
+  tiebreakers go further (opponents' records, the ACC's new "body of work"
+  step, the American's computer average).
 - **Data gaps.**
   - The data source (CollegeFootballData) only serves current SP+ and FPI
     values, so this project saves a weekly snapshot starting with 2026 week 4.
   - The AP data only includes the Top 25 (no "others receiving votes").
   - Committee rankings have no points, so rank *r* is treated as 26 − *r*.
-  - The Pac-12's late-season "flex week" games aren't simulated until
-    they're scheduled.
+  - The Pac-12's "flex week" games are stand-ins against a generic opponent
+    until the real matchups are scheduled.
 
 ## How well does it work?
 
@@ -155,7 +175,8 @@ src/site.py            builds site/data.json
 src/pipeline.py        runs all of the above (what the weekly job runs)
 src/notify.py          phone push notification when the numbers change
 site/                  the static page (HTML/CSS/JS, no framework)
-.github/workflows/update.yml   Monday job: pipeline -> commit -> deploy to Pages
+.github/workflows/update.yml   Sunday + Wednesday job: pipeline -> commit -> deploy to Pages
+site/sim.js            browser copy of the simulator (the What-if tab)
 ```
 
 ## Automation setup (one time)
@@ -163,7 +184,7 @@ site/                  the static page (HTML/CSS/JS, no framework)
 1. Add the API key as a repository secret named `CFBD_API_KEY` (Settings → Secrets
    and variables → Actions). It's never stored in the code.
 2. Set GitHub Pages to deploy from GitHub Actions (Settings → Pages → Source).
-3. The workflow then runs every Monday and Wednesday, and also on demand from
+3. The workflow then runs every Sunday and Wednesday, and also on demand from
    the Actions tab ("Run workflow").
 
 ### Phone notifications

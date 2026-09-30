@@ -3,9 +3,11 @@ name: Weekly update
 
 on:
   schedule:
-    # Monday 10:00 Mountain time, after the Sunday AP poll. The timezone key
-    # handles daylight saving. GitHub may start scheduled runs late when busy.
-    - cron: "0 10 * * 1"
+    # Sunday 13:00 Mountain time: an hour after the AP poll (Sundays at 2 p.m.
+    # Eastern = noon Mountain). The timezone key handles daylight saving. GitHub
+    # may start scheduled runs late when busy. In the offseason (Feb-Jul) the
+    # pipeline exits right away, so these runs do nothing until August.
+    - cron: "0 13 * * 0"
       timezone: "America/Denver"
     # Wednesday 10:00: picks up CFP rankings (released Tuesday nights in Nov/Dec)
     # and any poll that came out late. Sends no notification if nothing changed.

@@ -213,14 +213,185 @@ function renderTeam(id) {
     <p class="note">Weeks without SP+/FPI snapshots use Elo for the computer side.</p>
     <h3>Schedule</h3>
     <ul class="sched">${sched}</ul>
+    ${state.data.whatif && games.some((g) => g.hp == null)
+      ? `<button type="button" class="more" id="win-out">What if ${esc(t.name)} wins out?</button>` : ""}
     <p class="note">*Committee view: the rating used to model playoff selection (uses the committee's own rankings once released).</p>`;
+  const btn = $("#win-out");
+  if (btn) btn.addEventListener("click", () => winOut(id));
+}
+
+// ---------- what if ------------------------------------------------------
+// Picks live in state.picks ({gameId: "home" | "away"}) and in localStorage so
+// they survive a reload. The simulation runs in a Web Worker (whatif-worker.js)
+// using site/sim.js, the browser copy of the Python simulator.
+const WI_SIMS = 5000, WI_SEED = 2026;
+const wi = { worker: null, pending: new Map(), nextId: 1, baseline: null };
+
+function loadPicks() {
+  try { return JSON.parse(localStorage.getItem("cfb-picks-" + state.data.season + "-" + state.data.week)) || {}; }
+  catch { return {}; }
+}
+function savePicks() {
+  try { localStorage.setItem("cfb-picks-" + state.data.season + "-" + state.data.week, JSON.stringify(state.picks)); }
+  catch { /* private browsing etc.: picks just won't persist */ }
+}
+
+function runSim(picks) {
+  const opts = { sims: WI_SIMS, seed: WI_SEED, picks };
+  if (!wi.worker && typeof Worker !== "undefined") {
+    try {
+      wi.worker = new Worker("whatif-worker.js");
+      wi.worker.onmessage = (e) => { wi.pending.get(e.data.id)(e.data.result); wi.pending.delete(e.data.id); };
+    } catch { wi.worker = false; }
+  }
+  if (!wi.worker) {   // no worker support: run on the main thread
+    return new Promise((res) => setTimeout(() => res(CFBSim.simulate(state.data.whatif, opts)), 30));
+  }
+  const id = wi.nextId++;
+  return new Promise((res) => { wi.pending.set(id, res); wi.worker.postMessage({ id, inp: state.data.whatif, opts }); });
+}
+
+function remainingGames() {
+  const ids = new Set(state.data.whatif.games.map((g) => g[0]));
+  return state.data.games.filter((g) => g.hp == null && ids.has(g.id));
+}
+
+function renderWhatifGames() {
+  const wk = $("#wi-week").value;
+  const q = $("#wi-search").value.trim().toLowerCase();
+  const games = remainingGames().filter((g) =>
+    (wk === "all" || String(g.wk) === wk) &&
+    (!q || g.hn.toLowerCase().includes(q) || g.an.toLowerCase().includes(q)));
+  const side = (g, which) => {
+    const id = which === "home" ? g.h : g.a;
+    const name = which === "home" ? g.hn : g.an;
+    const p = which === "home" ? g.p : 1 - g.p;
+    const on = state.picks[g.id] === which;
+    return `<button type="button" class="pick" data-g="${g.id}" data-side="${which}" aria-pressed="${on}">
+      <span class="pick-name">${esc(name)}${state.byId.has(id) ? ` <span class="rk">${rankTag(id)}</span>` : ""}</span>
+      <span class="pick-p">${pct(p)}</span></button>`;
+  };
+  $("#wi-games").innerHTML = games.map((g) => `
+    <div class="wi-game">
+      <div class="wi-meta">Wk ${g.wk}${g.n ? " · neutral" : ""}${g.ph ? " · placeholder" : ""}</div>
+      <div class="wi-sides">${side(g, "away")}<span class="at">${g.n ? "vs" : "@"}</span>${side(g, "home")}</div>
+    </div>`).join("") || `<p class="note">No games match.</p>`;
+  const n = Object.keys(state.picks).length;
+  $("#wi-count").textContent = n ? `${n} pick${n > 1 ? "s" : ""}` : "No picks yet";
+  $("#wi-run").disabled = !n;
+}
+
+async function simulateWhatif() {
+  const box = $("#wi-results");
+  const picks = { ...state.picks };
+  if (!Object.keys(picks).length) return;
+  box.innerHTML = `<p class="note">Simulating ${WI_SIMS.toLocaleString()} seasons…</p>`;
+  $("#wi-run").disabled = true;
+  // The baseline is run by the same browser simulator, so the comparison isn't
+  // mixing two different sets of random draws.
+  if (!wi.baseline) wi.baseline = await runSim({});
+  const r = await runSim(picks);
+  $("#wi-run").disabled = false;
+  const ids = state.data.whatif.ids;
+  const rows = ids.map((id, i) => ({ t: state.byId.get(id), i,
+    before: wi.baseline.playoff[i], after: r.playoff[i], bye: r.bye[i], conf: r.conf[i], xw: r.wins[i] }))
+    .filter((x) => x.t && Math.abs(x.after - x.before) >= 0.005)
+    .sort((a, b) => Math.abs(b.after - b.before) - Math.abs(a.after - a.before))
+    .slice(0, 25);
+  const sign = (d) => (d > 0 ? "+" : "") + Math.round(d * 100);
+  box.innerHTML = rows.length ? `
+    <h3>How your picks change playoff odds</h3>
+    <div class="table-scroll wi-table"><table>
+      <thead><tr><th class="team-col">Team</th><th class="num">Before</th><th class="num">After</th>
+        <th class="num">Change</th><th class="num">Bye</th><th class="num">Conf</th><th class="num">xW</th></tr></thead>
+      <tbody>${rows.map((x) => `<tr data-id="${x.t.id}">
+        <td class="team-col"><div class="teamcell"><span class="swatch" style="background:${esc(x.t.color || "")}"></span>
+          <span class="tname">${esc(x.t.name)}</span></div></td>
+        <td class="num">${pct(x.before)}</td><td class="num pct-hi">${pct(x.after)}</td>
+        <td class="num ${x.after > x.before ? "win" : "loss"}">${sign(x.after - x.before)}</td>
+        <td class="num">${pct(x.bye)}</td><td class="num">${pct(x.conf)}</td><td class="num">${x.xw.toFixed(1)}</td>
+      </tr>`).join("")}</tbody></table></div>
+    <p class="note">Change is in percentage points of playoff odds. Both columns come from ${WI_SIMS.toLocaleString()}
+      in-browser simulations, so differences under ~2 points are noise.</p>`
+    : `<p class="note">Your picks barely move anyone's playoff odds (all changes under 1 point).</p>`;
+}
+
+function initWhatif() {
+  const wf = state.data.whatif;
+  if (!wf) {
+    $("#wi-body").innerHTML = `<p>The playoff field is set, so there's nothing left to simulate.
+      See <a href="#games">the bracket</a>.</p>`;
+    return;
+  }
+  $("#wi-sims").textContent = WI_SIMS.toLocaleString();
+  state.picks = loadPicks();
+  const weeks = [...new Set(remainingGames().map((g) => g.wk))].sort((a, b) => a - b);
+  $("#wi-week").innerHTML = weeks.map((w) => `<option value="${w}">Week ${w}</option>`).join("") +
+    `<option value="all">All weeks</option>`;
+  $("#wi-week").addEventListener("change", renderWhatifGames);
+  $("#wi-search").addEventListener("input", renderWhatifGames);
+  $("#wi-games").addEventListener("click", (e) => {
+    const b = e.target.closest(".pick");
+    if (!b) return;
+    const g = Number(b.dataset.g);
+    if (state.picks[g] === b.dataset.side) delete state.picks[g];
+    else state.picks[g] = b.dataset.side;
+    savePicks();
+    renderWhatifGames();
+  });
+  $("#wi-reset").addEventListener("click", () => {
+    state.picks = {};
+    savePicks();
+    $("#wi-results").innerHTML = "";
+    renderWhatifGames();
+  });
+  $("#wi-run").addEventListener("click", simulateWhatif);
+  $("#wi-results").addEventListener("click", (e) => {
+    const row = e.target.closest("[data-id]");
+    if (row) location.hash = "team/" + row.dataset.id;
+  });
+  renderWhatifGames();
+}
+
+// "What if they win out?" from a team page: pick every remaining game for them.
+function winOut(id) {
+  for (const g of remainingGames()) {
+    if (g.h === id) state.picks[g.id] = "home";
+    else if (g.a === id) state.picks[g.id] = "away";
+  }
+  savePicks();
+  $("#wi-week").value = "all";
+  $("#wi-search").value = state.byId.get(id).name;
+  location.hash = "whatif";
+  renderWhatifGames();
+  simulateWhatif();
+}
+
+// ---------- Selection Day ---------------------------------------------------
+function renderFinalField() {
+  const f = state.data.final_field;
+  const el = $("#final-field");
+  if (!f) { el.hidden = true; return; }
+  el.hidden = false;
+  const seed = (x) => `<li data-id="${x.id}"><span><b>${x.seed}.</b> ${esc(x.team)}${x.champion ? ' <span class="tag">Champion</span>' : ""}</span>
+    <span class="ranks">${x.cfp_rank ? "CFP #" + x.cfp_rank : "unranked"}${x.bye ? " · bye" : ""}</span></li>`;
+  el.innerHTML = `
+    <h2>The playoff field</h2>
+    <p class="note">Set by the committee's final rankings. Top four seeds get first-round byes; no re-seeding.</p>
+    <ol class="dlist">${f.seeds.map(seed).join("")}</ol>
+    <h3>First round (at the higher seed)</h3>
+    <div class="cards">${f.first_round.map(([a, b, sa, sb]) =>
+      `<div class="card"><b>#${sb} ${esc(b)}</b> at <b>#${sa} ${esc(a)}</b></div>`).join("")}</div>
+    <h3>Quarterfinals</h3>
+    <div class="cards">${f.quarterfinals.map(([a, opp, s]) =>
+      `<div class="card"><b>#${s} ${esc(a)}</b> vs winner of ${esc(opp)}</div>`).join("")}</div>`;
 }
 
 // ---------- routing -------------------------------------------------------
 function route() {
   const hash = location.hash.slice(1) || "rankings";
   const [view, arg] = hash.split("/");
-  const name = ["rankings", "games", "disagree", "about", "team"].includes(view) ? view : "rankings";
+  const name = ["rankings", "games", "whatif", "disagree", "about", "team"].includes(view) ? view : "rankings";
   document.querySelectorAll(".view").forEach((v) => (v.hidden = v.id !== "view-" + name));
   document.querySelectorAll(".tabs a").forEach((a) =>
     a.classList.toggle("active", a.dataset.tab === name || (name === "team" && a.dataset.tab === "rankings")));
@@ -233,7 +404,9 @@ function init(data) {
   data.teams.forEach((t) => state.byId.set(t.id, t));
 
   const updated = new Date(data.generated_at);
-  $("#subtitle").textContent = `${data.season} · through week ${data.week} · ${data.sims.toLocaleString()} simulated seasons`;
+  $("#subtitle").textContent = data.final_field
+    ? `${data.season} · the playoff field is set`
+    : `${data.season} · through week ${data.week} · ${data.sims.toLocaleString()} simulated seasons`;
   const label = { ap: "AP poll", cfp: "CFP rankings", sp: "SP+", fpi: "FPI", elo: "Elo" };
   const stale = Object.entries(data.stale || {})
     .map(([k, wk]) => `${label[k] || k} is from week ${wk} (this week's isn't out yet)`);
@@ -248,7 +421,9 @@ function init(data) {
 
   renderRankings();
   renderGames();
+  renderFinalField();
   renderDisagree();
+  initWhatif();
 
   document.querySelectorAll(".seg button").forEach((b) => b.addEventListener("click", () => {
     state.gameSort = b.dataset.sort;
@@ -273,6 +448,7 @@ function init(data) {
   $("#rank-table tbody").addEventListener("click", openRow);
   $("#rank-table tbody").addEventListener("keydown", (e) => { if (e.key === "Enter") openRow(e); });
   $("#view-disagree").addEventListener("click", openRow);
+  $("#final-field").addEventListener("click", openRow);
 
   window.addEventListener("hashchange", route);
   route();

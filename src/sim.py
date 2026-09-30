@@ -14,9 +14,21 @@ One simulated season
 Conference title game participants (approximation of each league's rules)
     Top two by conference win percentage (Sun Belt: East winner vs. West
     winner). Ties are broken by (a) win pct in games among the tied teams,
-    then (b) predictive rating. Real tiebreakers go further (common opponents,
-    opponents' records, the ACC's new "body of work" step, the American's
-    computer composite); rating stands in for all of those.
+    (b) win pct against common conference opponents, then (c) predictive
+    rating. Real tiebreakers go further (opponents' records, the ACC's
+    "body of work" step, the American's computer composite); rating stands in
+    for those.
+
+Pac-12 flex week (config sim.flex_weeks)
+    The Pac-12 schedules its final-week games late in the season. Until they
+    appear in the schedule, each Pac-12 team gets a placeholder non-conference
+    game at a neutral site against a generic opponent rated at the Group of 6
+    median. Real games replace the placeholders as soon as they're scheduled.
+
+Selection Day
+    Once every conference title game is final and the committee's final
+    rankings are out, nothing is simulated: the field and seeds come straight
+    from the committee's ranking and the actual champions (final_field()).
 
 Committee approximation (clearly NOT the real committee)
     score = selection rating - loss_penalty * losses + champ_bonus (if a
@@ -41,7 +53,8 @@ from src.rating import blend_week
 
 log = logging.getLogger(__name__)
 
-FCS = -1  # team index used for every non-FBS opponent
+FCS = -1   # team index used for every non-FBS opponent
+FLEX = -2  # team index for a placeholder flex-week opponent (not yet scheduled)
 
 
 def win_prob(margin: float, sigma: float) -> float:
@@ -95,44 +108,109 @@ class Season:
             h, a = self._i(g["home_id"]), self._i(g["away_id"])
             home_won = g["home_points"] > g["away_points"]
             self._tally(self.base, h, a, home_won, g["conference_game"])
-            if g["conference_game"] and h != FCS and a != FCS:
+            if g["conference_game"] and h >= 0 and a >= 0:
                 self.h2h_fixed[tuple(sorted((h, a)))] = h if home_won else a
 
         # Remaining games -> arrays for vectorized simulation.
         rem = [g for g in week_data["games_remaining"] if g["home_fbs"] or g["away_fbs"]]
+        g6 = set(cfg["playoff"]["group6"])
+        g6_ratings = [self.rating[i] for i, c in enumerate(self.conf) if c in g6]
+        self.flex_rating = float(np.median(g6_ratings)) if g6_ratings else 0.0
+        rem += self._flex_placeholders(week_data, rem, cfg)
         self.games = rem
         self.g_home = np.array([self._i(g["home_id"]) for g in rem], dtype=int)
-        self.g_away = np.array([self._i(g["away_id"]) for g in rem], dtype=int)
+        self.g_away = np.array([FLEX if g.get("placeholder") else self._i(g["away_id"]) for g in rem], dtype=int)
         self.g_conf = np.array([g["conference_game"] for g in rem], dtype=bool)
         self.g_edge = np.array([0.0 if g["neutral"] else self.hfa for g in rem])
         self.g_week = np.array([g["week"] for g in rem], dtype=int)
         self.pair_col = {tuple(sorted((h, a))): c for c, (h, a, conf)
-                         in enumerate(zip(self.g_home, self.g_away, self.g_conf)) if conf and h != FCS and a != FCS}
+                         in enumerate(zip(self.g_home, self.g_away, self.g_conf)) if conf and h >= 0 and a >= 0}
+
+    def _flex_placeholders(self, week_data: dict, rem: list, cfg: dict) -> list[dict]:
+        flex = (cfg["sim"].get("flex_weeks") or {}).get(week_data["season"]) or {}
+        busy = defaultdict(set)   # team id -> weeks it already has a game
+        for g in week_data["games_completed"] + rem:
+            busy[g["home_id"]].add(g["week"])
+            busy[g["away_id"]].add(g["week"])
+        out = []
+        for conf, wk in flex.items():
+            if wk <= self.week:
+                continue
+            for t in self.teams:
+                if t["conference"] == conf and wk not in busy[t["id"]]:
+                    out.append({"id": -(100000 + t["id"]), "week": wk, "start": None, "neutral": True,
+                                "conference_game": False, "placeholder": True,
+                                "home_id": t["id"], "away_id": None, "home_name": t["name"],
+                                "away_name": f"{conf} flex-week opponent (TBD)", "home_fbs": True, "away_fbs": False,
+                                "home_conference": conf, "away_conference": None,
+                                "notes": f"Placeholder: {conf} flex week, opponent not scheduled yet"})
+        return out
 
     def _i(self, team_id) -> int:
         return self.idx.get(str(team_id), FCS)
 
+    def export(self) -> dict:
+        """Everything site/sim.js needs to re-run this simulation in the browser
+        (the what-if tool). Team order matches `ids`; -1 = FCS, -2 = flex opponent."""
+        pcfg, ccfg = self.cfg["playoff"], self.cfg["committee"]
+        r2 = lambda a: [round(float(x), 2) for x in a]
+        return {
+            "week": self.week, "k": self.k, "hfa": self.hfa, "sigma": self.sigma,
+            "tau": rating_uncertainty(self.week, self.cfg["sim"].get("rating_uncertainty")),
+            "fcs_rating": round(self.fcs_rating, 2), "flex_rating": round(self.flex_rating, 2),
+            "sel_poll_weight": self.sel_poll_weight,
+            "ids": [int(t) for t in self.ids], "conf": self.conf, "div": self.division,
+            "rating": r2(self.rating), "sel": r2(self.sel_rating),
+            "w": [int(x) for x in self.base["w"]], "l": [int(x) for x in self.base["l"]],
+            "cw": [int(x) for x in self.base["cw"]], "cl": [int(x) for x in self.base["cl"]],
+            "h2h": [[a, b, w] for (a, b), w in self.h2h_fixed.items()],
+            "games": [[g["id"], int(h), int(a), int(c), float(e), int(wk)] for g, h, a, c, e, wk
+                      in zip(self.games, self.g_home, self.g_away, self.g_conf, self.g_edge, self.g_week)],
+            "committee": {k: ccfg[k] for k in ("loss_penalty", "champ_bonus", "noise_sd")},
+            "playoff": {**{k: pcfg[k] for k in ("power4", "group6", "g6_bid", "field_size", "byes",
+                                                  "no_title_game", "divisions", "title_game_home_of_higher_seed")},
+                        "notre_dame_rule": pcfg.get("notre_dame_rule", True),
+                        "nd": self.idx.get(str(pcfg["notre_dame_id"]))},
+        }
+
     @staticmethod
     def _tally(rec, h, a, home_won, conf):
         for team, won in ((h, home_won), (a, not home_won)):
-            if team == FCS:
+            if team < 0:
                 continue
             rec["w" if won else "l"][team] += 1
             if conf:
                 rec["cw" if won else "cl"][team] += 1
 
     def r(self, i) -> float:
-        return self.fcs_rating if i == FCS else self.rating[i]
+        return self.fcs_rating if i == FCS else self.flex_rating if i == FLEX else self.rating[i]
+
+    def rvec(self, idx: np.ndarray) -> np.ndarray:
+        """Ratings for an array of team indices, including the FCS/FLEX placeholders."""
+        return np.where(idx == FCS, self.fcs_rating,
+                        np.where(idx == FLEX, self.flex_rating, self.rating[np.maximum(idx, 0)]))
 
     def game_probs(self) -> np.ndarray:
-        rh = np.where(self.g_home == FCS, self.fcs_rating, self.rating[self.g_home])
-        ra = np.where(self.g_away == FCS, self.fcs_rating, self.rating[self.g_away])
-        m = self.k * (rh - ra) + self.g_edge
+        m = self.k * (self.rvec(self.g_home) - self.rvec(self.g_away)) + self.g_edge
         return np.array([win_prob(x, self.sigma) for x in m])
 
 
-def _order(members: list[int], pct: np.ndarray, rating: np.ndarray, h2h) -> list[int]:
-    """Order teams by conference win pct; ties by record among the tied teams, then rating."""
+def _record_vs(t: int, opponents, h2h) -> float:
+    """Win pct of team t against the given opponents (0.5 if it played none)."""
+    w = l = 0
+    for o in opponents:
+        if o != t:
+            res = h2h(t, o)
+            if res is not None:
+                w, l = w + res, l + (1 - res)
+    return w / (w + l) if w + l else 0.5
+
+
+def _order(members: list[int], pct: np.ndarray, rating: np.ndarray, h2h, pool: list[int] | None = None) -> list[int]:
+    """Order teams by conference win pct. Ties: (a) record among the tied teams,
+    (b) record vs. common conference opponents, (c) rating.
+    `pool` is the whole conference (for common opponents when ordering a division)."""
+    pool = members if pool is None else pool
     by_pct = defaultdict(list)
     for t in members:
         by_pct[round(pct[t], 6)].append(t)
@@ -140,15 +218,8 @@ def _order(members: list[int], pct: np.ndarray, rating: np.ndarray, h2h) -> list
     for p in sorted(by_pct, reverse=True):
         group = by_pct[p]
         if len(group) > 1:
-            def mini(t):
-                w = l = 0
-                for o in group:
-                    if o != t:
-                        res = h2h(t, o)
-                        if res is not None:
-                            w, l = w + res, l + (1 - res)
-                return w / (w + l) if w + l else 0.5
-            group = sorted(group, key=lambda t: (-mini(t), -rating[t]))
+            common = [o for o in pool if o not in group and all(h2h(t, o) is not None for t in group)]
+            group = sorted(group, key=lambda t: (-_record_vs(t, group, h2h), -_record_vs(t, common, h2h), -rating[t]))
         out += group
     return out
 
@@ -208,11 +279,9 @@ def simulate(season: Season, n_sims: int, seed: int | None) -> dict:
     tau = rating_uncertainty(season.week, cfg["sim"].get("rating_uncertainty"))
     sigma_game = float(np.sqrt(max(season.sigma ** 2 - 2 * (season.k * tau) ** 2, (0.5 * season.sigma) ** 2)))
     offset = rng.normal(0, tau, (S, T)) if tau else np.zeros((S, T))
-    off_fcs = np.zeros((S, 1))
-    off_all = np.hstack([offset, off_fcs])          # index -1 (FCS) -> no offset
+    off_all = np.hstack([offset, np.zeros((S, 2))])  # indices -1 (FCS) and -2 (FLEX) -> no offset
 
-    diff = np.where(season.g_home == FCS, season.fcs_rating, season.rating[season.g_home]) \
-        - np.where(season.g_away == FCS, season.fcs_rating, season.rating[season.g_away])
+    diff = season.rvec(season.g_home) - season.rvec(season.g_away)
     margin = (season.k * (diff + off_all[:, season.g_home] - off_all[:, season.g_away])
               + season.g_edge + rng.normal(0, sigma_game, (S, G)))
     home_win = margin > 0                                 # [sims, games]
@@ -222,10 +291,10 @@ def simulate(season: Season, n_sims: int, seed: int | None) -> dict:
     for c in range(G):
         h, a, hw = season.g_home[c], season.g_away[c], home_win[:, c]
         conf = season.g_conf[c]
-        if h != FCS:
+        if h >= 0:
             rec["w"][:, h] += hw; rec["l"][:, h] += ~hw
             if conf: rec["cw"][:, h] += hw; rec["cl"][:, h] += ~hw
-        if a != FCS:
+        if a >= 0:
             rec["w"][:, a] += ~hw; rec["l"][:, a] += hw
             if conf: rec["cw"][:, a] += ~hw; rec["cl"][:, a] += hw
     reg_wins = rec["w"].copy()
@@ -266,10 +335,10 @@ def simulate(season: Season, n_sims: int, seed: int | None) -> dict:
 
         for c, members in confs.items():
             if c in pcfg["divisions"]:
-                winners = [_order([t for t in members if season.division[t] == d], pct[s], season.rating, h2h)
+                winners = [_order([t for t in members if season.division[t] == d], pct[s], season.rating, h2h, members)
                            for d in pcfg["divisions"][c]]
                 # Higher seed = division winner with the better record (it hosts, where applicable).
-                pair = _order([w[0] for w in winners if w], pct[s], season.rating, h2h)
+                pair = _order([w[0] for w in winners if w], pct[s], season.rating, h2h, members)
             else:
                 pair = _order(members, pct[s], season.rating, h2h)[:2]
             if len(pair) < 2:
@@ -334,10 +403,60 @@ def leverage(season: Season, res: dict, week: int, min_side: int, z_min: float, 
     return out if top_n is None else out[:top_n]
 
 
+def final_field(week_data: dict, cfg: dict) -> dict | None:
+    """Selection Day: the real field, once every conference title game is final
+    and the committee's final rankings (released after them) are available.
+    Seeds come from the committee's ranking and the actual champions, run
+    through the same selection rules the simulation uses. Otherwise None."""
+    pcfg = cfg["playoff"]
+    is_title = lambda g: "Championship" in (g.get("notes") or "") and g["home_fbs"] and g["away_fbs"]
+    titles = [g for g in week_data["games_completed"] if is_title(g)]
+    cfp, src = week_data["polls"].get("cfp"), week_data["sources"].get("cfp")
+    # Not every conference plays one (the 2025 Pac-12 had two teams), so the test
+    # is: title games have been played, none are still scheduled, and the
+    # committee has ranked teams since.
+    if (not titles or any(is_title(g) for g in week_data["games_remaining"])
+            or not cfp or src is None or src < max(g["week"] for g in titles)):
+        return None
+
+    teams = week_data["teams"]
+    ids = [t["id"] for t in teams]
+    idx = {t: i for i, t in enumerate(ids)}
+    rank = {p["id"]: p["rank"] for p in cfp}
+    score = np.array([-rank.get(t, 100 + i) for i, t in enumerate(ids)], dtype=float)  # unranked: behind all ranked
+    champ = np.zeros(len(ids), dtype=bool)
+    in_title = np.zeros(len(ids), dtype=bool)
+    for g in titles:
+        champ[idx[g["home_id"] if g["home_points"] > g["away_points"] else g["away_id"]]] = True
+        in_title[[idx[g["home_id"]], idx[g["away_id"]]]] = True
+    order = pick_field(score, champ, [t["conference"] for t in teams], idx.get(pcfg["notre_dame_id"]), pcfg)
+    seeds = [{"seed": k + 1, "id": ids[t], "team": teams[t]["name"], "cfp_rank": rank.get(ids[t]),
+              "champion": bool(champ[t]), "bye": k < pcfg["byes"]} for k, t in enumerate(order)]
+    by_seed = {x["seed"]: x for x in seeds}
+    return {
+        "seeds": seeds,
+        # No re-seeding: 1 plays the 8/9 winner, 2 the 7/10, 3 the 6/11, 4 the 5/12.
+        "first_round": [[by_seed[a]["team"], by_seed[b]["team"], a, b] for a, b in ((5, 12), (6, 11), (7, 10), (8, 9))],
+        "quarterfinals": [[by_seed[a]["team"], f"{by_seed[b]['team']}/{by_seed[c]['team']}", a]
+                          for a, b, c in ((1, 8, 9), (2, 7, 10), (3, 6, 11), (4, 5, 12))],
+        "_made": np.isin(np.arange(len(ids)), order), "_bye": np.isin(np.arange(len(ids)), order[:pcfg["byes"]]),
+        "_champ": champ, "_in_title": in_title,
+    }
+
+
 def run(week_data: dict, cfg: dict, n_sims: int, seed: int | None) -> dict:
     ratings = blend_week(week_data, cfg)
     season = Season(week_data, ratings, cfg)
-    res = simulate(season, n_sims, seed)
+    final = final_field(week_data, cfg)
+    if final:
+        # The field is set: report certainties instead of simulating.
+        wins = np.array([[{str(r["id"]): r for r in ratings["teams"]}[t]["wins"] for t in season.ids]], dtype=float)
+        res = {"probs": season.game_probs(), "made": final.pop("_made")[None], "bye": final.pop("_bye")[None],
+               "champ": final.pop("_champ")[None], "in_title": final.pop("_in_title")[None],
+               "wins": wins, "reg_wins": wins}
+        n_sims = 0
+    else:
+        res = simulate(season, n_sims, seed)
     next_week = int(season.g_week.min()) if len(season.g_week) else None
 
     teams = []
@@ -361,12 +480,12 @@ def run(week_data: dict, cfg: dict, n_sims: int, seed: int | None) -> dict:
         m = season.k * (season.r(season.g_home[c]) - season.r(season.g_away[c])) + season.g_edge[c]
         remaining.append({"game_id": g["id"], "week": g["week"], "home": g["home_name"], "away": g["away_name"],
                           "home_id": g["home_id"], "away_id": g["away_id"], "fbs": g["home_fbs"] and g["away_fbs"],
-                          "neutral": g["neutral"], "start": g["start"],
+                          "neutral": g["neutral"], "start": g["start"], "placeholder": bool(g.get("placeholder")),
                           "home_win_prob": round(float(res["probs"][c]), 3), "predicted_margin": round(float(m), 1)})
     upcoming = [g for g in remaining if g["week"] == next_week]
 
     lev = leverage(season, res, next_week, cfg["sim"]["leverage_min_side_sims"],
-                   cfg["sim"]["leverage_z_min"], top_n=None) if next_week else []
+                   cfg["sim"]["leverage_z_min"], top_n=None) if next_week and not final else []
     return {
         "season": week_data["season"], "as_of_week": week_data["week"], "next_week": next_week,
         "sims": n_sims, "seed": seed,
@@ -376,6 +495,8 @@ def run(week_data: dict, cfg: dict, n_sims: int, seed: int | None) -> dict:
         "leverage": lev[:cfg["sim"]["top_n_games"]],
         "top_matchups": top_matchups(upcoming, by_id, teams, lev, cfg["sim"]["top_n_games"]),
         "week_games": week_games(upcoming, by_id, lev, season.fcs_rating),
+        "final_field": final,                               # set on Selection Day, else None
+        "inputs": None if final else season.export(),       # for the in-browser what-if tool
     }
 
 

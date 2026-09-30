@@ -165,3 +165,12 @@ def test_unmatched_rating_name_is_recorded(tmp_path):
     assert out["ratings"]["sp"] == {"1": 5.0}
     assert ("sp", "Gamma Tech") in reg.unmatched
     assert all(name != "nationalAverages" for _, name in reg.unmatched)
+
+
+def test_empty_calendar_is_not_cached(tmp_path):
+    import pytest
+    client = FakeClient([], {})
+    client.get = lambda endpoint, **p: [] if endpoint == "calendar" else TEAMS
+    with pytest.raises(RuntimeError):
+        fetch_season(client, 2027, tmp_path, CFG, now=at("2027-08-01T12:00:00"))
+    assert not (tmp_path / "2027" / "calendar.json").exists()   # re-checked next run

@@ -1,6 +1,11 @@
 # CFB Blend configuration. Every tunable constant lives here.
 
-season: 2026
+# "auto" = the season in progress: August-January belongs to that fall's season
+# (January 2027 -> 2026). Or set a year to pin it.
+season: auto
+# The weekly job takes a break in these months (after the title game, before
+# the next preseason poll) and starts again on its own in August.
+offseason_months: [2, 3, 4, 5, 6, 7]
 
 api:
   base_url: https://api.collegefootballdata.com
@@ -67,6 +72,11 @@ sim:
   leverage_min_side_sims: 50   # skip games where either outcome occurs in fewer sims (too noisy)
   leverage_z_min: 3.0          # a team's swing counts only if > 3 standard errors (filters sampling noise)
   top_n_games: 10              # length of the leverage and top-matchup lists
+  # Conference -> week of a "flex" week whose games are scheduled late (2026: the
+  # rebuilt Pac-12's final week, non-conference games). Until real games appear,
+  # each team gets a neutral-site placeholder vs. a Group of 6-median opponent.
+  flex_weeks:
+    2026: {Pac-12: 13}
   # How far a team's rating still moves between week n and the end of the regular
   # season (SD across FBS teams, points). Measured in the backtest as the average
   # of 2024 and 2025 (Elo + margin-rating stand-in for SP+/FPI). Each simulated

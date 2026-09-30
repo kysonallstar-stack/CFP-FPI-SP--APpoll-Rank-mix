@@ -21,6 +21,7 @@
     <nav class="tabs wrap" aria-label="Sections">
       <a href="#rankings" data-tab="rankings">Rankings</a>
       <a href="#games" data-tab="games">This week</a>
+      <a href="#whatif" data-tab="whatif">What if</a>
       <a href="#disagree" data-tab="disagree">Disagree</a>
       <a href="#about" data-tab="about">About</a>
     </nav>
@@ -55,6 +56,7 @@
     </section>
 
     <section id="view-games" class="view" hidden>
+      <div id="final-field" hidden></div>
       <h2 id="games-title">This week</h2>
       <div class="seg" role="group" aria-label="Sort games">
         <button type="button" data-sort="quality" aria-pressed="true">Best games</button>
@@ -64,6 +66,25 @@
       <p class="note" id="games-note"></p>
       <div id="week-games" class="cards"></div>
       <button type="button" id="more-games" class="more" hidden></button>
+    </section>
+
+    <section id="view-whatif" class="view" hidden>
+      <h2>What if?</h2>
+      <p class="note">Pick winners, then re-run the season <span id="wi-sims">5,000</span> times with your picks
+        locked in. Games you don't pick are simulated as usual. Tap a pick again to clear it.</p>
+      <div id="wi-body">
+        <div class="controls">
+          <select id="wi-week" aria-label="Week"></select>
+          <input id="wi-search" type="search" placeholder="Filter by team" aria-label="Filter games by team" autocomplete="off">
+        </div>
+        <div id="wi-games"></div>
+        <div class="wi-bar">
+          <span id="wi-count">No picks yet</span>
+          <button type="button" id="wi-reset" class="ghost">Reset</button>
+          <button type="button" id="wi-run" class="primary">Simulate</button>
+        </div>
+        <div id="wi-results" aria-live="polite"></div>
+      </div>
     </section>
 
     <section id="view-disagree" class="view" hidden>
@@ -89,6 +110,8 @@
         <span id="about-sims">10,000</span> times. Home field is worth <span id="about-hfa">2.7</span> points. Each
         simulated season also draws how much better or worse each team really is than its rating, so a team's
         results move together instead of every game being a separate coin flip.</p>
+      <p><strong>What if.</strong> The What-if tab re-runs the season in your browser with the winners you pick
+        locked in. On Selection Day the site switches from odds to the actual bracket.</p>
       <p><strong>The committee is approximated.</strong> In each simulation it ranks teams by rating, subtracts points for
         every loss and adds a little for conference titles. Those weights were fitted to the committee's actual
         2024 and 2025 final rankings. The real committee weighs many things this ignores.</p>
@@ -98,7 +121,7 @@
         <li><strong>Few games between conferences.</strong> Conferences are compared mostly through a handful of non-conference games.</li>
         <li><strong>The committee model is a simple approximation</strong> (rating, losses, titles).</li>
         <li><strong>Injuries aren't modeled</strong>, including a starting quarterback going down.</li>
-        <li><strong>Tiebreakers are simplified:</strong> record among the tied teams, then rating.</li>
+        <li><strong>Tiebreakers are simplified:</strong> record among the tied teams, then vs. common opponents, then rating.</li>
       </ul>
       <p><a id="repo-link" href="https://github.com/kysonallstar-stack/CFP-FPI-SP--APpoll-Rank-mix">Code, full method and backtest results on GitHub</a></p>
     </section>
@@ -109,6 +132,7 @@
     <p>Data: <a href="https://collegefootballdata.com">CollegeFootballData.com</a>. Not affiliated with the CFP, AP or ESPN.</p>
   </footer>
 
+  <script src="sim.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

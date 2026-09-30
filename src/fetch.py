@@ -63,9 +63,11 @@ def fetch_season(client, season: int, raw_root: Path, cfg: dict, now: datetime |
         ("calendar.json", "calendar", {"year": season}),
     ]:
         if not (season_dir / name).exists():
-            _write(season_dir / name, client.get(endpoint, **params))
+            data = client.get(endpoint, **params)
+            if data:              # don't cache an empty answer (e.g. next season not published yet)
+                _write(season_dir / name, data)
 
-    weeks = regular_weeks(_read(season_dir / "calendar.json"))
+    weeks = regular_weeks(_read(season_dir / "calendar.json") or [])
     if not weeks:
         raise RuntimeError(f"No regular-season calendar for {season}")
     # week_0 = preseason: "ends" when week 1 starts.
@@ -93,11 +95,13 @@ def fetch_season(client, season: int, raw_root: Path, cfg: dict, now: datetime |
             _write(path, new)
 
     # The latest week's ratings snapshot is retaken every run while the season is on.
-    if in_progress and latest and latest > 0:
+    # Week 0 gets the preseason SP+/FPI, so the site can show preseason rankings.
+    if in_progress and latest is not None:
         wdir = season_dir / f"week_{latest}"
         for name, endpoint in [("sp.json", "ratings/sp"), ("fpi.json", "ratings/fpi")]:
             _write(wdir / name, client.get(endpoint, year=season))
-        _write(wdir / "elo.json", client.get("ratings/elo", year=season, week=latest))
+        if latest > 0:
+            _write(wdir / "elo.json", client.get("ratings/elo", year=season, week=latest))
 
     if not todo:
         return summary

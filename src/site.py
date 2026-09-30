@@ -63,7 +63,7 @@ def build(season: int, proc: Path, cfg: dict, n_sims: int, seed) -> tuple[dict, 
     for g in sim["remaining_games"]:
         games.append({"id": g["game_id"], "wk": g["week"], "start": g["start"], "n": g["neutral"],
                       "h": g["home_id"], "a": g["away_id"], "hn": g["home"], "an": g["away"],
-                      "p": g["home_win_prob"], "m": g["predicted_margin"]})
+                      "p": g["home_win_prob"], "m": g["predicted_margin"], "ph": g["placeholder"]})
 
     gaps = [t for t in teams if t["gap"] is not None]
     site = {
@@ -80,6 +80,8 @@ def build(season: int, proc: Path, cfg: dict, n_sims: int, seed) -> tuple[dict, 
             "metrics_higher": sorted((t for t in gaps if t["gap"] < 0), key=lambda t: t["gap"])[:10],
         },
         "week_games": sim["week_games"],
+        "final_field": sim["final_field"],   # Selection Day bracket, else None
+        "whatif": sim["inputs"],             # inputs for the in-browser what-if simulator
         "games": sorted(games, key=lambda g: (g["wk"], g["start"] or "")),
     }
     # The disagreement lists only need ids; the page looks teams up.

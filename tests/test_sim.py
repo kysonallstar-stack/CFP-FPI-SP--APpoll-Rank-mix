@@ -101,3 +101,53 @@ def test_2024_25_rule_takes_five_highest_ranked_champions():
     rules = {**PCFG, "g6_bid": "top5_champions", "notre_dame_rule": False}
     field = pick_field(score, champ, conf, None, rules)
     assert {0, 1, 12, 13, 14} <= set(field) and 19 not in field
+
+
+def test_common_opponents_break_a_tie_head_to_head_cant():
+    # 0 and 1 tied and didn't play each other; both played 2 and 3.
+    # 0 went 2-0 vs them, 1 went 1-1, so 0 wins the tie despite a lower rating.
+    pct = np.array([0.75, 0.75, 0.25, 0.25])
+    rating = np.array([5.0, 20.0, 0.0, 0.0])
+    results = {(0, 2): 0, (0, 3): 0, (1, 2): 1, (1, 3): 2}   # pair -> winner
+    def h2h(a, b):
+        key = tuple(sorted((a, b)))
+        if key not in results:
+            return None
+        return 1 if results[key] == a else 0
+    assert _order([0, 1, 2, 3], pct, rating, h2h)[:2] == [0, 1]
+
+
+def test_selection_day_reproduces_the_real_2025_bracket():
+    """With the 2025 rules, the final committee ranking + actual champions give the actual field."""
+    import json
+    from pathlib import Path
+    from src.config import load_config
+    from src.sim import final_field
+    path = Path(__file__).parent.parent / "data/processed/2025/week_16.json"
+    if not path.exists():
+        pytest.skip("2025 data not cached")
+    cfg = load_config()
+    cfg["playoff"] = {**cfg["playoff"], **cfg["backtest"]["playoff_rules"][2025]}
+    f = final_field(json.loads(path.read_text()), cfg)
+    assert [x["team"] for x in f["seeds"] if x["bye"]] == ["Indiana", "Ohio State", "Georgia", "Texas Tech"]
+    # The actual 2025 first round (higher seed hosted)
+    assert [(a, b) for a, b, *_ in f["first_round"]] == [
+        ("Oregon", "James Madison"), ("Ole Miss", "Tulane"), ("Texas A&M", "Miami"), ("Oklahoma", "Alabama")]
+    before = json.loads((path.parent / "week_14.json").read_text())
+    assert final_field(before, cfg) is None                      # title games not played yet
+
+
+def test_flex_week_placeholders_only_for_open_teams():
+    from src.config import load_config
+    from src.sim import FLEX, Season
+    cfg = load_config()
+    cfg["sim"] = {**cfg["sim"], "flex_weeks": {2026: {"X": 3}}}
+    teams = [{"id": i, "name": f"T{i}", "conference": "X"} for i in (1, 2, 3)]
+    ratings = {"teams": [{"id": t["id"], "rating": 0.0, "selection_rating": 0.0} for t in teams]}
+    g = lambda gid, h, a: {"id": gid, "week": 3, "home_id": h, "away_id": a, "home_fbs": True, "away_fbs": True,
+                           "neutral": False, "conference_game": False, "start": None, "home_name": "", "away_name": ""}
+    week_data = {"season": 2026, "week": 1, "teams": teams, "games_completed": [], "games_remaining": [g(9, 1, 2)]}
+    season = Season(week_data, ratings, cfg)
+    placeholders = [x for x in season.games if x.get("placeholder")]
+    assert [x["home_id"] for x in placeholders] == [3]           # teams 1 and 2 already play in week 3
+    assert season.g_away[-1] == FLEX

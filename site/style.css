@@ -145,9 +145,10 @@ tbody tr:hover td, tbody tr:focus-within td { background: var(--accent-soft); }
 .history { display: flex; gap: 6px; flex-wrap: wrap; font-size: 13px; }
 .history span { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 3px 7px; font-variant-numeric: tabular-nums; }
 .sched { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
-.sched li { display: grid; grid-template-columns: 34px 1fr auto; gap: 8px; padding: 9px 12px; border-bottom: 1px solid var(--line); align-items: center; }
+/* Fixed-width week column wide enough for "Wk 10" so every row lines up. */
+.sched li { display: grid; grid-template-columns: 3.6em minmax(0, 1fr) auto; gap: 8px; padding: 9px 12px; border-bottom: 1px solid var(--line); align-items: center; }
 .sched li:last-child { border-bottom: 0; }
-.sched .wk { color: var(--muted); font-size: 12px; }
+.sched .wk { color: var(--muted); font-size: 12px; white-space: nowrap; }
 .sched .res { font-variant-numeric: tabular-nums; font-weight: 600; text-align: right; }
 .win { color: var(--good); }
 .loss { color: var(--bad); }
@@ -167,3 +168,32 @@ tbody tr:hover td, tbody tr:focus-within td { background: var(--accent-soft); }
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px; cursor: pointer; }
 .tag { display: inline-block; font-size: 12px; font-weight: 600; color: #fff; background: var(--accent-fill);
   border-radius: 999px; padding: 1px 8px; margin-left: 6px; vertical-align: 1px; }
+
+/* What if */
+#wi-games { display: grid; gap: 8px; }
+@media (min-width: 720px) { #wi-games { grid-template-columns: 1fr 1fr; } }
+.wi-game { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px; }
+.wi-meta { font-size: 12px; color: var(--muted); margin: 0 4px 6px; }
+.wi-sides { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 6px; align-items: stretch; }
+.wi-sides .at { align-self: center; color: var(--muted); font-size: 13px; }
+.pick {
+  font: inherit; font-size: 14px; color: var(--text); text-align: left; cursor: pointer;
+  background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px;
+  display: flex; flex-direction: column; gap: 2px; min-height: 52px; min-width: 0;
+}
+.pick-name { font-weight: 600; overflow-wrap: anywhere; }
+.pick-name .rk { color: var(--muted); font-weight: 400; font-size: 12px; }
+.pick-p { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.pick[aria-pressed="true"] { background: var(--accent-fill); border-color: var(--accent-fill); color: #fff; }
+.pick[aria-pressed="true"] .rk, .pick[aria-pressed="true"] .pick-p { color: #dbe8f7; }
+.wi-bar {
+  position: sticky; bottom: 0; z-index: 5; display: flex; align-items: center; gap: 8px;
+  background: var(--bg); border-top: 1px solid var(--line); margin-top: 10px;
+  padding: 10px 0 calc(10px + env(safe-area-inset-bottom));
+}
+.wi-bar #wi-count { flex: 1; color: var(--muted); font-size: 14px; }
+.wi-bar button { font: inherit; font-weight: 600; border-radius: 8px; padding: 9px 14px; cursor: pointer; }
+.wi-bar .primary { background: var(--accent-fill); color: #fff; border: 1px solid var(--accent-fill); }
+.wi-bar .primary:disabled { opacity: 0.45; cursor: default; }
+.wi-bar .ghost { background: none; color: var(--accent); border: 1px solid var(--line); }
+.wi-table { max-height: none; }

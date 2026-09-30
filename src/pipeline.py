@@ -25,14 +25,30 @@ def main() -> None:
     ap.add_argument("--skip-fetch", action="store_true", help="use cached data only (no API key needed)")
     args = ap.parse_args()
 
+    if not cfg["season_active"] and args.season == cfg["season"]:
+        log.info("Offseason (%s season is over): nothing to do until August.", args.season)
+        return
+
     if not args.skip_fetch:
         client = CFBDClient.from_config(cfg)
-        summary = fetch_season(client, args.season, repo_path(cfg["paths"]["raw"]), cfg)
+        try:
+            summary = fetch_season(client, args.season, repo_path(cfg["paths"]["raw"]), cfg)
+        except RuntimeError as e:  # e.g. next season's calendar isn't published yet
+            log.info("Nothing to fetch yet: %s", e)
+            return
         log.info("fetch: %d week(s) updated, %d API call(s)", len(summary["fetched"]), client.calls)
 
+    raw = repo_path(cfg["paths"]["raw"]) / str(args.season)
+    if not any(raw.glob("week_*")):
+        log.info("The %s season hasn't started yet (no weeks finished); nothing to publish.", args.season)
+        return
     normalize_season(args.season, cfg)
     proc = repo_path(cfg["paths"]["processed"]) / str(args.season)
-    data, ratings, sim = site.build(args.season, proc, cfg, cfg["sim"]["n_sims"], cfg["sim"]["seed"])
+    try:
+        data, ratings, sim = site.build(args.season, proc, cfg, cfg["sim"]["n_sims"], cfg["sim"]["seed"])
+    except ValueError as e:   # e.g. preseason ratings not published yet
+        log.warning("Not enough data to rate teams yet (%s); leaving the site unchanged.", e)
+        return
 
     write_outputs(ratings, proc)
     (proc / f"sim_week_{data['week']}.json").write_text(json.dumps(sim, indent=1, ensure_ascii=False))
