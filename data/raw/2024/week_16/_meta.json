@@ -1,0 +1,10 @@
+{
+ "season": 2024,
+ "week": 16,
+ "fetched_at": "2026-09-30T00:05:17+00:00",
+ "complete": true,
+ "missing": [
+  "AP poll",
+  "SP+/FPI (no weekly history available)"
+ ]
+}

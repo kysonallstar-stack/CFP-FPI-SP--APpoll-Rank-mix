@@ -83,3 +83,21 @@ def test_fcs_rating_estimate():
     # implied FCS rating = 5 + 2.7 - 30 = -22.3
     assert estimate_fcs_rating(games, {"1": 5.0}, 2.7, -20.0) == pytest.approx(-22.3)
     assert estimate_fcs_rating(games[:3], {"1": 5.0}, 2.7, -20.0) == -20.0   # too few games
+
+
+def test_rating_uncertainty_lookup_and_clamping():
+    from src.sim import rating_uncertainty
+    u = {"by_week": {1: 9.8, 4: 6.7, 15: 0.3}}
+    assert rating_uncertainty(4, u) == 6.7
+    assert rating_uncertainty(20, u) == 0.3     # past the table: last value
+    assert rating_uncertainty(0, u) == 9.8      # before the table: first value
+    assert rating_uncertainty(4, None) == 0.0
+
+
+def test_2024_25_rule_takes_five_highest_ranked_champions():
+    score, conf = _league()
+    champ = np.zeros(20, bool)
+    champ[[0, 1, 12, 13, 14, 19]] = True       # six champions; 19 is the lowest-ranked
+    rules = {**PCFG, "g6_bid": "top5_champions", "notre_dame_rule": False}
+    field = pick_field(score, champ, conf, None, rules)
+    assert {0, 1, 12, 13, 14} <= set(field) and 19 not in field

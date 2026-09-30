@@ -60,13 +60,25 @@ sim:
   # SD of actual margin around predicted margin. 2025 Elo-based predictions had a
   # residual SD of 16.1 (15.4 from week 8 on). Phase 4 re-measures this for our blend.
   sigma: 16.0
+  # Multiplies predicted margins. Backtest slope was 0.73-0.81 (predictions too
+  # extreme) on the Elo+SRS stand-in; 0.9 hedges toward trusting SP+'s own scale.
+  margin_scale: 0.9
   fcs_rating_default: -20.0    # used only if <10 completed FBS-vs-FCS games to estimate from
   leverage_min_side_sims: 50   # skip games where either outcome occurs in fewer sims (too noisy)
   leverage_z_min: 3.0          # a team's swing counts only if > 3 standard errors (filters sampling noise)
+  top_n_games: 10              # length of the leverage and top-matchup lists
+  # How far a team's rating still moves between week n and the end of the regular
+  # season (SD across FBS teams, points). Measured in the backtest as the average
+  # of 2024 and 2025 (Elo + margin-rating stand-in for SP+/FPI). Each simulated
+  # season draws a hidden offset per team from N(0, this), so a team's results are
+  # correlated across its remaining games. Set to null to turn off.
+  rating_uncertainty:
+    by_week: {1: 9.8, 2: 8.3, 3: 7.2, 4: 6.7, 5: 5.8, 6: 5.3, 7: 4.8, 8: 4.4,
+              9: 4.2, 10: 3.6, 11: 3.2, 12: 2.4, 13: 1.8, 14: 0.8, 15: 0.3}
 
 committee:                     # APPROXIMATION of the selection committee, not the real thing
-  loss_penalty: 3.0            # points subtracted per loss (committee weighs losses heavily)
-  champ_bonus: 2.0             # points added for winning a conference title
+  loss_penalty: 8.5            # points per loss; fitted to 2024-25 final CFP rankings (Phase 4)
+  champ_bonus: 0.5             # points for a conference title; fit says ~0 beyond the loss avoided
   noise_sd: 1.5                # per-sim noise: the committee is not perfectly predictable
 
 playoff:                       # verified 2026-27 format (see Phase 0 notes)
@@ -82,3 +94,13 @@ playoff:                       # verified 2026-27 format (see Phase 0 notes)
   # Title game hosted by the higher seed (verified for MW and Pac-12; historical
   # practice for the others). All other title games are at neutral sites.
   title_game_home_of_higher_seed: [Mountain West, Pac-12, American Athletic, Conference USA, Sun Belt]
+
+backtest:
+  # SP+/FPI have no weekly history, so past seasons use Elo + our own margin rating.
+  metric_sources: [elo, srs]
+  srs_lambda: 1.5              # ridge prior = sigma^2 / sd(ratings)^2 = 16^2 / 13.3^2
+  srs_margin_cap: 28           # cap each game's margin so blowouts don't dominate
+  calibration_weeks: [4, 7, 10, 13]
+  playoff_rules:               # the format that was actually in effect those seasons
+    2024: {g6_bid: top5_champions, notre_dame_rule: false}
+    2025: {g6_bid: top5_champions, notre_dame_rule: false}

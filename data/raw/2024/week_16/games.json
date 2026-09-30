@@ -1,0 +1,48 @@
+[
+ {
+  "id": 401645383,
+  "season": 2024,
+  "week": 16,
+  "seasonType": "regular",
+  "startDate": "2024-12-14T20:00:00.000Z",
+  "startTimeTBD": false,
+  "completed": true,
+  "neutralSite": true,
+  "conferenceGame": true,
+  "attendance": 60726,
+  "venueId": 3719,
+  "venue": "Northwest Stadium",
+  "homeId": 349,
+  "homeTeam": "Army",
+  "homeClassification": "fbs",
+  "homeConference": "American Athletic",
+  "homePoints": 13,
+  "homeLineScores": [
+   0,
+   7,
+   3,
+   3
+  ],
+  "homePostgameWinProbability": 0,
+  "homePregameElo": 1686,
+  "homePostgameElo": 1630,
+  "awayId": 2426,
+  "awayTeam": "Navy",
+  "awayClassification": "fbs",
+  "awayConference": "American Athletic",
+  "awayPoints": 31,
+  "awayLineScores": [
+   7,
+   7,
+   7,
+   10
+  ],
+  "awayPostgameWinProbability": 1,
+  "awayPregameElo": 1503,
+  "awayPostgameElo": 1559,
+  "excitementIndex": 3.7390196410750183,
+  "highlights": "",
+  "notes": null,
+  "playoff": null
+ }
+]
