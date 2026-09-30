@@ -14,12 +14,12 @@ paths:
   aliases: config/team_aliases.yaml
 
 fetch:
-  # A week is "complete" (frozen, never re-downloaded) once every FBS game in it
-  # is final AND the poll released after it is available. If a game never gets
-  # a result (cancelled) or the poll never shows up, we stop waiting after these
-  # many days past the week's end and freeze the week with the gap recorded.
+  # A week is "complete" (its games are never re-downloaded) once every FBS game
+  # in it is final. If a game never gets a result (cancelled), we stop waiting
+  # this many days after the week ends. Polls are NOT part of this: they are
+  # re-downloaded every run because their release day varies (AP Sunday, CFP
+  # Tuesday, either can be late).
   games_grace_days: 2
-  poll_grace_days: 9
 
 polls:
   ap: AP Top 25

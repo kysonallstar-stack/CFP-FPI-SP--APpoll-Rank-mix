@@ -4,7 +4,8 @@ A weekly college football ranking that blends computer ratings (SP+ and ESPN's
 FPI) with the AP poll, plus 12-team playoff odds from 10,000 simulated seasons.
 
 **Site:** https://kysonallstar-stack.github.io/CFP-FPI-SP--APpoll-Rank-mix/
-(updates every Monday at 10:00 Mountain time, after the Sunday AP poll)
+(updates Monday 10:00 Mountain time after the Sunday AP poll, and again Wednesday
+10:00 to pick up the committee's Tuesday-night rankings)
 
 ## The method, in plain language
 
@@ -58,6 +59,21 @@ keeps the odds from being overconfident.
 - *Leverage* is how much a game's result changes playoff odds, added up over
   every team it affects. Small changes that could just be random noise from
   the simulation are left out.
+
+## When polls come out on different days
+
+Polls don't arrive on a fixed schedule. The AP is usually Sunday; CFP rankings
+come out Tuesday nights in November and on Sunday of Selection Day; either can
+be late. So:
+- A week's *games* are frozen once they're final, but its *polls* are
+  re-downloaded on every run (one API call covers the whole season). A late
+  poll is picked up by the next run.
+- There are two runs a week: Monday (new games and the AP poll) and Wednesday
+  (the committee's Tuesday rankings, plus anything late).
+- Until a poll is released, the site uses the most recent one and says so in
+  the footer, e.g. "CFP rankings is from week 9 (this week's isn't out yet)".
+- The latest SP+/FPI snapshot is re-taken on each run until the next week
+  finishes, so a mid-week update to those ratings is also picked up.
 
 ## Known weaknesses
 
@@ -137,6 +153,7 @@ src/sim.py             game odds + season simulation
 src/backtest.py        historical accuracy and tuning
 src/site.py            builds site/data.json
 src/pipeline.py        runs all of the above (what the weekly job runs)
+src/notify.py          phone push notification when the numbers change
 site/                  the static page (HTML/CSS/JS, no framework)
 .github/workflows/update.yml   Monday job: pipeline -> commit -> deploy to Pages
 ```
@@ -146,8 +163,20 @@ site/                  the static page (HTML/CSS/JS, no framework)
 1. Add the API key as a repository secret named `CFBD_API_KEY` (Settings → Secrets
    and variables → Actions). It's never stored in the code.
 2. Set GitHub Pages to deploy from GitHub Actions (Settings → Pages → Source).
-3. The workflow then runs every Monday, and also on demand from the Actions tab
-   ("Run workflow").
+3. The workflow then runs every Monday and Wednesday, and also on demand from
+   the Actions tab ("Run workflow").
+
+### Phone notifications
+
+After each update that changes the numbers, the workflow sends a push
+notification through [ntfy](https://ntfy.sh): the week, the top playoff odds,
+the biggest movers, the game of the week, and any poll still being waited on.
+Tapping it opens the site. Runs where nothing changed send nothing.
+
+1. Install the free ntfy app (iOS or Android).
+2. Subscribe to the topic stored in the `NTFY_TOPIC` repository secret.
+   The topic name works like a password, so keep it private.
+3. Test it with `NTFY_TOPIC=<topic> python -m src.notify --test`.
 
 Data from [CollegeFootballData.com](https://collegefootballdata.com). Not
 affiliated with the College Football Playoff, the AP or ESPN.

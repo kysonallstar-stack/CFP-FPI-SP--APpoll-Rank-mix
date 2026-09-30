@@ -7,7 +7,7 @@ from src.normalize import build_week
 from src.teams import TeamRegistry
 
 CFG = {
-    "fetch": {"games_grace_days": 2, "poll_grace_days": 9},
+    "fetch": {"games_grace_days": 2},
     "polls": {"ap": "AP Top 25", "cfp": "Playoff Committee Rankings"},
 }
 TEAMS = [
@@ -45,7 +45,8 @@ class FakeClient:
             "teams/fbs": TEAMS,
             "calendar": CALENDAR,
             "games": self.games,
-            "rankings": self.polls_for.get(p.get("week"), []),
+            # The real endpoint returns every week's polls when no week is given.
+            "rankings": [w for resp in self.polls_for.values() for w in resp],
             "ratings/elo": [{"team": "Alpha", "elo": 1600}, {"team": "Beta", "elo": 1400}],
             "ratings/sp": self.sp if self.sp is not None else [{"team": "Alpha", "rating": 10.0}, {"team": "Beta", "rating": -3.0}],
             "ratings/fpi": [{"team": "Alpha", "fpi": 8.0}, {"team": "Beta", "fpi": -2.0}],
@@ -68,24 +69,43 @@ def test_completed_week_is_never_redownloaded(tmp_path):
 
     client.calls.clear()
     summary = fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-17T12:00:00"))
-    assert client.calls == []                       # nothing re-downloaded
+    endpoints = [e for e, _ in client.calls]
+    # Only the cheap refreshes: one polls call + the latest week's ratings snapshot.
+    assert "games" not in endpoints and "teams/fbs" not in endpoints
+    assert endpoints.count("rankings") == 1
     assert summary["skipped_complete"] == [0, 1, 2]
 
 
-def test_week_missing_poll_stays_open_then_freezes_after_grace(tmp_path):
+def test_poll_released_late_is_picked_up_after_week_freezes(tmp_path):
     games = [game(10, 1, True, 21, 14)]
-    client = FakeClient(games, {1: ap_poll(1)})     # no poll released after week 1
+    polls = {1: ap_poll(1)}                           # nothing released after week 1 yet
+    client = FakeClient(games, polls)
     fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-09T12:00:00"))
     m = meta(tmp_path, 1)
-    assert not m["complete"] and "AP poll" in m["missing"]
+    assert m["complete"]                              # games are final, so the week freezes...
+    assert any("AP poll" in x for x in m["missing"])  # ...but the missing poll is noted
 
-    fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-14T12:00:00"))
-    assert not meta(tmp_path, 1)["complete"]        # still within grace: keep retrying
+    polls[2] = ap_poll(2)                             # the AP comes out late
+    summary = fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-10T12:00:00"))
+    assert summary["polls_updated"] == [1]
+    saved = json.loads((tmp_path / "2026" / "week_1" / "polls.json").read_text())
+    assert saved[0]["poll"] == "AP Top 25"
 
-    # The ratings/week-2 side doesn't matter here; only week 1's freeze decision.
-    fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-18T12:00:00"))
-    m = meta(tmp_path, 1)
-    assert m["complete"] and "AP poll" in m["missing"]   # frozen, gap recorded
+
+def test_tuesday_cfp_rankings_reach_a_week_frozen_on_monday(tmp_path):
+    games = [game(10, 1, True, 21, 14)]
+    polls = {1: ap_poll(1), 2: ap_poll(2)}            # Monday: AP is out, CFP isn't
+    client = FakeClient(games, polls)
+    fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-09T12:00:00"))
+    assert meta(tmp_path, 1)["complete"]
+
+    cfp = {"poll": "Playoff Committee Rankings", "ranks": [{"rank": 1, "teamId": 2, "school": "Beta", "points": 0}]}
+    polls[2] = [{"week": 2, "polls": polls[2][0]["polls"] + [cfp]}]   # Tuesday night release
+    fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-10T12:00:00"))
+    saved = json.loads((tmp_path / "2026" / "week_1" / "polls.json").read_text())
+    assert {p["poll"] for p in saved} == {"AP Top 25", "Playoff Committee Rankings"}
+    out = build_week(tmp_path / "2026", 1, TeamRegistry(TEAMS), CFG)
+    assert out["polls"]["cfp"][0]["id"] == 2
 
 
 def test_unfinished_game_keeps_week_open(tmp_path):
@@ -96,13 +116,19 @@ def test_unfinished_game_keeps_week_open(tmp_path):
     assert not m["complete"] and any("final score" in x for x in m["missing"])
 
 
-def test_sp_fpi_snapshot_only_for_latest_week(tmp_path):
+def test_sp_fpi_snapshot_only_for_latest_week_and_refreshed_each_run(tmp_path):
     games = [game(10, 1, True, 21, 14), game(11, 2, True, 7, 3)]
     client = FakeClient(games, {1: ap_poll(1), 2: ap_poll(2), 3: ap_poll(3)})
     fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-16T12:00:00"))
-    assert (tmp_path / "2026" / "week_2" / "sp.json").exists()
+    sp_path = tmp_path / "2026" / "week_2" / "sp.json"
+    assert sp_path.exists()
     assert not (tmp_path / "2026" / "week_1" / "sp.json").exists()
     assert any("SP+/FPI" in x for x in meta(tmp_path, 1)["missing"])
+
+    # SP+ updates later in the week: the next run (same latest week) picks it up.
+    client.sp = [{"team": "Alpha", "rating": 12.0}, {"team": "Beta", "rating": -4.0}]
+    fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-17T12:00:00"))
+    assert json.loads(sp_path.read_text())[0]["rating"] == 12.0
 
 
 def test_normalize_week_with_missing_data_does_not_crash_or_look_ahead(tmp_path):
@@ -123,6 +149,7 @@ def test_normalize_week_with_missing_data_does_not_crash_or_look_ahead(tmp_path)
     wk2 = build_week(season_dir, 2, reg, CFG)
     assert wk2["ratings"]["sp"] == {"1": 10.0, "2": -3.0}
     assert wk2["sources"]["ap"] == 1                  # AP carried forward from week 1
+    assert wk2["stale"] == {"ap": 1}                  # ...and flagged as stale
     assert wk2["polls"]["cfp"] is None                # no committee rankings yet: not an error
     assert "ap" not in wk2["missing"]
 

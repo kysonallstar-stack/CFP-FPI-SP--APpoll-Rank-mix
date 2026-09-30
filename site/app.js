@@ -211,8 +211,12 @@ function init(data) {
 
   const updated = new Date(data.generated_at);
   $("#subtitle").textContent = `${data.season} · through week ${data.week} · ${data.sims.toLocaleString()} simulated seasons`;
+  const label = { ap: "AP poll", cfp: "CFP rankings", sp: "SP+", fpi: "FPI", elo: "Elo" };
+  const stale = Object.entries(data.stale || {})
+    .map(([k, wk]) => `${label[k] || k} is from week ${wk} (this week's isn't out yet)`);
   $("#updated").textContent = `Last updated ${updated.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" })}` +
-    (data.missing.length ? ` · missing this week: ${data.missing.join(", ")}` : "");
+    (stale.length ? ` · ${stale.join(" · ")}` : "") +
+    (data.missing.length ? ` · missing: ${data.missing.join(", ")}` : "");
   $("#about-sims").textContent = data.sims.toLocaleString();
   $("#about-hfa").textContent = data.settings.hfa;
 

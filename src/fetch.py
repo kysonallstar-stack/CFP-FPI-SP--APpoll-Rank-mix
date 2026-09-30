@@ -5,15 +5,21 @@ Layout:
   data/raw/<season>/calendar.json       week date ranges (fetched once per season)
   data/raw/<season>/schedule.json       every FBS game, refreshed each run (remaining schedule)
   data/raw/<season>/week_<n>/
-      games.json     games played in week n
+      games.json     games played in week n            -- frozen once the week is complete
       polls.json     polls released AFTER week n's games (CFBD labels these week n+1)
+                     -- refreshed EVERY run, because polls don't arrive on a fixed day:
+                        the AP is usually Sunday, CFP rankings are Tuesday night, and
+                        either can be late. One API call covers the whole season.
       elo.json       Elo after week n
-      sp.json/fpi.json  snapshot taken while week n was the latest week (current season only;
-                        the API has no weekly history for these)
+      sp.json/fpi.json  snapshot of the "current" values while week n is the latest
+                     finished week (current season only; the API has no weekly history).
+                     Re-taken on every run until the next week finishes, so a late
+                     SP+/FPI update is still picked up.
       _meta.json     fetched_at, complete flag, anything missing
 
-week_0 holds the preseason poll. Once a week's _meta.json says complete it is
-never downloaded again.
+A week is complete once every FBS game in it is final (or a grace period has
+passed for cancelled games). Complete weeks' games are never downloaded again.
+week_0 holds the preseason poll.
 
 Usage: python -m src.fetch [--season 2026]
 """
@@ -47,7 +53,7 @@ def regular_weeks(calendar: list[dict]) -> list[dict]:
 
 
 def fetch_season(client, season: int, raw_root: Path, cfg: dict, now: datetime | None = None) -> dict:
-    """Fetch every finished week of `season` that isn't frozen yet. Returns a summary."""
+    """Fetch what's new for `season`. Returns a summary."""
     now = now or datetime.now(timezone.utc)
     fcfg, polls_cfg = cfg["fetch"], cfg["polls"]
     season_dir = raw_root / str(season)
@@ -69,7 +75,30 @@ def fetch_season(client, season: int, raw_root: Path, cfg: dict, now: datetime |
     in_progress = now < ends[weeks[-1]["week"]]
 
     todo = [n for n in finished if not (_read(season_dir / f"week_{n}" / "_meta.json") or {}).get("complete")]
-    summary = {"season": season, "latest_week": latest, "fetched": [], "skipped_complete": [n for n in finished if n not in todo]}
+    summary = {"season": season, "latest_week": latest, "fetched": [], "polls_updated": [],
+               "skipped_complete": [n for n in finished if n not in todo]}
+    if not finished:
+        return summary
+
+    # Polls: one call for the whole season, written into every finished week.
+    # Only rewrite a file when its contents changed, so git history stays clean.
+    all_polls = {w["week"]: w["polls"] for w in client.get("rankings", year=season, seasonType="regular")}
+    for n in finished:
+        path = season_dir / f"week_{n}" / "polls.json"
+        new = all_polls.get(n + 1, [])
+        if new and new != _read(path):
+            _write(path, new)
+            summary["polls_updated"].append(n)
+        elif not path.exists():
+            _write(path, new)
+
+    # The latest week's ratings snapshot is retaken every run while the season is on.
+    if in_progress and latest and latest > 0:
+        wdir = season_dir / f"week_{latest}"
+        for name, endpoint in [("sp.json", "ratings/sp"), ("fpi.json", "ratings/fpi")]:
+            _write(wdir / name, client.get(endpoint, year=season))
+        _write(wdir / "elo.json", client.get("ratings/elo", year=season, week=latest))
+
     if not todo:
         return summary
 
@@ -82,38 +111,22 @@ def fetch_season(client, season: int, raw_root: Path, cfg: dict, now: datetime |
 
         games = [g for g in schedule if g["week"] == n] if n > 0 else []
         unfinished = [g["id"] for g in games if not g.get("completed")]
-        games_done = not unfinished or now > ends[n] + timedelta(days=fcfg["games_grace_days"])
+        complete = not unfinished or now > ends[n] + timedelta(days=fcfg["games_grace_days"])
         if unfinished:
             missing.append(f"{len(unfinished)} game(s) without a final score")
         if n > 0:
             _write(wdir / "games.json", games)
+            if not (wdir / "elo.json").exists():
+                elo = client.get("ratings/elo", year=season, week=n)
+                _write(wdir / "elo.json", elo)
+                if not elo:
+                    missing.append("Elo")
+            if not (wdir / "sp.json").exists():
+                missing.append("SP+/FPI (no weekly history available)")
 
-        polls = client.get("rankings", year=season, week=n + 1, seasonType="regular")
-        poll_list = polls[0]["polls"] if polls else []
-        _write(wdir / "polls.json", poll_list)
-        has_ap = any(p["poll"] == polls_cfg["ap"] for p in poll_list)
-        if not has_ap:
-            missing.append("AP poll")
+        if not any(p["poll"] == polls_cfg["ap"] for p in _read(wdir / "polls.json") or []):
+            missing.append("AP poll (not released yet; re-checked every run)")
 
-        if n > 0:
-            elo = client.get("ratings/elo", year=season, week=n)
-            _write(wdir / "elo.json", elo)
-            if not elo:
-                missing.append("Elo")
-
-        # SP+/FPI only exist as "current" values, so snapshot them for the latest
-        # week of an in-progress season. Earlier weeks can't be backfilled.
-        if n == latest and in_progress and n > 0:
-            for name, endpoint in [("sp.json", "ratings/sp"), ("fpi.json", "ratings/fpi")]:
-                data = client.get(endpoint, year=season)
-                _write(wdir / name, data)
-                if not data:
-                    missing.append(name[:-5].upper())
-        elif not (wdir / "sp.json").exists() and n > 0:
-            missing.append("SP+/FPI (no weekly history available)")
-
-        poll_ok = has_ap or now > ends[n] + timedelta(days=fcfg["poll_grace_days"])
-        complete = games_done and poll_ok
         _write(wdir / "_meta.json", {
             "season": season, "week": n,
             "fetched_at": now.isoformat(timespec="seconds"),
@@ -138,6 +151,8 @@ def main() -> None:
     for w in summary["fetched"]:
         state = "complete" if w["complete"] else "incomplete (will re-fetch next run)"
         log.info("week %d: %s", w["week"], state)
+    if summary["polls_updated"]:
+        log.info("new/changed polls for week(s): %s", summary["polls_updated"])
     log.info("skipped %d frozen week(s); API calls this run: %d",
              len(summary["skipped_complete"]), client.calls)
 

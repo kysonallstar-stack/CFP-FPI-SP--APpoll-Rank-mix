@@ -132,6 +132,9 @@ def build_week(season_dir: Path, n: int, reg: TeamRegistry, cfg: dict) -> dict:
         "games_completed": [g for g in completed if g["completed"]],
         "games_remaining": remaining + [g for g in completed if not g["completed"]],
         "sources": sources,   # week each input came from (None = unavailable)
+        # Inputs carried forward from an earlier week because this week's hasn't
+        # been released yet (e.g. Monday, before Tuesday's CFP rankings).
+        "stale": {k: w for k, w in sources.items() if w is not None and w < n},
         "missing": missing,
     }
 
