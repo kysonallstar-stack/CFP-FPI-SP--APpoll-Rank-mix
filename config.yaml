@@ -34,10 +34,14 @@ espn:
   timeout_seconds: 30
   rankings_url: https://site.api.espn.com/apis/site/v2/sports/football/college-football/rankings
   fpi_url: https://site.web.api.espn.com/apis/fitt/v3/sports/football/college-football/powerindex?region=us&lang=en&limit=200
-  # Bill Connelly's SP+ article, updated in place every Sunday morning. It gets
-  # a new address each season: add next year's here (until then CFBD's SP+ is used).
-  sp_article:
-    2026: https://www.espn.com/college-football/story/_/id/49868647/2026-college-football-sp+-rankings-all-138-fbs-teams
+  # Bill Connelly's SP+ article, updated in place every Sunday morning. Read
+  # through ESPN's article feed (the table arrives as structured data). The
+  # article gets a new id each season: it's the number in its web address,
+  # espn.com/college-football/story/_/id/<id>/... Add next year's here (until
+  # then CFBD's SP+ is used).
+  article_url: "https://now.core.api.espn.com/v1/sports/news/{id}?enable=inlines"
+  sp_article_id:
+    2026: 49868647
   # Names in that article that mean something else in CFBD's alias list.
   sp_name_overrides:
     KSU: Kennesaw State        # CFBD lists "KSU" as Kansas State

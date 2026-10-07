@@ -4,6 +4,8 @@ CFBD is the backbone (games, schedule, teams, Elo), but it lags ESPN on SP+
 and FPI by an unpredictable number of days and only carries the AP Top 25.
 ESPN publishes:
   - SP+   weekly, Sunday morning, as a table in Bill Connelly's rankings article
+          (read from ESPN's article feed, where the table is structured data;
+          the web page itself isn't served to cloud machines like GitHub's)
   - FPI   daily, as JSON behind espn.com/college-football/fpi
   - polls the AP Top 25 *plus others receiving votes* (and CFP rankings when
           they exist), as JSON behind the rankings page
@@ -30,7 +32,7 @@ from src.teams import TeamRegistry
 
 log = logging.getLogger(__name__)
 
-SP_ROW = re.compile(r"<tr[^>]*><td>(\d+)\.\s*([^<(]+?)\s*\((\d+)-(\d+)\)</td><td>(-?[\d.]+)</td>")
+SP_TEAM = re.compile(r"^(\d+)\.\s*(.+?)\s*\((\d+)-(\d+)\)$")   # "2. Ohio St. (4-1)"
 POLL_TYPES = {"ap": "ap", "cfp": "cfp"}   # ESPN poll type -> our key
 
 
@@ -40,24 +42,30 @@ def _get(url: str, ecfg: dict) -> requests.Response:
     return resp
 
 
-def parse_sp(page: str, reg: TeamRegistry, overrides: dict) -> dict:
-    """SP+ ratings from the article's first table. Raises ValueError unless every
-    FBS team appears exactly once -- a partial or mis-matched table is worse than none."""
-    start = page.find("<table")
-    table = page[start:page.find("</table>", start)]
+def parse_sp(article: dict, reg: TeamRegistry, overrides: dict) -> dict:
+    """SP+ ratings from the article's first table whose columns start Team, Rating.
+    Raises ValueError unless every FBS team appears exactly once -- a partial or
+    mis-matched table is worse than none."""
+    head = article["headlines"][0]
+    table = next((m["json"] for m in head.get("inlines", [])
+                  if m.get("moduleType") == "table" and m.get("json", {}).get("header", [])[:2] == ["Team", "Rating"]), None)
+    if table is None:
+        raise ValueError("SP+ article has no Team/Rating table")
     teams, seen = [], set()
-    for rank, name, wins, losses, rating in SP_ROW.findall(table):
-        name = html.unescape(name).strip()
+    for row in table["body"]:
+        m = SP_TEAM.match(html.unescape(row[0]).strip())
+        if not m:
+            raise ValueError(f"SP+ table: can't read row {row[0]!r}")
+        rank, name, wins, losses = m.groups()
         tid = reg.match(overrides.get(name, name), source="espn_sp")
         if tid is None or tid in seen:
             raise ValueError(f"SP+ table: can't place {name!r} ({'duplicate' if tid in seen else 'unknown team'})")
         seen.add(tid)
-        teams.append({"id": tid, "rank": int(rank), "rating": float(rating), "wins": int(wins), "losses": int(losses)})
+        teams.append({"id": tid, "rank": int(rank), "rating": float(row[1]), "wins": int(wins), "losses": int(losses)})
     missing = set(reg.by_id) - seen
     if missing or not teams:
         raise ValueError(f"SP+ table: {len(teams)} teams parsed, missing {sorted(reg.name(t) for t in missing)[:5]}")
-    modified = re.search(r'"dateModified"\s*:\s*"([^"]+)"', page)
-    return {"modified": modified.group(1) if modified else None, "teams": teams}
+    return {"modified": head.get("lastModified"), "teams": teams}
 
 
 def parse_fpi(data: dict, reg: TeamRegistry) -> dict:
@@ -124,11 +132,12 @@ def snapshot(season: int, raw_root: Path, latest_week: int, reg: TeamRegistry, c
             raise ValueError("no poll for this week yet")
         return data
 
-    sp_url = (ecfg.get("sp_article") or {}).get(season)
-    if sp_url:
-        save("espn_sp.json", lambda: parse_sp(get(sp_url, ecfg).text, reg, ecfg.get("sp_name_overrides") or {}))
+    article_id = (ecfg.get("sp_article_id") or {}).get(season)
+    if article_id:
+        url = ecfg["article_url"].format(id=article_id)
+        save("espn_sp.json", lambda: parse_sp(get(url, ecfg).json(), reg, ecfg.get("sp_name_overrides") or {}))
     else:
-        log.warning("No ESPN SP+ article configured for %s (config espn.sp_article); using CFBD's SP+.", season)
+        log.warning("No ESPN SP+ article configured for %s (config espn.sp_article_id); using CFBD's SP+.", season)
     save("espn_fpi.json", lambda: parse_fpi(get(ecfg["fpi_url"], ecfg).json(), reg))
     save("espn_polls.json", polls)
     return saved

@@ -11,13 +11,17 @@ TEAMS = [
     {"id": 2, "school": "Kennesaw State", "alternateNames": [], "conference": "Conference USA"},
     {"id": 3, "school": "Ohio State", "alternateNames": [], "conference": "Big Ten"},
 ]
-SP_PAGE = """<script>{"dateModified":"2026-10-04T14:45:00Z"}</script>
-<table><thead><tr><th>Team</th><th>Rating</th></tr></thead><tbody>
-<tr class="last"><td>1. Ohio St. (4-1)</td><td>30.3</td><td>42.0 (3)</td></tr>
-<tr class="last"><td>2. Kansas St. (3-1)</td><td>13.8</td><td>30.0 (40)</td></tr>
-<tr class="last"><td>3. KSU (1-3)</td><td>-11.5</td><td>20.0 (100)</td></tr>
-</tbody></table>
-<table><tbody><tr><td>1. Ohio St. (4-1)</td><td>99.9</td></tr></tbody></table>"""
+def article(rows):
+    return {"headlines": [{"lastModified": "2026-10-04T15:09:21Z", "inlines": [
+        {"moduleType": "photo", "json": {}},
+        {"moduleType": "table", "json": {"header": ["Team", "Rating", "Offense"], "body": rows}},
+        {"moduleType": "table", "json": {"header": ["Team", "Resume"], "body": [["1. Ohio St. (4-1)", "99.9"]]}},
+    ]}]}
+
+
+ROWS = [["1. Ohio St. (4-1)", "30.3", "42.0 (3)"], ["2. Kansas St. (3-1)", "13.8", "30.0 (40)"],
+        ["3. KSU (1-3)", "-11.5", "20.0 (100)"]]
+SP_PAGE = article(ROWS)
 OVERRIDES = {"KSU": "Kennesaw State"}
 
 
@@ -27,7 +31,7 @@ def reg():
 
 def test_sp_table_parses_first_table_only_with_overrides():
     out = espn.parse_sp(SP_PAGE, reg(), OVERRIDES)
-    assert out["modified"] == "2026-10-04T14:45:00Z"
+    assert out["modified"] == "2026-10-04T15:09:21Z"
     assert {t["id"]: t["rating"] for t in out["teams"]} == {3: 30.3, 1: 13.8, 2: -11.5}   # not the 99.9 table
 
 
@@ -38,9 +42,10 @@ def test_sp_table_rejected_when_a_name_lands_on_the_wrong_team():
 
 
 def test_sp_table_rejected_when_a_team_is_missing():
-    page = SP_PAGE.replace('<tr class="last"><td>3. KSU (1-3)</td><td>-11.5</td><td>20.0 (100)</td></tr>', "")
     with pytest.raises(ValueError, match="missing"):
-        espn.parse_sp(page, reg(), OVERRIDES)
+        espn.parse_sp(article(ROWS[:2]), reg(), OVERRIDES)
+    with pytest.raises(ValueError, match="no Team/Rating table"):
+        espn.parse_sp({"headlines": [{"inlines": []}]}, reg(), OVERRIDES)
 
 
 def team(tid):
@@ -78,7 +83,8 @@ class Resp:
         return self.payload
 
 
-CFG = {"espn": {"user_agent": "t", "rankings_url": "R", "fpi_url": "F", "sp_article": {2026: "S"}, "sp_name_overrides": OVERRIDES},
+CFG = {"espn": {"user_agent": "t", "rankings_url": "R", "fpi_url": "F", "article_url": "S{id}",
+                "sp_article_id": {2026: 7}, "sp_name_overrides": OVERRIDES},
        "polls": {"ap": "AP Top 25", "cfp": "Playoff Committee Rankings"}}
 
 
@@ -87,7 +93,7 @@ def test_snapshot_survives_failures_and_normalize_prefers_espn(tmp_path):
            "teams": [{**team(i), "categories": [{"name": "fpi", "values": [10.0 - i]}]} for i in (1, 2, 3)]}
 
     def get(url, ecfg):
-        if url == "S":
+        if url == "S7":
             return Resp(SP_PAGE)
         if url == "F":
             return Resp(fpi)
@@ -110,6 +116,6 @@ def test_snapshot_survives_failures_and_normalize_prefers_espn(tmp_path):
 def test_poll_for_the_wrong_week_is_ignored(tmp_path):
     polls = {"rankings": [{"type": "ap", "occurrence": {"number": 6}, "ranks": [{**team(3), "current": 1, "points": 9.0}]}]}
     get = lambda url, ecfg: Resp(polls)
-    cfg = {"espn": {**CFG["espn"], "sp_article": {}}}
+    cfg = {"espn": {**CFG["espn"], "sp_article_id": {}}}
     assert "espn_polls.json" in espn.snapshot(2026, tmp_path, 5, reg(), cfg, get=get)       # week 6 poll follows week 5
     assert "espn_polls.json" not in espn.snapshot(2026, tmp_path, 6, reg(), cfg, get=get)   # not out yet for week 6

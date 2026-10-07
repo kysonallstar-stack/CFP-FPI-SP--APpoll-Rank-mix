@@ -12,8 +12,8 @@ morning for anything new; takes the offseason off)
 **1. The computers.** Four ratings, each converted to a z-score (how many
 standard deviations above or below average) and combined:
 - **SP+** and **FPI** from ESPN, weight 1.0 each. These are the strongest
-  systems. They're read straight from ESPN (SP+ from Bill Connelly's weekly
-  article, FPI from ESPN's data feed), because CollegeFootballData can run a
+  systems. They're read straight from ESPN's data feeds (SP+ from the table in
+  Bill Connelly's weekly article, FPI from the FPI page's feed), because CollegeFootballData can run a
   week or more behind on them. If ESPN can't be read, CollegeFootballData's
   copy is used instead.
 - **Elo** (from CollegeFootballData) and **our own margin rating**, weight 0.5
@@ -162,8 +162,8 @@ be late. So:
     data products and can change without notice. Each one falls back to
     CollegeFootballData (older SP+/FPI, Top 25 only) if it can't be read, and
     the pipeline logs a warning.
-  - ESPN's SP+ article gets a new web address each season; add it to
-    `espn.sp_article` in `config.yaml`.
+  - ESPN's SP+ article gets a new id each season (the number in its web
+    address); add it to `espn.sp_article_id` in `config.yaml`.
   - Committee rankings have no points, so rank *r* is treated as 26 − *r*.
   - The Pac-12's "flex week" games are stand-ins against a generic opponent
     until the real matchups are scheduled.
