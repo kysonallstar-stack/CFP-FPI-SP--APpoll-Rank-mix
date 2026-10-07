@@ -34,6 +34,8 @@ log = logging.getLogger(__name__)
 
 SP_TEAM = re.compile(r"^(\d+)\.\s*(.+?)\s*\((\d+)-(\d+)\)$")   # "2. Ohio St. (4-1)"
 POLL_TYPES = {"ap": "ap", "cfp": "cfp"}   # ESPN poll type -> our key
+# Fields that change without the numbers changing.
+VOLATILE = {"fetched_at", "updated", "modified", "ap_updated", "cfp_updated"}
 
 
 def _get(url: str, ecfg: dict) -> requests.Response:
@@ -114,9 +116,15 @@ def snapshot(season: int, raw_root: Path, latest_week: int, reg: TeamRegistry, c
     def save(name: str, build):
         try:
             data = build()
-            data["fetched_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
-            wdir.mkdir(parents=True, exist_ok=True)
-            (wdir / name).write_text(json.dumps(data, indent=1, ensure_ascii=False))
+            path = wdir / name
+            # Rewrite only when the numbers changed (timestamps alone don't count),
+            # so a run with nothing new leaves the repo untouched.
+            strip = lambda d: {k: v for k, v in d.items() if k not in VOLATILE}
+            old = json.loads(path.read_text()) if path.exists() else None
+            if old is None or strip(old) != strip(data):
+                data["fetched_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+                wdir.mkdir(parents=True, exist_ok=True)
+                path.write_text(json.dumps(data, indent=1, ensure_ascii=False))
             saved.append(name)
         except Exception as e:  # noqa: BLE001 - any ESPN problem must not stop the weekly run
             log.warning("ESPN %s skipped (%s); using CFBD for this.", name, e)

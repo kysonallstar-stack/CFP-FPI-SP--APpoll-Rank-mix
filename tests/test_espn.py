@@ -119,3 +119,23 @@ def test_poll_for_the_wrong_week_is_ignored(tmp_path):
     cfg = {"espn": {**CFG["espn"], "sp_article_id": {}}}
     assert "espn_polls.json" in espn.snapshot(2026, tmp_path, 5, reg(), cfg, get=get)       # week 6 poll follows week 5
     assert "espn_polls.json" not in espn.snapshot(2026, tmp_path, 6, reg(), cfg, get=get)   # not out yet for week 6
+
+
+def test_snapshot_is_not_rewritten_when_only_timestamps_change(tmp_path):
+    def fpi(stamp):
+        return {"lastUpdated": stamp, "categories": [{"name": "fpi", "names": ["fpi"]}],
+                "teams": [{**team(i), "categories": [{"name": "fpi", "values": [10.0 - i]}]} for i in (1, 2, 3)]}
+    cfg = {"espn": {**CFG["espn"], "sp_article_id": {}}}
+    feed = {"F": fpi("monday")}
+    get = lambda url, ecfg: Resp(feed[url])                    # "R" (polls) raises KeyError: skipped
+    espn.snapshot(2026, tmp_path, 1, reg(), cfg, get=get)
+    path = tmp_path / "2026" / "week_1" / "espn_fpi.json"
+    first = path.read_text()
+
+    feed["F"] = fpi("tuesday")                                 # same numbers, new timestamp
+    espn.snapshot(2026, tmp_path, 1, reg(), cfg, get=get)
+    assert path.read_text() == first
+
+    feed["F"]["teams"][0]["categories"][0]["values"] = [5.5]   # a real change
+    espn.snapshot(2026, tmp_path, 1, reg(), cfg, get=get)
+    assert json.loads(path.read_text())["teams"][0]["fpi"] == 5.5
