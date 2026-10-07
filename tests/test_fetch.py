@@ -70,9 +70,11 @@ def test_completed_week_is_never_redownloaded(tmp_path):
     client.calls.clear()
     summary = fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-17T12:00:00"))
     endpoints = [e for e, _ in client.calls]
-    # Only the cheap refreshes: one polls call + the latest week's ratings snapshot.
-    assert "games" not in endpoints and "teams/fbs" not in endpoints
-    assert endpoints.count("rankings") == 1
+    # Only the cheap refreshes: polls, the latest week's ratings snapshot, and one
+    # schedule call to see whether the week in progress has finished.
+    assert "teams/fbs" not in endpoints and "calendar" not in endpoints
+    assert endpoints.count("rankings") == 1 and endpoints.count("games") <= 1
+    assert summary["fetched"] == []                 # no frozen week was rewritten
     assert summary["skipped_complete"] == [0, 1, 2]
 
 
@@ -174,3 +176,16 @@ def test_empty_calendar_is_not_cached(tmp_path):
     with pytest.raises(RuntimeError):
         fetch_season(client, 2027, tmp_path, CFG, now=at("2027-08-01T12:00:00"))
     assert not (tmp_path / "2027" / "calendar.json").exists()   # re-checked next run
+
+
+def test_sunday_run_picks_up_a_week_whose_games_are_all_final(tmp_path):
+    """Week 2 "ends" Tue 06:59 UTC on the calendar; a run before that still counts it
+    once every game is final, and doesn't if one is still unplayed."""
+    polls = {1: ap_poll(1), 2: ap_poll(2), 3: ap_poll(3)}
+    sunday = at("2026-09-13T19:00:00")                         # before week 2's calendar end
+    done = FakeClient([game(10, 1, True, 21, 14), game(11, 2, True, 7, 3)], polls)
+    assert fetch_season(done, 2026, tmp_path / "a", CFG, now=sunday)["latest_week"] == 2
+    assert (tmp_path / "a" / "2026" / "week_2" / "games.json").exists()
+
+    pending = FakeClient([game(10, 1, True, 21, 14), game(11, 2, False)], polls)
+    assert fetch_season(pending, 2026, tmp_path / "b", CFG, now=sunday)["latest_week"] == 1

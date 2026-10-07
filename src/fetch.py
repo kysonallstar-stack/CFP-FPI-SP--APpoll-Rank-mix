@@ -73,6 +73,18 @@ def fetch_season(client, season: int, raw_root: Path, cfg: dict, now: datetime |
     # week_0 = preseason: "ends" when week 1 starts.
     ends = {0: _ts(weeks[0]["startDate"])} | {w["week"]: _ts(w["endDate"]) for w in weeks}
     finished = [n for n, end in sorted(ends.items()) if end <= now]
+
+    # The calendar says a week ends at midnight Sunday night, but its games are
+    # over by Sunday morning. If the week in progress already has a final score
+    # for every game, count it as finished now (this is what lets the Sunday
+    # afternoon run pick up Saturday's games).
+    schedule = None
+    current = next((w["week"] for w in weeks if _ts(w["startDate"]) <= now < _ts(w["endDate"])), None)
+    if current is not None:
+        schedule = client.get("games", year=season, seasonType="regular", classification="fbs")
+        games = [g for g in schedule if g["week"] == current]
+        if games and all(g.get("completed") for g in games):
+            finished.append(current)
     latest = finished[-1] if finished else None
     in_progress = now < ends[weeks[-1]["week"]]
 
@@ -106,7 +118,8 @@ def fetch_season(client, season: int, raw_root: Path, cfg: dict, now: datetime |
     if not todo:
         return summary
 
-    schedule = client.get("games", year=season, seasonType="regular", classification="fbs")
+    if schedule is None:
+        schedule = client.get("games", year=season, seasonType="regular", classification="fbs")
     _write(season_dir / "schedule.json", schedule)
 
     for n in todo:
