@@ -47,7 +47,9 @@ class FakeClient:
             "games": self.games,
             # The real endpoint returns every week's polls when no week is given.
             "rankings": [w for resp in self.polls_for.values() for w in resp],
-            "ratings/elo": [{"team": "Alpha", "elo": 1600}, {"team": "Beta", "elo": 1400}],
+            # Elo moves every week, like the real thing.
+            "ratings/elo": [{"team": "Alpha", "elo": 1600 + 10 * (p.get("week") or 0)},
+                            {"team": "Beta", "elo": 1400 - 10 * (p.get("week") or 0)}],
             "ratings/sp": self.sp if self.sp is not None else [{"team": "Alpha", "rating": 10.0}, {"team": "Beta", "rating": -3.0}],
             "ratings/fpi": [{"team": "Alpha", "fpi": 8.0}, {"team": "Beta", "fpi": -2.0}],
         }[endpoint]
@@ -189,3 +191,20 @@ def test_sunday_run_picks_up_a_week_whose_games_are_all_final(tmp_path):
 
     pending = FakeClient([game(10, 1, True, 21, 14), game(11, 2, False)], polls)
     assert fetch_season(pending, 2026, tmp_path / "b", CFG, now=sunday)["latest_week"] == 1
+
+
+def test_unchanged_ratings_are_reported_as_stale(tmp_path):
+    """SP+ downloaded again in week 2 but identical to week 1's numbers: it's really week-1 data."""
+    client = FakeClient([game(10, 1, True, 21, 14), game(11, 2, False)],
+                        {1: ap_poll(1), 2: ap_poll(2), 3: ap_poll(3)})
+    fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-09T12:00:00"))   # week 1 snapshot
+    client.games = [game(10, 1, True, 21, 14), game(11, 2, True, 7, 3)]
+    fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-16T12:00:00"))   # week 2: same numbers
+    out = build_week(tmp_path / "2026", 2, TeamRegistry(TEAMS), CFG)
+    assert out["sources"]["sp"] == 1 and out["stale"]["sp"] == 1
+    assert out["ratings"]["sp"] == {"1": 10.0, "2": -3.0}      # still used, just flagged
+
+    client.sp = [{"team": "Alpha", "rating": 12.0}, {"team": "Beta", "rating": -4.0}]
+    fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-17T12:00:00"))   # source updates
+    out = build_week(tmp_path / "2026", 2, TeamRegistry(TEAMS), CFG)
+    assert out["sources"]["sp"] == 2 and "sp" not in out["stale"]

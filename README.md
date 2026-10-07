@@ -65,6 +65,14 @@ keeps the odds from being overconfident.
   the simulation are left out.
 - *Closest*: nearest to a coin flip.
 
+**Change from last week.** The rankings show how many places each team moved
+(±) and how much its rating changed (Rtg ±). Each team page shows rank and
+rating by week, and for finished games how the result compared with what the
+model predicted beforehand. Beating expectations is what raises a rating.
+If SP+ or FPI hasn't been updated at the source since an earlier week, the
+footer says which week the numbers date from; in those weeks, changes come
+only from the poll.
+
 **8. What if.** Pick winners of any remaining games and re-run 5,000 seasons
 with those results locked in. The simulation runs in your browser
 (`site/sim.js`, a copy of the Python simulator; a test checks the two agree).

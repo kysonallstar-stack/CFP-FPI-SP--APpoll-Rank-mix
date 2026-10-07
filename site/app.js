@@ -14,6 +14,17 @@ function pct(p) {
   return Math.round(p * 100) + "%";
 }
 const dash = (v) => (v == null ? "–" : v);
+// Week-over-week change. Rank: ▲ = moved up. Rating: signed points.
+function moveTag(d) {
+  if (d == null) return `<span class="dim">–</span>`;
+  if (d === 0) return `<span class="dim">–</span>`;
+  return d > 0 ? `<span class="win">▲${d}</span>` : `<span class="loss">▼${-d}</span>`;
+}
+function ratingTag(d) {
+  if (d == null) return `<span class="dim">–</span>`;
+  if (Math.abs(d) < 0.05) return `<span class="dim">0.0</span>`;
+  return `<span class="${d > 0 ? "win" : "loss"}">${d > 0 ? "+" : "−"}${Math.abs(d).toFixed(1)}</span>`;
+}
 const confName = (c) => (c === "FBS Independents" ? "Independent" : c);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const rec = (t) => `${t.w}-${t.l}` + (t.cw + t.cl ? ` (${t.cw}-${t.cl})` : "");
@@ -54,6 +65,7 @@ function renderRankings() {
   $("#rank-table tbody").innerHTML = rows.map((t) => `
     <tr data-id="${t.id}" tabindex="0">
       <td class="num">${t.rank}</td>
+      <td class="num">${moveTag(t.d_rank)}</td>
       <td class="team-col"><div class="teamcell">
         <span class="swatch" style="background:${esc(t.color || "")}"></span>
         <span><span class="tname">${esc(t.name)}</span><span class="trec">${rec(t)} · ${esc(confName(t.conf))}</span></span>
@@ -62,12 +74,13 @@ function renderRankings() {
       <td class="num">${pct(t.p_bye)}</td>
       <td class="num">${pct(t.p_conf)}</td>
       <td class="num">${t.rating.toFixed(1)}</td>
+      <td class="num">${ratingTag(t.d_rating)}</td>
       <td class="num ${t.ap ? "" : "dim"}">${dash(t.ap)}</td>
       <td class="num cfp-col" ${hasCfp ? "" : "hidden"}>${dash(t.cfp)}</td>
       <td class="num">${dash(t.sp)}</td>
       <td class="num">${dash(t.fpi)}</td>
       <td class="num">${t.xw.toFixed(1)}</td>
-    </tr>`).join("") || `<tr><td colspan="11" class="dim">No teams match.</td></tr>`;
+    </tr>`).join("") || `<tr><td colspan="13" class="dim">No teams match.</td></tr>`;
 }
 
 // ---------- this week -----------------------------------------------------
@@ -167,7 +180,10 @@ function renderTeam(id) {
   const el = $("#view-team");
   if (!t) { el.innerHTML = `<p>Team not found. <a href="#rankings">Back to rankings</a></p>`; return; }
   const games = state.data.games.filter((g) => g.h === id || g.a === id);
-  const hist = t.hist.map(([wk, rk]) => `<span>Wk ${wk}: #${rk}</span>`).join("");
+  const hist = t.hist.map(([wk, rk, rt]) => `<span>Wk ${wk}: #${rk} · ${rt.toFixed(1)}</span>`).join("");
+  const trend = t.d_rating == null ? ""
+    : `<p class="trend">Since last week: ${moveTag(t.d_rank)} in rank, ${ratingTag(t.d_rating)} rating points${
+        Math.abs(t.d_rating) < 0.5 ? " (about the same)" : t.d_rating > 0 ? " (rated higher)" : " (rated lower)"}</p>`;
   const sched = games.map((g) => {
     const home = g.h === id;
     const opp = home ? g.an : g.hn, oppId = home ? g.a : g.h;
@@ -176,6 +192,12 @@ function renderTeam(id) {
     if (g.hp != null) {
       const us = home ? g.hp : g.apts, them = home ? g.apts : g.hp;
       res = `<span class="${us > them ? "win" : "loss"}">${us > them ? "W" : "L"} ${us}-${them}</span>`;
+      if (g.exp != null) {
+        // How the result compared with what the model predicted beforehand.
+        const expected = home ? g.exp : -g.exp, diff = (us - them) - expected;
+        res += ` <span class="vsexp ${diff >= 0 ? "win" : "loss"}" title="Model expected ${expected > 0 ? "+" : ""}${expected.toFixed(1)}; result was ${
+          diff >= 0 ? "better" : "worse"} by ${Math.abs(diff).toFixed(1)}">(${diff >= 0 ? "+" : "−"}${Math.abs(diff).toFixed(1)})</span>`;
+      }
     } else {
       const p = home ? g.p : 1 - g.p;
       res = `<span title="Win probability">${pct(p)}</span>`;
@@ -208,9 +230,13 @@ function renderTeam(id) {
       <div class="stat"><b>${t.fpi ? "#" + t.fpi : "–"}</b><span>FPI</span></div>
       <div class="stat"><b>#${t.metrics}</b><span>Computers</span></div>
     </div>
-    <h3>Blend rank by week</h3>
+    <h3>Rank and rating by week</h3>
+    ${trend}
     <div class="history">${hist}</div>
-    <p class="note">Weeks without SP+/FPI snapshots use Elo for the computer side.</p>
+    <p class="note">Weeks without SP+/FPI snapshots use Elo for the computer side, so changes are only
+      shown between weeks that used the same inputs. On finished games, the number in brackets is the
+      final margin minus the margin the model predicted beforehand (points better or worse than expected).
+      Beating expectations is what pushes a rating up, even in a loss.</p>
     <h3>Schedule</h3>
     <ul class="sched">${sched}</ul>
     ${state.data.whatif && games.some((g) => g.hp == null)

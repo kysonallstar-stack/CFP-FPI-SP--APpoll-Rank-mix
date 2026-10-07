@@ -41,11 +41,13 @@
         <table id="rank-table">
           <thead><tr>
             <th data-sort="rank" class="num">#</th>
+            <th data-sort="d_rank" class="num" title="Places moved in the blend ranking since last week">±</th>
             <th data-sort="name" class="team-col">Team</th>
             <th data-sort="p_playoff" class="num" title="Chance to make the 12-team playoff">CFP%</th>
             <th data-sort="p_bye" class="num" title="Chance of a first-round bye (top-4 seed)">Bye%</th>
             <th data-sort="p_conf" class="num" title="Chance to win the conference">Conf%</th>
             <th data-sort="rating" class="num" title="Blended rating, points vs. an average FBS team">Rtg</th>
+            <th data-sort="d_rating" class="num" title="Change in rating (points) since last week">Rtg ±</th>
             <th data-sort="ap" class="num">AP</th>
             <th data-sort="cfp" class="num cfp-col" title="Committee ranking">CFP</th>
             <th data-sort="sp" class="num">SP+</th>
@@ -55,7 +57,8 @@
           <tbody></tbody>
         </table>
       </div>
-      <p class="note">Tap a team for its schedule and odds. Tap a column to sort.</p>
+      <p class="note">Tap a team for its schedule and odds. Tap a column to sort.
+        <b>±</b> is places moved since last week; <b>Rtg ±</b> is the change in rating, in points.</p>
     </section>
 
     <section id="view-games" class="view" hidden>

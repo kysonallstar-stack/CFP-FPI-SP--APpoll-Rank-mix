@@ -19,6 +19,29 @@ def _load(proc: Path, n: int) -> dict:
     return json.loads((proc / f"week_{n}.json").read_text())
 
 
+def _change(hist: list, week: int, sources: dict) -> dict:
+    """Change in blend rank and rating since last week. d_rank > 0 = moved up.
+    None when there's no prior week, or the two weeks used different computer
+    inputs (e.g. Elo early, SP+/FPI later), which would look like a fake jump."""
+    by_week = {w: (rank, rating) for w, rank, rating in hist}
+    if week not in by_week or week - 1 not in by_week or sources.get(week) != sources.get(week - 1):
+        return {"d_rank": None, "d_rating": None}
+    (r1, x1), (r0, x0) = by_week[week], by_week[week - 1]
+    return {"d_rank": r0 - r1, "d_rating": round(x1 - x0, 1)}
+
+
+def _expected_margins(proc: Path, week: int) -> dict:
+    """game id -> predicted home margin, from the simulation saved the week before each game."""
+    out = {}
+    for k in range(1, week + 1):
+        path = proc / f"sim_week_{k - 1}.json"
+        if path.exists():
+            for g in json.loads(path.read_text()).get("remaining_games", []):
+                if g["week"] == k:
+                    out[g["game_id"]] = g["predicted_margin"]
+    return out
+
+
 def build(season: int, proc: Path, cfg: dict, n_sims: int, seed) -> tuple[dict, dict, dict]:
     """Returns (site data, ratings output, sim output) for the latest processed week."""
     week = _latest_week(proc)
@@ -52,14 +75,18 @@ def build(season: int, proc: Path, cfg: dict, n_sims: int, seed) -> tuple[dict, 
             "p_title": o["p_title_game"], "p_conf": o["p_win_conference"],
             "p_playoff": o["p_playoff"], "p_bye": o["p_bye"], "xw": o["expected_wins"],
             "hist": history.get(t["id"], []),
+            **_change(history.get(t["id"], []), week, history_sources),
         })
 
+    expected = _expected_margins(proc, week)
     games = []
     for g in wd["games_completed"]:
         if g["home_fbs"] or g["away_fbs"]:
             games.append({"id": g["id"], "wk": g["week"], "start": g["start"], "n": g["neutral"],
                           "h": g["home_id"], "a": g["away_id"], "hn": g["home_name"], "an": g["away_name"],
-                          "hp": g["home_points"], "apts": g["away_points"]})
+                          "hp": g["home_points"], "apts": g["away_points"],
+                          # what the model predicted before the game (home margin), if we saved it
+                          "exp": expected.get(g["id"])})
     for g in sim["remaining_games"]:
         games.append({"id": g["game_id"], "wk": g["week"], "start": g["start"], "n": g["neutral"],
                       "h": g["home_id"], "a": g["away_id"], "hn": g["home"], "an": g["away"],

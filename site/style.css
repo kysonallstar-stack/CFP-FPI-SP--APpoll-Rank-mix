@@ -215,3 +215,7 @@ tbody tr:hover td, tbody tr:focus-within td { background: var(--accent-soft); }
 .logo { width: 22px; height: 22px; object-fit: contain; vertical-align: middle; }
 .dlist .logo { width: 18px; height: 18px; margin-right: 4px; }
 .byes .bseed { color: var(--accent); }
+
+/* Week-over-week change */
+.trend { margin: 4px 0 8px; font-size: 14px; }
+.vsexp { font-size: 12px; font-weight: 400; white-space: nowrap; }

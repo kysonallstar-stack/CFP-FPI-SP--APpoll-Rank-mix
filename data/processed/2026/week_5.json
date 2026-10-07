@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 5,
- "generated_at": "2026-10-07T19:03:37+00:00",
+ "generated_at": "2026-10-07T19:15:26+00:00",
  "teams": [
   {
    "id": 2005,
@@ -18700,12 +18700,15 @@
   }
  ],
  "sources": {
-  "sp": 5,
-  "fpi": 5,
+  "sp": 4,
+  "fpi": 4,
   "elo": 5,
   "ap": 5,
   "cfp": null
  },
- "stale": {},
+ "stale": {
+  "sp": 4,
+  "fpi": 4
+ },
  "missing": []
 }

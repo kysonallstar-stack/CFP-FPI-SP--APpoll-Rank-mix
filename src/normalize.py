@@ -103,6 +103,16 @@ def build_week(season_dir: Path, n: int, reg: TeamRegistry, cfg: dict) -> dict:
     ratings = {}
     for key, (fname, field) in RATING_SOURCES.items():
         k, rows = latest_file(fname)
+        # A snapshot can be fresh on disk but unchanged at the source (CFBD doesn't
+        # always update SP+/FPI every week). If it's identical to earlier weeks'
+        # snapshots, report the week the numbers really date from.
+        if rows is not None:
+            values = lambda rs: {r["team"]: field(r) for r in rs}
+            while k > 0:
+                prev = _read(wdirs[k - 1] / fname)
+                if not prev or values(prev) != values(rows):
+                    break
+                k -= 1
         sources[key] = k
         if rows is None:
             missing.append(key)
