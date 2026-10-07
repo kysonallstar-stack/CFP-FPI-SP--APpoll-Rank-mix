@@ -5,13 +5,15 @@ on:
   schedule:
     # Sunday 13:00 Mountain time: an hour after the AP poll (Sundays at 2 p.m.
     # Eastern = noon Mountain). The timezone key handles daylight saving. GitHub
-    # may start scheduled runs late when busy. In the offseason (Feb-Jul) the
-    # pipeline exits right away, so these runs do nothing until August.
+    # may start scheduled runs hours late when busy.
     - cron: "0 13 * * 0"
       timezone: "America/Denver"
-    # Wednesday 10:00: picks up CFP rankings (released Tuesday nights in Nov/Dec)
-    # and any poll that came out late. Sends no notification if nothing changed.
-    - cron: "0 10 * * 3"
+    # Every day at 10:00: picks up whatever arrived since -- CFBD's SP+/FPI (which
+    # lag ESPN by an unpredictable number of days), CFP rankings (Tuesday nights
+    # in Nov/Dec), a late poll. If nothing in data/raw changed, nothing is
+    # committed, deployed or notified. In the offseason (Feb-Jul) the pipeline
+    # exits right away.
+    - cron: "0 10 * * *"
       timezone: "America/Denver"
   workflow_dispatch:        # "Run workflow" button on the Actions tab
   push:                     # redeploy (without refetching) when the page code changes
@@ -49,8 +51,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
           git add data site
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
+          # Only the downloaded data counts as "new": the generated files always
+          # differ by a timestamp. No new data -> leave the repo and site alone.
+          if git diff --cached --quiet -- data/raw; then
+            echo "No new data."
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             git commit -m "Weekly data update $(date -u +%Y-%m-%d)"
@@ -60,8 +64,8 @@ jobs:
 
   deploy:
     needs: update
-    # Run after a successful update, or on its own for page-code pushes.
-    if: always() && (needs.update.result == 'success' || needs.update.result == 'skipped')
+    # Deploy when the update brought new data, or on its own for page-code pushes.
+    if: always() && ((needs.update.result == 'success' && needs.update.outputs.changed == 'true') || needs.update.result == 'skipped')
     runs-on: ubuntu-latest
     permissions:
       contents: read

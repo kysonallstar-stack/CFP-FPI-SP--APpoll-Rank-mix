@@ -162,7 +162,7 @@ function renderDisagree() {
   const d = state.data;
   const human = d.selection_poll === "cfp" ? "CFP" : "AP";
   $("#disagree-note").textContent =
-    `Computer rank (SP+ and FPI combined) vs. the ${human === "CFP" ? "committee's ranking" : "AP poll"}. ` +
+    `Computer rank (SP+, FPI, Elo and our margin rating combined) vs. the ${human === "CFP" ? "committee's ranking" : "AP poll"}. ` +
     `Unranked counts as 26th, so a team the computers rank highly but the poll leaves out shows up here.`;
   const item = (id) => {
     const t = state.byId.get(id);
@@ -228,12 +228,14 @@ function renderTeam(id) {
       ${cfp}
       <div class="stat"><b>${t.sp ? "#" + t.sp : "–"}</b><span>SP+</span></div>
       <div class="stat"><b>${t.fpi ? "#" + t.fpi : "–"}</b><span>FPI</span></div>
+      <div class="stat"><b>${t.elo ? "#" + t.elo : "–"}</b><span>Elo</span></div>
+      <div class="stat"><b>${t.srs ? "#" + t.srs : "–"}</b><span>Margin rating</span></div>
       <div class="stat"><b>#${t.metrics}</b><span>Computers</span></div>
     </div>
     <h3>Rank and rating by week</h3>
     ${trend}
     <div class="history">${hist}</div>
-    <p class="note">Weeks without SP+/FPI snapshots use Elo for the computer side, so changes are only
+    <p class="note">The computer side changes inputs early in the season, so changes are only
       shown between weeks that used the same inputs. On finished games, the number in brackets is the
       final margin minus the margin the model predicted beforehand (points better or worse than expected).
       Beating expectations is what pushes a rating up, even in a loss.</p>

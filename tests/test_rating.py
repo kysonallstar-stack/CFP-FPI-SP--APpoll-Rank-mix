@@ -87,3 +87,27 @@ def test_falls_back_to_elo_when_sp_and_fpi_missing():
 def test_no_poll_means_metrics_only():
     out = blend_week(week(), CFG)
     assert out["poll_weight"] == 0.0 and out["poll_source"] is None
+
+
+def test_metric_weights_and_always_fresh_sources():
+    """Elo at half weight pulls the computer side toward Elo's order, but less than at full weight."""
+    from src.rating import metrics_side
+    ids = ["1", "2", "3"]
+    ratings = {"sp": {"1": 10, "2": 0, "3": -10}, "elo": {"1": 1400, "2": 1500, "3": 1600}, "fpi": {}}
+    base = {"metric_sources": ["sp", "fpi", "elo"], "metric_fallback": []}
+    sp_only, _ = metrics_side({**ratings, "elo": {}}, ids, base)
+    half, used = metrics_side(ratings, ids, {**base, "metric_weights": {"elo": 0.5}})
+    assert used == ["sp", "elo"]                      # FPI has no data: skipped
+    assert sp_only["1"] > half["1"] > 0               # team 1 still on top, by less
+    equal, _ = metrics_side(ratings, ids, base)
+    assert abs(equal["1"]) < 1e-9                     # equal weights: opposite orders cancel out
+
+
+def test_srs_is_added_only_from_the_configured_week():
+    from src.rating import with_srs
+    g = {"home_id": 1, "away_id": 2, "home_points": 30, "away_points": 10, "neutral": True}
+    cfg = {"rating": {"srs_lambda": 1.5, "srs_margin_cap": 28, "srs_min_week": 4}, "sim": {"hfa": 2.7}}
+    wd = {"week": 3, "teams": [{"id": 1}, {"id": 2}], "ratings": {}, "games_completed": [g]}
+    assert "srs" not in with_srs(wd, cfg)["ratings"]
+    out = with_srs({**wd, "week": 4}, cfg)
+    assert out["ratings"]["srs"]["1"] > out["ratings"]["srs"]["2"]

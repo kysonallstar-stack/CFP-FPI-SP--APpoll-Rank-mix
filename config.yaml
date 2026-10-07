@@ -31,8 +31,22 @@ polls:
   cfp: Playoff Committee Rankings
 
 rating:
-  metric_sources: [sp, fpi]    # z-scored across FBS teams, then averaged
-  metric_fallback: [elo]       # used only in weeks where SP+ and FPI are both unavailable
+  # The "computers": each is z-scored across FBS teams, then they're averaged.
+  #   sp, fpi  ESPN's ratings, via CFBD. CFBD can lag ESPN by a week or more.
+  #   elo      CFBD's Elo, updated after every game.
+  #   srs      our own margin rating, refitted from all games played so far.
+  # Elo and srs guarantee the rating reacts to last weekend even when SP+/FPI
+  # haven't been refreshed at the source. A source with no data is skipped.
+  metric_sources: [sp, fpi, elo, srs]
+  # Relative weights (default 1). ESPN's ratings are the stronger systems when
+  # fresh, so they get two-thirds of the computer side; Elo and srs share a third.
+  # On week-5 games (week-4 ratings): avg miss 11.7 with SP+/FPI alone, 12.0 at
+  # 0.5 each, 12.3 at equal weights -- but SP+/FPI alone barely moved week to week.
+  metric_weights: {sp: 1.0, fpi: 1.0, elo: 0.5, srs: 0.5}
+  metric_fallback: [elo]       # used only if none of the above has data
+  srs_lambda: 1.5              # ridge prior = sigma^2 / sd(ratings)^2 = 16^2 / 13.3^2
+  srs_margin_cap: 28           # cap each game's margin so blowouts don't dominate
+  srs_min_week: 4              # don't use srs until teams have played ~4 games
   # Converts the blended z back to points. Normally SP+'s own SD that week;
   # this is used only when SP+ is missing (e.g. the 2025 backtest).
   # 13.3 = SD of 2026 week-4 SP+ across FBS.
@@ -108,8 +122,6 @@ playoff:                       # verified 2026-27 format (see Phase 0 notes)
 backtest:
   # SP+/FPI have no weekly history, so past seasons use Elo + our own margin rating.
   metric_sources: [elo, srs]
-  srs_lambda: 1.5              # ridge prior = sigma^2 / sd(ratings)^2 = 16^2 / 13.3^2
-  srs_margin_cap: 28           # cap each game's margin so blowouts don't dominate
   calibration_weeks: [4, 7, 10, 13]
   playoff_rules:               # the format that was actually in effect those seasons
     2024: {g6_bid: top5_champions, notre_dame_rule: false}

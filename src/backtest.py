@@ -29,7 +29,7 @@ from collections import defaultdict
 import numpy as np
 
 from src.config import load_config, repo_path
-from src.rating import blend_week, poll_side, poll_points
+from src.rating import blend_week, poll_side, poll_points, srs, with_srs  # noqa: F401 (srs re-exported)
 from src import sim as simmod
 
 log = logging.getLogger(__name__)
@@ -55,49 +55,14 @@ def load_lines(season: int, cfg: dict) -> dict[int, float]:
     return out
 
 
-def srs(games: list, team_ids: list, hfa: float, lam: float, cap: float) -> dict[str, float]:
-    """Ridge-regularized margin rating: margin ~ r_home - r_away + HFA.
-
-    lam shrinks every team toward average; lam = sigma^2 / sd(ratings)^2 is the
-    Bayesian prior "a team is average until its games say otherwise". Margins
-    are capped so one blowout doesn't dominate. All FCS teams share one rating.
-    """
-    idx = {t: i for i, t in enumerate(team_ids)}
-    fcs = len(team_ids)
-    rows, y = [], []
-    for g in games:
-        h = idx.get(str(g["home_id"]), fcs)
-        a = idx.get(str(g["away_id"]), fcs)
-        if h == a:
-            continue
-        x = np.zeros(fcs + 1)
-        x[h], x[a] = 1.0, -1.0
-        rows.append(x)
-        margin = np.clip(g["home_points"] - g["away_points"], -cap, cap)
-        y.append(margin - (0.0 if g["neutral"] else hfa))
-    if not rows:
-        return {}
-    X, y = np.array(rows), np.array(y)
-    r = np.linalg.solve(X.T @ X + lam * np.eye(fcs + 1), X.T @ y)
-    return {t: float(r[i]) for t, i in idx.items()}
-
-
 def bt_config(cfg: dict, w: tuple | None = None) -> dict:
     c = copy.deepcopy(cfg)
     c["rating"]["metric_sources"] = cfg["backtest"]["metric_sources"]
     c["rating"]["metric_fallback"] = []
+    c["rating"]["srs_min_week"] = 0          # the backtest used SRS from week 1
     if w is not None:
         c["weight"]["start"], c["weight"]["end"] = w
     return c
-
-
-def with_srs(wd: dict, cfg: dict) -> dict:
-    wd = copy.copy(wd)
-    wd["ratings"] = dict(wd["ratings"])
-    b = cfg["backtest"]
-    ids = [str(t["id"]) for t in wd["teams"]]
-    wd["ratings"]["srs"] = srs(wd["games_completed"], ids, cfg["sim"]["hfa"], b["srs_lambda"], b["srs_margin_cap"])
-    return wd
 
 
 # ---------- game-prediction accuracy ----------------------------------------

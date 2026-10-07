@@ -208,3 +208,19 @@ def test_unchanged_ratings_are_reported_as_stale(tmp_path):
     fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-17T12:00:00"))   # source updates
     out = build_week(tmp_path / "2026", 2, TeamRegistry(TEAMS), CFG)
     assert out["sources"]["sp"] == 2 and "sp" not in out["stale"]
+
+
+def test_source_updates_are_logged_only_when_numbers_change(tmp_path):
+    client = FakeClient([game(10, 1, True, 21, 14), game(11, 2, False)], {1: ap_poll(1), 2: ap_poll(2)})
+    log = tmp_path / "2026" / "source_updates.json"
+    fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-09T12:00:00"))
+    first = json.loads(log.read_text())
+    assert {u["source"] for u in first} == {"sp", "fpi"} and all(u["first_snapshot"] for u in first)
+
+    fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-10T12:00:00"))   # same numbers
+    assert json.loads(log.read_text()) == first
+
+    client.sp = [{"team": "Alpha", "rating": 12.0}, {"team": "Beta", "rating": -4.0}]
+    fetch_season(client, 2026, tmp_path, CFG, now=at("2026-09-11T12:00:00"))   # SP+ updated at the source
+    last = json.loads(log.read_text())[-1]
+    assert last["source"] == "sp" and last["seen_at"].startswith("2026-09-11") and not last["first_snapshot"]

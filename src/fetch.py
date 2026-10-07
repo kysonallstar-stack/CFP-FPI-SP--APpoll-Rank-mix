@@ -111,7 +111,19 @@ def fetch_season(client, season: int, raw_root: Path, cfg: dict, now: datetime |
     if in_progress and latest is not None:
         wdir = season_dir / f"week_{latest}"
         for name, endpoint in [("sp.json", "ratings/sp"), ("fpi.json", "ratings/fpi")]:
-            _write(wdir / name, client.get(endpoint, year=season))
+            data = client.get(endpoint, year=season)
+            # Log when the source's numbers actually change, so we learn how far
+            # CFBD runs behind ESPN (it publishes no schedule for these).
+            prev = next((d for k in range(latest, -1, -1)
+                         if (d := _read(season_dir / f"week_{k}" / name))), None)
+            if data and data != prev:
+                log_path = season_dir / "source_updates.json"
+                updates = _read(log_path) or []
+                updates.append({"source": name[:-5], "seen_at": now.isoformat(timespec="seconds"),
+                                "latest_week": latest, "first_snapshot": prev is None})
+                _write(log_path, updates)
+                summary.setdefault("ratings_updated", []).append(name[:-5])
+            _write(wdir / name, data)
         if latest > 0:
             _write(wdir / "elo.json", client.get("ratings/elo", year=season, week=latest))
 

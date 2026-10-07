@@ -26,6 +26,8 @@ import logging
 import statistics as st
 from pathlib import Path
 
+import numpy as np
+
 from src.config import load_config, repo_path
 
 log = logging.getLogger(__name__)
@@ -36,7 +38,9 @@ def zscores(values: dict) -> dict:
     if len(vals) < 2:
         return {k: 0.0 for k in values}
     m, s = st.mean(vals), st.pstdev(vals)
-    return {k: (v - m) / s if s else 0.0 for k, v in values.items()}
+    if s < 1e-9:                       # all (nearly) equal: no real spread to scale
+        return {k: 0.0 for k in values}
+    return {k: (v - m) / s for k, v in values.items()}
 
 
 def poll_weight(week: int, wcfg: dict) -> float:
@@ -44,6 +48,48 @@ def poll_weight(week: int, wcfg: dict) -> float:
     a, b = wcfg["start_week"], wcfg["end_week"]
     t = min(max((week - a) / (b - a), 0.0), 1.0)
     return wcfg["start"] + t * (wcfg["end"] - wcfg["start"])
+
+
+def srs(games: list, team_ids: list, hfa: float, lam: float, cap: float) -> dict[str, float]:
+    """Our own margin rating (ridge-regularized SRS): margin ~ r_home - r_away + HFA,
+    fitted to every game played so far, so it always reflects the latest results.
+
+    lam shrinks every team toward average; lam = sigma^2 / sd(ratings)^2 is the
+    Bayesian prior "a team is average until its games say otherwise". Margins
+    are capped so one blowout doesn't dominate. All FCS teams share one rating.
+    """
+    idx = {t: i for i, t in enumerate(team_ids)}
+    fcs = len(team_ids)
+    rows, y = [], []
+    for g in games:
+        h = idx.get(str(g["home_id"]), fcs)
+        a = idx.get(str(g["away_id"]), fcs)
+        if h == a:
+            continue
+        x = np.zeros(fcs + 1)
+        x[h], x[a] = 1.0, -1.0
+        rows.append(x)
+        margin = np.clip(g["home_points"] - g["away_points"], -cap, cap)
+        y.append(margin - (0.0 if g["neutral"] else hfa))
+    if not rows:
+        return {}
+    X, y = np.array(rows), np.array(y)
+    r = np.linalg.solve(X.T @ X + lam * np.eye(fcs + 1), X.T @ y)
+    return {t: float(r[i]) for t, i in idx.items()}
+
+
+def with_srs(week_data: dict, cfg: dict) -> dict:
+    """Copy of week_data with our margin rating added under ratings["srs"]
+    (skipped before srs_min_week: too few games to mean anything)."""
+    rcfg = cfg["rating"]
+    if week_data["ratings"].get("srs") or week_data["week"] < rcfg.get("srs_min_week", 0):
+        return week_data
+    ids = [str(t["id"]) for t in week_data["teams"]]
+    out = dict(week_data)
+    out["ratings"] = {**week_data["ratings"],
+                      "srs": srs(week_data["games_completed"], ids, cfg["sim"]["hfa"],
+                                 rcfg["srs_lambda"], rcfg["srs_margin_cap"])}
+    return out
 
 
 def metrics_side(ratings: dict, team_ids: list, rcfg: dict) -> tuple[dict, list]:
@@ -54,11 +100,12 @@ def metrics_side(ratings: dict, team_ids: list, rcfg: dict) -> tuple[dict, list]
     if not used:
         raise ValueError("No metric ratings available for this week")
     zs = {s: zscores({t: ratings[s][t] for t in team_ids if t in ratings[s]}) for s in used}
+    wts = rcfg.get("metric_weights") or {}
     avg = {}
     for t in team_ids:
-        parts = [zs[s][t] for s in used if t in zs[s]]
+        parts = [(zs[s][t], wts.get(s, 1.0)) for s in used if t in zs[s]]
         if parts:                       # a team missing from one source uses the others
-            avg[t] = sum(parts) / len(parts)
+            avg[t] = sum(z * w for z, w in parts) / sum(w for _, w in parts)
     return zscores(avg), used
 
 
@@ -132,6 +179,8 @@ def blend_week(week_data: dict, cfg: dict, method: str | None = None) -> dict:
     """
     rcfg, pcfg, ccfg = cfg["rating"], cfg["poll"], cfg["cfp"]
     method = method or pcfg["method"]
+    if "srs" in rcfg["metric_sources"]:
+        week_data = with_srs(week_data, cfg)
     team_ids = [str(t["id"]) for t in week_data["teams"]]
     ratings = week_data["ratings"]
     week = week_data["week"]
@@ -149,7 +198,7 @@ def blend_week(week_data: dict, cfg: dict, method: str | None = None) -> dict:
 
     names = {str(t["id"]): t for t in week_data["teams"]}
     src_ranks = {s: _ranks({t: v for t, v in (ratings.get(s) or {}).items() if t in metrics})
-                 for s in ("sp", "fpi", "elo")}
+                 for s in ("sp", "fpi", "elo", "srs")}
     # Disagreement is measured against the committee once it ranks teams, else the AP.
     poll_rank = {str(p["id"]): p["rank"] for p in (week_data["polls"].get(sel_src) or [])} if sel_src else {}
     ap_rank = {str(p["id"]): p["rank"] for p in (week_data["polls"].get("ap") or [])}
@@ -169,7 +218,7 @@ def blend_week(week_data: dict, cfg: dict, method: str | None = None) -> dict:
             "selection_rank": sel_rank[t], "selection_rating": round(sel[t] * scale_sd + scale_mean, 1),
             "metrics_rank": metrics_rank[t],
             "sp_rank": src_ranks["sp"].get(t), "fpi_rank": src_ranks["fpi"].get(t),
-            "elo_rank": src_ranks["elo"].get(t),
+            "elo_rank": src_ranks["elo"].get(t), "srs_rank": src_ranks["srs"].get(t),
             "ap_rank": ap_rank.get(t), "ap_points": points.get(t) if poll_src == "ap" else None,
             "cfp_rank": cfp_rank.get(t),
             "wins": rec["w"], "losses": rec["l"], "conf_wins": rec["cw"], "conf_losses": rec["cl"],

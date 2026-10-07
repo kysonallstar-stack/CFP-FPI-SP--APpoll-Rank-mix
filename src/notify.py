@@ -73,7 +73,7 @@ def build_message(new: dict, prev: dict | None) -> tuple[str, str] | None:
         g = new["week_games"][0]          # sorted best matchup first
         lines.append(f"Game of the week: {g['away']} at {g['home']}")
     for k, wk in (new.get("stale") or {}).items():
-        lines.append(f"{LABEL.get(k, k)} still from week {wk}; will re-check Wednesday.")
+        lines.append(f"{LABEL.get(k, k)} still from week {wk}; re-checked every morning.")
     return title, "\n".join(lines)
 
 

@@ -110,10 +110,12 @@
 
     <section id="view-about" class="view prose" hidden>
       <h2>How it works</h2>
-      <p><strong>Rating.</strong> SP+ and ESPN's FPI are converted to z-scores and averaged (the "computers").
-        That is blended with the AP poll's vote points (the "humans"). The poll's weight grows from 25% in
-        week 5 to 40% by week 12. The result is shown in points, so the difference between two teams is a
-        predicted margin before home field.</p>
+      <p><strong>Rating.</strong> Four computer ratings are converted to z-scores and combined: ESPN's SP+ and
+        FPI (two-thirds of the weight), plus Elo and our own margin rating (one-third). The last two are
+        recalculated from every game played, so the rating reacts to last weekend even when our data source
+        is behind on SP+ and FPI. The computers are then blended with the AP poll's vote points (the
+        "humans"). The poll's weight grows from 25% in week 5 to 40% by week 12. The result is shown in
+        points, so the difference between two teams is a predicted margin before home field.</p>
       <p><strong>Playoff selection.</strong> Once the committee releases its rankings, they replace the AP poll at a 50%
         weight, but only for predicting who the committee picks. Game predictions keep using the AP.</p>
       <p><strong>Odds.</strong> Every remaining game, each conference title game and the 12-team selection are simulated

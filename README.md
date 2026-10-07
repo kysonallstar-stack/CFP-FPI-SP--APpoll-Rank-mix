@@ -4,14 +4,24 @@ A weekly college football ranking that blends computer ratings (SP+ and ESPN's
 FPI) with the AP poll, plus 12-team playoff odds from 10,000 simulated seasons.
 
 **Site:** https://kysonallstar-stack.github.io/CFP-FPI-SP--APpoll-Rank-mix/
-(updates Sunday 1:00 p.m. Mountain, an hour after the AP poll, and again Wednesday
-10:00 to pick up the committee's Tuesday-night rankings; takes the offseason off)
+(updates Sunday 1:00 p.m. Mountain, an hour after the AP poll, and checks every
+morning for anything new; takes the offseason off)
 
 ## The method, in plain language
 
-**1. The computers.** SP+ and FPI each rate every FBS team in points. We
-convert each to a z-score (how many standard deviations above or below
-average) and average the two.
+**1. The computers.** Four ratings, each converted to a z-score (how many
+standard deviations above or below average) and combined:
+- **SP+** and **FPI** from ESPN, weight 1.0 each. These are the strongest
+  systems, but our data source (CollegeFootballData) can run a week or more
+  behind ESPN on them.
+- **Elo** (from CollegeFootballData) and **our own margin rating**, weight 0.5
+  each. Both are recalculated from every game played, so they are always
+  current. The margin rating is a standard "who beat whom by how much" fit,
+  with blowouts capped at 28 points; it's used from week 4 on.
+
+So two-thirds of the computer side is ESPN's ratings and one-third always
+reflects last weekend. When SP+ or FPI is out of date, the site footer says
+which week it's from.
 
 **2. The humans.** The AP poll's vote points are put on the same scale, so the
 gaps between teams match the gaps in votes, not just the rank order. The AP only
@@ -102,9 +112,13 @@ be late. So:
 - A week's *games* are frozen once they're final, but its *polls* are
   re-downloaded on every run (one API call covers the whole season). A late
   poll is picked up by the next run.
-- There are two runs a week: Sunday at 1:00 p.m. Mountain, an hour after the AP
-  poll (new games and the poll), and Wednesday (the committee's Tuesday
-  rankings, plus anything late).
+- ESPN publishes SP+ on Sunday mornings (about 10:45 a.m. Eastern) and updates
+  FPI daily, but CollegeFootballData picks them up on no fixed schedule. In
+  early October 2026 it was more than three days behind. Each time its numbers
+  change, the date is logged in `data/raw/<season>/source_updates.json`.
+- The job runs Sunday at 1:00 p.m. Mountain, an hour after the AP poll, and
+  again every morning at 10:00. If nothing new was downloaded, nothing is
+  published and no notification is sent.
 - Until a poll is released, the site uses the most recent one and says so in
   the footer, e.g. "CFP rankings is from week 9 (this week's isn't out yet)".
 - The latest SP+/FPI snapshot is re-taken on each run until the next week
@@ -129,6 +143,10 @@ be late. So:
   as "what usually happens", not a prediction of the committee's thinking.
 - **Injuries aren't modeled**, especially quarterback injuries. A team that
   loses its starting QB keeps its rating until its results drag it down.
+- **Elo and the margin rating favor unbeaten teams with weak schedules** more
+  than SP+ does, which lifts some Group of 6 teams. On week-5 games they made
+  predictions slightly worse (average miss 12.0 vs 11.7 points) in a week when
+  SP+/FPI were fresh; they earn their place in the weeks SP+/FPI are stale.
 - **Simplified tiebreakers.** Conference ties are broken by record among the
   tied teams, then record against common opponents, then rating. Real
   tiebreakers go further (opponents' records, the ACC's new "body of work"
@@ -190,7 +208,7 @@ src/site.py            builds site/data.json
 src/pipeline.py        runs all of the above (what the weekly job runs)
 src/notify.py          phone push notification when the numbers change
 site/                  the static page (HTML/CSS/JS, no framework)
-.github/workflows/update.yml   Sunday + Wednesday job: pipeline -> commit -> deploy to Pages
+.github/workflows/update.yml   Sunday + daily job: pipeline -> commit -> deploy to Pages
 site/sim.js            browser copy of the simulator (the What-if tab)
 ```
 
@@ -199,7 +217,7 @@ site/sim.js            browser copy of the simulator (the What-if tab)
 1. Add the API key as a repository secret named `CFBD_API_KEY` (Settings → Secrets
    and variables → Actions). It's never stored in the code.
 2. Set GitHub Pages to deploy from GitHub Actions (Settings → Pages → Source).
-3. The workflow then runs every Sunday and Wednesday, and also on demand from
+3. The workflow then runs every Sunday afternoon and every morning, and also on demand from
    the Actions tab ("Run workflow").
 
 ### Phone notifications
