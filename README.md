@@ -4,8 +4,8 @@ A weekly college football ranking that blends computer ratings (SP+ and ESPN's
 FPI) with the AP poll, plus 12-team playoff odds from 10,000 simulated seasons.
 
 **Site:** https://kysonallstar-stack.github.io/CFP-FPI-SP--APpoll-Rank-mix/
-(updates Sunday 1:00 p.m. Mountain, an hour after the AP poll, and checks every
-morning for anything new; takes the offseason off)
+(updates Sunday 1:00 p.m. Mountain, an hour after the AP poll, with follow-up
+checks Monday and Wednesday mornings; takes the offseason off)
 
 ## The method, in plain language
 
@@ -120,9 +120,10 @@ be late. So:
   ESPN. CollegeFootballData's copies arrive on no fixed schedule (more than
   three days behind in early October 2026); each time they change, the date is
   logged in `data/raw/<season>/source_updates.json`.
-- The job runs Sunday at 1:00 p.m. Mountain, an hour after the AP poll, and
-  again every morning at 10:00. If nothing new was downloaded, nothing is
-  published and no notification is sent.
+- The job runs Sunday at 1:00 p.m. Mountain, an hour after the AP poll, with
+  follow-up checks Monday and Wednesday at 10:00 (anything late or failed, and
+  the committee's Tuesday rankings). If nothing new was downloaded, nothing is
+  published.
 - Until a poll is released, the site uses the most recent one and says so in
   the footer, e.g. "CFP rankings is from week 9 (this week's isn't out yet)".
 - The latest SP+/FPI snapshot is re-taken on each run until the next week
@@ -218,7 +219,7 @@ src/site.py            builds site/data.json
 src/pipeline.py        runs all of the above (what the weekly job runs)
 src/notify.py          phone push notification when the numbers change
 site/                  the static page (HTML/CSS/JS, no framework)
-.github/workflows/update.yml   Sunday + daily job: pipeline -> commit -> deploy to Pages
+.github/workflows/update.yml   Sun/Mon/Wed job: pipeline -> commit -> deploy to Pages
 site/sim.js            browser copy of the simulator (the What-if tab)
 ```
 
@@ -227,15 +228,23 @@ site/sim.js            browser copy of the simulator (the What-if tab)
 1. Add the API key as a repository secret named `CFBD_API_KEY` (Settings → Secrets
    and variables → Actions). It's never stored in the code.
 2. Set GitHub Pages to deploy from GitHub Actions (Settings → Pages → Source).
-3. The workflow then runs every Sunday afternoon and every morning, and also on demand from
+3. The workflow then runs Sunday afternoon plus Monday and Wednesday mornings, and also on demand from
    the Actions tab ("Run workflow").
 
 ### Phone notifications
 
-After each update that changes the numbers, the workflow sends a push
-notification through [ntfy](https://ntfy.sh): the week, the top playoff odds,
-the biggest movers, the game of the week, and any poll still being waited on.
-Tapping it opens the site. Runs where nothing changed send nothing.
+The workflow sends a push notification through [ntfy](https://ntfy.sh) only
+when something worth knowing changed:
+- a new week of results;
+- a new AP poll or new CFP rankings;
+- an input that had been out of date catching up (for example SP+ arriving late);
+- the playoff field being set;
+- a real move in the rankings: a top-25 team moving two or more places, or any
+  team's playoff odds moving five points or more.
+
+Smaller day-to-day drift updates the site without a notification. The message
+has the reason, the top playoff odds, the biggest movers, the game of the
+week, and anything still out of date. Tapping it opens the site.
 
 1. Install the free ntfy app (iOS or Android).
 2. Subscribe to the topic stored in the `NTFY_TOPIC` repository secret.

@@ -2,8 +2,10 @@
 
 Compares the new site/data.json with the previous version and sends a short
 summary: the week, top playoff odds, the biggest movers, and anything still
-waiting on a poll. Sends nothing if the numbers didn't change (e.g. a Wednesday
-run in September, before committee rankings exist).
+waiting on a poll. Sends nothing unless something worth
+knowing changed: a new week, a new AP poll or CFP ranking, an input that had
+been out of date catching up, the playoff field being set, or a real move in
+the rankings (see reasons()). Small drift updates the site without a ping.
 
 The ntfy topic works like a password (anyone who knows it can read or post),
 so it comes from the NTFY_TOPIC environment variable / repo secret.
@@ -35,10 +37,39 @@ def load_prev(ref: str) -> dict | None:
         return None
 
 
-def fingerprint(d: dict) -> tuple:
-    """What counts as 'something changed' for a notification."""
-    return (d["season"], d["week"], tuple(sorted(d.get("stale", {}).items())),
-            tuple((t["id"], t["rank"], t["p_playoff"], t["cfp"], t["ap"]) for t in d["teams"]))
+# What's worth a notification. Small day-to-day drift (FPI changes a little
+# every day) updates the site quietly; these are the thresholds for "it moved".
+MIN_RANK_MOVE = 2       # a top-25 team moving at least this many places in the blend
+MIN_ODDS_MOVE = 0.05    # any team's playoff odds moving at least 5 points
+TOP_N = 25
+
+
+def reasons(new: dict, prev: dict | None) -> list[str]:
+    """Why this update deserves a notification (empty list = stay quiet)."""
+    if not prev or prev["season"] != new["season"]:
+        return [f"Week {new['week']} update"]
+    out = []
+    if prev["week"] != new["week"]:
+        out.append(f"Week {new['week']} update")
+    if new.get("final_field") and not prev.get("final_field"):
+        out.append("The playoff field is set")
+    old = {t["id"]: t for t in prev["teams"]}
+    changed = lambda key: any(t.get(key) != old.get(t["id"], {}).get(key) for t in new["teams"])
+    if changed("cfp"):
+        out.append("New CFP rankings")
+    if changed("ap") or changed("ap_pts"):
+        out.append("New AP poll")
+    # An input that was out of date last time and is current now (e.g. SP+ arrived).
+    caught_up = [LABEL.get(k, k) for k in (prev.get("stale") or {}) if k not in (new.get("stale") or {})]
+    if caught_up:
+        out.append(" and ".join(caught_up) + " updated")
+    if not out:
+        moved = [t for t in new["teams"] if t["id"] in old and
+                 (min(t["rank"], old[t["id"]]["rank"]) <= TOP_N and abs(t["rank"] - old[t["id"]]["rank"]) >= MIN_RANK_MOVE
+                  or abs(t["p_playoff"] - old[t["id"]]["p_playoff"]) >= MIN_ODDS_MOVE)]
+        if moved:
+            out.append("Rankings changed")
+    return out
 
 
 def pct(p: float) -> str:
@@ -46,20 +77,17 @@ def pct(p: float) -> str:
 
 
 def build_message(new: dict, prev: dict | None) -> tuple[str, str] | None:
-    if prev and fingerprint(prev) == fingerprint(new):
+    why = reasons(new, prev)
+    if not why:
         return None
-    new_week = not prev or prev["week"] != new["week"] or prev["season"] != new["season"]
-    got_cfp = bool(prev) and not new_week and any(t["cfp"] for t in new["teams"]) and \
-        [t["cfp"] for t in new["teams"]] != [t["cfp"] for t in prev["teams"]]
-    if new_week:
-        title = f"CFB Blend: week {new['week']} update"
-    elif got_cfp:
-        title = "CFB Blend: new CFP rankings"
-    else:
-        title = "CFB Blend: rankings updated"
+    head = why[0]
+    if head[1:2].islower():                 # "Week 6 update" -> "week 6 update"; leave "SP+ updated" alone
+        head = head[0].lower() + head[1:]
+    title = "CFB Blend: " + head
+    lines = ["Also: " + ", ".join(why[1:])] if len(why) > 1 else []
 
     top = sorted(new["teams"], key=lambda t: -t["p_playoff"])[:5]
-    lines = ["Playoff odds: " + ", ".join(f"{t['name']} {pct(t['p_playoff'])}" for t in top)]
+    lines.append("Playoff odds: " + ", ".join(f"{t['name']} {pct(t['p_playoff'])}" for t in top))
 
     if prev and prev["season"] == new["season"]:
         before = {t["id"]: t["p_playoff"] for t in prev["teams"]}
@@ -73,7 +101,7 @@ def build_message(new: dict, prev: dict | None) -> tuple[str, str] | None:
         g = new["week_games"][0]          # sorted best matchup first
         lines.append(f"Game of the week: {g['away']} at {g['home']}")
     for k, wk in (new.get("stale") or {}).items():
-        lines.append(f"{LABEL.get(k, k)} still from week {wk}; re-checked every morning.")
+        lines.append(f"{LABEL.get(k, k)} still from week {wk}; it will be picked up when it's released.")
     return title, "\n".join(lines)
 
 
@@ -99,7 +127,7 @@ def main() -> None:
     else:
         msg = build_message(json.loads(DATA.read_text()), load_prev(args.prev_ref))
         if msg is None:
-            print("No changes since the previous data; not sending.")
+            print("Nothing worth a notification since the previous data; not sending.")
             return
 
     title, body = msg

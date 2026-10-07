@@ -8,12 +8,13 @@ on:
     # may start scheduled runs hours late when busy.
     - cron: "0 13 * * 0"
       timezone: "America/Denver"
-    # Every day at 10:00: picks up whatever arrived since -- CFBD's SP+/FPI (which
-    # lag ESPN by an unpredictable number of days), CFP rankings (Tuesday nights
-    # in Nov/Dec), a late poll. If nothing in data/raw changed, nothing is
-    # committed, deployed or notified. In the offseason (Feb-Jul) the pipeline
-    # exits right away.
-    - cron: "0 10 * * *"
+    # Monday and Wednesday at 10:00: follow-up checks. Monday catches anything
+    # that was late or failed on Sunday; Wednesday picks up CFP rankings
+    # (released Tuesday nights in Nov/Dec). If nothing in data/raw changed,
+    # nothing is committed or deployed; a notification is sent only when
+    # something worth knowing changed (see src/notify.py). In the offseason
+    # (Feb-Jul) the pipeline exits right away.
+    - cron: "0 10 * * 1,3"
       timezone: "America/Denver"
   workflow_dispatch:        # "Run workflow" button on the Actions tab
   push:                     # redeploy (without refetching) when the page code changes
