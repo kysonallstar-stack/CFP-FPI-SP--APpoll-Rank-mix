@@ -14,6 +14,8 @@ function pct(p) {
   return Math.round(p * 100) + "%";
 }
 const dash = (v) => (v == null ? "–" : v);
+// AP column: rank, "RV" for teams receiving votes outside the Top 25, or a dash.
+const apTag = (t) => (t.ap ? t.ap : t.ap_pts ? `<span class="dim" title="Receiving votes: ${t.ap_pts} points">RV</span>` : "–");
 // Week-over-week change. Rank: ▲ = moved up. Rating: signed points.
 function moveTag(d) {
   if (d == null) return `<span class="dim">–</span>`;
@@ -75,7 +77,7 @@ function renderRankings() {
       <td class="num">${pct(t.p_conf)}</td>
       <td class="num">${t.rating.toFixed(1)}</td>
       <td class="num">${ratingTag(t.d_rating)}</td>
-      <td class="num ${t.ap ? "" : "dim"}">${dash(t.ap)}</td>
+      <td class="num ${t.ap ? "" : "dim"}">${apTag(t)}</td>
       <td class="num cfp-col" ${hasCfp ? "" : "hidden"}>${dash(t.cfp)}</td>
       <td class="num">${dash(t.sp)}</td>
       <td class="num">${dash(t.fpi)}</td>
@@ -168,7 +170,7 @@ function renderDisagree() {
     const t = state.byId.get(id);
     const h = human === "CFP" ? t.cfp : t.ap;
     return `<li data-id="${id}"><span><b>${esc(t.name)}</b> <span class="dim">${rec(t)}</span></span>
-      <span class="ranks">Computers #${t.metrics} · ${human} ${h ? "#" + h : "unranked"}</span></li>`;
+      <span class="ranks">Computers #${t.metrics} · ${human} ${h ? "#" + h : human === "AP" && t.ap_pts ? "receiving votes" : "unranked"}</span></li>`;
   };
   $("#poll-higher").innerHTML = d.disagree.poll_higher.map(item).join("") || "<li>None</li>";
   $("#metrics-higher").innerHTML = d.disagree.metrics_higher.map(item).join("") || "<li>None</li>";
@@ -224,7 +226,7 @@ function renderTeam(id) {
     <h3>Where each source ranks them</h3>
     <div class="stats">
       <div class="stat"><b>#${t.rank}</b><span>Blend</span></div>
-      <div class="stat"><b>${t.ap ? "#" + t.ap : "–"}</b><span>AP</span></div>
+      <div class="stat"><b>${t.ap ? "#" + t.ap : t.ap_pts ? "RV" : "–"}</b><span>AP${t.ap_pts ? ` · ${Math.round(t.ap_pts)} pts` : ""}</span></div>
       ${cfp}
       <div class="stat"><b>${t.sp ? "#" + t.sp : "–"}</b><span>SP+</span></div>
       <div class="stat"><b>${t.fpi ? "#" + t.fpi : "–"}</b><span>FPI</span></div>

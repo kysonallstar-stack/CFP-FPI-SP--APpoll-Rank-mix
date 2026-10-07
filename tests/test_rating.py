@@ -111,3 +111,12 @@ def test_srs_is_added_only_from_the_configured_week():
     assert "srs" not in with_srs(wd, cfg)["ratings"]
     out = with_srs({**wd, "week": 4}, cfg)
     assert out["ratings"]["srs"]["1"] > out["ratings"]["srs"]["2"]
+
+
+def test_teams_receiving_votes_keep_points_but_count_as_unranked():
+    ap = [{"id": 1, "rank": 1, "points": 100}, {"id": 2, "rank": 2, "points": 60}, {"id": 5, "rank": None, "points": 20}]
+    out = blend_week(week(ap=ap), CFG)
+    row = {t["team"]: t for t in out["teams"]}
+    assert row["T5"]["ap_rank"] is None and row["T5"]["ap_points"] == 20
+    assert row["T6"]["ap_points"] is None
+    assert row["T5"]["poll_z"] > row["T6"]["poll_z"]        # votes count for something

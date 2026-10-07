@@ -7,12 +7,13 @@ import argparse
 import json
 import logging
 
-from src import site
+from src import espn, site
 from src.cfbd import CFBDClient
 from src.config import load_config, repo_path
 from src.fetch import fetch_season
 from src.normalize import normalize_season
 from src.rating import write_outputs
+from src.teams import TeamRegistry
 
 log = logging.getLogger(__name__)
 
@@ -37,6 +38,12 @@ def main() -> None:
             log.info("Nothing to fetch yet: %s", e)
             return
         log.info("fetch: %d week(s) updated, %d API call(s)", len(summary["fetched"]), client.calls)
+        if cfg.get("espn", {}).get("enabled") and summary["latest_week"] is not None:
+            raw_root = repo_path(cfg["paths"]["raw"])
+            reg = TeamRegistry.from_files(json.loads((raw_root / str(args.season) / "teams_fbs.json").read_text()),
+                                          repo_path(cfg["paths"]["aliases"]))
+            saved = espn.snapshot(args.season, raw_root, summary["latest_week"], reg, cfg)
+            log.info("ESPN: saved %s", ", ".join(saved) or "nothing")
 
     raw = repo_path(cfg["paths"]["raw"]) / str(args.season)
     if not any(raw.glob("week_*")):

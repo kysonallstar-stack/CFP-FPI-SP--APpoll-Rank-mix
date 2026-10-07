@@ -12,8 +12,10 @@ morning for anything new; takes the offseason off)
 **1. The computers.** Four ratings, each converted to a z-score (how many
 standard deviations above or below average) and combined:
 - **SP+** and **FPI** from ESPN, weight 1.0 each. These are the strongest
-  systems, but our data source (CollegeFootballData) can run a week or more
-  behind ESPN on them.
+  systems. They're read straight from ESPN (SP+ from Bill Connelly's weekly
+  article, FPI from ESPN's data feed), because CollegeFootballData can run a
+  week or more behind on them. If ESPN can't be read, CollegeFootballData's
+  copy is used instead.
 - **Elo** (from CollegeFootballData) and **our own margin rating**, weight 0.5
   each. Both are recalculated from every game played, so they are always
   current. The margin rating is a standard "who beat whom by how much" fit,
@@ -24,9 +26,10 @@ reflects last weekend. When SP+ or FPI is out of date, the site footer says
 which week it's from.
 
 **2. The humans.** The AP poll's vote points are put on the same scale, so the
-gaps between teams match the gaps in votes, not just the rank order. The AP only
-publishes its Top 25, so every other team is treated as "no better than one
-step below #25". Being unranked can pull a good team down on the poll side,
+gaps between teams match the gaps in votes, not just the rank order. That
+includes teams "receiving votes" outside the Top 25 (shown as RV). Every team
+with no votes is treated as "no better than one step below the last
+vote-getter". Being unranked can pull a good team down on the poll side,
 but it never pulls a bad team *up*.
 
 **3. The blend.** `blend = (1 - w) × computers + w × poll`. The poll's weight
@@ -112,10 +115,11 @@ be late. So:
 - A week's *games* are frozen once they're final, but its *polls* are
   re-downloaded on every run (one API call covers the whole season). A late
   poll is picked up by the next run.
-- ESPN publishes SP+ on Sunday mornings (about 10:45 a.m. Eastern) and updates
-  FPI daily, but CollegeFootballData picks them up on no fixed schedule. In
-  early October 2026 it was more than three days behind. Each time its numbers
-  change, the date is logged in `data/raw/<season>/source_updates.json`.
+- ESPN publishes SP+ on Sunday mornings (about 10:45 a.m. Eastern), updates FPI
+  daily, and posts the AP poll Sunday afternoon, so all three are read from
+  ESPN. CollegeFootballData's copies arrive on no fixed schedule (more than
+  three days behind in early October 2026); each time they change, the date is
+  logged in `data/raw/<season>/source_updates.json`.
 - The job runs Sunday at 1:00 p.m. Mountain, an hour after the AP poll, and
   again every morning at 10:00. If nothing new was downloaded, nothing is
   published and no notification is sent.
@@ -154,7 +158,12 @@ be late. So:
 - **Data gaps.**
   - The data source (CollegeFootballData) only serves current SP+ and FPI
     values, so this project saves a weekly snapshot starting with 2026 week 4.
-  - The AP data only includes the Top 25 (no "others receiving votes").
+  - SP+, FPI and the AP poll come from ESPN pages and feeds that aren't official
+    data products and can change without notice. Each one falls back to
+    CollegeFootballData (older SP+/FPI, Top 25 only) if it can't be read, and
+    the pipeline logs a warning.
+  - ESPN's SP+ article gets a new web address each season; add it to
+    `espn.sp_article` in `config.yaml`.
   - Committee rankings have no points, so rank *r* is treated as 26 − *r*.
   - The Pac-12's "flex week" games are stand-ins against a generic opponent
     until the real matchups are scheduled.
@@ -201,6 +210,7 @@ config/team_aliases.yaml   extra team-name spellings for matching
 src/fetch.py           API download + cache       data/raw/<season>/week_<n>/
 src/normalize.py       clean per-week files       data/processed/<season>/week_<n>.json
 src/teams.py           one team ID across all sources
+src/espn.py            SP+, FPI and polls straight from ESPN (optional, falls back to CFBD)
 src/rating.py          the blend
 src/sim.py             game odds + season simulation
 src/backtest.py        historical accuracy and tuning
@@ -232,5 +242,6 @@ Tapping it opens the site. Runs where nothing changed send nothing.
    The topic name works like a password, so keep it private.
 3. Test it with `NTFY_TOPIC=<topic> python -m src.notify --test`.
 
-Data from [CollegeFootballData.com](https://collegefootballdata.com). Not
+Data from [CollegeFootballData.com](https://collegefootballdata.com) (games,
+schedule, Elo) and ESPN (SP+ by Bill Connelly, FPI, AP poll). Not
 affiliated with the College Football Playoff, the AP or ESPN.

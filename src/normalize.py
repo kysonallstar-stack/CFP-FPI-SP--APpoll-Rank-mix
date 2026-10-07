@@ -70,11 +70,34 @@ def _ratings(rows: list[dict], field, reg: TeamRegistry, source: str) -> dict[in
     return out
 
 
+# key -> (CFBD file, how to read a value from a CFBD row, ESPN file, value field in an ESPN team entry)
 RATING_SOURCES = {
-    "sp": ("sp.json", lambda r: r.get("rating")),
-    "fpi": ("fpi.json", lambda r: r.get("fpi")),
-    "elo": ("elo.json", lambda r: r.get("elo")),
+    "sp": ("sp.json", lambda r: r.get("rating"), "espn_sp.json", "rating"),
+    "fpi": ("fpi.json", lambda r: r.get("fpi"), "espn_fpi.json", "fpi"),
+    "elo": ("elo.json", lambda r: r.get("elo"), None, None),
 }
+
+
+def _load_rating(wdir: Path, key: str, reg: TeamRegistry) -> tuple[dict[int, float], str] | None:
+    """One week's snapshot of a rating as ({team id: value}, origin). ESPN's copy
+    (fresher) wins when it exists; otherwise CFBD's."""
+    cfbd_file, field, espn_file, espn_field = RATING_SOURCES[key]
+    espn = _read(wdir / espn_file) if espn_file else None
+    if espn and espn.get("teams"):
+        return {t["id"]: t[espn_field] for t in espn["teams"]}, "espn"
+    rows = _read(wdir / cfbd_file)
+    if rows:
+        return _ratings(rows, field, reg, key), "cfbd"
+    return None
+
+
+def _load_poll(wdir: Path, key: str, cfbd_name: str, reg: TeamRegistry) -> tuple[list[dict], str] | None:
+    """One week's poll. ESPN's AP includes others receiving votes (rank None)."""
+    espn = _read(wdir / "espn_polls.json")
+    if espn and espn.get(key):
+        return espn[key], "espn"
+    p = _poll(_read(wdir / "polls.json") or [], cfbd_name, reg)
+    return (p, "cfbd") if p is not None else None
 
 
 def build_week(season_dir: Path, n: int, reg: TeamRegistry, cfg: dict) -> dict:
@@ -100,34 +123,35 @@ def build_week(season_dir: Path, n: int, reg: TeamRegistry, cfg: dict) -> dict:
     schedule = _read(season_dir / "schedule.json") or []
     remaining = [_game(g, reg, hide_score=True) for g in schedule if g["week"] > n]
 
-    ratings = {}
-    for key, (fname, field) in RATING_SOURCES.items():
-        k, rows = latest_file(fname)
-        # A snapshot can be fresh on disk but unchanged at the source (CFBD doesn't
-        # always update SP+/FPI every week). If it's identical to earlier weeks'
-        # snapshots, report the week the numbers really date from.
-        if rows is not None:
-            values = lambda rs: {r["team"]: field(r) for r in rs}
+    ratings, origins = {}, {}
+    for key in RATING_SOURCES:
+        ratings[key], sources[key] = {}, None
+        for k in range(n, -1, -1):            # newest snapshot at or before week n (never look ahead)
+            found = _load_rating(wdirs[k], key, reg)
+            if not found:
+                continue
+            ratings[key], origins[key] = found
+            # A snapshot can be fresh on disk but unchanged at the source. If it's
+            # identical to earlier weeks' snapshots, report the week the numbers
+            # really date from.
             while k > 0:
-                prev = _read(wdirs[k - 1] / fname)
-                if not prev or values(prev) != values(rows):
+                prev = _load_rating(wdirs[k - 1], key, reg)
+                if not prev or prev[0] != ratings[key]:
                     break
                 k -= 1
-        sources[key] = k
-        if rows is None:
+            sources[key] = k
+            break
+        if sources[key] is None:
             missing.append(key)
-            ratings[key] = {}
-        else:
-            ratings[key] = _ratings(rows, field, reg, key)
 
     polls = {}
     for key in ("ap", "cfp"):
-        name = cfg["polls"][key]
         polls[key], sources[key] = None, None
         for k in range(n, -1, -1):
-            p = _poll(_read(wdirs[k] / "polls.json") or [], name, reg)
-            if p is not None:
-                polls[key], sources[key] = p, k
+            found = _load_poll(wdirs[k], key, cfg["polls"][key], reg)
+            if found:
+                polls[key], origins[key] = found
+                sources[key] = k
                 break
         if polls[key] is None and key == "ap":
             missing.append("ap")
@@ -142,6 +166,7 @@ def build_week(season_dir: Path, n: int, reg: TeamRegistry, cfg: dict) -> dict:
         "games_completed": [g for g in completed if g["completed"]],
         "games_remaining": remaining + [g for g in completed if not g["completed"]],
         "sources": sources,   # week each input came from (None = unavailable)
+        "origins": origins,   # which provider each input came from: "espn" or "cfbd"
         # Inputs carried forward from an earlier week because this week's hasn't
         # been released yet (e.g. Monday, before Tuesday's CFP rankings).
         "stale": {k: w for k, w in sources.items() if w is not None and w < n},

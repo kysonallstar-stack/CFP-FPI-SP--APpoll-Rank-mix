@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 1,
- "generated_at": "2026-10-07T19:29:17+00:00",
+ "generated_at": "2026-10-07T19:36:11+00:00",
  "teams": [
   {
    "id": 2005,
@@ -18427,6 +18427,10 @@
   "elo": 1,
   "ap": 1,
   "cfp": null
+ },
+ "origins": {
+  "elo": "cfbd",
+  "ap": "cfbd"
  },
  "stale": {},
  "missing": [

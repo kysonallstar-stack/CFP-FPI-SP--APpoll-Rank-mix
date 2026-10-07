@@ -113,7 +113,7 @@ def poll_points(week_data: dict, use_cfp: bool) -> tuple[dict, str | None]:
     """Points per ranked team. CFP rankings have no points, so rank r becomes 26 - r."""
     polls = week_data["polls"]
     if use_cfp and polls.get("cfp"):
-        return {str(p["id"]): 26 - p["rank"] for p in polls["cfp"]}, "cfp"
+        return {str(p["id"]): 26 - p["rank"] for p in polls["cfp"] if p.get("rank")}, "cfp"
     if polls.get("ap"):
         return {str(p["id"]): p["points"] for p in polls["ap"]}, "ap"
     return {}, None
@@ -200,9 +200,10 @@ def blend_week(week_data: dict, cfg: dict, method: str | None = None) -> dict:
     src_ranks = {s: _ranks({t: v for t, v in (ratings.get(s) or {}).items() if t in metrics})
                  for s in ("sp", "fpi", "elo", "srs")}
     # Disagreement is measured against the committee once it ranks teams, else the AP.
-    poll_rank = {str(p["id"]): p["rank"] for p in (week_data["polls"].get(sel_src) or [])} if sel_src else {}
-    ap_rank = {str(p["id"]): p["rank"] for p in (week_data["polls"].get("ap") or [])}
-    cfp_rank = {str(p["id"]): p["rank"] for p in (week_data["polls"].get("cfp") or [])}
+    # Teams "receiving votes" have points but no rank; they count as unranked here.
+    ranked = lambda key: {str(p["id"]): p["rank"] for p in (week_data["polls"].get(key) or []) if p.get("rank")}
+    poll_rank = ranked(sel_src) if sel_src else {}
+    ap_rank, cfp_rank = ranked("ap"), ranked("cfp")
     blend_rank, metrics_rank, sel_rank = _ranks(blend), _ranks(metrics), _ranks(sel)
 
     rows = []

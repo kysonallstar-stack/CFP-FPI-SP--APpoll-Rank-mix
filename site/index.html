@@ -114,7 +114,7 @@
         FPI (two-thirds of the weight), plus Elo and our own margin rating (one-third). The last two are
         recalculated from every game played, so the rating reacts to last weekend even when our data source
         is behind on SP+ and FPI. The computers are then blended with the AP poll's vote points (the
-        "humans"). The poll's weight grows from 25% in week 5 to 40% by week 12. The result is shown in
+        "humans"), including teams receiving votes outside the Top 25. The poll's weight grows from 25% in week 5 to 40% by week 12. The result is shown in
         points, so the difference between two teams is a predicted margin before home field.</p>
       <p><strong>Playoff selection.</strong> Once the committee releases its rankings, they replace the AP poll at a 50%
         weight, but only for predicting who the committee picks. Game predictions keep using the AP.</p>
@@ -141,7 +141,9 @@
 
   <footer class="wrap foot">
     <p id="updated"></p>
-    <p>Data: <a href="https://collegefootballdata.com">CollegeFootballData.com</a>. Not affiliated with the CFP, AP or ESPN.</p>
+    <p>Data: <a href="https://collegefootballdata.com">CollegeFootballData.com</a> (games, schedule, Elo) and
+      <a href="https://www.espn.com/college-football/">ESPN</a> (SP+ by Bill Connelly, FPI, AP poll).
+      Not affiliated with the CFP, AP or ESPN.</p>
   </footer>
 
   <script src="sim.js?v=__BUILD__"></script>

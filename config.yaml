@@ -26,6 +26,22 @@ fetch:
   # Tuesday, either can be late).
   games_grace_days: 2
 
+# Fresher SP+, FPI and polls straight from ESPN (see src/espn.py). Unofficial
+# sources: if any of them fails or looks wrong, that input falls back to CFBD.
+espn:
+  enabled: true
+  user_agent: "cfb-blend (personal project; github.com/kysonallstar-stack/CFP-FPI-SP--APpoll-Rank-mix)"
+  timeout_seconds: 30
+  rankings_url: https://site.api.espn.com/apis/site/v2/sports/football/college-football/rankings
+  fpi_url: https://site.web.api.espn.com/apis/fitt/v3/sports/football/college-football/powerindex?region=us&lang=en&limit=200
+  # Bill Connelly's SP+ article, updated in place every Sunday morning. It gets
+  # a new address each season: add next year's here (until then CFBD's SP+ is used).
+  sp_article:
+    2026: https://www.espn.com/college-football/story/_/id/49868647/2026-college-football-sp+-rankings-all-138-fbs-teams
+  # Names in that article that mean something else in CFBD's alias list.
+  sp_name_overrides:
+    KSU: Kennesaw State        # CFBD lists "KSU" as Kansas State
+
 polls:
   ap: AP Top 25
   cfp: Playoff Committee Rankings
