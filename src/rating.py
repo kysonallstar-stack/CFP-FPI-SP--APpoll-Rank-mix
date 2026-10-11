@@ -78,6 +78,55 @@ def srs(games: list, team_ids: list, hfa: float, lam: float, cap: float) -> dict
     return {t: float(r[i]) for t, i in idx.items()}
 
 
+def scoring(games: list, team_ids: list, hfa: float, lam: float) -> dict:
+    """How many points games involving each team tend to have, for expected scores.
+
+    Each side's points ~ average + offense(scorer) - defense(opponent) +- HFA/2,
+    ridge-fitted to every game played so far (same idea as srs, on points instead
+    of margins; all FCS teams share one offense and one defense). Returns
+    {"avg": league points per team per game, "off": {id: pts}, "def": {id: pts}},
+    where a positive defense means fewer points allowed. Only the expected TOTAL
+    is taken from this; the margin still comes from the blended rating.
+    """
+    idx = {t: i for i, t in enumerate(team_ids)}
+    n = len(team_ids) + 1                      # last slot = any FCS team
+    rows, y = [], []
+    for g in games:
+        h = idx.get(str(g["home_id"]), n - 1)
+        a = idx.get(str(g["away_id"]), n - 1)
+        if h == a:
+            continue
+        edge = 0.0 if g["neutral"] else hfa / 2
+        for scorer, opp, pts, e in ((h, a, g["home_points"], edge), (a, h, g["away_points"], -edge)):
+            x = np.zeros(2 * n)
+            x[scorer], x[n + opp] = 1.0, -1.0
+            rows.append(x)
+            y.append(pts - e)
+    if not rows:
+        return {"avg": None, "off": {}, "def": {}}
+    X, y = np.array(rows), np.array(y)
+    avg = float(y.mean())
+    r = np.linalg.solve(X.T @ X + lam * np.eye(2 * n), X.T @ (y - avg))
+    return {"avg": avg, "off": {t: float(r[i]) for t, i in idx.items()},
+            "def": {t: float(r[n + i]) for t, i in idx.items()},
+            "fcs_off": float(r[n - 1]), "fcs_def": float(r[2 * n - 1])}
+
+
+def expected_score(sc: dict, home_id, away_id, margin: float, default_avg: float) -> list[int]:
+    """[home, away] whole-number score: the total from `scoring`, split so the
+    gap equals the predicted margin (at least 1: no ties). The loser gets at
+    least 3 so lopsided games don't show a negative or zero score."""
+    avg = sc["avg"] if sc.get("avg") is not None else default_avg
+    def part(kind, t):
+        if t is None or not sc.get(kind):      # unscheduled placeholder opponent: average
+            return 0.0
+        return sc[kind].get(str(t), sc.get(f"fcs_{kind}", 0.0))
+    total = 2 * avg + part("off", home_id) - part("def", away_id) + part("off", away_id) - part("def", home_id)
+    gap = max(1, round(abs(margin)))
+    low = max(3, round((total - gap) / 2))
+    return [low + gap, low] if margin >= 0 else [low, low + gap]
+
+
 def with_srs(week_data: dict, cfg: dict) -> dict:
     """Copy of week_data with our margin rating added under ratings["srs"]
     (skipped before srs_min_week: too few games to mean anything)."""

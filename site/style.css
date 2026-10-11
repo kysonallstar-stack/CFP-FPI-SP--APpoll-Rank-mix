@@ -115,6 +115,9 @@ tbody tr:hover td, tbody tr:focus-within td { background: var(--accent-soft); }
 .matchup .who a { color: inherit; text-decoration: none; }
 .matchup .rk { color: var(--muted); font-weight: 400; font-size: 13px; }
 .matchup .pr { font-variant-numeric: tabular-nums; font-weight: 700; text-align: right; }
+/* Expected score beside a win chance */
+.xs { color: var(--muted); font-weight: 400; font-size: 13px; font-variant-numeric: tabular-nums; }
+.matchup .xs { margin-right: 10px; }
 .probbar { height: 6px; border-radius: 3px; background: var(--bar); margin: 8px 0 6px; overflow: hidden; }
 .probbar span { display: block; height: 100%; background: var(--accent-fill); }
 .meta { font-size: 13px; color: var(--muted); }

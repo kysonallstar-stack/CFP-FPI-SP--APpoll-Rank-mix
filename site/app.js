@@ -91,12 +91,14 @@ function gameCard(g, extra) {
   const fav = g.predicted_margin >= 0 ? g.home : g.away;
   const where = g.neutral ? "neutral site" : `at ${esc(g.home)}`;
   const aid = state.byId.has(g.away_id) ? g.away_id : null, hid = state.byId.has(g.home_id) ? g.home_id : null;
+  // Expected score [home, away], shown beside each side's win chance.
+  const xs = (i) => g.expected_score ? `<span class="xs" title="Expected score">${g.expected_score[i]}</span>` : "";
   return `<div class="card">
     <div class="matchup">
       <span class="who">${teamLink(aid, g.away)} <span class="rk">${aid ? rankTag(aid) : ""}</span></span>
-      <span class="pr">${pct(1 - hp)}</span>
+      <span class="pr">${xs(1)}${pct(1 - hp)}</span>
       <span class="who">${g.neutral ? "vs" : "@"} ${teamLink(hid, g.home)} <span class="rk">${hid ? rankTag(hid) : ""}</span></span>
-      <span class="pr">${pct(hp)}</span>
+      <span class="pr">${xs(0)}${pct(hp)}</span>
     </div>
     <div class="probbar" aria-hidden="true"><span style="width:${Math.round((1 - hp) * 100)}%"></span></div>
     <div class="meta">${esc(fav)} by ${Math.abs(g.predicted_margin).toFixed(1)} · ${where}${g.start ? " · " + fmtDate(g.start) : ""}</div>
@@ -202,7 +204,8 @@ function renderTeam(id) {
       }
     } else {
       const p = home ? g.p : 1 - g.p;
-      res = `<span title="Win probability">${pct(p)}</span>`;
+      const score = g.xs ? ` <span class="xs" title="Expected score">${home ? g.xs[0] : g.xs[1]}-${home ? g.xs[1] : g.xs[0]}</span>` : "";
+      res = `<span title="Win probability">${pct(p)}</span>${score}`;
     }
     return `<li><span class="wk">Wk ${g.wk}</span>
       <span>${site} ${teamLink(oppId, opp)} ${state.byId.has(oppId) ? `<span class="dim">${rankTag(oppId)}</span>` : ""}${g.n ? ' <span class="dim">(N)</span>' : ""}</span>
@@ -240,7 +243,7 @@ function renderTeam(id) {
     <p class="note">The computer side changes inputs early in the season, so changes are only
       shown between weeks that used the same inputs. On finished games, the number in brackets is the
       final margin minus the margin the model predicted beforehand (points better or worse than expected).
-      Beating expectations is what pushes a rating up, even in a loss.</p>
+      Beating expectations is what pushes a rating up, even in a loss. Upcoming games show the chance of winning and the expected score.</p>
     <h3>Schedule</h3>
     <ul class="sched">${sched}</ul>
     ${state.data.whatif && games.some((g) => g.hp == null)

@@ -51,6 +51,12 @@ deviation of 16 points turns that into a win probability. Home field and the
 standard deviation were measured from 2025 games, and the 0.9 comes from the
 backtest.
 
+Each upcoming game also shows an expected score beside the win chances. The gap
+between the two numbers is the predicted margin; the total comes from a separate
+fit of how many points each team's games have had this season (offense and
+defense, adjusted for opponents). It is a typical score, not a prediction that
+the game lands exactly there.
+
 **6. The season simulation.** 10,000 times over, we:
 - play every remaining game;
 - set up each conference title game from the simulated standings (top two by

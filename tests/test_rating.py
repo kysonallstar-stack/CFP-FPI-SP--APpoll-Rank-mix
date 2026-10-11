@@ -120,3 +120,19 @@ def test_teams_receiving_votes_keep_points_but_count_as_unranked():
     assert row["T5"]["ap_rank"] is None and row["T5"]["ap_points"] == 20
     assert row["T6"]["ap_points"] is None
     assert row["T5"]["poll_z"] > row["T6"]["poll_z"]        # votes count for something
+
+
+def test_expected_score_splits_the_total_by_the_margin():
+    from src.rating import expected_score, scoring
+    g = lambda h, a, hp, ap: {"home_id": h, "away_id": a, "home_points": hp, "away_points": ap, "neutral": True}
+    # Team 1's games are high scoring, team 3's are low scoring.
+    games = [g(1, 2, 45, 38), g(2, 1, 35, 49), g(3, 4, 13, 10), g(4, 3, 7, 10), g(2, 4, 24, 21)] * 3
+    sc = scoring(games, ["1", "2", "3", "4"], hfa=0.0, lam=2.0)
+    assert sc["off"]["1"] > sc["off"]["3"] and sc["def"]["3"] > sc["def"]["1"]
+    high, low = expected_score(sc, 1, 2, 7.2, 27.0), expected_score(sc, 3, 4, 7.2, 27.0)
+    assert high[0] - high[1] == 7 and low[0] - low[1] == 7          # same margin either way
+    assert sum(high) > sum(low)                                      # but a bigger total
+    assert expected_score(sc, 1, 2, -0.2, 27.0)[1] - expected_score(sc, 1, 2, -0.2, 27.0)[0] == 1   # never a tie
+    assert min(expected_score(sc, 3, 4, 60.0, 27.0)) == 3           # the loser's score has a floor
+    # No games yet, or a placeholder opponent: league-average total.
+    assert expected_score(scoring([], ["1"], 0.0, 2.0), 1, None, 4.0, 27.0) == [29, 25]

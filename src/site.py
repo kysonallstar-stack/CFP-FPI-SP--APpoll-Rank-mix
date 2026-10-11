@@ -7,7 +7,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from src.rating import blend_week
+from src.rating import blend_week, expected_score, scoring
 from src.sim import run as run_sim
 
 
@@ -79,6 +79,13 @@ def build(season: int, proc: Path, cfg: dict, n_sims: int, seed) -> tuple[dict, 
         })
 
     expected = _expected_margins(proc, week)
+    # Expected final scores for games still to be played: [home, away].
+    rcfg = cfg["rating"]
+    sc = scoring(wd["games_completed"], [str(t["id"]) for t in wd["teams"]], cfg["sim"]["hfa"],
+                 rcfg.get("scoring_lambda", 2.0))
+    xs = {g["game_id"]: expected_score(sc, g["home_id"], g["away_id"], g["predicted_margin"],
+                                       rcfg.get("scoring_default_avg", 27.0))
+          for g in sim["remaining_games"]}
     games = []
     for g in wd["games_completed"]:
         if g["home_fbs"] or g["away_fbs"]:
@@ -90,7 +97,8 @@ def build(season: int, proc: Path, cfg: dict, n_sims: int, seed) -> tuple[dict, 
     for g in sim["remaining_games"]:
         games.append({"id": g["game_id"], "wk": g["week"], "start": g["start"], "n": g["neutral"],
                       "h": g["home_id"], "a": g["away_id"], "hn": g["home"], "an": g["away"],
-                      "p": g["home_win_prob"], "m": g["predicted_margin"], "ph": g["placeholder"]})
+                      "p": g["home_win_prob"], "m": g["predicted_margin"], "xs": xs[g["game_id"]],
+                      "ph": g["placeholder"]})
 
     gaps = [t for t in teams if t["gap"] is not None]
     site = {
@@ -106,7 +114,7 @@ def build(season: int, proc: Path, cfg: dict, n_sims: int, seed) -> tuple[dict, 
             "poll_higher": sorted((t for t in gaps if t["gap"] > 0), key=lambda t: -t["gap"])[:10],
             "metrics_higher": sorted((t for t in gaps if t["gap"] < 0), key=lambda t: t["gap"])[:10],
         },
-        "week_games": sim["week_games"],
+        "week_games": [{**g, "expected_score": xs[g["game_id"]]} for g in sim["week_games"]],
         "final_field": sim["final_field"],   # Selection Day bracket, else None
         "whatif": sim["inputs"],             # inputs for the in-browser what-if simulator
         "games": sorted(games, key=lambda g: (g["wk"], g["start"] or "")),

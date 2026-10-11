@@ -67,6 +67,10 @@ rating:
   srs_lambda: 1.5              # ridge prior = sigma^2 / sd(ratings)^2 = 16^2 / 13.3^2
   srs_margin_cap: 28           # cap each game's margin so blowouts don't dominate
   srs_min_week: 4              # don't use srs until teams have played ~4 games
+  # Expected scores: the margin comes from the blend; the total comes from an
+  # offense/defense fit of this season's points (see rating.scoring).
+  scoring_lambda: 2.0          # ridge prior = 10^2 / 7^2: game noise vs spread between teams
+  scoring_default_avg: 27.0    # points per team per game, used only before any games are played
   # Converts the blended z back to points. Normally SP+'s own SD that week;
   # this is used only when SP+ is missing (e.g. the 2025 backtest).
   # 13.3 = SD of 2026 week-4 SP+ across FBS.
