@@ -3,18 +3,19 @@ name: Weekly update
 
 on:
   schedule:
-    # Sunday 13:00 Mountain time: an hour after the AP poll (Sundays at 2 p.m.
+    # Sunday 13:17 Mountain time: about an hour after the AP poll (Sundays at 2 p.m.
     # Eastern = noon Mountain). The timezone key handles daylight saving. GitHub
-    # may start scheduled runs hours late when busy.
-    - cron: "0 13 * * 0"
+    # may start scheduled runs hours late when busy, worst at the top of the
+    # hour, hence the odd minute.
+    - cron: "17 13 * * 0"
       timezone: "America/Denver"
-    # Monday and Wednesday at 10:00: follow-up checks. Monday catches anything
+    # Monday and Wednesday at 10:17: follow-up checks. Monday catches anything
     # that was late or failed on Sunday; Wednesday picks up CFP rankings
     # (released Tuesday nights in Nov/Dec). If nothing in data/raw changed,
     # nothing is committed or deployed; a notification is sent only when
     # something worth knowing changed (see src/notify.py). In the offseason
     # (Feb-Jul) the pipeline exits right away.
-    - cron: "0 10 * * 1,3"
+    - cron: "17 10 * * 1,3"
       timezone: "America/Denver"
   workflow_dispatch:        # "Run workflow" button on the Actions tab
   push:                     # redeploy (without refetching) when the page code changes

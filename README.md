@@ -4,7 +4,7 @@ A weekly college football ranking that blends computer ratings (SP+ and ESPN's
 FPI) with the AP poll, plus 12-team playoff odds from 10,000 simulated seasons.
 
 **Site:** https://kysonallstar-stack.github.io/CFP-FPI-SP--APpoll-Rank-mix/
-(updates Sunday 1:00 p.m. Mountain, an hour after the AP poll, with follow-up
+(updates Sunday 1:17 p.m. Mountain, about an hour after the AP poll, with follow-up
 checks Monday and Wednesday mornings; takes the offseason off)
 
 ## The method, in plain language
@@ -120,8 +120,8 @@ be late. So:
   ESPN. CollegeFootballData's copies arrive on no fixed schedule (more than
   three days behind in early October 2026); each time they change, the date is
   logged in `data/raw/<season>/source_updates.json`.
-- The job runs Sunday at 1:00 p.m. Mountain, an hour after the AP poll, with
-  follow-up checks Monday and Wednesday at 10:00 (anything late or failed, and
+- The job runs Sunday at 1:17 p.m. Mountain, about an hour after the AP poll, with
+  follow-up checks Monday and Wednesday at 10:17 (anything late or failed, and
   the committee's Tuesday rankings). If nothing new was downloaded, nothing is
   published.
 - Until a poll is released, the site uses the most recent one and says so in
