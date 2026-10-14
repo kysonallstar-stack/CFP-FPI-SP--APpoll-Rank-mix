@@ -27,7 +27,7 @@
    "losses": 0,
    "p_title_game": 0.0,
    "p_win_conference": 0.0,
-   "p_playoff": 0.9694,
+   "p_playoff": 0.9695,
    "p_bye": 0.7289,
    "expected_wins": 11.08,
    "expected_regular_season_wins": 11.08
@@ -42,7 +42,7 @@
    "losses": 0,
    "p_title_game": 0.874,
    "p_win_conference": 0.5197,
-   "p_playoff": 0.9119,
+   "p_playoff": 0.9121,
    "p_bye": 0.59,
    "expected_wins": 11.54,
    "expected_regular_season_wins": 11.02
@@ -57,7 +57,7 @@
    "losses": 0,
    "p_title_game": 0.9602,
    "p_win_conference": 0.7628,
-   "p_playoff": 0.9086,
+   "p_playoff": 0.9087,
    "p_bye": 0.5653,
    "expected_wins": 11.61,
    "expected_regular_season_wins": 10.85
@@ -72,7 +72,7 @@
    "losses": 0,
    "p_title_game": 0.6779,
    "p_win_conference": 0.4159,
-   "p_playoff": 0.8816,
+   "p_playoff": 0.8817,
    "p_bye": 0.4968,
    "expected_wins": 11.3,
    "expected_regular_season_wins": 10.88
@@ -85,9 +85,9 @@
    "rating": 27.6,
    "wins": 5,
    "losses": 1,
-   "p_title_game": 0.4764,
+   "p_title_game": 0.4767,
    "p_win_conference": 0.2332,
-   "p_playoff": 0.7764,
+   "p_playoff": 0.7769,
    "p_bye": 0.2833,
    "expected_wins": 10.16,
    "expected_regular_season_wins": 9.93
@@ -103,7 +103,7 @@
    "p_title_game": 0.5345,
    "p_win_conference": 0.35,
    "p_playoff": 0.7017,
-   "p_bye": 0.2731,
+   "p_bye": 0.2732,
    "expected_wins": 9.79,
    "expected_regular_season_wins": 9.44
   },
@@ -115,10 +115,10 @@
    "rating": 21.4,
    "wins": 5,
    "losses": 0,
-   "p_title_game": 0.5782,
+   "p_title_game": 0.5781,
    "p_win_conference": 0.3087,
-   "p_playoff": 0.6657,
-   "p_bye": 0.2327,
+   "p_playoff": 0.6661,
+   "p_bye": 0.2328,
    "expected_wins": 10.85,
    "expected_regular_season_wins": 10.54
   },
@@ -130,10 +130,10 @@
    "rating": 22.3,
    "wins": 5,
    "losses": 0,
-   "p_title_game": 0.5387,
-   "p_win_conference": 0.3045,
-   "p_playoff": 0.6558,
-   "p_bye": 0.2293,
+   "p_title_game": 0.539,
+   "p_win_conference": 0.3048,
+   "p_playoff": 0.6562,
+   "p_bye": 0.2294,
    "expected_wins": 10.69,
    "expected_regular_season_wins": 10.38
   },
@@ -147,7 +147,7 @@
    "losses": 1,
    "p_title_game": 0.2365,
    "p_win_conference": 0.1088,
-   "p_playoff": 0.5504,
+   "p_playoff": 0.5505,
    "p_bye": 0.1423,
    "expected_wins": 9.31,
    "expected_regular_season_wins": 9.2
@@ -160,9 +160,9 @@
    "rating": 10.4,
    "wins": 6,
    "losses": 0,
-   "p_title_game": 0.8618,
-   "p_win_conference": 0.694,
-   "p_playoff": 0.5311,
+   "p_title_game": 0.8619,
+   "p_win_conference": 0.6941,
+   "p_playoff": 0.5317,
    "p_bye": 0.0837,
    "expected_wins": 11.71,
    "expected_regular_season_wins": 11.02
@@ -175,9 +175,9 @@
    "rating": 19.8,
    "wins": 5,
    "losses": 0,
-   "p_title_game": 0.4899,
-   "p_win_conference": 0.2412,
-   "p_playoff": 0.4509,
+   "p_title_game": 0.4897,
+   "p_win_conference": 0.2409,
+   "p_playoff": 0.4507,
    "p_bye": 0.0964,
    "expected_wins": 9.97,
    "expected_regular_season_wins": 9.73
@@ -207,7 +207,7 @@
    "losses": 1,
    "p_title_game": 0.9106,
    "p_win_conference": 0.575,
-   "p_playoff": 0.331,
+   "p_playoff": 0.3313,
    "p_bye": 0.0254,
    "expected_wins": 10.56,
    "expected_regular_season_wins": 9.99
@@ -220,27 +220,27 @@
    "rating": 11.2,
    "wins": 4,
    "losses": 1,
-   "p_title_game": 0.739,
-   "p_win_conference": 0.5054,
-   "p_playoff": 0.2555,
+   "p_title_game": 0.7385,
+   "p_win_conference": 0.5052,
+   "p_playoff": 0.2554,
    "p_bye": 0.0142,
    "expected_wins": 10.16,
-   "expected_regular_season_wins": 9.66
+   "expected_regular_season_wins": 9.65
   },
   {
    "id": 2335,
    "team": "Liberty",
    "conference": "Conference USA",
    "rank": 48,
-   "rating": 7.1,
+   "rating": 7.0,
    "wins": 5,
    "losses": 1,
-   "p_title_game": 0.8955,
-   "p_win_conference": 0.6894,
-   "p_playoff": 0.2437,
-   "p_bye": 0.0057,
-   "expected_wins": 10.87,
-   "expected_regular_season_wins": 10.18
+   "p_title_game": 0.8936,
+   "p_win_conference": 0.6861,
+   "p_playoff": 0.2386,
+   "p_bye": 0.0053,
+   "expected_wins": 10.85,
+   "expected_regular_season_wins": 10.16
   },
   {
    "id": 248,
@@ -252,7 +252,7 @@
    "losses": 1,
    "p_title_game": 0.0981,
    "p_win_conference": 0.0417,
-   "p_playoff": 0.2069,
+   "p_playoff": 0.207,
    "p_bye": 0.0173,
    "expected_wins": 9.0,
    "expected_regular_season_wins": 8.96
@@ -267,7 +267,7 @@
    "losses": 1,
    "p_title_game": 0.0609,
    "p_win_conference": 0.0178,
-   "p_playoff": 0.2061,
+   "p_playoff": 0.2062,
    "p_bye": 0.0168,
    "expected_wins": 8.85,
    "expected_regular_season_wins": 8.83
@@ -280,10 +280,10 @@
    "rating": 17.4,
    "wins": 5,
    "losses": 1,
-   "p_title_game": 0.0949,
-   "p_win_conference": 0.032,
-   "p_playoff": 0.1879,
-   "p_bye": 0.0182,
+   "p_title_game": 0.095,
+   "p_win_conference": 0.0321,
+   "p_playoff": 0.1888,
+   "p_bye": 0.0184,
    "expected_wins": 8.53,
    "expected_regular_season_wins": 8.5
   },
@@ -312,7 +312,7 @@
    "losses": 1,
    "p_title_game": 0.0434,
    "p_win_conference": 0.0177,
-   "p_playoff": 0.1717,
+   "p_playoff": 0.1719,
    "p_bye": 0.0154,
    "expected_wins": 8.52,
    "expected_regular_season_wins": 8.51
@@ -325,10 +325,10 @@
    "rating": 18.6,
    "wins": 5,
    "losses": 1,
-   "p_title_game": 0.0863,
-   "p_win_conference": 0.0328,
-   "p_playoff": 0.1659,
-   "p_bye": 0.0163,
+   "p_title_game": 0.0861,
+   "p_win_conference": 0.0327,
+   "p_playoff": 0.1658,
+   "p_bye": 0.0162,
    "expected_wins": 8.32,
    "expected_regular_season_wins": 8.28
   },
@@ -342,7 +342,7 @@
    "losses": 1,
    "p_title_game": 0.0913,
    "p_win_conference": 0.0335,
-   "p_playoff": 0.146,
+   "p_playoff": 0.1461,
    "p_bye": 0.0143,
    "expected_wins": 8.16,
    "expected_regular_season_wins": 8.12
@@ -357,7 +357,7 @@
    "losses": 2,
    "p_title_game": 0.0324,
    "p_win_conference": 0.013,
-   "p_playoff": 0.1228,
+   "p_playoff": 0.1229,
    "p_bye": 0.0096,
    "expected_wins": 7.46,
    "expected_regular_season_wins": 7.44
@@ -385,9 +385,9 @@
    "rating": 6.8,
    "wins": 5,
    "losses": 1,
-   "p_title_game": 0.5853,
-   "p_win_conference": 0.2788,
-   "p_playoff": 0.1151,
+   "p_title_game": 0.5848,
+   "p_win_conference": 0.2786,
+   "p_playoff": 0.115,
    "p_bye": 0.0024,
    "expected_wins": 10.01,
    "expected_regular_season_wins": 9.73
@@ -402,7 +402,7 @@
    "losses": 1,
    "p_title_game": 0.0241,
    "p_win_conference": 0.0071,
-   "p_playoff": 0.1089,
+   "p_playoff": 0.1091,
    "p_bye": 0.0071,
    "expected_wins": 8.26,
    "expected_regular_season_wins": 8.25
@@ -432,7 +432,7 @@
    "losses": 1,
    "p_title_game": 0.0554,
    "p_win_conference": 0.0189,
-   "p_playoff": 0.0945,
+   "p_playoff": 0.0946,
    "p_bye": 0.0069,
    "expected_wins": 8.3,
    "expected_regular_season_wins": 8.28
@@ -447,7 +447,7 @@
    "losses": 2,
    "p_title_game": 0.0423,
    "p_win_conference": 0.0203,
-   "p_playoff": 0.0891,
+   "p_playoff": 0.0892,
    "p_bye": 0.0041,
    "expected_wins": 7.4,
    "expected_regular_season_wins": 7.38
@@ -477,7 +477,7 @@
    "losses": 1,
    "p_title_game": 0.0241,
    "p_win_conference": 0.0067,
-   "p_playoff": 0.0635,
+   "p_playoff": 0.0634,
    "p_bye": 0.0033,
    "expected_wins": 7.91,
    "expected_regular_season_wins": 7.9
@@ -492,7 +492,7 @@
    "losses": 1,
    "p_title_game": 0.1265,
    "p_win_conference": 0.0438,
-   "p_playoff": 0.062,
+   "p_playoff": 0.0621,
    "p_bye": 0.0023,
    "expected_wins": 7.95,
    "expected_regular_season_wins": 7.91
@@ -535,7 +535,7 @@
    "rating": 11.9,
    "wins": 5,
    "losses": 1,
-   "p_title_game": 0.0455,
+   "p_title_game": 0.0453,
    "p_win_conference": 0.0098,
    "p_playoff": 0.0603,
    "p_bye": 0.0016,
@@ -567,7 +567,7 @@
    "losses": 2,
    "p_title_game": 0.6673,
    "p_win_conference": 0.2986,
-   "p_playoff": 0.0438,
+   "p_playoff": 0.0441,
    "p_bye": 0.0001,
    "expected_wins": 8.55,
    "expected_regular_season_wins": 8.25
@@ -627,7 +627,7 @@
    "losses": 2,
    "p_title_game": 0.0301,
    "p_win_conference": 0.0085,
-   "p_playoff": 0.0201,
+   "p_playoff": 0.0202,
    "p_bye": 0.0004,
    "expected_wins": 6.4,
    "expected_regular_season_wins": 6.39
@@ -642,7 +642,7 @@
    "losses": 1,
    "p_title_game": 0.3668,
    "p_win_conference": 0.1622,
-   "p_playoff": 0.0198,
+   "p_playoff": 0.0199,
    "p_bye": 0.0002,
    "expected_wins": 8.84,
    "expected_regular_season_wins": 8.68
@@ -657,7 +657,7 @@
    "losses": 2,
    "p_title_game": 0.0021,
    "p_win_conference": 0.0004,
-   "p_playoff": 0.0156,
+   "p_playoff": 0.0155,
    "p_bye": 0.0002,
    "expected_wins": 6.87,
    "expected_regular_season_wins": 6.87
@@ -745,7 +745,7 @@
    "rating": 0.1,
    "wins": 4,
    "losses": 1,
-   "p_title_game": 0.2214,
+   "p_title_game": 0.2216,
    "p_win_conference": 0.0714,
    "p_playoff": 0.0075,
    "p_bye": 0.0,
@@ -792,7 +792,7 @@
    "losses": 3,
    "p_title_game": 0.0005,
    "p_win_conference": 0.0,
-   "p_playoff": 0.0061,
+   "p_playoff": 0.0062,
    "p_bye": 0.0,
    "expected_wins": 5.86,
    "expected_regular_season_wins": 5.86
@@ -805,12 +805,12 @@
    "rating": -2.0,
    "wins": 4,
    "losses": 1,
-   "p_title_game": 0.1026,
+   "p_title_game": 0.1027,
    "p_win_conference": 0.0641,
    "p_playoff": 0.006,
    "p_bye": 0.0,
    "expected_wins": 8.09,
-   "expected_regular_season_wins": 8.02
+   "expected_regular_season_wins": 8.03
   },
   {
    "id": 153,
@@ -837,7 +837,7 @@
    "losses": 2,
    "p_title_game": 0.0378,
    "p_win_conference": 0.0195,
-   "p_playoff": 0.0043,
+   "p_playoff": 0.0044,
    "p_bye": 0.0,
    "expected_wins": 7.88,
    "expected_regular_season_wins": 7.86
@@ -866,8 +866,8 @@
    "wins": 4,
    "losses": 2,
    "p_title_game": 0.65,
-   "p_win_conference": 0.4006,
-   "p_playoff": 0.0037,
+   "p_win_conference": 0.4005,
+   "p_playoff": 0.0038,
    "p_bye": 0.0,
    "expected_wins": 8.82,
    "expected_regular_season_wins": 8.42
@@ -880,7 +880,7 @@
    "rating": 0.5,
    "wins": 4,
    "losses": 2,
-   "p_title_game": 0.361,
+   "p_title_game": 0.3608,
    "p_win_conference": 0.1225,
    "p_playoff": 0.0036,
    "p_bye": 0.0,
@@ -897,9 +897,9 @@
    "losses": 1,
    "p_title_game": 0.0058,
    "p_win_conference": 0.0022,
-   "p_playoff": 0.0029,
+   "p_playoff": 0.003,
    "p_bye": 0.0001,
-   "expected_wins": 6.35,
+   "expected_wins": 6.36,
    "expected_regular_season_wins": 6.35
   },
   {
@@ -912,7 +912,7 @@
    "losses": 1,
    "p_title_game": 0.1017,
    "p_win_conference": 0.0394,
-   "p_playoff": 0.0028,
+   "p_playoff": 0.0029,
    "p_bye": 0.0,
    "expected_wins": 7.29,
    "expected_regular_season_wins": 7.25
@@ -925,7 +925,7 @@
    "rating": -2.0,
    "wins": 4,
    "losses": 2,
-   "p_title_game": 0.3117,
+   "p_title_game": 0.3116,
    "p_win_conference": 0.1854,
    "p_playoff": 0.0021,
    "p_bye": 0.0,
@@ -1000,12 +1000,12 @@
    "rating": -2.6,
    "wins": 4,
    "losses": 2,
-   "p_title_game": 0.2241,
+   "p_title_game": 0.2244,
    "p_win_conference": 0.0635,
    "p_playoff": 0.0014,
    "p_bye": 0.0,
    "expected_wins": 8.17,
-   "expected_regular_season_wins": 8.1
+   "expected_regular_season_wins": 8.11
   },
   {
    "id": 66,
@@ -1165,12 +1165,12 @@
    "rating": -4.5,
    "wins": 4,
    "losses": 2,
-   "p_title_game": 0.5454,
-   "p_win_conference": 0.1573,
+   "p_title_game": 0.5495,
+   "p_win_conference": 0.1602,
    "p_playoff": 0.0004,
    "p_bye": 0.0,
-   "expected_wins": 8.2,
-   "expected_regular_season_wins": 8.04
+   "expected_wins": 8.21,
+   "expected_regular_season_wins": 8.05
   },
   {
    "id": 356,
@@ -1195,8 +1195,8 @@
    "rating": -5.5,
    "wins": 3,
    "losses": 2,
-   "p_title_game": 0.1661,
-   "p_win_conference": 0.0398,
+   "p_title_game": 0.166,
+   "p_win_conference": 0.0399,
    "p_playoff": 0.0002,
    "p_bye": 0.0,
    "expected_wins": 6.56,
@@ -1210,8 +1210,8 @@
    "rating": -7.0,
    "wins": 4,
    "losses": 2,
-   "p_title_game": 0.4756,
-   "p_win_conference": 0.2,
+   "p_title_game": 0.4757,
+   "p_win_conference": 0.2001,
    "p_playoff": 0.0002,
    "p_bye": 0.0,
    "expected_wins": 8.27,
@@ -1230,7 +1230,7 @@
    "p_playoff": 0.0002,
    "p_bye": 0.0,
    "expected_wins": 6.34,
-   "expected_regular_season_wins": 6.33
+   "expected_regular_season_wins": 6.34
   },
   {
    "id": 326,
@@ -1270,7 +1270,7 @@
    "rating": -5.3,
    "wins": 3,
    "losses": 2,
-   "p_title_game": 0.337,
+   "p_title_game": 0.3369,
    "p_win_conference": 0.0677,
    "p_playoff": 0.0001,
    "p_bye": 0.0,
@@ -1285,11 +1285,11 @@
    "rating": -5.4,
    "wins": 3,
    "losses": 2,
-   "p_title_game": 0.2967,
-   "p_win_conference": 0.0939,
+   "p_title_game": 0.2998,
+   "p_win_conference": 0.0949,
    "p_playoff": 0.0001,
    "p_bye": 0.0,
-   "expected_wins": 7.19,
+   "expected_wins": 7.2,
    "expected_regular_season_wins": 7.1
   },
   {
@@ -1312,15 +1312,15 @@
    "team": "Vanderbilt",
    "conference": "SEC",
    "rank": 65,
-   "rating": 0.8,
+   "rating": 0.7,
    "wins": 3,
    "losses": 3,
    "p_title_game": 0.0,
    "p_win_conference": 0.0,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 4.56,
-   "expected_regular_season_wins": 4.56
+   "expected_wins": 4.55,
+   "expected_regular_season_wins": 4.55
   },
   {
    "id": 127,
@@ -1372,15 +1372,15 @@
    "team": "West Virginia",
    "conference": "Big 12",
    "rank": 78,
-   "rating": -1.8,
+   "rating": -1.9,
    "wins": 3,
    "losses": 3,
    "p_title_game": 0.0,
    "p_win_conference": 0.0,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 4.44,
-   "expected_regular_season_wins": 4.44
+   "expected_wins": 4.43,
+   "expected_regular_season_wins": 4.43
   },
   {
    "id": 2426,
@@ -1450,8 +1450,8 @@
    "rating": -4.5,
    "wins": 2,
    "losses": 4,
-   "p_title_game": 0.011,
-   "p_win_conference": 0.0072,
+   "p_title_game": 0.0109,
+   "p_win_conference": 0.0071,
    "p_playoff": 0.0,
    "p_bye": 0.0,
    "expected_wins": 5.44,
@@ -1462,15 +1462,15 @@
    "team": "Nevada",
    "conference": "Mountain West",
    "rank": 95,
-   "rating": -5.9,
+   "rating": -5.8,
    "wins": 2,
    "losses": 3,
-   "p_title_game": 0.0445,
-   "p_win_conference": 0.0136,
+   "p_title_game": 0.0455,
+   "p_win_conference": 0.014,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 4.96,
-   "expected_regular_season_wins": 4.95
+   "expected_wins": 4.97,
+   "expected_regular_season_wins": 4.96
   },
   {
    "id": 202,
@@ -1540,7 +1540,7 @@
    "rating": -7.7,
    "wins": 4,
    "losses": 2,
-   "p_title_game": 0.2522,
+   "p_title_game": 0.2521,
    "p_win_conference": 0.0487,
    "p_playoff": 0.0,
    "p_bye": 0.0,
@@ -1555,7 +1555,7 @@
    "rating": -8.7,
    "wins": 3,
    "losses": 3,
-   "p_title_game": 0.127,
+   "p_title_game": 0.1271,
    "p_win_conference": 0.0588,
    "p_playoff": 0.0,
    "p_bye": 0.0,
@@ -1630,7 +1630,7 @@
    "rating": -10.1,
    "wins": 1,
    "losses": 4,
-   "p_title_game": 0.0528,
+   "p_title_game": 0.053,
    "p_win_conference": 0.0162,
    "p_playoff": 0.0,
    "p_bye": 0.0,
@@ -1668,55 +1668,40 @@
    "expected_regular_season_wins": 5.67
   },
   {
-   "id": 324,
-   "team": "Coastal Carolina",
-   "conference": "Sun Belt",
-   "rank": 111,
-   "rating": -11.3,
-   "wins": 2,
-   "losses": 4,
-   "p_title_game": 0.0065,
-   "p_win_conference": 0.0029,
-   "p_playoff": 0.0,
-   "p_bye": 0.0,
-   "expected_wins": 4.2,
-   "expected_regular_season_wins": 4.2
-  },
-  {
    "id": 113,
    "team": "Massachusetts",
    "conference": "Mid-American",
-   "rank": 112,
+   "rank": 111,
    "rating": -11.4,
    "wins": 4,
    "losses": 2,
-   "p_title_game": 0.0144,
+   "p_title_game": 0.0145,
    "p_win_conference": 0.0072,
    "p_playoff": 0.0,
    "p_bye": 0.0,
    "expected_wins": 7.09,
-   "expected_regular_season_wins": 7.08
+   "expected_regular_season_wins": 7.09
   },
   {
-   "id": 48,
-   "team": "Delaware",
-   "conference": "Conference USA",
-   "rank": 113,
-   "rating": -12.0,
+   "id": 324,
+   "team": "Coastal Carolina",
+   "conference": "Sun Belt",
+   "rank": 112,
+   "rating": -11.4,
    "wins": 2,
-   "losses": 3,
-   "p_title_game": 0.0639,
-   "p_win_conference": 0.0126,
+   "losses": 4,
+   "p_title_game": 0.0064,
+   "p_win_conference": 0.0028,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 5.42,
-   "expected_regular_season_wins": 5.4
+   "expected_wins": 4.19,
+   "expected_regular_season_wins": 4.19
   },
   {
    "id": 5,
    "team": "UAB",
    "conference": "American Athletic",
-   "rank": 114,
+   "rank": 113,
    "rating": -12.4,
    "wins": 3,
    "losses": 3,
@@ -1731,16 +1716,31 @@
    "id": 2084,
    "team": "Buffalo",
    "conference": "Mid-American",
-   "rank": 115,
+   "rank": 114,
    "rating": -12.4,
    "wins": 3,
    "losses": 3,
-   "p_title_game": 0.0985,
+   "p_title_game": 0.0984,
    "p_win_conference": 0.0373,
    "p_playoff": 0.0,
    "p_bye": 0.0,
    "expected_wins": 6.58,
    "expected_regular_season_wins": 6.54
+  },
+  {
+   "id": 48,
+   "team": "Delaware",
+   "conference": "Conference USA",
+   "rank": 115,
+   "rating": -12.5,
+   "wins": 2,
+   "losses": 3,
+   "p_title_game": 0.058,
+   "p_win_conference": 0.0114,
+   "p_playoff": 0.0,
+   "p_bye": 0.0,
+   "expected_wins": 5.33,
+   "expected_regular_season_wins": 5.32
   },
   {
    "id": 295,
@@ -1755,7 +1755,7 @@
    "p_playoff": 0.0,
    "p_bye": 0.0,
    "expected_wins": 4.58,
-   "expected_regular_season_wins": 4.57
+   "expected_regular_season_wins": 4.58
   },
   {
    "id": 2199,
@@ -1795,11 +1795,11 @@
    "rating": -13.2,
    "wins": 2,
    "losses": 4,
-   "p_title_game": 0.0574,
+   "p_title_game": 0.057,
    "p_win_conference": 0.0141,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 4.65,
+   "expected_wins": 4.66,
    "expected_regular_season_wins": 4.64
   },
   {
@@ -1811,10 +1811,10 @@
    "wins": 2,
    "losses": 4,
    "p_title_game": 0.0432,
-   "p_win_conference": 0.0085,
+   "p_win_conference": 0.0088,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 4.51,
+   "expected_wins": 4.52,
    "expected_regular_season_wins": 4.51
   },
   {
@@ -1870,7 +1870,7 @@
    "rating": -14.9,
    "wins": 3,
    "losses": 3,
-   "p_title_game": 0.0221,
+   "p_title_game": 0.0222,
    "p_win_conference": 0.0033,
    "p_playoff": 0.0,
    "p_bye": 0.0,
@@ -1900,12 +1900,12 @@
    "rating": -15.6,
    "wins": 1,
    "losses": 4,
-   "p_title_game": 0.0256,
-   "p_win_conference": 0.0044,
+   "p_title_game": 0.0251,
+   "p_win_conference": 0.0043,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 4.04,
-   "expected_regular_season_wins": 4.04
+   "expected_wins": 4.03,
+   "expected_regular_season_wins": 4.02
   },
   {
    "id": 189,
@@ -1915,12 +1915,12 @@
    "rating": -16.3,
    "wins": 2,
    "losses": 4,
-   "p_title_game": 0.086,
+   "p_title_game": 0.0859,
    "p_win_conference": 0.0262,
    "p_playoff": 0.0,
    "p_bye": 0.0,
    "expected_wins": 4.54,
-   "expected_regular_season_wins": 4.51
+   "expected_regular_season_wins": 4.52
   },
   {
    "id": 2572,
@@ -1942,45 +1942,45 @@
    "team": "Missouri State",
    "conference": "Conference USA",
    "rank": 129,
-   "rating": -17.6,
+   "rating": -17.5,
    "wins": 1,
    "losses": 4,
-   "p_title_game": 0.0117,
+   "p_title_game": 0.0122,
    "p_win_conference": 0.0024,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 3.21,
-   "expected_regular_season_wins": 3.2
+   "expected_wins": 3.23,
+   "expected_regular_season_wins": 3.23
   },
   {
    "id": 2393,
    "team": "Middle Tennessee",
    "conference": "Conference USA",
    "rank": 130,
-   "rating": -18.2,
+   "rating": -17.8,
    "wins": 2,
    "losses": 3,
-   "p_title_game": 0.0078,
-   "p_win_conference": 0.0012,
+   "p_title_game": 0.0086,
+   "p_win_conference": 0.0016,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 4.36,
-   "expected_regular_season_wins": 4.36
+   "expected_wins": 4.42,
+   "expected_regular_season_wins": 4.42
   },
   {
    "id": 2459,
    "team": "Northern Illinois",
    "conference": "Mountain West",
    "rank": 131,
-   "rating": -21.4,
+   "rating": -21.5,
    "wins": 0,
    "losses": 5,
-   "p_title_game": 0.0008,
+   "p_title_game": 0.0007,
    "p_win_conference": 0.0,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 1.92,
-   "expected_regular_season_wins": 1.92
+   "expected_wins": 1.9,
+   "expected_regular_season_wins": 1.9
   },
   {
    "id": 2309,
@@ -2002,15 +2002,15 @@
    "team": "Ball State",
    "conference": "Mid-American",
    "rank": 133,
-   "rating": -23.0,
+   "rating": -23.1,
    "wins": 1,
    "losses": 5,
    "p_title_game": 0.0011,
    "p_win_conference": 0.0002,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 2.99,
-   "expected_regular_season_wins": 2.99
+   "expected_wins": 2.98,
+   "expected_regular_season_wins": 2.98
   },
   {
    "id": 2006,
@@ -2100,8 +2100,8 @@
    "neutral": false,
    "start": "2026-10-13T23:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.429,
-   "predicted_margin": -2.9
+   "home_win_prob": 0.449,
+   "predicted_margin": -2.1
   },
   {
    "game_id": 401871053,
@@ -2128,8 +2128,8 @@
    "neutral": false,
    "start": "2026-10-14T23:30:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.4,
-   "predicted_margin": -4.1
+   "home_win_prob": 0.402,
+   "predicted_margin": -4.0
   },
   {
    "game_id": 401871068,
@@ -2226,8 +2226,8 @@
    "neutral": false,
    "start": "2026-10-17T00:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.502,
-   "predicted_margin": 0.1
+   "home_win_prob": 0.5,
+   "predicted_margin": 0.0
   },
   {
    "game_id": 401858494,
@@ -2352,8 +2352,8 @@
    "neutral": false,
    "start": "2026-10-17T16:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.707,
-   "predicted_margin": 8.7
+   "home_win_prob": 0.709,
+   "predicted_margin": 8.8
   },
   {
    "game_id": 401862802,
@@ -2408,8 +2408,8 @@
    "neutral": false,
    "start": "2026-10-17T16:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.455,
-   "predicted_margin": -1.8
+   "home_win_prob": 0.453,
+   "predicted_margin": -1.9
   },
   {
    "game_id": 401858491,
@@ -2548,8 +2548,8 @@
    "neutral": false,
    "start": "2026-10-17T19:30:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.703,
-   "predicted_margin": 8.5
+   "home_win_prob": 0.705,
+   "predicted_margin": 8.6
   },
   {
    "game_id": 401866444,
@@ -2730,8 +2730,8 @@
    "neutral": false,
    "start": "2026-10-17T23:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.615,
-   "predicted_margin": 4.7
+   "home_win_prob": 0.613,
+   "predicted_margin": 4.6
   },
   {
    "game_id": 401864520,
@@ -2744,8 +2744,8 @@
    "neutral": false,
    "start": "2026-10-17T23:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.811,
-   "predicted_margin": 14.1
+   "home_win_prob": 0.81,
+   "predicted_margin": 14.0
   },
   {
    "game_id": 401869934,
@@ -2970,8 +2970,8 @@
    "neutral": false,
    "start": "2026-10-13T23:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.429,
-   "predicted_margin": -2.9
+   "home_win_prob": 0.449,
+   "predicted_margin": -2.1
   },
   {
    "game_id": 401871053,
@@ -2998,8 +2998,8 @@
    "neutral": false,
    "start": "2026-10-14T23:30:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.4,
-   "predicted_margin": -4.1
+   "home_win_prob": 0.402,
+   "predicted_margin": -4.0
   },
   {
    "game_id": 401871068,
@@ -3096,8 +3096,8 @@
    "neutral": false,
    "start": "2026-10-17T00:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.502,
-   "predicted_margin": 0.1
+   "home_win_prob": 0.5,
+   "predicted_margin": 0.0
   },
   {
    "game_id": 401858494,
@@ -3222,8 +3222,8 @@
    "neutral": false,
    "start": "2026-10-17T16:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.707,
-   "predicted_margin": 8.7
+   "home_win_prob": 0.709,
+   "predicted_margin": 8.8
   },
   {
    "game_id": 401862802,
@@ -3278,8 +3278,8 @@
    "neutral": false,
    "start": "2026-10-17T16:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.455,
-   "predicted_margin": -1.8
+   "home_win_prob": 0.453,
+   "predicted_margin": -1.9
   },
   {
    "game_id": 401858491,
@@ -3418,8 +3418,8 @@
    "neutral": false,
    "start": "2026-10-17T19:30:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.703,
-   "predicted_margin": 8.5
+   "home_win_prob": 0.705,
+   "predicted_margin": 8.6
   },
   {
    "game_id": 401866444,
@@ -3600,8 +3600,8 @@
    "neutral": false,
    "start": "2026-10-17T23:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.615,
-   "predicted_margin": 4.7
+   "home_win_prob": 0.613,
+   "predicted_margin": 4.6
   },
   {
    "game_id": 401864520,
@@ -3614,8 +3614,8 @@
    "neutral": false,
    "start": "2026-10-17T23:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.811,
-   "predicted_margin": 14.1
+   "home_win_prob": 0.81,
+   "predicted_margin": 14.0
   },
   {
    "game_id": 401869934,
@@ -3838,8 +3838,8 @@
    "neutral": false,
    "start": "2026-10-20T23:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.686,
-   "predicted_margin": 7.7
+   "home_win_prob": 0.674,
+   "predicted_margin": 7.2
   },
   {
    "game_id": 401871055,
@@ -3852,8 +3852,8 @@
    "neutral": false,
    "start": "2026-10-20T23:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.813,
-   "predicted_margin": 14.2
+   "home_win_prob": 0.807,
+   "predicted_margin": 13.9
   },
   {
    "game_id": 401871092,
@@ -3908,8 +3908,8 @@
    "neutral": false,
    "start": "2026-10-22T23:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.212,
-   "predicted_margin": -12.8
+   "home_win_prob": 0.214,
+   "predicted_margin": -12.7
   },
   {
    "game_id": 401862807,
@@ -4146,8 +4146,8 @@
    "neutral": false,
    "start": "2026-10-24T04:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.786,
-   "predicted_margin": 12.7
+   "home_win_prob": 0.788,
+   "predicted_margin": 12.8
   },
   {
    "game_id": 401856731,
@@ -4202,7 +4202,7 @@
    "neutral": false,
    "start": "2026-10-24T04:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.757,
+   "home_win_prob": 0.759,
    "predicted_margin": 11.2
   },
   {
@@ -4328,8 +4328,8 @@
    "neutral": false,
    "start": "2026-10-24T04:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.638,
-   "predicted_margin": 5.7
+   "home_win_prob": 0.636,
+   "predicted_margin": 5.6
   },
   {
    "game_id": 401866446,
@@ -4356,8 +4356,8 @@
    "neutral": false,
    "start": "2026-10-24T04:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.389,
-   "predicted_margin": -4.5
+   "home_win_prob": 0.387,
+   "predicted_margin": -4.6
   },
   {
    "game_id": 401871093,
@@ -4538,8 +4538,8 @@
    "neutral": false,
    "start": "2026-10-24T21:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.682,
-   "predicted_margin": 7.6
+   "home_win_prob": 0.684,
+   "predicted_margin": 7.7
   },
   {
    "game_id": 401860907,
@@ -4622,8 +4622,8 @@
    "neutral": false,
    "start": "2026-10-27T23:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.536,
-   "predicted_margin": 1.4
+   "home_win_prob": 0.547,
+   "predicted_margin": 1.9
   },
   {
    "game_id": 401871072,
@@ -4636,8 +4636,8 @@
    "neutral": false,
    "start": "2026-10-28T00:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.522,
-   "predicted_margin": 0.9
+   "home_win_prob": 0.525,
+   "predicted_margin": 1.0
   },
   {
    "game_id": 401871058,
@@ -4650,8 +4650,8 @@
    "neutral": false,
    "start": "2026-10-28T23:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.387,
-   "predicted_margin": -4.6
+   "home_win_prob": 0.396,
+   "predicted_margin": -4.2
   },
   {
    "game_id": 401871057,
@@ -5042,8 +5042,8 @@
    "neutral": false,
    "start": "2026-10-31T04:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.923,
-   "predicted_margin": 22.8
+   "home_win_prob": 0.922,
+   "predicted_margin": 22.7
   },
   {
    "game_id": 401858503,
@@ -5252,8 +5252,8 @@
    "neutral": false,
    "start": "2026-10-31T04:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.755,
-   "predicted_margin": 11.1
+   "home_win_prob": 0.757,
+   "predicted_margin": 11.2
   },
   {
    "game_id": 401859185,
@@ -5308,7 +5308,7 @@
    "neutral": false,
    "start": "2026-10-31T19:30:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.808,
+   "home_win_prob": 0.807,
    "predicted_margin": 13.9
   },
   {
@@ -5392,8 +5392,8 @@
    "neutral": false,
    "start": "2026-11-01T02:30:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.919,
-   "predicted_margin": 22.4
+   "home_win_prob": 0.92,
+   "predicted_margin": 22.5
   },
   {
    "game_id": 401866454,
@@ -5434,8 +5434,8 @@
    "neutral": false,
    "start": "2026-11-04T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.794,
-   "predicted_margin": 13.1
+   "home_win_prob": 0.796,
+   "predicted_margin": 13.2
   },
   {
    "game_id": 401866456,
@@ -5546,8 +5546,8 @@
    "neutral": false,
    "start": "2026-11-07T02:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.214,
-   "predicted_margin": -12.7
+   "home_win_prob": 0.215,
+   "predicted_margin": -12.6
   },
   {
    "game_id": 401856855,
@@ -5630,8 +5630,8 @@
    "neutral": false,
    "start": "2026-11-07T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.817,
-   "predicted_margin": 14.5
+   "home_win_prob": 0.819,
+   "predicted_margin": 14.6
   },
   {
    "game_id": 401864532,
@@ -5784,8 +5784,8 @@
    "neutral": false,
    "start": "2026-11-07T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.596,
-   "predicted_margin": 3.9
+   "home_win_prob": 0.593,
+   "predicted_margin": 3.8
   },
   {
    "game_id": 401858513,
@@ -5826,8 +5826,8 @@
    "neutral": false,
    "start": "2026-11-07T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.769,
-   "predicted_margin": 11.8
+   "home_win_prob": 0.771,
+   "predicted_margin": 11.9
   },
   {
    "game_id": 401858516,
@@ -5925,7 +5925,7 @@
    "start": "2026-11-07T05:00:00.000Z",
    "placeholder": false,
    "home_win_prob": 0.93,
-   "predicted_margin": 23.6
+   "predicted_margin": 23.7
   },
   {
    "game_id": 401856854,
@@ -6120,8 +6120,8 @@
    "neutral": false,
    "start": "2026-11-07T20:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.609,
-   "predicted_margin": 4.4
+   "home_win_prob": 0.619,
+   "predicted_margin": 4.9
   },
   {
    "game_id": 401862820,
@@ -6148,8 +6148,8 @@
    "neutral": false,
    "start": "2026-11-07T20:30:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.46,
-   "predicted_margin": -1.6
+   "home_win_prob": 0.469,
+   "predicted_margin": -1.3
   },
   {
    "game_id": 401871074,
@@ -6162,8 +6162,8 @@
    "neutral": false,
    "start": "2026-11-07T21:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.804,
-   "predicted_margin": 13.7
+   "home_win_prob": 0.802,
+   "predicted_margin": 13.6
   },
   {
    "game_id": 401870795,
@@ -6176,8 +6176,8 @@
    "neutral": false,
    "start": "2026-11-07T22:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.165,
-   "predicted_margin": -15.6
+   "home_win_prob": 0.167,
+   "predicted_margin": -15.5
   },
   {
    "game_id": 401860911,
@@ -6344,8 +6344,8 @@
    "neutral": false,
    "start": "2026-11-11T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.335,
-   "predicted_margin": -6.8
+   "home_win_prob": 0.332,
+   "predicted_margin": -6.9
   },
   {
    "game_id": 401866462,
@@ -6736,8 +6736,8 @@
    "neutral": false,
    "start": "2026-11-14T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.241,
-   "predicted_margin": -11.2
+   "home_win_prob": 0.237,
+   "predicted_margin": -11.4
   },
   {
    "game_id": 401856861,
@@ -6750,8 +6750,8 @@
    "neutral": false,
    "start": "2026-11-14T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.4,
-   "predicted_margin": -4.0
+   "home_win_prob": 0.398,
+   "predicted_margin": -4.1
   },
   {
    "game_id": 401856887,
@@ -6778,8 +6778,8 @@
    "neutral": false,
    "start": "2026-11-14T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.09,
-   "predicted_margin": -21.4
+   "home_win_prob": 0.089,
+   "predicted_margin": -21.5
   },
   {
    "game_id": 401858300,
@@ -6918,8 +6918,8 @@
    "neutral": false,
    "start": "2026-11-14T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.516,
-   "predicted_margin": 0.6
+   "home_win_prob": 0.513,
+   "predicted_margin": 0.5
   },
   {
    "game_id": 401858519,
@@ -7058,8 +7058,8 @@
    "neutral": false,
    "start": "2026-11-14T20:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.469,
-   "predicted_margin": -1.3
+   "home_win_prob": 0.471,
+   "predicted_margin": -1.2
   },
   {
    "game_id": 401871060,
@@ -7072,8 +7072,8 @@
    "neutral": false,
    "start": "2026-11-14T20:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.42,
-   "predicted_margin": -3.2
+   "home_win_prob": 0.409,
+   "predicted_margin": -3.7
   },
   {
    "game_id": 401870752,
@@ -7114,8 +7114,8 @@
    "neutral": false,
    "start": "2026-11-14T20:30:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.944,
-   "predicted_margin": 25.5
+   "home_win_prob": 0.941,
+   "predicted_margin": 25.0
   },
   {
    "game_id": 401860916,
@@ -7240,8 +7240,8 @@
    "neutral": false,
    "start": "2026-11-18T00:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.857,
-   "predicted_margin": 17.1
+   "home_win_prob": 0.859,
+   "predicted_margin": 17.2
   },
   {
    "game_id": 401866466,
@@ -7576,8 +7576,8 @@
    "neutral": false,
    "start": "2026-11-21T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.723,
-   "predicted_margin": 9.4
+   "home_win_prob": 0.724,
+   "predicted_margin": 9.5
   },
   {
    "game_id": 401856752,
@@ -7618,8 +7618,8 @@
    "neutral": false,
    "start": "2026-11-21T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.22,
-   "predicted_margin": -12.3
+   "home_win_prob": 0.219,
+   "predicted_margin": -12.4
   },
   {
    "game_id": 401856867,
@@ -7786,8 +7786,8 @@
    "neutral": false,
    "start": "2026-11-21T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.768,
-   "predicted_margin": 11.7
+   "home_win_prob": 0.769,
+   "predicted_margin": 11.8
   },
   {
    "game_id": 401858309,
@@ -7870,8 +7870,8 @@
    "neutral": false,
    "start": "2026-11-21T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.745,
-   "predicted_margin": 10.5
+   "home_win_prob": 0.747,
+   "predicted_margin": 10.6
   },
   {
    "game_id": 401869958,
@@ -7982,7 +7982,7 @@
    "neutral": false,
    "start": "2026-11-21T18:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.907,
+   "home_win_prob": 0.906,
    "predicted_margin": 21.1
   },
   {
@@ -7996,8 +7996,8 @@
    "neutral": false,
    "start": "2026-11-21T19:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.624,
-   "predicted_margin": 5.0
+   "home_win_prob": 0.615,
+   "predicted_margin": 4.7
   },
   {
    "game_id": 401871079,
@@ -8010,8 +8010,8 @@
    "neutral": false,
    "start": "2026-11-21T19:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.817,
-   "predicted_margin": 14.5
+   "home_win_prob": 0.816,
+   "predicted_margin": 14.4
   },
   {
    "game_id": 401856746,
@@ -8052,8 +8052,8 @@
    "neutral": false,
    "start": "2026-11-21T20:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.54,
-   "predicted_margin": 1.6
+   "home_win_prob": 0.551,
+   "predicted_margin": 2.1
   },
   {
    "game_id": 401861968,
@@ -8094,8 +8094,8 @@
    "neutral": false,
    "start": "2026-11-21T21:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.96,
-   "predicted_margin": 28.1
+   "home_win_prob": 0.961,
+   "predicted_margin": 28.2
   },
   {
    "game_id": 401860920,
@@ -8416,8 +8416,8 @@
    "neutral": false,
    "start": "2026-11-28T02:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.936,
-   "predicted_margin": 24.4
+   "home_win_prob": 0.937,
+   "predicted_margin": 24.5
   },
   {
    "game_id": 401856875,
@@ -8557,7 +8557,7 @@
    "start": "2026-11-28T05:00:00.000Z",
    "placeholder": false,
    "home_win_prob": 0.918,
-   "predicted_margin": 22.2
+   "predicted_margin": 22.3
   },
   {
    "game_id": 401864550,
@@ -8570,7 +8570,7 @@
    "neutral": false,
    "start": "2026-11-28T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.643,
+   "home_win_prob": 0.641,
    "predicted_margin": 5.8
   },
   {
@@ -8752,8 +8752,8 @@
    "neutral": false,
    "start": "2026-11-28T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.222,
-   "predicted_margin": -12.2
+   "home_win_prob": 0.22,
+   "predicted_margin": -12.3
   },
   {
    "game_id": 401856761,
@@ -8948,8 +8948,8 @@
    "neutral": false,
    "start": "2026-11-28T17:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.389,
-   "predicted_margin": -4.5
+   "home_win_prob": 0.387,
+   "predicted_margin": -4.6
   },
   {
    "game_id": 401858540,
@@ -9004,8 +9004,8 @@
    "neutral": false,
    "start": "2026-11-28T19:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.111,
-   "predicted_margin": -19.5
+   "home_win_prob": 0.113,
+   "predicted_margin": -19.4
   },
   {
    "game_id": 401871082,
@@ -9032,8 +9032,8 @@
    "neutral": false,
    "start": "2026-11-28T19:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.455,
-   "predicted_margin": -1.8
+   "home_win_prob": 0.464,
+   "predicted_margin": -1.4
   },
   {
    "game_id": 401869939,
@@ -9060,8 +9060,8 @@
    "neutral": false,
    "start": "2026-11-28T20:30:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.4,
-   "predicted_margin": -4.0
+   "home_win_prob": 0.389,
+   "predicted_margin": -4.5
   },
   {
    "game_id": 401864546,
@@ -9088,8 +9088,8 @@
    "neutral": false,
    "start": "2026-11-29T02:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.702,
-   "predicted_margin": 8.5
+   "home_win_prob": 0.7,
+   "predicted_margin": 8.4
   },
   {
    "game_id": 401864547,
@@ -9244,19 +9244,19 @@
    "neutral": false,
    "home_win_prob": 0.343,
    "predicted_margin": -6.5,
-   "total_swing": 0.56,
+   "total_swing": 0.561,
    "movers": [
     {
      "team": "Alabama",
      "if_home_wins": 0.58,
-     "if_home_loses": 0.88,
-     "swing": -0.3
+     "if_home_loses": 0.881,
+     "swing": -0.301
     },
     {
      "team": "Tennessee",
-     "if_home_wins": 0.358,
-     "if_home_loses": 0.098,
-     "swing": 0.26
+     "if_home_wins": 0.359,
+     "if_home_loses": 0.099,
+     "swing": 0.261
     }
    ]
   },
@@ -9275,21 +9275,21 @@
    "movers": [
     {
      "team": "James Madison",
-     "if_home_wins": 0.605,
+     "if_home_wins": 0.606,
      "if_home_loses": 0.223,
-     "swing": 0.382
+     "swing": 0.383
     },
     {
      "team": "Liberty",
-     "if_home_wins": 0.232,
-     "if_home_loses": 0.291,
+     "if_home_wins": 0.227,
+     "if_home_loses": 0.286,
      "swing": -0.058
     },
     {
      "team": "New Mexico",
      "if_home_wins": 0.249,
-     "if_home_loses": 0.285,
-     "swing": -0.036
+     "if_home_loses": 0.284,
+     "swing": -0.035
     },
     {
      "team": "Georgia State",
@@ -9310,13 +9310,13 @@
    "neutral": false,
    "home_win_prob": 0.102,
    "predicted_margin": -20.3,
-   "total_swing": 0.486,
+   "total_swing": 0.487,
    "movers": [
     {
      "team": "Utah",
      "if_home_wins": 0.323,
-     "if_home_loses": 0.695,
-     "swing": -0.372
+     "if_home_loses": 0.696,
+     "swing": -0.373
     },
     {
      "team": "BYU",
@@ -9370,13 +9370,13 @@
    "neutral": false,
    "home_win_prob": 0.676,
    "predicted_margin": 7.3,
-   "total_swing": 0.446,
+   "total_swing": 0.447,
    "movers": [
     {
      "team": "UCLA",
      "if_home_wins": 0.503,
      "if_home_loses": 0.204,
-     "swing": 0.299
+     "swing": 0.3
     },
     {
      "team": "Wisconsin",
@@ -9403,7 +9403,7 @@
    "neutral": false,
    "home_win_prob": 0.836,
    "predicted_margin": 15.7,
-   "total_swing": 0.433,
+   "total_swing": 0.434,
    "movers": [
     {
      "team": "Texas",
@@ -9414,8 +9414,8 @@
     {
      "team": "LSU",
      "if_home_wins": 0.117,
-     "if_home_loses": 0.156,
-     "swing": -0.039
+     "if_home_loses": 0.157,
+     "swing": -0.04
     },
     {
      "team": "Florida",
@@ -9442,11 +9442,11 @@
      "team": "Missouri",
      "if_home_wins": 0.063,
      "if_home_loses": 0.301,
-     "swing": -0.238
+     "swing": -0.237
     },
     {
      "team": "Ole Miss",
-     "if_home_wins": 0.227,
+     "if_home_wins": 0.228,
      "if_home_loses": 0.039,
      "swing": 0.188
     }
@@ -9467,9 +9467,9 @@
    "movers": [
     {
      "team": "BYU",
-     "if_home_wins": 0.679,
+     "if_home_wins": 0.678,
      "if_home_loses": 0.334,
-     "swing": 0.345
+     "swing": 0.344
     },
     {
      "team": "Notre Dame",
@@ -9490,7 +9490,7 @@
    "neutral": false,
    "home_win_prob": 0.916,
    "predicted_margin": 22.1,
-   "total_swing": 0.409,
+   "total_swing": 0.41,
    "movers": [
     {
      "team": "Texas Tech",
@@ -9535,7 +9535,7 @@
      "team": "Oregon",
      "if_home_wins": 0.142,
      "if_home_loses": 0.016,
-     "swing": 0.125
+     "swing": 0.126
     }
    ]
   }
@@ -9553,7 +9553,7 @@
    "predicted_margin": 1.3,
    "home_rank": 5,
    "away_rank": 3,
-   "home_p_playoff": 0.8816,
+   "home_p_playoff": 0.8817,
    "away_p_playoff": 0.7017,
    "playoff_swing": 0.451,
    "quality": 27.7
@@ -9570,8 +9570,8 @@
    "predicted_margin": -7.0,
    "home_rank": 10,
    "away_rank": 1,
-   "home_p_playoff": 0.4509,
-   "away_p_playoff": 0.9694,
+   "home_p_playoff": 0.4507,
+   "away_p_playoff": 0.9695,
    "playoff_swing": 0.412,
    "quality": 19.8
   },
@@ -9587,8 +9587,8 @@
    "predicted_margin": 2.5,
    "home_rank": 13,
    "away_rank": 12,
-   "home_p_playoff": 0.146,
-   "away_p_playoff": 0.1659,
+   "home_p_playoff": 0.1461,
+   "away_p_playoff": 0.1658,
    "playoff_swing": 0.426,
    "quality": 18.4
   },
@@ -9604,9 +9604,9 @@
    "predicted_margin": -6.5,
    "home_rank": 14,
    "away_rank": 6,
-   "home_p_playoff": 0.1879,
-   "away_p_playoff": 0.7764,
-   "playoff_swing": 0.56,
+   "home_p_playoff": 0.1888,
+   "away_p_playoff": 0.7769,
+   "playoff_swing": 0.561,
    "quality": 17.4
   },
   {
@@ -9621,8 +9621,8 @@
    "predicted_margin": 3.6,
    "home_rank": 15,
    "away_rank": 17,
-   "home_p_playoff": 0.0891,
-   "away_p_playoff": 0.1717,
+   "home_p_playoff": 0.0892,
+   "away_p_playoff": 0.1719,
    "playoff_swing": 0.382,
    "quality": 16.2
   },
@@ -9638,8 +9638,8 @@
    "predicted_margin": 7.7,
    "home_rank": 11,
    "away_rank": 22,
-   "home_p_playoff": 0.1228,
-   "away_p_playoff": 0.0635,
+   "home_p_playoff": 0.1229,
+   "away_p_playoff": 0.0634,
    "playoff_swing": 0.282,
    "quality": 13.9
   },
@@ -9655,9 +9655,9 @@
    "predicted_margin": 3.2,
    "home_rank": 25,
    "away_rank": 28,
-   "home_p_playoff": 0.0201,
+   "home_p_playoff": 0.0202,
    "away_p_playoff": 0.0603,
-   "playoff_swing": 0.131,
+   "playoff_swing": 0.132,
    "quality": 11.9
   },
   {
@@ -9674,7 +9674,7 @@
    "away_rank": 31,
    "home_p_playoff": 0.4075,
    "away_p_playoff": 0.0618,
-   "playoff_swing": 0.446,
+   "playoff_swing": 0.447,
    "quality": 11.3
   },
   {
@@ -9706,9 +9706,9 @@
    "predicted_margin": 15.7,
    "home_rank": 7,
    "away_rank": 35,
-   "home_p_playoff": 0.5504,
+   "home_p_playoff": 0.5505,
    "away_p_playoff": 0.0077,
-   "playoff_swing": 0.433,
+   "playoff_swing": 0.434,
    "quality": 10.8
   }
  ],
@@ -9760,9 +9760,9 @@
    "movers": [
     {
      "team": "BYU",
-     "if_home_wins": 0.679,
+     "if_home_wins": 0.678,
      "if_home_loses": 0.334,
-     "swing": 0.345
+     "swing": 0.344
     },
     {
      "team": "Notre Dame",
@@ -9792,11 +9792,11 @@
      "team": "Missouri",
      "if_home_wins": 0.063,
      "if_home_loses": 0.301,
-     "swing": -0.238
+     "swing": -0.237
     },
     {
      "team": "Ole Miss",
-     "if_home_wins": 0.227,
+     "if_home_wins": 0.228,
      "if_home_loses": 0.039,
      "swing": 0.188
     }
@@ -9816,19 +9816,19 @@
    "home_rank": 14,
    "away_rank": 6,
    "quality": 17.4,
-   "swing": 0.56,
+   "swing": 0.561,
    "movers": [
     {
      "team": "Alabama",
      "if_home_wins": 0.58,
-     "if_home_loses": 0.88,
-     "swing": -0.3
+     "if_home_loses": 0.881,
+     "swing": -0.301
     },
     {
      "team": "Tennessee",
-     "if_home_wins": 0.358,
-     "if_home_loses": 0.098,
-     "swing": 0.26
+     "if_home_wins": 0.359,
+     "if_home_loses": 0.099,
+     "swing": 0.261
     }
    ],
    "closeness": 0.157
@@ -9858,7 +9858,7 @@
      "team": "Oregon",
      "if_home_wins": 0.142,
      "if_home_loses": 0.016,
-     "swing": 0.125
+     "swing": 0.126
     }
    ],
    "closeness": 0.089
@@ -9882,7 +9882,7 @@
      "team": "LSU",
      "if_home_wins": 0.168,
      "if_home_loses": 0.022,
-     "swing": 0.146
+     "swing": 0.147
     },
     {
      "team": "Mississippi State",
@@ -9906,7 +9906,7 @@
    "home_rank": 25,
    "away_rank": 28,
    "quality": 11.9,
-   "swing": 0.131,
+   "swing": 0.132,
    "movers": [
     {
      "team": "Kentucky",
@@ -9936,13 +9936,13 @@
    "home_rank": 16,
    "away_rank": 31,
    "quality": 11.3,
-   "swing": 0.446,
+   "swing": 0.447,
    "movers": [
     {
      "team": "UCLA",
      "if_home_wins": 0.503,
      "if_home_loses": 0.204,
-     "swing": 0.299
+     "swing": 0.3
     },
     {
      "team": "Wisconsin",
@@ -10002,7 +10002,7 @@
    "home_rank": 7,
    "away_rank": 35,
    "quality": 10.8,
-   "swing": 0.433,
+   "swing": 0.434,
    "movers": [
     {
      "team": "Texas",
@@ -10013,8 +10013,8 @@
     {
      "team": "LSU",
      "if_home_wins": 0.117,
-     "if_home_loses": 0.156,
-     "swing": -0.039
+     "if_home_loses": 0.157,
+     "swing": -0.04
     },
     {
      "team": "Florida",
@@ -10044,11 +10044,11 @@
      "team": "Houston",
      "if_home_wins": 0.282,
      "if_home_loses": 0.059,
-     "swing": 0.222
+     "swing": 0.223
     },
     {
      "team": "Oklahoma State",
-     "if_home_wins": 0.025,
+     "if_home_wins": 0.026,
      "if_home_loses": 0.134,
      "swing": -0.109
     },
@@ -10259,13 +10259,13 @@
    "home_rank": 68,
    "away_rank": 21,
    "quality": 0.1,
-   "swing": 0.119,
+   "swing": 0.12,
    "movers": [
     {
      "team": "Northwestern",
      "if_home_wins": 0.02,
      "if_home_loses": 0.14,
-     "swing": -0.119
+     "swing": -0.12
     }
    ],
    "closeness": 0.236
@@ -10337,7 +10337,7 @@
    "home_rank": 9,
    "away_rank": 70,
    "quality": -0.1,
-   "swing": 0.409,
+   "swing": 0.41,
    "movers": [
     {
      "team": "Texas Tech",
@@ -10373,7 +10373,7 @@
    "home_rank": 75,
    "away_rank": 27,
    "quality": -1.3,
-   "swing": 0.07,
+   "swing": 0.069,
    "movers": [
     {
      "team": "Louisville",
@@ -10385,7 +10385,7 @@
      "team": "Memphis",
      "if_home_wins": 0.105,
      "if_home_loses": 0.129,
-     "swing": -0.025
+     "swing": -0.024
     }
    ],
    "closeness": 0.219
@@ -10398,14 +10398,14 @@
    "away_id": 8,
    "neutral": false,
    "start": "2026-10-17T23:00:00.000Z",
-   "home_win_prob": 0.615,
-   "predicted_margin": 4.7,
+   "home_win_prob": 0.613,
+   "predicted_margin": 4.6,
    "home_rank": 65,
    "away_rank": 77,
    "quality": -1.4,
    "swing": 0.0,
    "movers": [],
-   "closeness": 0.115
+   "closeness": 0.113
   },
   {
    "game_id": 401856829,
@@ -10415,14 +10415,21 @@
    "away_id": 2132,
    "neutral": false,
    "start": "2026-10-17T16:00:00.000Z",
-   "home_win_prob": 0.455,
-   "predicted_margin": -1.8,
+   "home_win_prob": 0.453,
+   "predicted_margin": -1.9,
    "home_rank": 78,
    "away_rank": 60,
-   "quality": -1.8,
+   "quality": -1.9,
    "swing": 0.005,
-   "movers": [],
-   "closeness": 0.045
+   "movers": [
+    {
+     "team": "Cincinnati",
+     "if_home_wins": 0.0,
+     "if_home_loses": 0.005,
+     "swing": -0.005
+    }
+   ],
+   "closeness": 0.047
   },
   {
    "game_id": 401869957,
@@ -10441,21 +10448,21 @@
    "movers": [
     {
      "team": "James Madison",
-     "if_home_wins": 0.605,
+     "if_home_wins": 0.606,
      "if_home_loses": 0.223,
-     "swing": 0.382
+     "swing": 0.383
     },
     {
      "team": "Liberty",
-     "if_home_wins": 0.232,
-     "if_home_loses": 0.291,
+     "if_home_wins": 0.227,
+     "if_home_loses": 0.286,
      "swing": -0.058
     },
     {
      "team": "New Mexico",
      "if_home_wins": 0.249,
-     "if_home_loses": 0.285,
-     "swing": -0.036
+     "if_home_loses": 0.284,
+     "swing": -0.035
     },
     {
      "team": "Georgia State",
@@ -10514,7 +10521,7 @@
     {
      "team": "Alabama",
      "if_home_wins": 0.801,
-     "if_home_loses": 0.769,
+     "if_home_loses": 0.77,
      "swing": 0.032
     },
     {
@@ -10539,13 +10546,13 @@
    "home_rank": 86,
    "away_rank": 8,
    "quality": -3.3,
-   "swing": 0.486,
+   "swing": 0.487,
    "movers": [
     {
      "team": "Utah",
      "if_home_wins": 0.323,
-     "if_home_loses": 0.695,
-     "swing": -0.372
+     "if_home_loses": 0.696,
+     "swing": -0.373
     },
     {
      "team": "BYU",
@@ -10575,14 +10582,8 @@
    "home_rank": 72,
    "away_rank": 88,
    "quality": -3.5,
-   "swing": 0.014,
+   "swing": 0.007,
    "movers": [
-    {
-     "team": "Kansas State",
-     "if_home_wins": 0.018,
-     "if_home_loses": 0.011,
-     "swing": 0.007
-    },
     {
      "team": "Florida Atlantic",
      "if_home_wins": 0.0,
@@ -10658,21 +10659,21 @@
    "away_id": 2440,
    "neutral": false,
    "start": "2026-10-17T23:00:00.000Z",
-   "home_win_prob": 0.811,
-   "predicted_margin": 14.1,
+   "home_win_prob": 0.81,
+   "predicted_margin": 14.0,
    "home_rank": 50,
    "away_rank": 95,
-   "quality": -5.9,
+   "quality": -5.8,
    "swing": 0.131,
    "movers": [
     {
      "team": "North Dakota State",
-     "if_home_wins": 0.138,
+     "if_home_wins": 0.139,
      "if_home_loses": 0.011,
      "swing": 0.128
     }
    ],
-   "closeness": 0.311
+   "closeness": 0.31
   },
   {
    "game_id": 401858489,
@@ -10687,7 +10688,7 @@
    "home_rank": 87,
    "away_rank": 97,
    "quality": -6.3,
-   "swing": 0.0,
+   "swing": 0.003,
    "movers": [],
    "closeness": 0.13
   },
@@ -10734,7 +10735,7 @@
      "team": "Oregon State",
      "if_home_wins": 0.05,
      "if_home_loses": 0.002,
-     "swing": 0.048
+     "swing": 0.047
     },
     {
      "team": "South Carolina",
@@ -10794,14 +10795,14 @@
    "away_id": 2026,
    "neutral": false,
    "start": "2026-10-17T00:00:00.000Z",
-   "home_win_prob": 0.502,
-   "predicted_margin": 0.1,
-   "home_rank": 111,
+   "home_win_prob": 0.5,
+   "predicted_margin": 0.0,
+   "home_rank": 112,
    "away_rank": 102,
-   "quality": -11.3,
+   "quality": -11.4,
    "swing": 0.0,
    "movers": [],
-   "closeness": 0.002
+   "closeness": 0.0
   },
   {
    "game_id": 401862800,
@@ -10813,10 +10814,10 @@
    "start": "2026-10-15T23:30:00.000Z",
    "home_win_prob": 0.337,
    "predicted_margin": -6.8,
-   "home_rank": 114,
+   "home_rank": 113,
    "away_rank": 79,
    "quality": -12.4,
-   "swing": 0.031,
+   "swing": 0.032,
    "movers": [
     {
      "team": "Boise State",
@@ -10837,8 +10838,8 @@
    "start": "2026-10-17T17:00:00.000Z",
    "home_win_prob": 0.545,
    "predicted_margin": 1.8,
-   "home_rank": 115,
-   "away_rank": 112,
+   "home_rank": 114,
+   "away_rank": 111,
    "quality": -12.4,
    "swing": 0.0,
    "movers": [],
@@ -10908,7 +10909,7 @@
    "home_rank": 121,
    "away_rank": 32,
    "quality": -13.4,
-   "swing": 0.246,
+   "swing": 0.242,
    "movers": [
     {
      "team": "New Mexico",
@@ -10936,8 +10937,8 @@
    "movers": [
     {
      "team": "James Madison",
-     "if_home_wins": 0.502,
-     "if_home_loses": 0.542,
+     "if_home_wins": 0.503,
+     "if_home_loses": 0.543,
      "swing": -0.04
     },
     {
@@ -10991,14 +10992,14 @@
    "away_id": 338,
    "neutral": false,
    "start": "2026-10-14T23:30:00.000Z",
-   "home_win_prob": 0.4,
-   "predicted_margin": -4.1,
+   "home_win_prob": 0.402,
+   "predicted_margin": -4.0,
    "home_rank": 129,
    "away_rank": 108,
-   "quality": -17.6,
+   "quality": -17.5,
    "swing": 0.0,
    "movers": [],
-   "closeness": 0.1
+   "closeness": 0.098
   },
   {
    "game_id": 401871067,
@@ -11008,21 +11009,21 @@
    "away_id": 48,
    "neutral": false,
    "start": "2026-10-13T23:00:00.000Z",
-   "home_win_prob": 0.429,
-   "predicted_margin": -2.9,
+   "home_win_prob": 0.449,
+   "predicted_margin": -2.1,
    "home_rank": 130,
-   "away_rank": 113,
-   "quality": -18.2,
+   "away_rank": 115,
+   "quality": -17.8,
    "swing": 0.008,
    "movers": [
     {
      "team": "Clemson",
      "if_home_wins": 0.004,
-     "if_home_loses": 0.012,
+     "if_home_loses": 0.013,
      "swing": -0.008
     }
    ],
-   "closeness": 0.071
+   "closeness": 0.051
   },
   {
    "game_id": 401864522,
@@ -11032,14 +11033,14 @@
    "away_id": 2459,
    "neutral": false,
    "start": "2026-10-17T19:30:00.000Z",
-   "home_win_prob": 0.703,
-   "predicted_margin": 8.5,
+   "home_win_prob": 0.705,
+   "predicted_margin": 8.6,
    "home_rank": 124,
    "away_rank": 131,
-   "quality": -21.4,
+   "quality": -21.5,
    "swing": 0.0,
    "movers": [],
-   "closeness": 0.203
+   "closeness": 0.205
   },
   {
    "game_id": 401862806,
@@ -11073,14 +11074,14 @@
    "away_id": 2050,
    "neutral": false,
    "start": "2026-10-17T16:00:00.000Z",
-   "home_win_prob": 0.707,
-   "predicted_margin": 8.7,
+   "home_win_prob": 0.709,
+   "predicted_margin": 8.8,
    "home_rank": 127,
    "away_rank": 133,
-   "quality": -23.0,
+   "quality": -23.1,
    "swing": 0.0,
    "movers": [],
-   "closeness": 0.207
+   "closeness": 0.209
   },
   {
    "game_id": 401866478,
@@ -11180,7 +11181,7 @@
    "home_rank": 57,
    "away_rank": null,
    "quality": -35.3,
-   "swing": 0.377,
+   "swing": 0.371,
    "movers": [
     {
      "team": "Texas Tech",
@@ -11691,7 +11692,7 @@
    -9.0,
    -1.0,
    10.3,
-   -23.0,
+   -23.1,
    11.4,
    12.2,
    -6.4,
@@ -11703,10 +11704,10 @@
    -27.9,
    3.2,
    4.3,
-   -11.3,
+   -11.4,
    -3.3,
    -9.3,
-   -12.0,
+   -12.5,
    9.1,
    -1.9,
    -12.8,
@@ -11732,7 +11733,7 @@
    -10.1,
    -21.8,
    11.9,
-   7.1,
+   7.0,
    -2.6,
    -5.3,
    12.0,
@@ -11745,20 +11746,20 @@
    -8.7,
    10.9,
    0.1,
-   -18.2,
+   -17.8,
    0.3,
    13.9,
    18.6,
-   -17.6,
+   -17.5,
    -2.1,
    -1.3,
    16.2,
-   -5.9,
+   -5.8,
    11.2,
    -13.2,
    5.8,
    6.8,
-   -21.4,
+   -21.5,
    2.9,
    14.3,
    30.6,
@@ -11808,7 +11809,7 @@
    -8.9,
    -24.9,
    1.0,
-   0.8,
+   0.7,
    6.6,
    6.9,
    13.3,
@@ -11816,7 +11817,7 @@
    -9.2,
    -13.4,
    -1.1,
-   -1.8,
+   -1.9,
    11.3,
    -14.9
   ],
@@ -11831,7 +11832,7 @@
    -9.0,
    -1.0,
    10.3,
-   -23.0,
+   -23.1,
    11.4,
    12.2,
    -6.4,
@@ -11843,10 +11844,10 @@
    -27.9,
    3.2,
    4.3,
-   -11.3,
+   -11.4,
    -3.3,
    -9.3,
-   -12.0,
+   -12.5,
    9.1,
    -1.9,
    -12.8,
@@ -11872,7 +11873,7 @@
    -10.1,
    -21.8,
    11.9,
-   7.1,
+   7.0,
    -2.6,
    -5.3,
    12.0,
@@ -11885,20 +11886,20 @@
    -8.7,
    10.9,
    0.1,
-   -18.2,
+   -17.8,
    0.3,
    13.9,
    18.6,
-   -17.6,
+   -17.5,
    -2.1,
    -1.3,
    16.2,
-   -5.9,
+   -5.8,
    11.2,
    -13.2,
    5.8,
    6.8,
-   -21.4,
+   -21.5,
    2.9,
    14.3,
    30.6,
@@ -11948,7 +11949,7 @@
    -8.9,
    -24.9,
    1.0,
-   0.8,
+   0.7,
    6.6,
    6.9,
    13.3,
@@ -11956,7 +11957,7 @@
    -9.2,
    -13.4,
    -1.1,
-   -1.8,
+   -1.9,
    11.3,
    -14.9
   ],
@@ -16959,90 +16960,90 @@
    "score": [
     -30.29,
     -94.4,
-    10.34,
-    -52.05,
+    10.35,
+    -52.04,
     -15.76,
     -54.65,
-    -66.47,
-    -57.73,
+    -66.45,
+    -57.71,
     -41.69,
     -35.9,
-    -88.1,
+    -88.3,
     -25.25,
     -5.2,
     -72.45,
-    -71.29,
-    -52.38,
-    -1.41,
+    -71.27,
+    -52.37,
+    -1.42,
     -54.71,
-    -59.9,
+    -59.89,
     -110.76,
-    -42.57,
+    -42.55,
     -35.47,
-    -68.41,
+    -68.6,
     -65.58,
     -66.06,
-    -61.64,
+    -62.84,
     -24.94,
     -40.31,
     -56.34,
-    -31.0,
+    -30.98,
     -42.17,
-    -44.06,
+    -44.04,
     -36.5,
     -25.93,
     18.98,
     -51.13,
-    -33.78,
+    -33.76,
     -59.86,
     -72.77,
-    -9.06,
+    -9.05,
     -48.29,
     16.26,
     -10.11,
     -44.19,
-    -36.68,
-    1.01,
-    -46.81,
+    -36.62,
+    1.02,
+    -46.8,
     -30.75,
-    -64.67,
+    -64.65,
     -79.79,
-    -20.25,
-    -7.42,
-    -32.44,
+    -20.24,
+    -7.63,
+    -32.42,
     -42.21,
     -24.39,
     -14.85,
     -63.32,
     -62.48,
-    -48.72,
+    -48.7,
     -14.71,
     17.49,
     -48.59,
     -33.96,
     -59.89,
-    -76.32,
+    -75.38,
     -52.74,
-    -18.81,
+    -18.8,
     -11.21,
-    -83.23,
+    -82.94,
     -52.55,
     -47.42,
     -11.36,
-    -59.19,
-    -8.19,
-    -66.93,
+    -58.99,
+    -8.2,
+    -66.91,
     -37.57,
-    -12.68,
-    -95.62,
+    -12.69,
+    -95.83,
     -28.31,
     -15.35,
     22.83,
-    -38.16,
+    -38.15,
     8.34,
     -30.7,
     -22.43,
-    -66.44,
+    -66.43,
     -12.74,
     -17.57,
     -21.69,
@@ -17051,10 +17052,10 @@
     -49.2,
     -80.3,
     -78.04,
-    -95.48,
-    -74.19,
+    -95.46,
+    -74.28,
     -68.0,
-    -66.92,
+    -66.91,
     -20.77,
     -45.93,
     -34.27,
@@ -17062,13 +17063,13 @@
     -29.8,
     -76.08,
     -59.36,
-    -44.73,
+    -44.71,
     -56.81,
-    -10.59,
+    -10.58,
     2.86,
     -36.45,
     -47.9,
-    6.95,
+    6.96,
     -30.34,
     -48.62,
     -51.93,
@@ -17082,19 +17083,19 @@
     -14.31,
     6.61,
     -65.93,
-    -95.03,
+    -95.01,
     -26.58,
-    -55.47,
+    -55.65,
     -32.61,
     -29.74,
     -9.33,
     -47.42,
     -73.6,
-    -68.19,
+    -68.15,
     -28.91,
-    -59.09,
+    -59.27,
     -19.46,
-    -66.47
+    -66.46
    ],
    "p_conf": [
     0.0714,
@@ -17113,26 +17114,26 @@
     0.0,
     0.0262,
     0.0373,
-    0.2412,
+    0.2409,
     0.0015,
     0.0184,
     0.0,
     0.0022,
     0.0069,
-    0.0029,
+    0.0028,
     0.0,
     0.0019,
-    0.0126,
+    0.0114,
     0.0156,
     0.0697,
     0.0652,
     0.0014,
     0.0394,
-    0.0939,
+    0.0949,
     0.001,
     0.0897,
     0.5197,
-    0.0072,
+    0.0071,
     0.0641,
     0.0007,
     0.0,
@@ -17141,14 +17142,14 @@
     0.4159,
     0.0178,
     0.0003,
-    0.1573,
-    0.694,
+    0.1602,
+    0.6941,
     0.0004,
     0.0004,
     0.0162,
     0.0007,
     0.0098,
-    0.6894,
+    0.6861,
     0.0635,
     0.0677,
     0.0204,
@@ -17161,24 +17162,24 @@
     0.0588,
     0.001,
     0.0,
-    0.0012,
+    0.0016,
     0.0005,
     0.0067,
-    0.0328,
+    0.0327,
     0.0024,
     0.0183,
     0.0005,
     0.0177,
-    0.0136,
-    0.5054,
+    0.014,
+    0.5052,
     0.0141,
     0.004,
-    0.2788,
+    0.2786,
     0.0,
     0.2121,
     0.0071,
     0.0,
-    0.2,
+    0.2001,
     0.35,
     0.0085,
     0.0438,
@@ -17192,7 +17193,7 @@
     0.0001,
     0.0,
     0.0,
-    0.0044,
+    0.0043,
     0.0023,
     0.005,
     0.0575,
@@ -17204,13 +17205,13 @@
     0.0,
     0.0007,
     0.0153,
-    0.032,
+    0.0321,
     0.1088,
     0.0001,
     0.0282,
     0.3087,
     0.1854,
-    0.0398,
+    0.0399,
     0.0265,
     0.0038,
     0.0025,
@@ -17220,7 +17221,7 @@
     0.0,
     0.1225,
     0.0189,
-    0.3045,
+    0.3048,
     0.0038,
     0.0,
     0.1622,
@@ -17230,8 +17231,8 @@
     0.0866,
     0.0,
     0.0005,
-    0.0085,
-    0.4006,
+    0.0088,
+    0.4005,
     0.0,
     0.0303,
     0.0033
