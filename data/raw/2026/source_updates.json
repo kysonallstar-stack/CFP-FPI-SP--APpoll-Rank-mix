@@ -34,5 +34,11 @@
   "seen_at": "2026-10-26T21:04:49+00:00",
   "latest_week": 8,
   "first_snapshot": false
+ },
+ {
+  "source": "fpi",
+  "seen_at": "2026-11-01T23:36:28+00:00",
+  "latest_week": 9,
+  "first_snapshot": false
  }
 ]
