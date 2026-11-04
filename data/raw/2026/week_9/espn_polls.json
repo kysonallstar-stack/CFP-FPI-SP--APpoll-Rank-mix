@@ -1,4 +1,158 @@
 {
+ "cfp": [
+  {
+   "id": 2390,
+   "rank": 1,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 61,
+   "rank": 2,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 254,
+   "rank": 3,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 84,
+   "rank": 4,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 333,
+   "rank": 5,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 96,
+   "rank": 6,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 251,
+   "rank": 7,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 26,
+   "rank": 8,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 252,
+   "rank": 9,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 145,
+   "rank": 10,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 87,
+   "rank": 11,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 194,
+   "rank": 12,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2633,
+   "rank": 13,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 99,
+   "rank": 14,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2641,
+   "rank": 15,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 154,
+   "rank": 16,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 248,
+   "rank": 17,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 142,
+   "rank": 18,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2294,
+   "rank": 19,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 30,
+   "rank": 20,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2579,
+   "rank": 21,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 12,
+   "rank": 22,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2483,
+   "rank": 23,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 57,
+   "rank": 24,
+   "points": 0.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 68,
+   "rank": 25,
+   "points": 0.0,
+   "first_place_votes": 0
+  }
+ ],
+ "cfp_week": 10,
+ "cfp_updated": "2026-11-04T03:21Z",
  "ap": [
   {
    "id": 2390,
@@ -213,5 +367,5 @@
  ],
  "ap_week": 10,
  "ap_updated": "2026-11-01T22:08Z",
- "fetched_at": "2026-11-01T23:36:30+00:00"
+ "fetched_at": "2026-11-04T22:41:02+00:00"
 }
