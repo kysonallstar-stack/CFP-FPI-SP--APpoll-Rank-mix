@@ -27,25 +27,10 @@
    "losses": 1,
    "p_title_game": 0.0,
    "p_win_conference": 0.0,
-   "p_playoff": 0.9677,
-   "p_bye": 0.6834,
+   "p_playoff": 0.9804,
+   "p_bye": 0.7797,
    "expected_wins": 10.74,
    "expected_regular_season_wins": 10.74
-  },
-  {
-   "id": 2390,
-   "team": "Miami",
-   "conference": "ACC",
-   "rank": 3,
-   "rating": 25.8,
-   "wins": 8,
-   "losses": 1,
-   "p_title_game": 0.9986,
-   "p_win_conference": 0.6531,
-   "p_playoff": 0.9316,
-   "p_bye": 0.6281,
-   "expected_wins": 11.36,
-   "expected_regular_season_wins": 10.71
   },
   {
    "id": 61,
@@ -57,8 +42,8 @@
    "losses": 1,
    "p_title_game": 0.9679,
    "p_win_conference": 0.5871,
-   "p_playoff": 0.9308,
-   "p_bye": 0.6388,
+   "p_playoff": 0.933,
+   "p_bye": 0.6376,
    "expected_wins": 11.2,
    "expected_regular_season_wins": 10.61
   },
@@ -72,25 +57,25 @@
    "losses": 2,
    "p_title_game": 0.4273,
    "p_win_conference": 0.1833,
-   "p_playoff": 0.894,
-   "p_bye": 0.4146,
+   "p_playoff": 0.9067,
+   "p_bye": 0.4362,
    "expected_wins": 9.99,
    "expected_regular_season_wins": 9.81
   },
   {
-   "id": 84,
-   "team": "Indiana",
-   "conference": "Big Ten",
-   "rank": 6,
-   "rating": 24.0,
+   "id": 2390,
+   "team": "Miami",
+   "conference": "ACC",
+   "rank": 3,
+   "rating": 25.8,
    "wins": 8,
    "losses": 1,
-   "p_title_game": 0.639,
-   "p_win_conference": 0.3722,
-   "p_playoff": 0.8666,
-   "p_bye": 0.3903,
-   "expected_wins": 10.8,
-   "expected_regular_season_wins": 10.43
+   "p_title_game": 0.9986,
+   "p_win_conference": 0.6531,
+   "p_playoff": 0.9004,
+   "p_bye": 0.5121,
+   "expected_wins": 11.36,
+   "expected_regular_season_wins": 10.71
   },
   {
    "id": 254,
@@ -102,10 +87,25 @@
    "losses": 0,
    "p_title_game": 0.9544,
    "p_win_conference": 0.6053,
-   "p_playoff": 0.8635,
-   "p_bye": 0.5029,
+   "p_playoff": 0.8654,
+   "p_bye": 0.5052,
    "expected_wins": 11.91,
    "expected_regular_season_wins": 11.31
+  },
+  {
+   "id": 84,
+   "team": "Indiana",
+   "conference": "Big Ten",
+   "rank": 6,
+   "rating": 24.0,
+   "wins": 8,
+   "losses": 1,
+   "p_title_game": 0.6399,
+   "p_win_conference": 0.3728,
+   "p_playoff": 0.8018,
+   "p_bye": 0.3011,
+   "expected_wins": 10.81,
+   "expected_regular_season_wins": 10.43
   },
   {
    "id": 26,
@@ -116,9 +116,9 @@
    "wins": 9,
    "losses": 0,
    "p_title_game": 0.9352,
-   "p_win_conference": 0.44,
-   "p_playoff": 0.6932,
-   "p_bye": 0.2561,
+   "p_win_conference": 0.4396,
+   "p_playoff": 0.7305,
+   "p_bye": 0.2997,
    "expected_wins": 11.61,
    "expected_regular_season_wins": 11.17
   },
@@ -132,25 +132,10 @@
    "losses": 2,
    "p_title_game": 0.3254,
    "p_win_conference": 0.1368,
-   "p_playoff": 0.6173,
-   "p_bye": 0.1336,
+   "p_playoff": 0.6276,
+   "p_bye": 0.137,
    "expected_wins": 9.34,
    "expected_regular_season_wins": 9.2
-  },
-  {
-   "id": 2335,
-   "team": "Liberty",
-   "conference": "Conference USA",
-   "rank": 33,
-   "rating": 11.8,
-   "wins": 8,
-   "losses": 1,
-   "p_title_game": 0.9963,
-   "p_win_conference": 0.7753,
-   "p_playoff": 0.4904,
-   "p_bye": 0.013,
-   "expected_wins": 11.58,
-   "expected_regular_season_wins": 10.81
   },
   {
    "id": 154,
@@ -162,10 +147,25 @@
    "losses": 1,
    "p_title_game": 0.6732,
    "p_win_conference": 0.2611,
-   "p_playoff": 0.465,
-   "p_bye": 0.0832,
+   "p_playoff": 0.5117,
+   "p_bye": 0.1057,
    "expected_wins": 10.48,
    "expected_regular_season_wins": 10.22
+  },
+  {
+   "id": 2335,
+   "team": "Liberty",
+   "conference": "Conference USA",
+   "rank": 33,
+   "rating": 11.8,
+   "wins": 8,
+   "losses": 1,
+   "p_title_game": 0.9963,
+   "p_win_conference": 0.7753,
+   "p_playoff": 0.5011,
+   "p_bye": 0.015,
+   "expected_wins": 11.58,
+   "expected_regular_season_wins": 10.81
   },
   {
    "id": 68,
@@ -177,25 +177,10 @@
    "losses": 1,
    "p_title_game": 0.9939,
    "p_win_conference": 0.765,
-   "p_playoff": 0.4608,
-   "p_bye": 0.0236,
+   "p_playoff": 0.4829,
+   "p_bye": 0.0292,
    "expected_wins": 11.41,
    "expected_regular_season_wins": 10.64
-  },
-  {
-   "id": 252,
-   "team": "BYU",
-   "conference": "Big 12",
-   "rank": 15,
-   "rating": 17.2,
-   "wins": 7,
-   "losses": 2,
-   "p_title_game": 0.1958,
-   "p_win_conference": 0.0763,
-   "p_playoff": 0.3745,
-   "p_bye": 0.0386,
-   "expected_wins": 9.31,
-   "expected_regular_season_wins": 9.23
   },
   {
    "id": 2633,
@@ -207,8 +192,8 @@
    "losses": 2,
    "p_title_game": 0.2306,
    "p_win_conference": 0.0829,
-   "p_playoff": 0.3578,
-   "p_bye": 0.0408,
+   "p_playoff": 0.4571,
+   "p_bye": 0.0689,
    "expected_wins": 9.22,
    "expected_regular_season_wins": 9.14
   },
@@ -222,55 +207,40 @@
    "losses": 1,
    "p_title_game": 0.5469,
    "p_win_conference": 0.2187,
-   "p_playoff": 0.3554,
-   "p_bye": 0.0458,
+   "p_playoff": 0.391,
+   "p_bye": 0.0581,
    "expected_wins": 10.14,
    "expected_regular_season_wins": 9.92
+  },
+  {
+   "id": 252,
+   "team": "BYU",
+   "conference": "Big 12",
+   "rank": 15,
+   "rating": 17.2,
+   "wins": 7,
+   "losses": 2,
+   "p_title_game": 0.1958,
+   "p_win_conference": 0.0763,
+   "p_playoff": 0.3518,
+   "p_bye": 0.0333,
+   "expected_wins": 9.31,
+   "expected_regular_season_wins": 9.23
   },
   {
    "id": 167,
    "team": "New Mexico",
    "conference": "Mountain West",
-   "rank": 30,
+   "rank": 29,
    "rating": 12.8,
    "wins": 8,
    "losses": 1,
    "p_title_game": 0.9473,
    "p_win_conference": 0.7171,
-   "p_playoff": 0.3443,
-   "p_bye": 0.0103,
+   "p_playoff": 0.3484,
+   "p_bye": 0.0118,
    "expected_wins": 11.23,
    "expected_regular_season_wins": 10.51
-  },
-  {
-   "id": 194,
-   "team": "Ohio State",
-   "conference": "Big Ten",
-   "rank": 9,
-   "rating": 20.8,
-   "wins": 6,
-   "losses": 3,
-   "p_title_game": 0.1037,
-   "p_win_conference": 0.051,
-   "p_playoff": 0.3437,
-   "p_bye": 0.0347,
-   "expected_wins": 8.2,
-   "expected_regular_season_wins": 8.14
-  },
-  {
-   "id": 145,
-   "team": "Ole Miss",
-   "conference": "SEC",
-   "rank": 17,
-   "rating": 16.5,
-   "wins": 6,
-   "losses": 3,
-   "p_title_game": 0.002,
-   "p_win_conference": 0.0007,
-   "p_playoff": 0.3123,
-   "p_bye": 0.0091,
-   "expected_wins": 8.36,
-   "expected_regular_season_wins": 8.36
   },
   {
    "id": 2294,
@@ -280,10 +250,10 @@
    "rating": 17.1,
    "wins": 7,
    "losses": 2,
-   "p_title_game": 0.0568,
-   "p_win_conference": 0.0252,
-   "p_playoff": 0.2734,
-   "p_bye": 0.0106,
+   "p_title_game": 0.0565,
+   "p_win_conference": 0.0251,
+   "p_playoff": 0.3355,
+   "p_bye": 0.0237,
    "expected_wins": 9.2,
    "expected_regular_season_wins": 9.18
   },
@@ -297,40 +267,25 @@
    "losses": 2,
    "p_title_game": 0.1034,
    "p_win_conference": 0.0347,
-   "p_playoff": 0.2349,
-   "p_bye": 0.0095,
+   "p_playoff": 0.2803,
+   "p_bye": 0.0161,
    "expected_wins": 9.26,
    "expected_regular_season_wins": 9.23
   },
   {
-   "id": 96,
-   "team": "Kentucky",
-   "conference": "SEC",
-   "rank": 25,
-   "rating": 13.2,
-   "wins": 7,
-   "losses": 2,
-   "p_title_game": 0.0406,
-   "p_win_conference": 0.0076,
-   "p_playoff": 0.1755,
-   "p_bye": 0.011,
-   "expected_wins": 8.65,
-   "expected_regular_season_wins": 8.65
-  },
-  {
-   "id": 99,
-   "team": "LSU",
-   "conference": "SEC",
-   "rank": 12,
-   "rating": 19.9,
+   "id": 194,
+   "team": "Ohio State",
+   "conference": "Big Ten",
+   "rank": 9,
+   "rating": 20.8,
    "wins": 6,
    "losses": 3,
-   "p_title_game": 0.002,
-   "p_win_conference": 0.0009,
-   "p_playoff": 0.1741,
-   "p_bye": 0.0134,
-   "expected_wins": 7.7,
-   "expected_regular_season_wins": 7.7
+   "p_title_game": 0.1039,
+   "p_win_conference": 0.0513,
+   "p_playoff": 0.2361,
+   "p_bye": 0.0084,
+   "expected_wins": 8.2,
+   "expected_regular_season_wins": 8.15
   },
   {
    "id": 2483,
@@ -340,12 +295,12 @@
    "rating": 17.7,
    "wins": 6,
    "losses": 3,
-   "p_title_game": 0.1765,
-   "p_win_conference": 0.0795,
-   "p_playoff": 0.1533,
-   "p_bye": 0.0009,
+   "p_title_game": 0.1758,
+   "p_win_conference": 0.0791,
+   "p_playoff": 0.228,
+   "p_bye": 0.0035,
    "expected_wins": 8.38,
-   "expected_regular_season_wins": 8.3
+   "expected_regular_season_wins": 8.31
   },
   {
    "id": 256,
@@ -357,10 +312,40 @@
    "losses": 2,
    "p_title_game": 0.7429,
    "p_win_conference": 0.4784,
-   "p_playoff": 0.1462,
-   "p_bye": 0.0011,
+   "p_playoff": 0.1512,
+   "p_bye": 0.0008,
    "expected_wins": 10.12,
    "expected_regular_season_wins": 9.64
+  },
+  {
+   "id": 145,
+   "team": "Ole Miss",
+   "conference": "SEC",
+   "rank": 17,
+   "rating": 16.5,
+   "wins": 6,
+   "losses": 3,
+   "p_title_game": 0.002,
+   "p_win_conference": 0.0007,
+   "p_playoff": 0.1467,
+   "p_bye": 0.0011,
+   "expected_wins": 8.36,
+   "expected_regular_season_wins": 8.36
+  },
+  {
+   "id": 96,
+   "team": "Kentucky",
+   "conference": "SEC",
+   "rank": 25,
+   "rating": 13.2,
+   "wins": 7,
+   "losses": 2,
+   "p_title_game": 0.0406,
+   "p_win_conference": 0.0076,
+   "p_playoff": 0.1269,
+   "p_bye": 0.0043,
+   "expected_wins": 8.65,
+   "expected_regular_season_wins": 8.65
   },
   {
    "id": 12,
@@ -372,10 +357,40 @@
    "losses": 2,
    "p_title_game": 0.0515,
    "p_win_conference": 0.0207,
-   "p_playoff": 0.129,
-   "p_bye": 0.0027,
+   "p_playoff": 0.1231,
+   "p_bye": 0.0018,
    "expected_wins": 8.96,
    "expected_regular_season_wins": 8.94
+  },
+  {
+   "id": 99,
+   "team": "LSU",
+   "conference": "SEC",
+   "rank": 12,
+   "rating": 19.9,
+   "wins": 6,
+   "losses": 3,
+   "p_title_game": 0.002,
+   "p_win_conference": 0.0009,
+   "p_playoff": 0.1136,
+   "p_bye": 0.0048,
+   "expected_wins": 7.7,
+   "expected_regular_season_wins": 7.7
+  },
+  {
+   "id": 30,
+   "team": "USC",
+   "conference": "Big Ten",
+   "rank": 18,
+   "rating": 16.3,
+   "wins": 7,
+   "losses": 2,
+   "p_title_game": 0.0493,
+   "p_win_conference": 0.0216,
+   "p_playoff": 0.0781,
+   "p_bye": 0.0036,
+   "expected_wins": 8.53,
+   "expected_regular_season_wins": 8.51
   },
   {
    "id": 2567,
@@ -387,52 +402,22 @@
    "losses": 2,
    "p_title_game": 0.2255,
    "p_win_conference": 0.0563,
-   "p_playoff": 0.0681,
-   "p_bye": 0.0005,
+   "p_playoff": 0.0683,
+   "p_bye": 0.0003,
    "expected_wins": 8.53,
    "expected_regular_season_wins": 8.48
-  },
-  {
-   "id": 30,
-   "team": "USC",
-   "conference": "Big Ten",
-   "rank": 18,
-   "rating": 16.3,
-   "wins": 7,
-   "losses": 2,
-   "p_title_game": 0.0492,
-   "p_win_conference": 0.0216,
-   "p_playoff": 0.066,
-   "p_bye": 0.0024,
-   "expected_wins": 8.53,
-   "expected_regular_season_wins": 8.51
-  },
-  {
-   "id": 2449,
-   "team": "North Dakota State",
-   "conference": "Mountain West",
-   "rank": 47,
-   "rating": 7.6,
-   "wins": 7,
-   "losses": 2,
-   "p_title_game": 0.6086,
-   "p_win_conference": 0.2125,
-   "p_playoff": 0.0436,
-   "p_bye": 0.0,
-   "expected_wins": 9.78,
-   "expected_regular_season_wins": 9.56
   },
   {
    "id": 97,
    "team": "Louisville",
    "conference": "ACC",
-   "rank": 22,
+   "rank": 23,
    "rating": 14.4,
    "wins": 6,
    "losses": 3,
    "p_title_game": 0.0656,
    "p_win_conference": 0.0195,
-   "p_playoff": 0.0434,
+   "p_playoff": 0.0451,
    "p_bye": 0.0,
    "expected_wins": 7.75,
    "expected_regular_season_wins": 7.73
@@ -447,10 +432,40 @@
    "losses": 3,
    "p_title_game": 0.0864,
    "p_win_conference": 0.0264,
-   "p_playoff": 0.0389,
+   "p_playoff": 0.0434,
    "p_bye": 0.0,
    "expected_wins": 7.92,
    "expected_regular_season_wins": 7.89
+  },
+  {
+   "id": 2579,
+   "team": "South Carolina",
+   "conference": "SEC",
+   "rank": 22,
+   "rating": 14.4,
+   "wins": 6,
+   "losses": 3,
+   "p_title_game": 0.0018,
+   "p_win_conference": 0.0003,
+   "p_playoff": 0.0414,
+   "p_bye": 0.0005,
+   "expected_wins": 7.65,
+   "expected_regular_season_wins": 7.65
+  },
+  {
+   "id": 2449,
+   "team": "North Dakota State",
+   "conference": "Mountain West",
+   "rank": 47,
+   "rating": 7.6,
+   "wins": 7,
+   "losses": 2,
+   "p_title_game": 0.6086,
+   "p_win_conference": 0.2125,
+   "p_playoff": 0.0413,
+   "p_bye": 0.0,
+   "expected_wins": 9.78,
+   "expected_regular_season_wins": 9.56
   },
   {
    "id": 235,
@@ -462,7 +477,7 @@
    "losses": 2,
    "p_title_game": 0.5484,
    "p_win_conference": 0.2601,
-   "p_playoff": 0.0294,
+   "p_playoff": 0.0281,
    "p_bye": 0.0,
    "expected_wins": 9.35,
    "expected_regular_season_wins": 9.09
@@ -477,25 +492,10 @@
    "losses": 2,
    "p_title_game": 0.8846,
    "p_win_conference": 0.5592,
-   "p_playoff": 0.0269,
+   "p_playoff": 0.0244,
    "p_bye": 0.0001,
    "expected_wins": 9.85,
    "expected_regular_season_wins": 9.29
-  },
-  {
-   "id": 2579,
-   "team": "South Carolina",
-   "conference": "SEC",
-   "rank": 23,
-   "rating": 14.4,
-   "wins": 6,
-   "losses": 3,
-   "p_title_game": 0.0018,
-   "p_win_conference": 0.0003,
-   "p_playoff": 0.0261,
-   "p_bye": 0.0001,
-   "expected_wins": 7.65,
-   "expected_regular_season_wins": 7.65
   },
   {
    "id": 150,
@@ -507,10 +507,25 @@
    "losses": 2,
    "p_title_game": 0.0328,
    "p_win_conference": 0.0086,
-   "p_playoff": 0.0203,
+   "p_playoff": 0.0205,
    "p_bye": 0.0001,
    "expected_wins": 8.2,
    "expected_regular_season_wins": 8.19
+  },
+  {
+   "id": 275,
+   "team": "Wisconsin",
+   "conference": "Big Ten",
+   "rank": 38,
+   "rating": 10.0,
+   "wins": 6,
+   "losses": 3,
+   "p_title_game": 0.0264,
+   "p_win_conference": 0.0068,
+   "p_playoff": 0.0182,
+   "p_bye": 0.0,
+   "expected_wins": 8.17,
+   "expected_regular_season_wins": 8.16
   },
   {
    "id": 239,
@@ -528,19 +543,19 @@
    "expected_regular_season_wins": 7.12
   },
   {
-   "id": 275,
-   "team": "Wisconsin",
+   "id": 77,
+   "team": "Northwestern",
    "conference": "Big Ten",
-   "rank": 38,
-   "rating": 10.0,
+   "rank": 31,
+   "rating": 12.2,
    "wins": 6,
    "losses": 3,
-   "p_title_game": 0.0266,
-   "p_win_conference": 0.0068,
-   "p_playoff": 0.0166,
+   "p_title_game": 0.0001,
+   "p_win_conference": 0.0,
+   "p_playoff": 0.0114,
    "p_bye": 0.0,
-   "expected_wins": 8.17,
-   "expected_regular_season_wins": 8.16
+   "expected_wins": 7.6,
+   "expected_regular_season_wins": 7.6
   },
   {
    "id": 142,
@@ -552,40 +567,10 @@
    "losses": 3,
    "p_title_game": 0.0016,
    "p_win_conference": 0.0003,
-   "p_playoff": 0.0163,
-   "p_bye": 0.0007,
+   "p_playoff": 0.0108,
+   "p_bye": 0.0003,
    "expected_wins": 7.29,
    "expected_regular_season_wins": 7.29
-  },
-  {
-   "id": 77,
-   "team": "Northwestern",
-   "conference": "Big Ten",
-   "rank": 31,
-   "rating": 12.2,
-   "wins": 6,
-   "losses": 3,
-   "p_title_game": 0.0001,
-   "p_win_conference": 0.0,
-   "p_playoff": 0.0104,
-   "p_bye": 0.0,
-   "expected_wins": 7.6,
-   "expected_regular_season_wins": 7.6
-  },
-  {
-   "id": 356,
-   "team": "Illinois",
-   "conference": "Big Ten",
-   "rank": 45,
-   "rating": 7.8,
-   "wins": 6,
-   "losses": 3,
-   "p_title_game": 0.0129,
-   "p_win_conference": 0.0037,
-   "p_playoff": 0.0043,
-   "p_bye": 0.0,
-   "expected_wins": 6.89,
-   "expected_regular_season_wins": 6.89
   },
   {
    "id": 221,
@@ -597,10 +582,25 @@
    "losses": 3,
    "p_title_game": 0.0002,
    "p_win_conference": 0.0002,
-   "p_playoff": 0.0042,
+   "p_playoff": 0.0043,
    "p_bye": 0.0,
    "expected_wins": 7.76,
    "expected_regular_season_wins": 7.76
+  },
+  {
+   "id": 356,
+   "team": "Illinois",
+   "conference": "Big Ten",
+   "rank": 45,
+   "rating": 7.8,
+   "wins": 6,
+   "losses": 3,
+   "p_title_game": 0.0129,
+   "p_win_conference": 0.0037,
+   "p_playoff": 0.0041,
+   "p_bye": 0.0,
+   "expected_wins": 6.89,
+   "expected_regular_season_wins": 6.89
   },
   {
    "id": 2348,
@@ -612,7 +612,7 @@
    "losses": 2,
    "p_title_game": 0.992,
    "p_win_conference": 0.3779,
-   "p_playoff": 0.0029,
+   "p_playoff": 0.0027,
    "p_bye": 0.0,
    "expected_wins": 9.53,
    "expected_regular_season_wins": 9.15
@@ -621,16 +621,16 @@
    "id": 158,
    "team": "Nebraska",
    "conference": "Big Ten",
-   "rank": 29,
-   "rating": 12.9,
+   "rank": 30,
+   "rating": 12.8,
    "wins": 5,
    "losses": 4,
    "p_title_game": 0.0,
    "p_win_conference": 0.0,
-   "p_playoff": 0.0016,
+   "p_playoff": 0.0023,
    "p_bye": 0.0,
-   "expected_wins": 6.58,
-   "expected_regular_season_wins": 6.58
+   "expected_wins": 6.57,
+   "expected_regular_season_wins": 6.57
   },
   {
    "id": 213,
@@ -642,7 +642,7 @@
    "losses": 4,
    "p_title_game": 0.0,
    "p_win_conference": 0.0,
-   "p_playoff": 0.0014,
+   "p_playoff": 0.0015,
    "p_bye": 0.0,
    "expected_wins": 7.44,
    "expected_regular_season_wins": 7.44
@@ -657,7 +657,7 @@
    "losses": 3,
    "p_title_game": 0.0041,
    "p_win_conference": 0.0012,
-   "p_playoff": 0.0014,
+   "p_playoff": 0.0012,
    "p_bye": 0.0,
    "expected_wins": 7.45,
    "expected_regular_season_wins": 7.45
@@ -666,7 +666,7 @@
    "id": 55,
    "team": "Jacksonville State",
    "conference": "Conference USA",
-   "rank": 66,
+   "rank": 67,
    "rating": 0.8,
    "wins": 7,
    "losses": 2,
@@ -687,7 +687,7 @@
    "losses": 4,
    "p_title_game": 0.0008,
    "p_win_conference": 0.0001,
-   "p_playoff": 0.001,
+   "p_playoff": 0.0007,
    "p_bye": 0.0,
    "expected_wins": 6.39,
    "expected_regular_season_wins": 6.39
@@ -700,12 +700,12 @@
    "rating": 0.2,
    "wins": 7,
    "losses": 2,
-   "p_title_game": 0.5165,
-   "p_win_conference": 0.2974,
-   "p_playoff": 0.0009,
+   "p_title_game": 0.5199,
+   "p_win_conference": 0.298,
+   "p_playoff": 0.0007,
    "p_bye": 0.0,
-   "expected_wins": 9.5,
-   "expected_regular_season_wins": 9.21
+   "expected_wins": 9.51,
+   "expected_regular_season_wins": 9.22
   },
   {
    "id": 2005,
@@ -717,7 +717,7 @@
    "losses": 2,
    "p_title_game": 0.0284,
    "p_win_conference": 0.0121,
-   "p_playoff": 0.0008,
+   "p_playoff": 0.0007,
    "p_bye": 0.0,
    "expected_wins": 8.91,
    "expected_regular_season_wins": 8.9
@@ -732,7 +732,7 @@
    "losses": 4,
    "p_title_game": 0.0,
    "p_win_conference": 0.0,
-   "p_playoff": 0.0004,
+   "p_playoff": 0.0002,
    "p_bye": 0.0,
    "expected_wins": 6.58,
    "expected_regular_season_wins": 6.58
@@ -745,27 +745,12 @@
    "rating": -0.4,
    "wins": 7,
    "losses": 2,
-   "p_title_game": 0.3191,
-   "p_win_conference": 0.1152,
-   "p_playoff": 0.0003,
+   "p_title_game": 0.3193,
+   "p_win_conference": 0.1154,
+   "p_playoff": 0.0002,
    "p_bye": 0.0,
    "expected_wins": 8.68,
    "expected_regular_season_wins": 8.57
-  },
-  {
-   "id": 153,
-   "team": "North Carolina",
-   "conference": "ACC",
-   "rank": 48,
-   "rating": 7.4,
-   "wins": 5,
-   "losses": 4,
-   "p_title_game": 0.0,
-   "p_win_conference": 0.0,
-   "p_playoff": 0.0002,
-   "p_bye": 0.0,
-   "expected_wins": 6.73,
-   "expected_regular_season_wins": 6.73
   },
   {
    "id": 130,
@@ -787,30 +772,15 @@
    "team": "Washington",
    "conference": "Big Ten",
    "rank": 42,
-   "rating": 8.3,
+   "rating": 8.2,
    "wins": 5,
    "losses": 4,
    "p_title_game": 0.0,
    "p_win_conference": 0.0,
    "p_playoff": 0.0001,
    "p_bye": 0.0,
-   "expected_wins": 6.08,
-   "expected_regular_season_wins": 6.08
-  },
-  {
-   "id": 58,
-   "team": "South Florida",
-   "conference": "American Athletic",
-   "rank": 60,
-   "rating": 2.6,
-   "wins": 6,
-   "losses": 3,
-   "p_title_game": 0.002,
-   "p_win_conference": 0.0005,
-   "p_playoff": 0.0001,
-   "p_bye": 0.0,
-   "expected_wins": 7.83,
-   "expected_regular_season_wins": 7.83
+   "expected_wins": 6.07,
+   "expected_regular_season_wins": 6.07
   },
   {
    "id": 245,
@@ -841,6 +811,21 @@
    "p_bye": 0.0,
    "expected_wins": 5.16,
    "expected_regular_season_wins": 5.16
+  },
+  {
+   "id": 153,
+   "team": "North Carolina",
+   "conference": "ACC",
+   "rank": 48,
+   "rating": 7.4,
+   "wins": 5,
+   "losses": 4,
+   "p_title_game": 0.0,
+   "p_win_conference": 0.0,
+   "p_playoff": 0.0,
+   "p_bye": 0.0,
+   "expected_wins": 6.73,
+   "expected_regular_season_wins": 6.73
   },
   {
    "id": 52,
@@ -978,6 +963,21 @@
    "expected_regular_season_wins": 4.0
   },
   {
+   "id": 58,
+   "team": "South Florida",
+   "conference": "American Athletic",
+   "rank": 60,
+   "rating": 2.6,
+   "wins": 6,
+   "losses": 3,
+   "p_title_game": 0.0021,
+   "p_win_conference": 0.0005,
+   "p_playoff": 0.0,
+   "p_bye": 0.0,
+   "expected_wins": 7.83,
+   "expected_regular_season_wins": 7.83
+  },
+  {
    "id": 258,
    "team": "Virginia",
    "conference": "ACC",
@@ -1023,25 +1023,10 @@
    "expected_regular_season_wins": 5.01
   },
   {
-   "id": 66,
-   "team": "Iowa State",
-   "conference": "Big 12",
-   "rank": 64,
-   "rating": 1.3,
-   "wins": 4,
-   "losses": 5,
-   "p_title_game": 0.0,
-   "p_win_conference": 0.0,
-   "p_playoff": 0.0,
-   "p_bye": 0.0,
-   "expected_wins": 5.5,
-   "expected_regular_season_wins": 5.5
-  },
-  {
    "id": 202,
    "team": "Tulsa",
    "conference": "American Athletic",
-   "rank": 65,
+   "rank": 64,
    "rating": 1.3,
    "wins": 5,
    "losses": 4,
@@ -1053,10 +1038,25 @@
    "expected_regular_season_wins": 7.09
   },
   {
+   "id": 66,
+   "team": "Iowa State",
+   "conference": "Big 12",
+   "rank": 65,
+   "rating": 1.3,
+   "wins": 4,
+   "losses": 5,
+   "p_title_game": 0.0,
+   "p_win_conference": 0.0,
+   "p_playoff": 0.0,
+   "p_bye": 0.0,
+   "expected_wins": 5.5,
+   "expected_regular_season_wins": 5.5
+  },
+  {
    "id": 135,
    "team": "Minnesota",
    "conference": "Big Ten",
-   "rank": 67,
+   "rank": 66,
    "rating": 0.8,
    "wins": 5,
    "losses": 4,
@@ -1173,34 +1173,34 @@
    "expected_regular_season_wins": 4.47
   },
   {
+   "id": 2711,
+   "team": "Western Michigan",
+   "conference": "Mid-American",
+   "rank": 78,
+   "rating": -0.8,
+   "wins": 6,
+   "losses": 3,
+   "p_title_game": 0.6385,
+   "p_win_conference": 0.3461,
+   "p_playoff": 0.0,
+   "p_bye": 0.0,
+   "expected_wins": 8.8,
+   "expected_regular_season_wins": 8.46
+  },
+  {
    "id": 349,
    "team": "Army",
    "conference": "American Athletic",
-   "rank": 78,
+   "rank": 79,
    "rating": -1.0,
    "wins": 5,
    "losses": 4,
-   "p_title_game": 0.1872,
-   "p_win_conference": 0.052,
+   "p_title_game": 0.1869,
+   "p_win_conference": 0.0518,
    "p_playoff": 0.0,
    "p_bye": 0.0,
    "expected_wins": 6.94,
    "expected_regular_season_wins": 6.89
-  },
-  {
-   "id": 2711,
-   "team": "Western Michigan",
-   "conference": "Mid-American",
-   "rank": 79,
-   "rating": -1.1,
-   "wins": 6,
-   "losses": 3,
-   "p_title_game": 0.6325,
-   "p_win_conference": 0.3365,
-   "p_playoff": 0.0,
-   "p_bye": 0.0,
-   "expected_wins": 8.78,
-   "expected_regular_season_wins": 8.45
   },
   {
    "id": 183,
@@ -1248,25 +1248,10 @@
    "expected_regular_season_wins": 4.66
   },
   {
-   "id": 152,
-   "team": "NC State",
-   "conference": "ACC",
-   "rank": 83,
-   "rating": -2.8,
-   "wins": 4,
-   "losses": 5,
-   "p_title_game": 0.0,
-   "p_win_conference": 0.0,
-   "p_playoff": 0.0,
-   "p_bye": 0.0,
-   "expected_wins": 5.0,
-   "expected_regular_season_wins": 5.0
-  },
-  {
    "id": 41,
    "team": "UConn",
    "conference": "FBS Independents",
-   "rank": 84,
+   "rank": 83,
    "rating": -2.8,
    "wins": 4,
    "losses": 5,
@@ -1276,6 +1261,21 @@
    "p_bye": 0.0,
    "expected_wins": 5.61,
    "expected_regular_season_wins": 5.61
+  },
+  {
+   "id": 152,
+   "team": "NC State",
+   "conference": "ACC",
+   "rank": 84,
+   "rating": -2.8,
+   "wins": 4,
+   "losses": 5,
+   "p_title_game": 0.0,
+   "p_win_conference": 0.0,
+   "p_playoff": 0.0,
+   "p_bye": 0.0,
+   "expected_wins": 5.0,
+   "expected_regular_season_wins": 5.0
   },
   {
    "id": 151,
@@ -1293,25 +1293,10 @@
    "expected_regular_season_wins": 6.83
   },
   {
-   "id": 2439,
-   "team": "UNLV",
-   "conference": "Mountain West",
-   "rank": 86,
-   "rating": -3.5,
-   "wins": 5,
-   "losses": 4,
-   "p_title_game": 0.0074,
-   "p_win_conference": 0.002,
-   "p_playoff": 0.0,
-   "p_bye": 0.0,
-   "expected_wins": 6.39,
-   "expected_regular_season_wins": 6.39
-  },
-  {
    "id": 2226,
    "team": "Florida Atlantic",
    "conference": "American Athletic",
-   "rank": 87,
+   "rank": 86,
    "rating": -3.5,
    "wins": 6,
    "losses": 3,
@@ -1323,25 +1308,25 @@
    "expected_regular_season_wins": 7.17
   },
   {
-   "id": 195,
-   "team": "Ohio",
-   "conference": "Mid-American",
-   "rank": 88,
-   "rating": -3.7,
-   "wins": 7,
-   "losses": 2,
-   "p_title_game": 0.5889,
-   "p_win_conference": 0.2816,
+   "id": 2439,
+   "team": "UNLV",
+   "conference": "Mountain West",
+   "rank": 87,
+   "rating": -3.5,
+   "wins": 5,
+   "losses": 4,
+   "p_title_game": 0.0074,
+   "p_win_conference": 0.002,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 9.14,
-   "expected_regular_season_wins": 8.86
+   "expected_wins": 6.39,
+   "expected_regular_season_wins": 6.39
   },
   {
    "id": 120,
    "team": "Maryland",
    "conference": "Big Ten",
-   "rank": 89,
+   "rank": 88,
    "rating": -3.9,
    "wins": 3,
    "losses": 6,
@@ -1351,6 +1336,21 @@
    "p_bye": 0.0,
    "expected_wins": 3.6,
    "expected_regular_season_wins": 3.6
+  },
+  {
+   "id": 195,
+   "team": "Ohio",
+   "conference": "Mid-American",
+   "rank": 89,
+   "rating": -4.2,
+   "wins": 7,
+   "losses": 2,
+   "p_title_game": 0.5751,
+   "p_win_conference": 0.2682,
+   "p_playoff": 0.0,
+   "p_bye": 0.0,
+   "expected_wins": 9.1,
+   "expected_regular_season_wins": 8.83
   },
   {
    "id": 328,
@@ -1428,10 +1428,25 @@
    "expected_regular_season_wins": 7.41
   },
   {
+   "id": 193,
+   "team": "Miami (OH)",
+   "conference": "Mid-American",
+   "rank": 95,
+   "rating": -7.6,
+   "wins": 5,
+   "losses": 4,
+   "p_title_game": 0.0502,
+   "p_win_conference": 0.0192,
+   "p_playoff": 0.0,
+   "p_bye": 0.0,
+   "expected_wins": 6.56,
+   "expected_regular_season_wins": 6.54
+  },
+  {
    "id": 59,
    "team": "Georgia Tech",
    "conference": "ACC",
-   "rank": 95,
+   "rank": 96,
    "rating": -7.6,
    "wins": 2,
    "losses": 7,
@@ -1446,7 +1461,7 @@
    "id": 48,
    "team": "Delaware",
    "conference": "Conference USA",
-   "rank": 96,
+   "rank": 97,
    "rating": -7.8,
    "wins": 4,
    "losses": 5,
@@ -1461,7 +1476,7 @@
    "id": 2440,
    "team": "Nevada",
    "conference": "Mountain West",
-   "rank": 97,
+   "rank": 98,
    "rating": -7.8,
    "wins": 3,
    "losses": 6,
@@ -1476,7 +1491,7 @@
    "id": 164,
    "team": "Rutgers",
    "conference": "Big Ten",
-   "rank": 98,
+   "rank": 99,
    "rating": -7.9,
    "wins": 2,
    "losses": 7,
@@ -1486,21 +1501,6 @@
    "p_bye": 0.0,
    "expected_wins": 2.64,
    "expected_regular_season_wins": 2.64
-  },
-  {
-   "id": 193,
-   "team": "Miami (OH)",
-   "conference": "Mid-American",
-   "rank": 99,
-   "rating": -8.0,
-   "wins": 5,
-   "losses": 4,
-   "p_title_game": 0.0478,
-   "p_win_conference": 0.0182,
-   "p_playoff": 0.0,
-   "p_bye": 0.0,
-   "expected_wins": 6.53,
-   "expected_regular_season_wins": 6.51
   },
   {
    "id": 2026,
@@ -1705,11 +1705,11 @@
    "rating": -10.7,
    "wins": 6,
    "losses": 3,
-   "p_title_game": 0.214,
-   "p_win_conference": 0.0662,
+   "p_title_game": 0.2161,
+   "p_win_conference": 0.0685,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 8.01,
+   "expected_wins": 8.02,
    "expected_regular_season_wins": 7.95
   },
   {
@@ -1897,15 +1897,15 @@
    "team": "Rice",
    "conference": "American Athletic",
    "rank": 126,
-   "rating": -15.7,
+   "rating": -15.6,
    "wins": 1,
    "losses": 8,
    "p_title_game": 0.0,
    "p_win_conference": 0.0,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 2.01,
-   "expected_regular_season_wins": 2.01
+   "expected_wins": 2.02,
+   "expected_regular_season_wins": 2.02
   },
   {
    "id": 2572,
@@ -1927,15 +1927,15 @@
    "team": "Eastern Michigan",
    "conference": "Mid-American",
    "rank": 128,
-   "rating": -17.1,
+   "rating": -17.2,
    "wins": 4,
    "losses": 6,
    "p_title_game": 0.0001,
    "p_win_conference": 0.0,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 4.84,
-   "expected_regular_season_wins": 4.84
+   "expected_wins": 4.83,
+   "expected_regular_season_wins": 4.83
   },
   {
    "id": 189,
@@ -1945,8 +1945,8 @@
    "rating": -17.2,
    "wins": 2,
    "losses": 7,
-   "p_title_game": 0.0001,
-   "p_win_conference": 0.0001,
+   "p_title_game": 0.0,
+   "p_win_conference": 0.0,
    "p_playoff": 0.0,
    "p_bye": 0.0,
    "expected_wins": 3.27,
@@ -1964,8 +1964,8 @@
    "p_win_conference": 0.0,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 3.91,
-   "expected_regular_season_wins": 3.91
+   "expected_wins": 3.92,
+   "expected_regular_season_wins": 3.92
   },
   {
    "id": 2534,
@@ -1987,7 +1987,7 @@
    "team": "Kent State",
    "conference": "Mid-American",
    "rank": 132,
-   "rating": -23.0,
+   "rating": -22.9,
    "wins": 3,
    "losses": 6,
    "p_title_game": 0.0,
@@ -2062,15 +2062,15 @@
    "team": "Akron",
    "conference": "Mid-American",
    "rank": 137,
-   "rating": -25.5,
+   "rating": -25.8,
    "wins": 1,
    "losses": 8,
    "p_title_game": 0.0,
    "p_win_conference": 0.0,
    "p_playoff": 0.0,
    "p_bye": 0.0,
-   "expected_wins": 1.56,
-   "expected_regular_season_wins": 1.56
+   "expected_wins": 1.54,
+   "expected_regular_season_wins": 1.54
   },
   {
    "id": 16,
@@ -2100,8 +2100,8 @@
    "neutral": false,
    "start": "2026-11-11T00:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.69,
-   "predicted_margin": 7.9
+   "home_win_prob": 0.688,
+   "predicted_margin": 7.8
   },
   {
    "game_id": 401866458,
@@ -2114,8 +2114,8 @@
    "neutral": false,
    "start": "2026-11-11T00:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.114,
-   "predicted_margin": -19.3
+   "home_win_prob": 0.108,
+   "predicted_margin": -19.8
   },
   {
    "game_id": 401866460,
@@ -2128,8 +2128,8 @@
    "neutral": false,
    "start": "2026-11-11T01:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.471,
-   "predicted_margin": -1.2
+   "home_win_prob": 0.491,
+   "predicted_margin": -0.4
   },
   {
    "game_id": 401866463,
@@ -2562,8 +2562,8 @@
    "neutral": false,
    "start": "2026-11-14T17:30:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.158,
-   "predicted_margin": -16.0
+   "home_win_prob": 0.16,
+   "predicted_margin": -15.9
   },
   {
    "game_id": 401856889,
@@ -2646,8 +2646,8 @@
    "neutral": false,
    "start": "2026-11-14T19:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.453,
-   "predicted_margin": -1.9
+   "home_win_prob": 0.455,
+   "predicted_margin": -1.8
   },
   {
    "game_id": 401870796,
@@ -2828,8 +2828,8 @@
    "neutral": false,
    "start": "2026-11-14T21:15:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.394,
-   "predicted_margin": -4.3
+   "home_win_prob": 0.396,
+   "predicted_margin": -4.2
   },
   {
    "game_id": 401871099,
@@ -3040,8 +3040,8 @@
    "neutral": false,
    "start": "2026-11-11T00:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.69,
-   "predicted_margin": 7.9
+   "home_win_prob": 0.688,
+   "predicted_margin": 7.8
   },
   {
    "game_id": 401866458,
@@ -3054,8 +3054,8 @@
    "neutral": false,
    "start": "2026-11-11T00:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.114,
-   "predicted_margin": -19.3
+   "home_win_prob": 0.108,
+   "predicted_margin": -19.8
   },
   {
    "game_id": 401866460,
@@ -3068,8 +3068,8 @@
    "neutral": false,
    "start": "2026-11-11T01:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.471,
-   "predicted_margin": -1.2
+   "home_win_prob": 0.491,
+   "predicted_margin": -0.4
   },
   {
    "game_id": 401866463,
@@ -3502,8 +3502,8 @@
    "neutral": false,
    "start": "2026-11-14T17:30:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.158,
-   "predicted_margin": -16.0
+   "home_win_prob": 0.16,
+   "predicted_margin": -15.9
   },
   {
    "game_id": 401856889,
@@ -3586,8 +3586,8 @@
    "neutral": false,
    "start": "2026-11-14T19:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.453,
-   "predicted_margin": -1.9
+   "home_win_prob": 0.455,
+   "predicted_margin": -1.8
   },
   {
    "game_id": 401870796,
@@ -3768,8 +3768,8 @@
    "neutral": false,
    "start": "2026-11-14T21:15:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.394,
-   "predicted_margin": -4.3
+   "home_win_prob": 0.396,
+   "predicted_margin": -4.2
   },
   {
    "game_id": 401871099,
@@ -3978,8 +3978,8 @@
    "neutral": false,
    "start": "2026-11-18T00:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.25,
-   "predicted_margin": -10.8
+   "home_win_prob": 0.245,
+   "predicted_margin": -11.1
   },
   {
    "game_id": 401866464,
@@ -3992,8 +3992,8 @@
    "neutral": false,
    "start": "2026-11-18T00:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.85,
-   "predicted_margin": 16.6
+   "home_win_prob": 0.843,
+   "predicted_margin": 16.1
   },
   {
    "game_id": 401866465,
@@ -4006,8 +4006,8 @@
    "neutral": false,
    "start": "2026-11-18T00:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.857,
-   "predicted_margin": 17.1
+   "home_win_prob": 0.862,
+   "predicted_margin": 17.5
   },
   {
    "game_id": 401866467,
@@ -4020,8 +4020,8 @@
    "neutral": false,
    "start": "2026-11-18T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.816,
-   "predicted_margin": 14.4
+   "home_win_prob": 0.82,
+   "predicted_margin": 14.7
   },
   {
    "game_id": 401866469,
@@ -4048,8 +4048,8 @@
    "neutral": false,
    "start": "2026-11-20T00:30:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.69,
-   "predicted_margin": 7.9
+   "home_win_prob": 0.688,
+   "predicted_margin": 7.8
   },
   {
    "game_id": 401856869,
@@ -4146,8 +4146,8 @@
    "neutral": false,
    "start": "2026-11-21T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.391,
-   "predicted_margin": -4.4
+   "home_win_prob": 0.389,
+   "predicted_margin": -4.5
   },
   {
    "game_id": 401858528,
@@ -4398,8 +4398,8 @@
    "neutral": false,
    "start": "2026-11-21T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.237,
-   "predicted_margin": -11.4
+   "home_win_prob": 0.236,
+   "predicted_margin": -11.5
   },
   {
    "game_id": 401856748,
@@ -4749,7 +4749,7 @@
    "start": "2026-11-21T18:00:00.000Z",
    "placeholder": false,
    "home_win_prob": 0.992,
-   "predicted_margin": 38.7
+   "predicted_margin": 38.8
   },
   {
    "game_id": 401856746,
@@ -4846,7 +4846,7 @@
    "neutral": false,
    "start": "2026-11-21T20:30:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.993,
+   "home_win_prob": 0.994,
    "predicted_margin": 39.7
   },
   {
@@ -4958,8 +4958,8 @@
    "neutral": false,
    "start": "2026-11-24T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.711,
-   "predicted_margin": 8.9
+   "home_win_prob": 0.709,
+   "predicted_margin": 8.8
   },
   {
    "game_id": 401866470,
@@ -4972,8 +4972,8 @@
    "neutral": false,
    "start": "2026-11-25T00:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.692,
-   "predicted_margin": 8.0
+   "home_win_prob": 0.688,
+   "predicted_margin": 7.8
   },
   {
    "game_id": 401856879,
@@ -5056,8 +5056,8 @@
    "neutral": false,
    "start": "2026-11-27T17:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.253,
-   "predicted_margin": -10.6
+   "home_win_prob": 0.248,
+   "predicted_margin": -10.9
   },
   {
    "game_id": 401858536,
@@ -5070,8 +5070,8 @@
    "neutral": false,
    "start": "2026-11-27T17:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.657,
-   "predicted_margin": 6.5
+   "home_win_prob": 0.659,
+   "predicted_margin": 6.6
   },
   {
    "game_id": 401856762,
@@ -5098,8 +5098,8 @@
    "neutral": false,
    "start": "2026-11-27T17:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.48,
-   "predicted_margin": -0.8
+   "home_win_prob": 0.469,
+   "predicted_margin": -1.3
   },
   {
    "game_id": 401869930,
@@ -5294,8 +5294,8 @@
    "neutral": false,
    "start": "2026-11-28T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.255,
-   "predicted_margin": -10.5
+   "home_win_prob": 0.257,
+   "predicted_margin": -10.4
   },
   {
    "game_id": 401856757,
@@ -5700,7 +5700,7 @@
    "neutral": false,
    "start": "2026-11-28T05:00:00.000Z",
    "placeholder": false,
-   "home_win_prob": 0.757,
+   "home_win_prob": 0.759,
    "predicted_margin": 11.2
   },
   {
@@ -5996,31 +5996,37 @@
    "neutral": false,
    "home_win_prob": 0.475,
    "predicted_margin": -1.0,
-   "total_swing": 0.808,
+   "total_swing": 0.724,
    "movers": [
     {
      "team": "Texas",
-     "if_home_wins": 0.426,
-     "if_home_loses": 0.785,
-     "swing": -0.359
+     "if_home_wins": 0.441,
+     "if_home_loses": 0.791,
+     "swing": -0.35
     },
     {
      "team": "LSU",
-     "if_home_wins": 0.342,
-     "if_home_loses": 0.027,
-     "swing": 0.314
+     "if_home_wins": 0.235,
+     "if_home_loses": 0.007,
+     "swing": 0.227
     },
     {
      "team": "Tennessee",
-     "if_home_wins": 0.304,
-     "if_home_loses": 0.405,
-     "swing": -0.101
+     "if_home_wins": 0.41,
+     "if_home_loses": 0.499,
+     "swing": -0.089
     },
     {
      "team": "Alabama",
-     "if_home_wins": 0.876,
-     "if_home_loses": 0.91,
-     "swing": -0.034
+     "if_home_wins": 0.89,
+     "if_home_loses": 0.922,
+     "swing": -0.032
+    },
+    {
+     "team": "Oregon",
+     "if_home_wins": 0.242,
+     "if_home_loses": 0.216,
+     "swing": 0.026
     }
    ]
   },
@@ -6035,244 +6041,31 @@
    "neutral": false,
    "home_win_prob": 0.791,
    "predicted_margin": 13.0,
-   "total_swing": 0.694,
+   "total_swing": 0.687,
    "movers": [
     {
      "team": "Boise State",
-     "if_home_wins": 0.565,
-     "if_home_loses": 0.065,
-     "swing": 0.499
+     "if_home_wins": 0.589,
+     "if_home_loses": 0.078,
+     "swing": 0.512
     },
     {
      "team": "Liberty",
-     "if_home_wins": 0.473,
-     "if_home_loses": 0.555,
-     "swing": -0.081
+     "if_home_wins": 0.485,
+     "if_home_loses": 0.562,
+     "swing": -0.077
     },
     {
      "team": "New Mexico",
-     "if_home_wins": 0.333,
-     "if_home_loses": 0.386,
-     "swing": -0.052
+     "if_home_wins": 0.337,
+     "if_home_loses": 0.392,
+     "swing": -0.055
     },
     {
      "team": "James Madison",
-     "if_home_wins": 0.138,
-     "if_home_loses": 0.178,
-     "swing": -0.04
-    },
-    {
-     "team": "North Dakota State",
-     "if_home_wins": 0.04,
-     "if_home_loses": 0.057,
-     "swing": -0.017
-    }
-   ]
-  },
-  {
-   "game_id": 401856887,
-   "week": 11,
-   "home": "Oklahoma",
-   "away": "Ole Miss",
-   "home_id": 201,
-   "away_id": 145,
-   "start": "2026-11-14T05:00:00.000Z",
-   "neutral": false,
-   "home_win_prob": 0.44,
-   "predicted_margin": -2.4,
-   "total_swing": 0.659,
-   "movers": [
-    {
-     "team": "Ole Miss",
-     "if_home_wins": 0.032,
-     "if_home_loses": 0.532,
-     "swing": -0.5
-    },
-    {
-     "team": "Ohio State",
-     "if_home_wins": 0.368,
-     "if_home_loses": 0.325,
-     "swing": 0.043
-    },
-    {
-     "team": "Wake Forest",
-     "if_home_wins": 0.488,
-     "if_home_loses": 0.447,
-     "swing": 0.042
-    },
-    {
-     "team": "LSU",
-     "if_home_wins": 0.19,
-     "if_home_loses": 0.162,
-     "swing": 0.028
-    },
-    {
-     "team": "Houston",
-     "if_home_wins": 0.25,
-     "if_home_loses": 0.223,
-     "swing": 0.026
-    }
-   ]
-  },
-  {
-   "game_id": 401858518,
-   "week": 11,
-   "home": "Indiana",
-   "away": "USC",
-   "home_id": 84,
-   "away_id": 30,
-   "start": "2026-11-14T20:30:00.000Z",
-   "neutral": false,
-   "home_win_prob": 0.726,
-   "predicted_margin": 9.6,
-   "total_swing": 0.579,
-   "movers": [
-    {
-     "team": "Indiana",
-     "if_home_wins": 0.935,
-     "if_home_loses": 0.685,
-     "swing": 0.251
-    },
-    {
-     "team": "USC",
-     "if_home_wins": 0.012,
-     "if_home_loses": 0.209,
-     "swing": -0.197
-    },
-    {
-     "team": "Oregon",
-     "if_home_wins": 0.134,
-     "if_home_loses": 0.205,
-     "swing": -0.072
-    },
-    {
-     "team": "Ohio State",
-     "if_home_wins": 0.354,
-     "if_home_loses": 0.315,
-     "swing": 0.039
-    },
-    {
-     "team": "Wisconsin",
-     "if_home_wins": 0.011,
-     "if_home_loses": 0.031,
-     "swing": -0.02
-    }
-   ]
-  },
-  {
-   "game_id": 401856864,
-   "week": 11,
-   "home": "Arizona",
-   "away": "Utah",
-   "home_id": 12,
-   "away_id": 254,
-   "start": "2026-11-14T05:00:00.000Z",
-   "neutral": false,
-   "home_win_prob": 0.372,
-   "predicted_margin": -5.2,
-   "total_swing": 0.575,
-   "movers": [
-    {
-     "team": "Arizona",
-     "if_home_wins": 0.32,
-     "if_home_loses": 0.01,
-     "swing": 0.31
-    },
-    {
-     "team": "Utah",
-     "if_home_wins": 0.729,
-     "if_home_loses": 0.947,
-     "swing": -0.218
-    },
-    {
-     "team": "BYU",
-     "if_home_wins": 0.345,
-     "if_home_loses": 0.393,
-     "swing": -0.048
-    }
-   ]
-  },
-  {
-   "game_id": 401858522,
-   "week": 11,
-   "home": "Ohio State",
-   "away": "Northwestern",
-   "home_id": 194,
-   "away_id": 77,
-   "start": "2026-11-14T17:00:00.000Z",
-   "neutral": false,
-   "home_win_prob": 0.743,
-   "predicted_margin": 10.4,
-   "total_swing": 0.557,
-   "movers": [
-    {
-     "team": "Ohio State",
-     "if_home_wins": 0.442,
-     "if_home_loses": 0.061,
-     "swing": 0.382
-    },
-    {
-     "team": "Northwestern",
-     "if_home_wins": 0.0,
-     "if_home_loses": 0.04,
-     "swing": -0.04
-    },
-    {
-     "team": "UCLA",
-     "if_home_wins": 0.683,
-     "if_home_loses": 0.722,
-     "swing": -0.039
-    },
-    {
-     "team": "Texas",
-     "if_home_wins": 0.608,
-     "if_home_loses": 0.644,
-     "swing": -0.036
-    },
-    {
-     "team": "Tennessee",
-     "if_home_wins": 0.349,
-     "if_home_loses": 0.383,
-     "swing": -0.033
-    }
-   ]
-  },
-  {
-   "game_id": 401858301,
-   "week": 11,
-   "home": "SMU",
-   "away": "Wake Forest",
-   "home_id": 2567,
-   "away_id": 154,
-   "start": "2026-11-14T17:00:00.000Z",
-   "neutral": false,
-   "home_win_prob": 0.409,
-   "predicted_margin": -3.7,
-   "total_swing": 0.551,
-   "movers": [
-    {
-     "team": "Wake Forest",
-     "if_home_wins": 0.269,
-     "if_home_loses": 0.602,
-     "swing": -0.332
-    },
-    {
-     "team": "SMU",
-     "if_home_wins": 0.165,
-     "if_home_loses": 0.001,
-     "swing": 0.164
-    },
-    {
-     "team": "Louisville",
-     "if_home_wins": 0.063,
-     "if_home_loses": 0.03,
-     "swing": 0.034
-    },
-    {
-     "team": "Miami",
-     "if_home_wins": 0.943,
-     "if_home_loses": 0.924,
-     "swing": 0.019
+     "if_home_wins": 0.142,
+     "if_home_loses": 0.185,
+     "swing": -0.043
     }
    ]
   },
@@ -6287,76 +6080,148 @@
    "neutral": false,
    "home_win_prob": 0.44,
    "predicted_margin": -2.4,
-   "total_swing": 0.503,
+   "total_swing": 0.619,
    "movers": [
     {
      "team": "Texas Tech",
-     "if_home_wins": 0.176,
-     "if_home_loses": 0.493,
-     "swing": -0.317
+     "if_home_wins": 0.201,
+     "if_home_loses": 0.538,
+     "swing": -0.337
     },
     {
      "team": "Oklahoma State",
-     "if_home_wins": 0.089,
+     "if_home_wins": 0.099,
      "if_home_loses": 0.0,
-     "swing": 0.089
-    },
-    {
-     "team": "Texas",
-     "if_home_wins": 0.64,
-     "if_home_loses": 0.6,
-     "swing": 0.04
+     "swing": 0.099
     },
     {
      "team": "Houston",
-     "if_home_wins": 0.217,
-     "if_home_loses": 0.249,
-     "swing": -0.032
+     "if_home_wins": 0.253,
+     "if_home_loses": 0.302,
+     "swing": -0.049
     },
     {
-     "team": "Utah",
-     "if_home_wins": 0.878,
-     "if_home_loses": 0.852,
-     "swing": 0.026
+     "team": "Texas",
+     "if_home_wins": 0.652,
+     "if_home_loses": 0.609,
+     "swing": 0.043
+    },
+    {
+     "team": "Tennessee",
+     "if_home_wins": 0.476,
+     "if_home_loses": 0.442,
+     "swing": 0.034
     }
    ]
   },
   {
-   "game_id": 401856858,
+   "game_id": 401858301,
    "week": 11,
-   "home": "BYU",
-   "away": "Baylor",
-   "home_id": 252,
-   "away_id": 239,
-   "start": "2026-11-14T05:00:00.000Z",
+   "home": "SMU",
+   "away": "Wake Forest",
+   "home_id": 2567,
+   "away_id": 154,
+   "start": "2026-11-14T17:00:00.000Z",
    "neutral": false,
-   "home_win_prob": 0.676,
-   "predicted_margin": 7.3,
-   "total_swing": 0.496,
+   "home_win_prob": 0.409,
+   "predicted_margin": -3.7,
+   "total_swing": 0.568,
    "movers": [
     {
+     "team": "Wake Forest",
+     "if_home_wins": 0.314,
+     "if_home_loses": 0.65,
+     "swing": -0.335
+    },
+    {
+     "team": "SMU",
+     "if_home_wins": 0.166,
+     "if_home_loses": 0.0,
+     "swing": 0.165
+    },
+    {
+     "team": "Louisville",
+     "if_home_wins": 0.064,
+     "if_home_loses": 0.032,
+     "swing": 0.033
+    },
+    {
+     "team": "Miami",
+     "if_home_wins": 0.913,
+     "if_home_loses": 0.891,
+     "swing": 0.022
+    },
+    {
+     "team": "Duke",
+     "if_home_wins": 0.027,
+     "if_home_loses": 0.016,
+     "swing": 0.011
+    }
+   ]
+  },
+  {
+   "game_id": 401856864,
+   "week": 11,
+   "home": "Arizona",
+   "away": "Utah",
+   "home_id": 12,
+   "away_id": 254,
+   "start": "2026-11-14T05:00:00.000Z",
+   "neutral": false,
+   "home_win_prob": 0.372,
+   "predicted_margin": -5.2,
+   "total_swing": 0.56,
+   "movers": [
+    {
+     "team": "Arizona",
+     "if_home_wins": 0.309,
+     "if_home_loses": 0.008,
+     "swing": 0.301
+    },
+    {
+     "team": "Utah",
+     "if_home_wins": 0.734,
+     "if_home_loses": 0.947,
+     "swing": -0.212
+    },
+    {
      "team": "BYU",
-     "if_home_wins": 0.508,
-     "if_home_loses": 0.103,
-     "swing": 0.404
+     "if_home_wins": 0.322,
+     "if_home_loses": 0.37,
+     "swing": -0.048
+    }
+   ]
+  },
+  {
+   "game_id": 401858518,
+   "week": 11,
+   "home": "Indiana",
+   "away": "USC",
+   "home_id": 84,
+   "away_id": 30,
+   "start": "2026-11-14T20:30:00.000Z",
+   "neutral": false,
+   "home_win_prob": 0.726,
+   "predicted_margin": 9.6,
+   "total_swing": 0.548,
+   "movers": [
+    {
+     "team": "Indiana",
+     "if_home_wins": 0.885,
+     "if_home_loses": 0.58,
+     "swing": 0.305
     },
     {
-     "team": "Baylor",
-     "if_home_wins": 0.001,
-     "if_home_loses": 0.052,
-     "swing": -0.05
+     "team": "USC",
+     "if_home_wins": 0.017,
+     "if_home_loses": 0.239,
+     "swing": -0.222
     },
     {
-     "team": "UCLA",
-     "if_home_wins": 0.683,
-     "if_home_loses": 0.713,
-     "swing": -0.03
-    },
-    {
-     "team": "South Carolina",
-     "if_home_wins": 0.022,
-     "if_home_loses": 0.034,
-     "swing": -0.012
+     "team": "Wisconsin",
+     "if_home_wins": 0.013,
+     "if_home_loses": 0.033,
+     "swing": -0.021
     }
    ]
   },
@@ -6371,13 +6236,118 @@
    "neutral": false,
    "home_win_prob": 0.953,
    "predicted_margin": 26.7,
-   "total_swing": 0.47,
+   "total_swing": 0.478,
    "movers": [
     {
      "team": "Liberty",
-     "if_home_wins": 0.513,
-     "if_home_loses": 0.046,
-     "swing": 0.466
+     "if_home_wins": 0.524,
+     "if_home_loses": 0.048,
+     "swing": 0.475
+    }
+   ]
+  },
+  {
+   "game_id": 401856888,
+   "week": 11,
+   "home": "Texas A&M",
+   "away": "Tennessee",
+   "home_id": 245,
+   "away_id": 2633,
+   "start": "2026-11-14T05:00:00.000Z",
+   "neutral": false,
+   "home_win_prob": 0.337,
+   "predicted_margin": -6.8,
+   "total_swing": 0.47,
+   "movers": [
+    {
+     "team": "Tennessee",
+     "if_home_wins": 0.208,
+     "if_home_loses": 0.583,
+     "swing": -0.375
+    },
+    {
+     "team": "Liberty",
+     "if_home_wins": 0.525,
+     "if_home_loses": 0.489,
+     "swing": 0.036
+    },
+    {
+     "team": "Ole Miss",
+     "if_home_wins": 0.167,
+     "if_home_loses": 0.136,
+     "swing": 0.03
+    },
+    {
+     "team": "Alabama",
+     "if_home_wins": 0.888,
+     "if_home_loses": 0.916,
+     "swing": -0.028
+    }
+   ]
+  },
+  {
+   "game_id": 401864539,
+   "week": 11,
+   "home": "New Mexico",
+   "away": "UNLV",
+   "home_id": 167,
+   "away_id": 2439,
+   "start": "2026-11-15T00:30:00.000Z",
+   "neutral": false,
+   "home_win_prob": 0.861,
+   "predicted_margin": 17.4,
+   "total_swing": 0.464,
+   "movers": [
+    {
+     "team": "New Mexico",
+     "if_home_wins": 0.4,
+     "if_home_loses": 0.028,
+     "swing": 0.372
+    },
+    {
+     "team": "James Madison",
+     "if_home_wins": 0.144,
+     "if_home_loses": 0.197,
+     "swing": -0.053
+    },
+    {
+     "team": "Ohio State",
+     "if_home_wins": 0.231,
+     "if_home_loses": 0.27,
+     "swing": -0.04
+    }
+   ]
+  },
+  {
+   "game_id": 401856858,
+   "week": 11,
+   "home": "BYU",
+   "away": "Baylor",
+   "home_id": 252,
+   "away_id": 239,
+   "start": "2026-11-14T05:00:00.000Z",
+   "neutral": false,
+   "home_win_prob": 0.676,
+   "predicted_margin": 7.3,
+   "total_swing": 0.459,
+   "movers": [
+    {
+     "team": "BYU",
+     "if_home_wins": 0.481,
+     "if_home_loses": 0.089,
+     "swing": 0.392
+    },
+    {
+     "team": "Baylor",
+     "if_home_wins": 0.001,
+     "if_home_loses": 0.052,
+     "swing": -0.05
+    },
+    {
+     "team": "South Carolina",
+     "if_home_wins": 0.036,
+     "if_home_loses": 0.053,
+     "swing": -0.017
     }
    ]
   }
@@ -6395,9 +6365,9 @@
    "predicted_margin": -1.0,
    "home_rank": 12,
    "away_rank": 5,
-   "home_p_playoff": 0.1741,
-   "away_p_playoff": 0.6173,
-   "playoff_swing": 0.808,
+   "home_p_playoff": 0.1136,
+   "away_p_playoff": 0.6276,
+   "playoff_swing": 0.724,
    "quality": 19.9
   },
   {
@@ -6412,9 +6382,9 @@
    "predicted_margin": 9.6,
    "home_rank": 6,
    "away_rank": 18,
-   "home_p_playoff": 0.8666,
-   "away_p_playoff": 0.066,
-   "playoff_swing": 0.579,
+   "home_p_playoff": 0.8018,
+   "away_p_playoff": 0.0781,
+   "playoff_swing": 0.548,
    "quality": 16.3
   },
   {
@@ -6429,9 +6399,9 @@
    "predicted_margin": -5.2,
    "home_rank": 21,
    "away_rank": 7,
-   "home_p_playoff": 0.129,
-   "away_p_playoff": 0.8635,
-   "playoff_swing": 0.575,
+   "home_p_playoff": 0.1231,
+   "away_p_playoff": 0.8654,
+   "playoff_swing": 0.56,
    "quality": 14.7
   },
   {
@@ -6446,9 +6416,9 @@
    "predicted_margin": -3.7,
    "home_rank": 24,
    "away_rank": 11,
-   "home_p_playoff": 0.0681,
-   "away_p_playoff": 0.465,
-   "playoff_swing": 0.551,
+   "home_p_playoff": 0.0683,
+   "away_p_playoff": 0.5117,
+   "playoff_swing": 0.568,
    "quality": 13.2
   },
   {
@@ -6463,9 +6433,9 @@
    "predicted_margin": 14.2,
    "home_rank": 3,
    "away_rank": 26,
-   "home_p_playoff": 0.9316,
-   "away_p_playoff": 0.0203,
-   "playoff_swing": 0.272,
+   "home_p_playoff": 0.9004,
+   "away_p_playoff": 0.0205,
+   "playoff_swing": 0.301,
    "quality": 13.0
   },
   {
@@ -6480,9 +6450,9 @@
    "predicted_margin": 17.8,
    "home_rank": 1,
    "away_rank": 28,
-   "home_p_playoff": 0.9308,
-   "away_p_playoff": 0.0163,
-   "playoff_swing": 0.315,
+   "home_p_playoff": 0.933,
+   "away_p_playoff": 0.0108,
+   "playoff_swing": 0.279,
    "quality": 12.9
   },
   {
@@ -6497,9 +6467,9 @@
    "predicted_margin": -2.4,
    "home_rank": 27,
    "away_rank": 13,
-   "home_p_playoff": 0.0389,
-   "away_p_playoff": 0.3554,
-   "playoff_swing": 0.503,
+   "home_p_playoff": 0.0434,
+   "away_p_playoff": 0.391,
+   "playoff_swing": 0.619,
    "quality": 12.9
   },
   {
@@ -6514,9 +6484,9 @@
    "predicted_margin": 10.4,
    "home_rank": 9,
    "away_rank": 31,
-   "home_p_playoff": 0.3437,
-   "away_p_playoff": 0.0104,
-   "playoff_swing": 0.557,
+   "home_p_playoff": 0.2361,
+   "away_p_playoff": 0.0114,
+   "playoff_swing": 0.432,
    "quality": 12.2
   },
   {
@@ -6531,9 +6501,9 @@
    "predicted_margin": 7.3,
    "home_rank": 15,
    "away_rank": 32,
-   "home_p_playoff": 0.3745,
+   "home_p_playoff": 0.3518,
    "away_p_playoff": 0.0179,
-   "playoff_swing": 0.496,
+   "playoff_swing": 0.459,
    "quality": 12.1
   },
   {
@@ -6548,9 +6518,9 @@
    "predicted_margin": -2.4,
    "home_rank": 37,
    "away_rank": 17,
-   "home_p_playoff": 0.001,
-   "away_p_playoff": 0.3123,
-   "playoff_swing": 0.659,
+   "home_p_playoff": 0.0007,
+   "away_p_playoff": 0.1467,
+   "playoff_swing": 0.286,
    "quality": 10.8
   }
  ],
@@ -6568,31 +6538,37 @@
    "home_rank": 12,
    "away_rank": 5,
    "quality": 19.9,
-   "swing": 0.808,
+   "swing": 0.724,
    "movers": [
     {
      "team": "Texas",
-     "if_home_wins": 0.426,
-     "if_home_loses": 0.785,
-     "swing": -0.359
+     "if_home_wins": 0.441,
+     "if_home_loses": 0.791,
+     "swing": -0.35
     },
     {
      "team": "LSU",
-     "if_home_wins": 0.342,
-     "if_home_loses": 0.027,
-     "swing": 0.314
+     "if_home_wins": 0.235,
+     "if_home_loses": 0.007,
+     "swing": 0.227
     },
     {
      "team": "Tennessee",
-     "if_home_wins": 0.304,
-     "if_home_loses": 0.405,
-     "swing": -0.101
+     "if_home_wins": 0.41,
+     "if_home_loses": 0.499,
+     "swing": -0.089
     },
     {
      "team": "Alabama",
-     "if_home_wins": 0.876,
-     "if_home_loses": 0.91,
-     "swing": -0.034
+     "if_home_wins": 0.89,
+     "if_home_loses": 0.922,
+     "swing": -0.032
+    },
+    {
+     "team": "Oregon",
+     "if_home_wins": 0.242,
+     "if_home_loses": 0.216,
+     "swing": 0.026
     }
    ],
    "closeness": 0.025
@@ -6610,37 +6586,25 @@
    "home_rank": 6,
    "away_rank": 18,
    "quality": 16.3,
-   "swing": 0.579,
+   "swing": 0.548,
    "movers": [
     {
      "team": "Indiana",
-     "if_home_wins": 0.935,
-     "if_home_loses": 0.685,
-     "swing": 0.251
+     "if_home_wins": 0.885,
+     "if_home_loses": 0.58,
+     "swing": 0.305
     },
     {
      "team": "USC",
-     "if_home_wins": 0.012,
-     "if_home_loses": 0.209,
-     "swing": -0.197
-    },
-    {
-     "team": "Oregon",
-     "if_home_wins": 0.134,
-     "if_home_loses": 0.205,
-     "swing": -0.072
-    },
-    {
-     "team": "Ohio State",
-     "if_home_wins": 0.354,
-     "if_home_loses": 0.315,
-     "swing": 0.039
+     "if_home_wins": 0.017,
+     "if_home_loses": 0.239,
+     "swing": -0.222
     },
     {
      "team": "Wisconsin",
-     "if_home_wins": 0.011,
-     "if_home_loses": 0.031,
-     "swing": -0.02
+     "if_home_wins": 0.013,
+     "if_home_loses": 0.033,
+     "swing": -0.021
     }
    ],
    "closeness": 0.226
@@ -6658,24 +6622,24 @@
    "home_rank": 21,
    "away_rank": 7,
    "quality": 14.7,
-   "swing": 0.575,
+   "swing": 0.56,
    "movers": [
     {
      "team": "Arizona",
-     "if_home_wins": 0.32,
-     "if_home_loses": 0.01,
-     "swing": 0.31
+     "if_home_wins": 0.309,
+     "if_home_loses": 0.008,
+     "swing": 0.301
     },
     {
      "team": "Utah",
-     "if_home_wins": 0.729,
+     "if_home_wins": 0.734,
      "if_home_loses": 0.947,
-     "swing": -0.218
+     "swing": -0.212
     },
     {
      "team": "BYU",
-     "if_home_wins": 0.345,
-     "if_home_loses": 0.393,
+     "if_home_wins": 0.322,
+     "if_home_loses": 0.37,
      "swing": -0.048
     }
    ],
@@ -6694,31 +6658,37 @@
    "home_rank": 24,
    "away_rank": 11,
    "quality": 13.2,
-   "swing": 0.551,
+   "swing": 0.568,
    "movers": [
     {
      "team": "Wake Forest",
-     "if_home_wins": 0.269,
-     "if_home_loses": 0.602,
-     "swing": -0.332
+     "if_home_wins": 0.314,
+     "if_home_loses": 0.65,
+     "swing": -0.335
     },
     {
      "team": "SMU",
-     "if_home_wins": 0.165,
-     "if_home_loses": 0.001,
-     "swing": 0.164
+     "if_home_wins": 0.166,
+     "if_home_loses": 0.0,
+     "swing": 0.165
     },
     {
      "team": "Louisville",
-     "if_home_wins": 0.063,
-     "if_home_loses": 0.03,
-     "swing": 0.034
+     "if_home_wins": 0.064,
+     "if_home_loses": 0.032,
+     "swing": 0.033
     },
     {
      "team": "Miami",
-     "if_home_wins": 0.943,
-     "if_home_loses": 0.924,
-     "swing": 0.019
+     "if_home_wins": 0.913,
+     "if_home_loses": 0.891,
+     "swing": 0.022
+    },
+    {
+     "team": "Duke",
+     "if_home_wins": 0.027,
+     "if_home_loses": 0.016,
+     "swing": 0.011
     }
    ],
    "closeness": 0.091
@@ -6736,18 +6706,18 @@
    "home_rank": 3,
    "away_rank": 26,
    "quality": 13.0,
-   "swing": 0.272,
+   "swing": 0.301,
    "movers": [
     {
      "team": "Miami",
-     "if_home_wins": 0.966,
-     "if_home_loses": 0.776,
-     "swing": 0.19
+     "if_home_wins": 0.94,
+     "if_home_loses": 0.722,
+     "swing": 0.219
     },
     {
      "team": "Duke",
-     "if_home_wins": 0.005,
-     "if_home_loses": 0.087,
+     "if_home_wins": 0.006,
+     "if_home_loses": 0.088,
      "swing": -0.082
     }
    ],
@@ -6766,19 +6736,25 @@
    "home_rank": 1,
    "away_rank": 28,
    "quality": 12.9,
-   "swing": 0.315,
+   "swing": 0.279,
    "movers": [
     {
      "team": "Georgia",
-     "if_home_wins": 0.956,
-     "if_home_loses": 0.761,
-     "swing": 0.195
+     "if_home_wins": 0.957,
+     "if_home_loses": 0.771,
+     "swing": 0.186
     },
     {
      "team": "Missouri",
-     "if_home_wins": 0.001,
-     "if_home_loses": 0.121,
-     "swing": -0.121
+     "if_home_wins": 0.0,
+     "if_home_loses": 0.083,
+     "swing": -0.083
+    },
+    {
+     "team": "Notre Dame",
+     "if_home_wins": 0.979,
+     "if_home_loses": 0.99,
+     "swing": -0.011
     }
    ],
    "closeness": 0.367
@@ -6796,37 +6772,37 @@
    "home_rank": 27,
    "away_rank": 13,
    "quality": 12.9,
-   "swing": 0.503,
+   "swing": 0.619,
    "movers": [
     {
      "team": "Texas Tech",
-     "if_home_wins": 0.176,
-     "if_home_loses": 0.493,
-     "swing": -0.317
+     "if_home_wins": 0.201,
+     "if_home_loses": 0.538,
+     "swing": -0.337
     },
     {
      "team": "Oklahoma State",
-     "if_home_wins": 0.089,
+     "if_home_wins": 0.099,
      "if_home_loses": 0.0,
-     "swing": 0.089
-    },
-    {
-     "team": "Texas",
-     "if_home_wins": 0.64,
-     "if_home_loses": 0.6,
-     "swing": 0.04
+     "swing": 0.099
     },
     {
      "team": "Houston",
-     "if_home_wins": 0.217,
-     "if_home_loses": 0.249,
-     "swing": -0.032
+     "if_home_wins": 0.253,
+     "if_home_loses": 0.302,
+     "swing": -0.049
     },
     {
-     "team": "Utah",
-     "if_home_wins": 0.878,
-     "if_home_loses": 0.852,
-     "swing": 0.026
+     "team": "Texas",
+     "if_home_wins": 0.652,
+     "if_home_loses": 0.609,
+     "swing": 0.043
+    },
+    {
+     "team": "Tennessee",
+     "if_home_wins": 0.476,
+     "if_home_loses": 0.442,
+     "swing": 0.034
     }
    ],
    "closeness": 0.06
@@ -6844,37 +6820,37 @@
    "home_rank": 9,
    "away_rank": 31,
    "quality": 12.2,
-   "swing": 0.557,
+   "swing": 0.432,
    "movers": [
     {
      "team": "Ohio State",
-     "if_home_wins": 0.442,
-     "if_home_loses": 0.061,
-     "swing": 0.382
+     "if_home_wins": 0.312,
+     "if_home_loses": 0.018,
+     "swing": 0.294
     },
     {
      "team": "Northwestern",
      "if_home_wins": 0.0,
-     "if_home_loses": 0.04,
-     "swing": -0.04
+     "if_home_loses": 0.044,
+     "swing": -0.044
+    },
+    {
+     "team": "Oregon",
+     "if_home_wins": 0.219,
+     "if_home_loses": 0.254,
+     "swing": -0.035
     },
     {
      "team": "UCLA",
-     "if_home_wins": 0.683,
-     "if_home_loses": 0.722,
-     "swing": -0.039
-    },
-    {
-     "team": "Texas",
-     "if_home_wins": 0.608,
-     "if_home_loses": 0.644,
-     "swing": -0.036
-    },
-    {
-     "team": "Tennessee",
-     "if_home_wins": 0.349,
-     "if_home_loses": 0.383,
+     "if_home_wins": 0.722,
+     "if_home_loses": 0.755,
      "swing": -0.033
+    },
+    {
+     "team": "Ole Miss",
+     "if_home_wins": 0.14,
+     "if_home_loses": 0.166,
+     "swing": -0.026
     }
    ],
    "closeness": 0.243
@@ -6892,13 +6868,13 @@
    "home_rank": 15,
    "away_rank": 32,
    "quality": 12.1,
-   "swing": 0.496,
+   "swing": 0.459,
    "movers": [
     {
      "team": "BYU",
-     "if_home_wins": 0.508,
-     "if_home_loses": 0.103,
-     "swing": 0.404
+     "if_home_wins": 0.481,
+     "if_home_loses": 0.089,
+     "swing": 0.392
     },
     {
      "team": "Baylor",
@@ -6907,16 +6883,10 @@
      "swing": -0.05
     },
     {
-     "team": "UCLA",
-     "if_home_wins": 0.683,
-     "if_home_loses": 0.713,
-     "swing": -0.03
-    },
-    {
      "team": "South Carolina",
-     "if_home_wins": 0.022,
-     "if_home_loses": 0.034,
-     "swing": -0.012
+     "if_home_wins": 0.036,
+     "if_home_loses": 0.053,
+     "swing": -0.017
     }
    ],
    "closeness": 0.176
@@ -6934,37 +6904,19 @@
    "home_rank": 37,
    "away_rank": 17,
    "quality": 10.8,
-   "swing": 0.659,
+   "swing": 0.286,
    "movers": [
     {
      "team": "Ole Miss",
-     "if_home_wins": 0.032,
-     "if_home_loses": 0.532,
-     "swing": -0.5
-    },
-    {
-     "team": "Ohio State",
-     "if_home_wins": 0.368,
-     "if_home_loses": 0.325,
-     "swing": 0.043
+     "if_home_wins": 0.003,
+     "if_home_loses": 0.259,
+     "swing": -0.256
     },
     {
      "team": "Wake Forest",
-     "if_home_wins": 0.488,
-     "if_home_loses": 0.447,
-     "swing": 0.042
-    },
-    {
-     "team": "LSU",
-     "if_home_wins": 0.19,
-     "if_home_loses": 0.162,
-     "swing": 0.028
-    },
-    {
-     "team": "Houston",
-     "if_home_wins": 0.25,
-     "if_home_loses": 0.223,
-     "swing": 0.026
+     "if_home_wins": 0.529,
+     "if_home_loses": 0.498,
+     "swing": 0.031
     }
    ],
    "closeness": 0.06
@@ -6982,31 +6934,31 @@
    "home_rank": 36,
    "away_rank": 8,
    "quality": 10.8,
-   "swing": 0.441,
+   "swing": 0.47,
    "movers": [
     {
      "team": "Tennessee",
-     "if_home_wins": 0.131,
-     "if_home_loses": 0.473,
-     "swing": -0.342
+     "if_home_wins": 0.208,
+     "if_home_loses": 0.583,
+     "swing": -0.375
     },
     {
      "team": "Liberty",
-     "if_home_wins": 0.517,
-     "if_home_loses": 0.477,
-     "swing": 0.039
-    },
-    {
-     "team": "Alabama",
-     "if_home_wins": 0.874,
-     "if_home_loses": 0.904,
-     "swing": -0.03
+     "if_home_wins": 0.525,
+     "if_home_loses": 0.489,
+     "swing": 0.036
     },
     {
      "team": "Ole Miss",
-     "if_home_wins": 0.332,
-     "if_home_loses": 0.302,
+     "if_home_wins": 0.167,
+     "if_home_loses": 0.136,
      "swing": 0.03
+    },
+    {
+     "team": "Alabama",
+     "if_home_wins": 0.888,
+     "if_home_loses": 0.916,
+     "swing": -0.028
     }
    ],
    "closeness": 0.163
@@ -7024,19 +6976,19 @@
    "home_rank": 14,
    "away_rank": 39,
    "quality": 9.0,
-   "swing": 0.233,
+   "swing": 0.334,
    "movers": [
     {
      "team": "Oregon",
-     "if_home_wins": 0.202,
-     "if_home_loses": 0.005,
-     "swing": 0.198
+     "if_home_wins": 0.3,
+     "if_home_loses": 0.011,
+     "swing": 0.289
     },
     {
-     "team": "Ohio State",
-     "if_home_wins": 0.352,
-     "if_home_loses": 0.317,
-     "swing": 0.035
+     "team": "Tennessee",
+     "if_home_wins": 0.446,
+     "if_home_loses": 0.491,
+     "swing": -0.045
     }
    ],
    "closeness": 0.245
@@ -7054,19 +7006,13 @@
    "home_rank": 25,
    "away_rank": 41,
    "quality": 8.7,
-   "swing": 0.248,
+   "swing": 0.176,
    "movers": [
     {
      "team": "Kentucky",
-     "if_home_wins": 0.252,
-     "if_home_loses": 0.024,
-     "swing": 0.229
-    },
-    {
-     "team": "Alabama",
-     "if_home_wins": 0.887,
-     "if_home_loses": 0.907,
-     "swing": -0.019
+     "if_home_wins": 0.186,
+     "if_home_loses": 0.01,
+     "swing": 0.176
     }
    ],
    "closeness": 0.163
@@ -7084,37 +7030,31 @@
    "home_rank": 10,
    "away_rank": 45,
    "quality": 7.8,
-   "swing": 0.459,
+   "swing": 0.411,
    "movers": [
     {
      "team": "UCLA",
-     "if_home_wins": 0.755,
-     "if_home_loses": 0.428,
-     "swing": 0.327
+     "if_home_wins": 0.791,
+     "if_home_loses": 0.47,
+     "swing": 0.321
     },
     {
      "team": "Tennessee",
-     "if_home_wins": 0.349,
-     "if_home_loses": 0.394,
-     "swing": -0.045
-    },
-    {
-     "team": "Ohio State",
-     "if_home_wins": 0.351,
-     "if_home_loses": 0.312,
-     "swing": 0.039
+     "if_home_wins": 0.449,
+     "if_home_loses": 0.49,
+     "swing": -0.041
     },
     {
      "team": "Alabama",
-     "if_home_wins": 0.889,
-     "if_home_loses": 0.917,
-     "swing": -0.028
+     "if_home_wins": 0.901,
+     "if_home_loses": 0.93,
+     "swing": -0.029
     },
     {
      "team": "Illinois",
      "if_home_wins": 0.0,
-     "if_home_loses": 0.022,
-     "swing": -0.021
+     "if_home_loses": 0.021,
+     "swing": -0.02
     }
    ],
    "closeness": 0.314
@@ -7130,21 +7070,27 @@
    "home_win_prob": 0.411,
    "predicted_margin": -3.6,
    "home_rank": 48,
-   "away_rank": 22,
+   "away_rank": 23,
    "quality": 7.4,
-   "swing": 0.124,
+   "swing": 0.162,
    "movers": [
     {
      "team": "Louisville",
      "if_home_wins": 0.0,
-     "if_home_loses": 0.074,
-     "swing": -0.073
+     "if_home_loses": 0.077,
+     "swing": -0.076
     },
     {
      "team": "SMU",
      "if_home_wins": 0.097,
-     "if_home_loses": 0.047,
+     "if_home_loses": 0.048,
      "swing": 0.05
+    },
+    {
+     "team": "Wake Forest",
+     "if_home_wins": 0.533,
+     "if_home_loses": 0.497,
+     "swing": 0.036
     }
    ],
    "closeness": 0.089
@@ -7166,8 +7112,8 @@
    "movers": [
     {
      "team": "Texas",
-     "if_home_wins": 0.604,
-     "if_home_loses": 0.638,
+     "if_home_wins": 0.614,
+     "if_home_loses": 0.649,
      "swing": -0.034
     },
     {
@@ -7209,15 +7155,8 @@
    "home_rank": 51,
    "away_rank": 55,
    "quality": 4.1,
-   "swing": 0.032,
-   "movers": [
-    {
-     "team": "Boise State",
-     "if_home_wins": 0.448,
-     "if_home_loses": 0.48,
-     "swing": -0.032
-    }
-   ],
+   "swing": 0.0,
+   "movers": [],
    "closeness": 0.104
   },
   {
@@ -7233,37 +7172,31 @@
    "home_rank": 20,
    "away_rank": 56,
    "quality": 3.3,
-   "swing": 0.694,
+   "swing": 0.687,
    "movers": [
     {
      "team": "Boise State",
-     "if_home_wins": 0.565,
-     "if_home_loses": 0.065,
-     "swing": 0.499
+     "if_home_wins": 0.589,
+     "if_home_loses": 0.078,
+     "swing": 0.512
     },
     {
      "team": "Liberty",
-     "if_home_wins": 0.473,
-     "if_home_loses": 0.555,
-     "swing": -0.081
+     "if_home_wins": 0.485,
+     "if_home_loses": 0.562,
+     "swing": -0.077
     },
     {
      "team": "New Mexico",
-     "if_home_wins": 0.333,
-     "if_home_loses": 0.386,
-     "swing": -0.052
+     "if_home_wins": 0.337,
+     "if_home_loses": 0.392,
+     "swing": -0.055
     },
     {
      "team": "James Madison",
-     "if_home_wins": 0.138,
-     "if_home_loses": 0.178,
-     "swing": -0.04
-    },
-    {
-     "team": "North Dakota State",
-     "if_home_wins": 0.04,
-     "if_home_loses": 0.057,
-     "swing": -0.017
+     "if_home_wins": 0.142,
+     "if_home_loses": 0.185,
+     "swing": -0.043
     }
    ],
    "closeness": 0.291
@@ -7281,25 +7214,31 @@
    "home_rank": 60,
    "away_rank": 46,
    "quality": 2.6,
-   "swing": 0.103,
+   "swing": 0.135,
    "movers": [
     {
      "team": "Memphis",
      "if_home_wins": 0.0,
-     "if_home_loses": 0.053,
-     "swing": -0.053
+     "if_home_loses": 0.051,
+     "swing": -0.051
     },
     {
      "team": "Liberty",
-     "if_home_wins": 0.508,
-     "if_home_loses": 0.476,
-     "swing": 0.032
+     "if_home_wins": 0.52,
+     "if_home_loses": 0.486,
+     "swing": 0.034
+    },
+    {
+     "team": "Texas",
+     "if_home_wins": 0.646,
+     "if_home_loses": 0.613,
+     "swing": 0.033
     },
     {
      "team": "SMU",
-     "if_home_wins": 0.058,
+     "if_home_wins": 0.059,
      "if_home_loses": 0.076,
-     "swing": -0.018
+     "swing": -0.017
     }
    ],
    "closeness": 0.047
@@ -7331,7 +7270,7 @@
    "start": "2026-11-14T05:00:00.000Z",
    "home_win_prob": 0.522,
    "predicted_margin": 0.9,
-   "home_rank": 64,
+   "home_rank": 65,
    "away_rank": 57,
    "quality": 1.3,
    "swing": 0.0,
@@ -7349,10 +7288,17 @@
    "home_win_prob": 0.778,
    "predicted_margin": 12.2,
    "home_rank": 34,
-   "away_rank": 67,
+   "away_rank": 66,
    "quality": 0.8,
-   "swing": 0.002,
-   "movers": [],
+   "swing": 0.04,
+   "movers": [
+    {
+     "team": "BYU",
+     "if_home_wins": 0.36,
+     "if_home_loses": 0.322,
+     "swing": 0.038
+    }
+   ],
    "closeness": 0.278
   },
   {
@@ -7368,7 +7314,7 @@
    "home_rank": 62,
    "away_rank": 68,
    "quality": 0.6,
-   "swing": 0.0,
+   "swing": 0.002,
    "movers": [],
    "closeness": 0.098
   },
@@ -7385,13 +7331,13 @@
    "home_rank": 70,
    "away_rank": 58,
    "quality": 0.6,
-   "swing": 0.038,
+   "swing": 0.036,
    "movers": [
     {
      "team": "BYU",
-     "if_home_wins": 0.393,
-     "if_home_loses": 0.355,
-     "swing": 0.038
+     "if_home_wins": 0.369,
+     "if_home_loses": 0.333,
+     "swing": 0.036
     }
    ],
    "closeness": 0.011
@@ -7404,14 +7350,14 @@
    "away_id": 264,
    "neutral": false,
    "start": "2026-11-14T21:15:00.000Z",
-   "home_win_prob": 0.394,
-   "predicted_margin": -4.3,
+   "home_win_prob": 0.396,
+   "predicted_margin": -4.2,
    "home_rank": 71,
    "away_rank": 42,
    "quality": 0.5,
    "swing": 0.0,
    "movers": [],
-   "closeness": 0.106
+   "closeness": 0.104
   },
   {
    "game_id": 401862827,
@@ -7426,13 +7372,13 @@
    "home_rank": 75,
    "away_rank": 44,
    "quality": -0.4,
-   "swing": 0.044,
+   "swing": 0.04,
    "movers": [
     {
      "team": "North Texas",
      "if_home_wins": 0.0,
-     "if_home_loses": 0.044,
-     "swing": -0.044
+     "if_home_loses": 0.04,
+     "swing": -0.04
     }
    ],
    "closeness": 0.117
@@ -7450,13 +7396,13 @@
    "home_rank": 16,
    "away_rank": 76,
    "quality": -0.5,
-   "swing": 0.291,
+   "swing": 0.344,
    "movers": [
     {
      "team": "Iowa",
-     "if_home_wins": 0.308,
-     "if_home_loses": 0.019,
-     "swing": 0.289
+     "if_home_wins": 0.376,
+     "if_home_loses": 0.034,
+     "swing": 0.342
     }
    ],
    "closeness": 0.377
@@ -7474,13 +7420,13 @@
    "home_rank": 77,
    "away_rank": 4,
    "quality": -0.7,
-   "swing": 0.295,
+   "swing": 0.271,
    "movers": [
     {
      "team": "Alabama",
-     "if_home_wins": 0.629,
-     "if_home_loses": 0.921,
-     "swing": -0.293
+     "if_home_wins": 0.663,
+     "if_home_loses": 0.932,
+     "swing": -0.269
     }
    ],
    "closeness": 0.406
@@ -7496,15 +7442,15 @@
    "home_win_prob": 0.239,
    "predicted_margin": -11.3,
    "home_rank": 81,
-   "away_rank": 23,
+   "away_rank": 22,
    "quality": -1.2,
-   "swing": 0.033,
+   "swing": 0.053,
    "movers": [
     {
      "team": "South Carolina",
      "if_home_wins": 0.0,
-     "if_home_loses": 0.034,
-     "swing": -0.033
+     "if_home_loses": 0.054,
+     "swing": -0.053
     }
    ],
    "closeness": 0.261
@@ -7519,22 +7465,16 @@
    "start": "2026-11-14T17:00:00.000Z",
    "home_win_prob": 0.266,
    "predicted_margin": -10.0,
-   "home_rank": 84,
+   "home_rank": 83,
    "away_rank": 35,
    "quality": -2.8,
-   "swing": 0.234,
+   "swing": 0.2,
    "movers": [
     {
      "team": "James Madison",
-     "if_home_wins": 0.004,
-     "if_home_loses": 0.199,
-     "swing": -0.195
-    },
-    {
-     "team": "New Mexico",
-     "if_home_wins": 0.373,
-     "if_home_loses": 0.334,
-     "swing": 0.039
+     "if_home_wins": 0.005,
+     "if_home_loses": 0.206,
+     "swing": -0.2
     }
    ],
    "closeness": 0.234
@@ -7549,7 +7489,7 @@
    "start": "2026-11-14T17:00:00.000Z",
    "home_win_prob": 0.531,
    "predicted_margin": 1.3,
-   "home_rank": 83,
+   "home_rank": 84,
    "away_rank": 80,
    "quality": -2.8,
    "swing": 0.0,
@@ -7566,8 +7506,8 @@
    "start": "2026-11-14T20:30:00.000Z",
    "home_win_prob": 0.67,
    "predicted_margin": 7.0,
-   "home_rank": 65,
-   "away_rank": 87,
+   "home_rank": 64,
+   "away_rank": 86,
    "quality": -3.5,
    "swing": 0.0,
    "movers": [],
@@ -7583,28 +7523,28 @@
    "start": "2026-11-15T00:30:00.000Z",
    "home_win_prob": 0.861,
    "predicted_margin": 17.4,
-   "home_rank": 30,
-   "away_rank": 86,
+   "home_rank": 29,
+   "away_rank": 87,
    "quality": -3.5,
-   "swing": 0.462,
+   "swing": 0.464,
    "movers": [
     {
      "team": "New Mexico",
-     "if_home_wins": 0.395,
-     "if_home_loses": 0.03,
-     "swing": 0.364
+     "if_home_wins": 0.4,
+     "if_home_loses": 0.028,
+     "swing": 0.372
     },
     {
      "team": "James Madison",
-     "if_home_wins": 0.139,
-     "if_home_loses": 0.191,
-     "swing": -0.052
+     "if_home_wins": 0.144,
+     "if_home_loses": 0.197,
+     "swing": -0.053
     },
     {
      "team": "Ohio State",
-     "if_home_wins": 0.337,
-     "if_home_loses": 0.384,
-     "swing": -0.046
+     "if_home_wins": 0.231,
+     "if_home_loses": 0.27,
+     "swing": -0.04
     }
    ],
    "closeness": 0.361
@@ -7619,16 +7559,16 @@
    "start": "2026-11-14T17:00:00.000Z",
    "home_win_prob": 0.27,
    "predicted_margin": -9.8,
-   "home_rank": 89,
+   "home_rank": 88,
    "away_rank": 38,
    "quality": -3.9,
-   "swing": 0.022,
+   "swing": 0.024,
    "movers": [
     {
      "team": "Wisconsin",
      "if_home_wins": 0.001,
-     "if_home_loses": 0.022,
-     "swing": -0.022
+     "if_home_loses": 0.025,
+     "swing": -0.024
     }
    ],
    "closeness": 0.23
@@ -7646,13 +7586,13 @@
    "home_rank": 2,
    "away_rank": 91,
    "quality": -5.1,
-   "swing": 0.266,
+   "swing": 0.186,
    "movers": [
     {
      "team": "Notre Dame",
-     "if_home_wins": 0.973,
-     "if_home_loses": 0.721,
-     "swing": 0.252
+     "if_home_wins": 0.984,
+     "if_home_loses": 0.81,
+     "swing": 0.175
     }
    ],
    "closeness": 0.477
@@ -7670,13 +7610,19 @@
    "home_rank": 92,
    "away_rank": 19,
    "quality": -5.3,
-   "swing": 0.255,
+   "swing": 0.345,
    "movers": [
     {
      "team": "Houston",
-     "if_home_wins": 0.019,
-     "if_home_loses": 0.274,
-     "swing": -0.255
+     "if_home_wins": 0.024,
+     "if_home_loses": 0.327,
+     "swing": -0.303
+    },
+    {
+     "team": "Texas",
+     "if_home_wins": 0.662,
+     "if_home_loses": 0.621,
+     "swing": 0.041
     }
    ],
    "closeness": 0.34
@@ -7699,6 +7645,23 @@
    "closeness": 0.069
   },
   {
+   "game_id": 401866460,
+   "home": "Miami (OH)",
+   "away": "Ohio",
+   "home_id": 193,
+   "away_id": 195,
+   "neutral": false,
+   "start": "2026-11-11T01:00:00.000Z",
+   "home_win_prob": 0.491,
+   "predicted_margin": -0.4,
+   "home_rank": 95,
+   "away_rank": 89,
+   "quality": -7.6,
+   "swing": 0.0,
+   "movers": [],
+   "closeness": 0.009
+  },
+  {
    "game_id": 401858297,
    "home": "Clemson",
    "away": "Georgia Tech",
@@ -7709,9 +7672,9 @@
    "home_win_prob": 0.817,
    "predicted_margin": 14.5,
    "home_rank": 52,
-   "away_rank": 95,
+   "away_rank": 96,
    "quality": -7.6,
-   "swing": 0.002,
+   "swing": 0.001,
    "movers": [],
    "closeness": 0.317
   },
@@ -7723,38 +7686,21 @@
    "away_id": 158,
    "neutral": false,
    "start": "2026-11-14T17:30:00.000Z",
-   "home_win_prob": 0.158,
-   "predicted_margin": -16.0,
-   "home_rank": 98,
-   "away_rank": 29,
+   "home_win_prob": 0.16,
+   "predicted_margin": -15.9,
+   "home_rank": 99,
+   "away_rank": 30,
    "quality": -7.9,
-   "swing": 0.014,
+   "swing": 0.016,
    "movers": [
     {
      "team": "Duke",
-     "if_home_wins": 0.012,
+     "if_home_wins": 0.011,
      "if_home_loses": 0.022,
-     "swing": -0.01
+     "swing": -0.012
     }
    ],
-   "closeness": 0.342
-  },
-  {
-   "game_id": 401866460,
-   "home": "Miami (OH)",
-   "away": "Ohio",
-   "home_id": 193,
-   "away_id": 195,
-   "neutral": false,
-   "start": "2026-11-11T01:00:00.000Z",
-   "home_win_prob": 0.471,
-   "predicted_margin": -1.2,
-   "home_rank": 99,
-   "away_rank": 88,
-   "quality": -8.0,
-   "swing": 0.0,
-   "movers": [],
-   "closeness": 0.029
+   "closeness": 0.34
   },
   {
    "game_id": 401871060,
@@ -7766,7 +7712,7 @@
    "start": "2026-11-14T20:00:00.000Z",
    "home_win_prob": 0.602,
    "predicted_margin": 4.1,
-   "home_rank": 96,
+   "home_rank": 97,
    "away_rank": 103,
    "quality": -9.4,
    "swing": 0.0,
@@ -7803,19 +7749,19 @@
    "home_rank": 104,
    "away_rank": 47,
    "quality": -9.6,
-   "swing": 0.132,
+   "swing": 0.124,
    "movers": [
     {
      "team": "New Mexico",
-     "if_home_wins": 0.396,
-     "if_home_loses": 0.331,
-     "swing": 0.065
+     "if_home_wins": 0.397,
+     "if_home_loses": 0.336,
+     "swing": 0.061
     },
     {
      "team": "North Dakota State",
      "if_home_wins": 0.0,
-     "if_home_loses": 0.055,
-     "swing": -0.055
+     "if_home_loses": 0.052,
+     "swing": -0.052
     },
     {
      "team": "Duke",
@@ -7873,13 +7819,13 @@
    "home_rank": 74,
    "away_rank": 109,
    "quality": -10.3,
-   "swing": 0.038,
+   "swing": 0.039,
    "movers": [
     {
      "team": "Boise State",
-     "if_home_wins": 0.452,
-     "if_home_loses": 0.49,
-     "swing": -0.038
+     "if_home_wins": 0.474,
+     "if_home_loses": 0.513,
+     "swing": -0.039
     }
    ],
    "closeness": 0.268
@@ -7897,8 +7843,15 @@
    "home_rank": 61,
    "away_rank": 111,
    "quality": -10.5,
-   "swing": 0.001,
-   "movers": [],
+   "swing": 0.008,
+   "movers": [
+    {
+     "team": "Missouri",
+     "if_home_wins": 0.012,
+     "if_home_loses": 0.004,
+     "swing": 0.008
+    }
+   ],
    "closeness": 0.313
   },
   {
@@ -7931,7 +7884,7 @@
    "home_rank": 72,
    "away_rank": 117,
    "quality": -12.5,
-   "swing": 0.002,
+   "swing": 0.0,
    "movers": [],
    "closeness": 0.311
   },
@@ -7948,7 +7901,7 @@
    "home_rank": 54,
    "away_rank": 118,
    "quality": -12.6,
-   "swing": 0.001,
+   "swing": 0.0,
    "movers": [],
    "closeness": 0.372
   },
@@ -7997,7 +7950,7 @@
    "home_win_prob": 0.25,
    "predicted_margin": -10.8,
    "home_rank": 121,
-   "away_rank": 66,
+   "away_rank": 67,
    "quality": -14.2,
    "swing": 0.001,
    "movers": [],
@@ -8016,13 +7969,13 @@
    "home_rank": 33,
    "away_rank": 124,
    "quality": -14.9,
-   "swing": 0.47,
+   "swing": 0.478,
    "movers": [
     {
      "team": "Liberty",
-     "if_home_wins": 0.513,
-     "if_home_loses": 0.046,
-     "swing": 0.466
+     "if_home_wins": 0.524,
+     "if_home_loses": 0.048,
+     "swing": 0.475
     }
    ],
    "closeness": 0.453
@@ -8040,15 +7993,8 @@
    "home_rank": 122,
    "away_rank": 125,
    "quality": -15.0,
-   "swing": 0.023,
-   "movers": [
-    {
-     "team": "James Madison",
-     "if_home_wins": 0.156,
-     "if_home_loses": 0.132,
-     "swing": 0.023
-    }
-   ],
+   "swing": 0.0,
+   "movers": [],
    "closeness": 0.082
   },
   {
@@ -8059,14 +8005,14 @@
    "away_id": 2655,
    "neutral": false,
    "start": "2026-11-14T19:00:00.000Z",
-   "home_win_prob": 0.453,
-   "predicted_margin": -1.9,
+   "home_win_prob": 0.455,
+   "predicted_margin": -1.8,
    "home_rank": 126,
    "away_rank": 112,
-   "quality": -15.7,
+   "quality": -15.6,
    "swing": 0.0,
    "movers": [],
-   "closeness": 0.047
+   "closeness": 0.045
   },
   {
    "game_id": 401871099,
@@ -8081,8 +8027,15 @@
    "home_rank": 59,
    "away_rank": 127,
    "quality": -15.9,
-   "swing": 0.006,
-   "movers": [],
+   "swing": 0.017,
+   "movers": [
+    {
+     "team": "Memphis",
+     "if_home_wins": 0.03,
+     "if_home_loses": 0.017,
+     "swing": 0.013
+    }
+   ],
    "closeness": 0.387
   },
   {
@@ -8115,7 +8068,7 @@
    "home_rank": 131,
    "away_rank": 110,
    "quality": -21.4,
-   "swing": 0.0,
+   "swing": 0.004,
    "movers": [],
    "closeness": 0.176
   },
@@ -8127,14 +8080,14 @@
    "away_id": 2309,
    "neutral": false,
    "start": "2026-11-11T00:00:00.000Z",
-   "home_win_prob": 0.69,
-   "predicted_margin": 7.9,
+   "home_win_prob": 0.688,
+   "predicted_margin": 7.8,
    "home_rank": 129,
    "away_rank": 132,
-   "quality": -23.0,
+   "quality": -22.9,
    "swing": 0.0,
    "movers": [],
-   "closeness": 0.19
+   "closeness": 0.188
   },
   {
    "game_id": 401869969,
@@ -8149,13 +8102,13 @@
    "home_rank": 133,
    "away_rank": 73,
    "quality": -23.8,
-   "swing": 0.032,
+   "swing": 0.033,
    "movers": [
     {
      "team": "Arizona",
-     "if_home_wins": 0.102,
-     "if_home_loses": 0.133,
-     "swing": -0.031
+     "if_home_wins": 0.095,
+     "if_home_loses": 0.127,
+     "swing": -0.033
     }
    ],
    "closeness": 0.379
@@ -8173,7 +8126,7 @@
    "home_rank": 134,
    "away_rank": 85,
    "quality": -24.1,
-   "swing": 0.005,
+   "swing": 0.004,
    "movers": [],
    "closeness": 0.346
   },
@@ -8188,7 +8141,7 @@
    "home_win_prob": 0.22,
    "predicted_margin": -12.3,
    "home_rank": 135,
-   "away_rank": 97,
+   "away_rank": 98,
    "quality": -24.5,
    "swing": 0.0,
    "movers": [],
@@ -8207,7 +8160,7 @@
    "home_rank": 136,
    "away_rank": 94,
    "quality": -25.1,
-   "swing": 0.001,
+   "swing": 0.0,
    "movers": [],
    "closeness": 0.294
   },
@@ -8219,14 +8172,14 @@
    "away_id": 2711,
    "neutral": false,
    "start": "2026-11-11T00:00:00.000Z",
-   "home_win_prob": 0.114,
-   "predicted_margin": -19.3,
+   "home_win_prob": 0.108,
+   "predicted_margin": -19.8,
    "home_rank": 137,
-   "away_rank": 79,
-   "quality": -25.5,
-   "swing": 0.006,
+   "away_rank": 78,
+   "quality": -25.8,
+   "swing": 0.005,
    "movers": [],
-   "closeness": 0.386
+   "closeness": 0.392
   },
   {
    "game_id": 401866462,
@@ -8241,7 +8194,7 @@
    "home_rank": 115,
    "away_rank": 138,
    "quality": -26.0,
-   "swing": 0.004,
+   "swing": 0.001,
    "movers": [],
    "closeness": 0.342
   }
@@ -8253,7 +8206,7 @@
   "hfa": 2.7,
   "sigma": 16.0,
   "tau": 3.6,
-  "fcs_rating": -35.25,
+  "fcs_rating": -35.26,
   "flex_rating": -9.4,
   "sel_poll_weight": 0.5,
   "ids": [
@@ -8678,7 +8631,7 @@
   ],
   "rating": [
    -0.3,
-   -25.5,
+   -25.8,
    25.7,
    -8.3,
    14.7,
@@ -8705,7 +8658,7 @@
    -7.8,
    13.0,
    -3.0,
-   -17.1,
+   -17.2,
    8.7,
    -3.5,
    -9.4,
@@ -8726,7 +8679,7 @@
    3.1,
    1.6,
    -10.3,
-   -23.0,
+   -22.9,
    13.2,
    11.8,
    0.0,
@@ -8738,7 +8691,7 @@
    -12.5,
    7.7,
    25.8,
-   -8.0,
+   -7.6,
    9.0,
    0.5,
    -14.9,
@@ -8748,7 +8701,7 @@
    -14.3,
    -2.6,
    -2.8,
-   12.9,
+   12.8,
    -7.8,
    12.8,
    -15.0,
@@ -8758,7 +8711,7 @@
    7.9,
    12.2,
    27.5,
-   -3.7,
+   -4.2,
    20.8,
    10.8,
    12.9,
@@ -8769,7 +8722,7 @@
    11.4,
    8.9,
    -0.5,
-   -15.7,
+   -15.6,
    -7.9,
    -26.0,
    -21.4,
@@ -8808,152 +8761,152 @@
    2.3,
    4.6,
    20.3,
-   8.3,
+   8.2,
    -11.1,
    -14.2,
-   -1.1,
+   -0.8,
    0.6,
    10.0,
    -7.5
   ],
   "sel": [
-   -0.1,
-   -25.6,
-   26.4,
+   -0.2,
+   -25.9,
+   26.9,
    -8.2,
-   13.9,
-   0.8,
+   13.7,
+   0.7,
    -1.1,
    -8.6,
    -0.9,
-   6.2,
+   6.1,
    -19.1,
-   11.2,
-   12.1,
+   11.5,
+   12.7,
    -5.0,
-   -17.2,
+   -17.3,
    -10.7,
-   19.0,
-   -10.4,
+   18.5,
+   -10.5,
    -11.2,
    -24.2,
-   3.5,
-   5.7,
+   3.4,
+   5.6,
    -9.8,
-   -5.2,
+   -5.3,
    -13.2,
    -7.7,
-   11.8,
-   -2.8,
+   12.1,
+   -2.9,
    -17.2,
-   9.9,
+   8.9,
    -3.4,
-   -9.3,
-   6.9,
-   4.3,
-   29.6,
-   0.8,
-   -5.4,
+   -9.4,
+   6.8,
+   4.2,
+   29.7,
+   0.7,
+   -5.5,
    -7.6,
    -9.6,
-   15.1,
-   8.0,
-   25.4,
-   16.1,
-   1.5,
-   1.0,
-   10.6,
-   3.3,
-   1.8,
+   16.3,
+   7.9,
+   23.3,
+   17.7,
+   1.4,
+   0.9,
+   10.9,
+   3.2,
+   1.7,
    -10.2,
-   -23.1,
-   17.4,
-   11.0,
-   0.2,
-   2.8,
-   13.0,
-   21.3,
+   -23.0,
+   15.4,
+   11.3,
+   0.1,
+   2.7,
+   13.3,
+   18.7,
    -13.7,
    -3.8,
    -12.5,
-   8.0,
-   27.9,
-   -7.9,
+   7.9,
+   25.3,
+   -7.6,
    9.2,
-   0.7,
+   0.6,
    -14.9,
-   1.0,
-   5.0,
-   14.9,
+   0.9,
+   4.9,
+   13.5,
    -14.3,
    -2.5,
    -2.7,
-   11.8,
-   -7.7,
-   10.9,
-   -15.1,
+   12.1,
+   -7.8,
+   11.2,
+   -15.0,
+   7.6,
    7.7,
-   7.8,
    -24.6,
-   6.6,
-   11.3,
-   24.8,
-   -3.6,
-   22.6,
-   10.2,
-   11.8,
+   6.5,
+   11.6,
+   26.9,
+   -4.1,
+   19.6,
+   10.5,
+   12.5,
    -14.8,
-   19.8,
-   15.3,
+   16.4,
+   18.1,
    3.5,
-   10.7,
-   9.2,
+   11.0,
+   9.1,
    -0.4,
-   -15.7,
+   -15.6,
    -7.9,
    -26.1,
    -21.5,
    -9.3,
    -10.2,
-   11.8,
-   -9.7,
-   13.9,
-   -16.0,
+   12.0,
+   -9.8,
+   15.5,
+   -15.9,
    2.7,
-   -12.5,
-   -1.0,
-   8.2,
+   -12.6,
+   -1.1,
+   8.1,
    -9.9,
-   20.2,
-   24.6,
-   10.2,
-   6.0,
-   17.6,
+   22.1,
+   24.8,
+   10.5,
+   5.9,
+   18.8,
    0.3,
-   -11.2,
+   -11.3,
    -10.6,
-   1.5,
+   1.4,
    -9.9,
-   2.2,
-   20.7,
+   2.1,
+   22.1,
    -2.7,
-   -24.0,
-   -3.3,
-   15.0,
-   24.6,
+   -23.9,
+   -3.4,
+   15.9,
+   24.7,
    -4.4,
-   -25.3,
-   -0.2,
+   -25.2,
+   -0.3,
    -0.6,
-   2.5,
-   4.8,
-   18.6,
-   8.5,
+   2.4,
+   4.7,
+   19.8,
+   8.4,
    -11.1,
    -14.2,
-   -0.9,
+   -0.7,
    0.7,
-   9.7,
+   10.0,
    -7.5
   ],
   "w": [
@@ -13177,143 +13130,143 @@
   },
   "projection": {
    "score": [
-    -18.15,
-    -80.28,
-    14.28,
+    -18.25,
+    -80.72,
+    14.78,
     -34.92,
-    -3.88,
-    -34.27,
+    -4.08,
+    -34.37,
     -48.35,
     -44.48,
-    -28.5,
-    -23.05,
-    -62.37,
-    -17.94,
-    3.27,
+    -28.52,
+    -23.15,
+    -62.31,
+    -17.64,
+    3.87,
     -47.28,
-    -61.69,
-    -33.61,
-    3.09,
-    -53.09,
+    -61.81,
+    -33.55,
+    2.59,
+    -53.19,
     -42.09,
     -80.74,
-    -27.2,
-    -20.3,
+    -27.3,
+    -20.4,
     -53.34,
-    -49.26,
+    -49.36,
     -56.33,
     -41.21,
-    -12.21,
-    -29.83,
-    -52.45,
-    -19.11,
+    -11.91,
+    -29.93,
+    -52.53,
+    -20.11,
     -31.85,
-    -41.93,
-    -25.69,
-    -21.38,
-    19.11,
-    -27.42,
-    -35.19,
+    -42.03,
+    -25.79,
+    -21.48,
+    19.21,
+    -27.52,
+    -35.29,
     -60.48,
     -48.16,
-    -0.52,
-    -22.69,
-    14.28,
-    0.35,
-    -32.4,
-    -20.57,
-    -2.91,
-    -39.17,
-    -36.35,
+    0.68,
+    -22.79,
+    12.2,
+    1.97,
+    -32.5,
+    -20.67,
+    -2.61,
+    -39.27,
+    -36.45,
     -46.46,
-    -66.64,
-    -2.86,
-    3.65,
-    -19.47,
-    -17.91,
-    -10.94,
-    -2.54,
+    -66.55,
+    -4.86,
+    3.95,
+    -19.57,
+    -18.01,
+    -10.64,
+    -5.14,
     -43.59,
     -49.68,
-    -42.01,
-    -10.55,
-    18.53,
-    -37.8,
+    -41.98,
+    -10.65,
+    15.93,
+    -37.29,
     -26.9,
-    -39.9,
+    -39.99,
     -47.33,
-    -34.91,
-    -27.09,
-    -12.45,
+    -35.01,
+    -27.19,
+    -13.85,
     -58.16,
     -39.37,
     -40.96,
-    -17.23,
-    -44.12,
-    0.9,
-    -55.32,
-    -20.11,
-    -7.7,
+    -16.97,
+    -44.22,
+    1.2,
+    -55.22,
+    -20.21,
+    -7.8,
     -81.34,
-    -10.43,
-    -13.3,
-    18.4,
-    -24.3,
-    2.1,
-    -20.43,
-    -10.83,
+    -10.53,
+    -13.0,
+    20.5,
+    -25.09,
+    -0.88,
+    -20.13,
+    -10.13,
     -54.77,
-    1.62,
-    -4.14,
+    -1.78,
+    -1.32,
     -25.04,
-    -11.07,
-    -14.12,
+    -10.77,
+    -14.22,
     -46.97,
-    -66.63,
-    -57.68,
+    -66.48,
+    -57.67,
     -74.54,
     -72.93,
     -47.91,
     -49.79,
-    -11.02,
-    -41.84,
-    -10.39,
-    -58.94,
+    -10.82,
+    -41.94,
+    -8.79,
+    -58.84,
     -19.99,
-    -53.98,
-    -38.7,
-    -28.62,
-    -53.52,
-    3.14,
-    7.89,
-    -27.66,
-    -21.19,
-    1.51,
-    -16.65,
-    -48.85,
-    -49.43,
-    -23.3,
+    -54.08,
+    -38.8,
+    -28.72,
+    -53.53,
+    5.04,
+    8.09,
+    -27.36,
+    -21.29,
+    2.71,
+    -16.59,
+    -48.95,
+    -49.44,
+    -23.4,
     -44.72,
-    -25.27,
-    9.75,
+    -25.37,
+    11.15,
     -35.73,
-    -73.92,
-    -33.99,
-    -6.37,
-    15.96,
+    -73.82,
+    -34.09,
+    -5.47,
+    16.06,
     -39.54,
-    -78.88,
-    -22.53,
+    -78.78,
+    -22.63,
     -43.32,
-    -30.27,
-    -20.1,
-    4.34,
-    -24.92,
+    -30.37,
+    -20.2,
+    5.54,
+    -25.07,
     -60.34,
     -58.51,
-    -20.75,
+    -20.42,
     -34.63,
-    -10.33,
+    -10.02,
     -36.76
    ],
    "p_conf": [
@@ -13325,14 +13278,14 @@
     0.0,
     0.0,
     0.0002,
-    0.052,
+    0.0518,
     0.0,
     0.0,
     0.0179,
     0.765,
     0.0,
-    0.0001,
-    0.0662,
+    0.0,
+    0.0685,
     0.0763,
     0.0,
     0.0,
@@ -13358,8 +13311,8 @@
     0.0,
     0.0347,
     0.0037,
-    0.3722,
-    0.0252,
+    0.3728,
+    0.0251,
     0.0,
     0.223,
     0.4784,
@@ -13378,7 +13331,7 @@
     0.0,
     0.2601,
     0.6531,
-    0.0182,
+    0.0192,
     0.0,
     0.0,
     0.0008,
@@ -13398,13 +13351,13 @@
     0.5592,
     0.0,
     0.0,
-    0.2816,
-    0.051,
+    0.2682,
+    0.0513,
     0.0001,
     0.0264,
     0.0,
     0.0007,
-    0.0795,
+    0.0791,
     0.023,
     0.0,
     0.0002,
@@ -13429,13 +13382,13 @@
     0.0,
     0.1728,
     0.2187,
-    0.2974,
+    0.298,
     0.0,
     0.0,
     0.0008,
     0.0023,
     0.0,
-    0.44,
+    0.4396,
     0.0,
     0.0,
     0.002,
@@ -13443,7 +13396,7 @@
     0.6053,
     0.0094,
     0.0,
-    0.1152,
+    0.1154,
     0.0,
     0.0,
     0.0,
@@ -13451,7 +13404,7 @@
     0.0,
     0.0,
     0.0,
-    0.3365,
+    0.3461,
     0.0,
     0.0068,
     0.0557
