@@ -1,0 +1,241 @@
+{
+ "ap": [
+  {
+   "id": 61,
+   "rank": 1,
+   "points": 1734.0,
+   "first_place_votes": 58
+  },
+  {
+   "id": 254,
+   "rank": 2,
+   "points": 1677.0,
+   "first_place_votes": 10
+  },
+  {
+   "id": 87,
+   "rank": 3,
+   "points": 1584.0,
+   "first_place_votes": 2
+  },
+  {
+   "id": 26,
+   "rank": 4,
+   "points": 1552.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2390,
+   "rank": 5,
+   "points": 1426.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 84,
+   "rank": 6,
+   "points": 1384.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 333,
+   "rank": 7,
+   "points": 1297.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 251,
+   "rank": 8,
+   "points": 1290.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2633,
+   "rank": 9,
+   "points": 1179.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 154,
+   "rank": 10,
+   "points": 1134.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2641,
+   "rank": 11,
+   "points": 1081.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 252,
+   "rank": 12,
+   "points": 1038.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2294,
+   "rank": 13,
+   "points": 861.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2483,
+   "rank": 14,
+   "points": 820.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 68,
+   "rank": 15,
+   "points": 767.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 194,
+   "rank": 16,
+   "points": 661.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 96,
+   "rank": 17,
+   "points": 599.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 30,
+   "rank": 18,
+   "points": 546.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 12,
+   "rank": 19,
+   "points": 404.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 248,
+   "rank": 20,
+   "points": 365.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 97,
+   "rank": 21,
+   "points": 357.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2335,
+   "rank": 22,
+   "points": 183.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 57,
+   "rank": 23,
+   "points": 173.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 235,
+   "rank": 24,
+   "points": 138.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 145,
+   "rank": 25,
+   "points": 103.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 201,
+   "rank": null,
+   "points": 95.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 99,
+   "rank": null,
+   "points": 91.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 150,
+   "rank": null,
+   "points": 62.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2636,
+   "rank": null,
+   "points": 36.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 167,
+   "rank": null,
+   "points": 32.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2579,
+   "rank": null,
+   "points": 31.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2348,
+   "rank": null,
+   "points": 14.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2449,
+   "rank": null,
+   "points": 9.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2751,
+   "rank": null,
+   "points": 5.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2649,
+   "rank": null,
+   "points": 5.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2567,
+   "rank": null,
+   "points": 5.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2005,
+   "rank": null,
+   "points": 5.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 2,
+   "rank": null,
+   "points": 4.0,
+   "first_place_votes": 0
+  },
+  {
+   "id": 142,
+   "rank": null,
+   "points": 3.0,
+   "first_place_votes": 0
+  }
+ ],
+ "ap_week": 12,
+ "ap_updated": "2026-11-16T22:19Z",
+ "fetched_at": "2026-11-17T00:51:45+00:00"
+}
